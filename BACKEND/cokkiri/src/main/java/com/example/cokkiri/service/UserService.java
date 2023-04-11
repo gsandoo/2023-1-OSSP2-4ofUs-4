@@ -10,8 +10,29 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    //AuthKey값 check함수
+    public boolean checkAuthKey(String email,String authKey){
+        String userAuthKey = userRepository.findByEmail(email).getAuthKey();
+        if (authKey.equals(userAuthKey))
+            return true;
+        else
+            return false;
+    }
+
+    //user 회원정보 저장
     public User save(User user){
         userRepository.save(user);
         return user;
+    }
+
+    //메일 인증 성공시
+    public void updateAuth(String email){
+        User user = userRepository.findByEmail(email);
+        user.setAuth(true);
+        userRepository.save(user);
+    }
+
+    public boolean login(String id,String password){
+        return userRepository.existsByIdAndPasswordAndAuthTrue(id,password);
     }
 }

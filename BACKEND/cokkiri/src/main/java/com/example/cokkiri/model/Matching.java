@@ -19,27 +19,23 @@ public class Matching {
     @Id
     @GeneratedValue
     @Column
-    private String student_id;
-
-    //수업이면 true 공강이면 false
-    @Column
-    private boolean is_class;
+    private String studentId;
 
     //희망 인원 수
     @Column
-    private int total_people;
+    private int totalPeople;
 
     //가능한 요일
     @ElementCollection
-    private List<String> possible_day;
+    private List<String> possibleDay;
 
     @Column
-    private Time start_time;
+    private Time startTime;
 
     @Column
-    private Time end_time;
+    private Time endTime;
 
-    //학수번호
+    //학수번호 null이면 공강매칭 null이 아니면 수업매칭
     @Column
-    private String subject_number;
+    private String subjectNumber;
 }

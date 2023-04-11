@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Student {
+public class User {
 
     @Id
     @GeneratedValue
@@ -39,9 +39,12 @@ public class Student {
     @Column
     private String number;
 
+    @Column
+    private String email;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
-    private LocalDateTime restrction_date;
+    private LocalDateTime restrctionDate;
 
     @ElementCollection
     private List<String> course;
@@ -49,4 +52,12 @@ public class Student {
     @ColumnDefault("false")
     @Column
     private boolean admin;
+
+    //인증여부
+    @ColumnDefault("false")
+    @Column
+    private boolean auth;
+
+    @Column
+    private String authKey;
 }

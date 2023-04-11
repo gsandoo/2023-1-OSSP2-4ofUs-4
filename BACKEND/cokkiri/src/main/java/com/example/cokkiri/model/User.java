@@ -17,10 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class User {
 
     @Id
-    @GeneratedValue
     @Column
     private String id;
 
@@ -43,7 +43,6 @@ public class User {
     private String email;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(nullable = false)
     private LocalDateTime restrctionDate;
 
     @ElementCollection
@@ -58,6 +57,7 @@ public class User {
     @Column
     private boolean auth;
 
+    //인증키
     @Column
     private String authKey;
 }

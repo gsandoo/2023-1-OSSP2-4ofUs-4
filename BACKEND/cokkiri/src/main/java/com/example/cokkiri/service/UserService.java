@@ -12,11 +12,7 @@ public class UserService {
 
     //AuthKey값 check함수
     public boolean checkAuthKey(String email,String authKey){
-        String userAuthKey = userRepository.findByEmail(email).getAuthKey();
-        if (authKey.equals(userAuthKey))
-            return true;
-        else
-            return false;
+        return userRepository.existsByEmailAndAuthKey(email,authKey);
     }
 
     //user 회원정보 저장

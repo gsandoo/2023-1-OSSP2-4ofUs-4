@@ -19,7 +19,7 @@ public class Matching {
     @Id
     @GeneratedValue
     @Column
-    private String studentId;
+    private String matchingId;
 
     //희망 인원 수
     @Column
@@ -28,6 +28,7 @@ public class Matching {
     //가능한 요일
     @ElementCollection
     private List<String> possibleDay;
+
 
     @Column
     private Time startTime;

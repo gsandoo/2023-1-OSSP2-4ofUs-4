@@ -16,11 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Entity // pk 반드시 필요
 public class User {
 
-    @Id
-    @GeneratedValue
+    @Id             // pk
+    @GeneratedValue // 자동으로 값 증가
     @Column
     private String id;
 

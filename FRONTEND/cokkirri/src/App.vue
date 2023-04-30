@@ -1,23 +1,4 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+    <!---모든 주소 정보를 RouterView로 가져왔음--->
+    <RouterView />
 </template>
-
-<script>
-
-export default {
-  name: 'App',
-  components: {
-  }
-}
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

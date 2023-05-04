@@ -28,7 +28,5 @@ public class MailAuthConfiguration {
         mailSender.setJavaMailProperties(properties);
 
         return mailSender;
-
-    }
-
+       }
 }

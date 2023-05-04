@@ -1,45 +1,49 @@
 package com.example.cokkiri.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Matching {
+public class ClassMatchedList {
     //매칭 결과에 대한 Entity
 
     //매칭 번호 (auto increment)
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     @Column
     private String matchingId;
 
-    //매칭된 사람수
+    //학수번호
     @Column
-    private int totalPeople;
+    @ColumnDefault("NULL")
+    @ElementCollection
+    private List<String> courseNumber;
+
+    //희망인원
+    @Column
+    private int headCount;
 
     //매칭된 시간
     @Column
-    private Date matchingTime;
+    private String matchingTime;
 
     //매칭된 사람들 학번
     @ElementCollection
-    private List<String> users;
+    private List<String> studentIdList;
 
     //약속시간
     @Column
-    private Date promiseTime;
+    @ElementCollection
+    private List<String> promiseTime;
 
     @Column
     @ColumnDefault("0")
@@ -51,7 +55,10 @@ public class Matching {
     //매칭결과
     private boolean matchingRes;
 
-
-
+    @Column
+    //매칭타입
+    //공강=free , 수업=class
+    private  String matchingType;
 
 }
+

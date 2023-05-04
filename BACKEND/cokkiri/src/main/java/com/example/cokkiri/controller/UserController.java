@@ -30,11 +30,7 @@ public class UserController {
         return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
     }
 
-    //로그인 처리 부분
-    @PostMapping("/login")
-    public ResponseEntity <Boolean> login(String id,String password){
-        return new ResponseEntity<Boolean>(userService.login(id,password),HttpStatus.OK);
-    }
+
 
     //user가 인증메일을 눌렀을 떄 처리
     @GetMapping("/signUpConfirm")

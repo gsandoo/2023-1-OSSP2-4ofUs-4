@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 public class PublicMatching {
 
-    private String matchingId;
+    private int matchingId;
 
     //매칭된 사람수
     private int headCount;

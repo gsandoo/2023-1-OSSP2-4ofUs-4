@@ -20,7 +20,7 @@ public class PublicMatchedList {
     @Id
     @GeneratedValue()
     @Column
-    private String matchingId;
+    private int matchingId;
 
     //희망인원
     @Column

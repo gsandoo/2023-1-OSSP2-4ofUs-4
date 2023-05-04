@@ -20,11 +20,10 @@ public class ClassMatchedList {
     @Id
     @GeneratedValue()
     @Column
-    private String matchingId;
+    private int matchingId;
 
     //학수번호
     @Column
-    @ColumnDefault("NULL")
     @ElementCollection
     private List<String> courseNumber;
 

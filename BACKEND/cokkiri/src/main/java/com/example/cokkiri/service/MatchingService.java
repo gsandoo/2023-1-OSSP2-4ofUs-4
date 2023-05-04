@@ -14,7 +14,7 @@ import java.util.*;
 
 
 
-@Service
+@Service("service")
 public class MatchingService {
     // 수업 레포지토리
     @Autowired
@@ -30,6 +30,7 @@ public class MatchingService {
     //반환 배열
     List<PublicMatching> publicUsersList = new ArrayList<>();
     List<ClassMatching> classUserList =new ArrayList<>();
+
 
     // 요일, 시간, 희망인원이 같을 시 증가
     int userCount;
@@ -267,14 +268,15 @@ public class MatchingService {
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
         publicLectureUsers.add(user);
-        PublicMatchedList publicMatchedListMatchedList = findPublicMatch(publicLectureUsers,count);
+        PublicMatchedList publicMatchedList = new PublicMatchedList();
+        publicMatchedList=findPublicMatch(publicLectureUsers,count);
 
         //Null 값이 아니라면 save  **이 부분 에러 **
-        if (publicMatchedListMatchedList!=null){
-            PublicMatchedListRepository.save(publicMatchedListMatchedList);
+        if (publicMatchedList!=null){
+            publicMatchedListRepository.save(publicMatchedList);
 
         }
-        return publicMatchedListMatchedList;
+        return publicMatchedList;
     }
 
 
@@ -286,9 +288,9 @@ public class MatchingService {
         ClassMatchedList classMatchedList = findClassMatch(classLectureUsers,count);
         // 이부분 에러
         if (classMatchedList!=null){
-            MatchedListRepository.save(classMatchedList);
-        }
-        System.out.println(classMatchedList);
+
+        }else{
+        System.out.println(classMatchedList);}
         return classMatchedList;
     }
 

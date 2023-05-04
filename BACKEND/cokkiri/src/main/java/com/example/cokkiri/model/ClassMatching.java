@@ -10,7 +10,7 @@ import java.util.List;
 @ToString
 public class ClassMatching {
 
-    private String matchingId;
+    private int matchingId;
 
     //매칭된 사람수
     private int headCount;

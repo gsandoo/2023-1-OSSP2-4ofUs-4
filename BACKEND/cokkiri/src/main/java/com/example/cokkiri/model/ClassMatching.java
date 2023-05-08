@@ -10,7 +10,6 @@ import java.util.List;
 @ToString
 public class ClassMatching {
 
-    private int matchingId;
 
     //매칭된 사람수
     private int headCount;
@@ -28,14 +27,8 @@ public class ClassMatching {
     //약속시간
     private List<String> promiseTime;
 
-
-    @ColumnDefault("0")
-    //매칭 동의수 사람수랑 같게 되면 matchingRes=true
-    private int matchingAgree;
-
-
-    //매칭결과
-    private boolean matchingRes;
+    // 매칭상태
+    private Boolean isClassMatching;
 
 
     //매칭타입

@@ -15,7 +15,7 @@ import java.util.*;
 public class MatchingService {
     // 수업 레포지토리
     @Autowired
-    private MatchedListRepository matchedListRepository;
+    private MatchedListRepository classMatchedListRepository;
 
     // 공강 레포지토리
     @Autowired
@@ -268,10 +268,8 @@ public class MatchingService {
         PublicMatchedList publicMatchedList = new PublicMatchedList();
         publicMatchedList=findPublicMatch(publicLectureUsers,count);
 
-        //Null 값이 아니라면 save  **이 부분 에러 **
         if (publicMatchedList!=null){
             publicMatchedListRepository.save(publicMatchedList);
-
         }
         return publicMatchedList;
     }
@@ -282,12 +280,12 @@ public class MatchingService {
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
         classLectureUsers.add(user);
-        ClassMatchedList classMatchedList = findClassMatch(classLectureUsers,count);
-        // 이부분 에러
+        ClassMatchedList classMatchedList = new ClassMatchedList();
+        classMatchedList = findClassMatch(classLectureUsers,count);
+        
         if (classMatchedList!=null){
-
-        }else{
-        System.out.println(classMatchedList);}
+            classMatchedListRepository.save(classMatchedList);
+        }
         return classMatchedList;
     }
 

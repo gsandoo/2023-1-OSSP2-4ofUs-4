@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.example.cokkiri.controller;
 
 import com.example.cokkiri.model.TimeTable;
@@ -29,7 +28,4 @@ public class TimeTableController {
     public ResponseEntity<String> readTimeTable(){
         return new ResponseEntity<String>(timeTableService.readTimeTable(), HttpStatus.OK);
     }
-=======
-package com.example.cokkiri.controller;public class TimeTableController {
->>>>>>> ea10db8 (remove 민감 파일)
 }

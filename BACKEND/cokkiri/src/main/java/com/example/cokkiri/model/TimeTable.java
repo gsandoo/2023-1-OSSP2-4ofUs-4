@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.example.cokkiri.model;
 
 import jakarta.persistence.Column;
@@ -32,7 +31,4 @@ public class TimeTable {
     //강의 날짜/시간
     @Column
     private String lectureDate;
-=======
-package com.example.cokkiri.model;public class TimeTable {
->>>>>>> ea10db8 (remove 민감 파일)
 }

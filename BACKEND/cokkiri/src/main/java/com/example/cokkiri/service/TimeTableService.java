@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.cokkiri.service;
 
 import com.example.cokkiri.model.TimeTable;
@@ -68,3 +69,7 @@ public class TimeTableService {
     }
 }
 
+=======
+package com.example.cokkiri.service;public class TimeTableService {
+}
+>>>>>>> ea10db8 (remove 민감 파일)

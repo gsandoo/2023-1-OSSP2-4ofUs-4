@@ -77,6 +77,14 @@ public class UserService {
             userRepository.save(e.get());
         }
     }
+    //heart 개수 변경
+    public void updateById(String id,int heart){
+        Optional<User> e = userRepository.findById(id);
+        if(e.isPresent()){
+            e.get().setHeart(heart);
+            userRepository.save(e.get());
+        }
+    }
 
     public void updateByIdAdmin(String id,User user){
         Optional<User> e = userRepository.findById(id);

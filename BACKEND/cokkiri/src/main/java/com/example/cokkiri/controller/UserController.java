@@ -1,13 +1,11 @@
 package com.example.cokkiri.controller;
 
 import com.example.cokkiri.model.ClassMatchedList;
+import com.example.cokkiri.model.Payment;
 import com.example.cokkiri.model.PublicMatchedList;
 import com.example.cokkiri.model.User;
 //import com.example.cokkiri.service.MailSendService;
-import com.example.cokkiri.service.MailSendService;
-import com.example.cokkiri.service.MatchingService;
-import com.example.cokkiri.service.TimeTableService;
-import com.example.cokkiri.service.UserService;
+import com.example.cokkiri.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +25,9 @@ public class UserController {
 
     @Autowired
     private MatchingService matchingService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     //로그인 처리 부분
     @PostMapping("/login")
@@ -120,6 +121,14 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable("userId") String userId,User user){
         userService.updateById(userId,user);
         return new ResponseEntity<User>(user,HttpStatus.OK);
+    }
+
+    //이메일로 결제내역 저장 및 쿠키개수 변경
+    @PutMapping(value = {"payment"})
+    public ResponseEntity<User> updateUserHeart(@PathVariable("userId") String userId, int heart, Payment payment){
+        paymentService.save(payment);
+        userService.updateById(userId,heart);
+        return new ResponseEntity<User>(userService.findById(userId).get(),HttpStatus.OK);
     }
 
 }

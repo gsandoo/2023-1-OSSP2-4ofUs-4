@@ -25,11 +25,11 @@ public class Payment {
     @Column
     private String id;
 
-    //결 한 사람
+    //결제 한 사람
     @Column
     private String userId;
 
-    //결 일시
+    //결제 일시
     @Column
     private Date payDate;
 

@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+##민감사항
+MailAuthConfiguration.java
+src/main/resources
+VerifyController.java

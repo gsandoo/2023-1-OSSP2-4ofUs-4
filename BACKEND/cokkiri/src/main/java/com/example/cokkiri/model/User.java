@@ -17,37 +17,37 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email"}))
 public class User {
 
-    @Id
+    //학번
     @Column
     private String id;
-
+    //비밀번호
     @Column
     private String password;
-
+    //이름
     @Column
     private String name;
-
+    //성별
     @Column
     private String sex;
-
+    //전공
     @Column
     private String major;
-
+    //번호
     @Column
     private String number;
-
+    //이메일
+    @Id
     @Column
     private String email;
-
+    //제한날짜
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime restrctionDate;
-
+    //수강과목
     @ElementCollection
     private List<String> course;
-
+    //관리자
     @ColumnDefault("false")
     @Column
     private boolean admin;
@@ -60,4 +60,19 @@ public class User {
     //인증키
     @Column
     private String authKey;
+
+    //하트
+    @Column
+    @ColumnDefault("0")
+    private int heart;
+    
+    //수업매칭중인지 확인 변수
+    @Column
+    @ColumnDefault("false")
+    private boolean isClassMatching;
+
+    //공강매칭중인지 확인 변수
+    @Column
+    @ColumnDefault("false")
+    private boolean isPublicMatching;
 }

@@ -20,14 +20,15 @@ public class UserService {
         userRepository.findAll().forEach(e->users.add(e));
         return users;
     }
+    //이메일로 조회
     public Optional<User> findById(String id){
         Optional<User> user = userRepository.findById(id);
         return user;
     }
 
     //이름으로 조회하므로 null가능성 있음
-    public Optional<User> findByName(String name){
-        Optional<User> user = Optional.ofNullable(userRepository.findByName(name));
+    public List<User> findByName(String name){
+        List<User> user =userRepository.findByName(name);
         return user;
     }
 
@@ -44,14 +45,19 @@ public class UserService {
 
     //메일 인증 성공시
     public void updateAuth(String email){
-        User user = userRepository.findByEmail(email);
-        user.setAuth(true);
-        userRepository.save(user);
+        Optional<User> user = userRepository.findById(email);
+        user.get().setAuth(true);
+        userRepository.save(user.get());
     }
 
     //login
     public boolean login(String id,String password){
-        return userRepository.existsByIdAndPasswordAndAuthTrue(id,password);
+        return userRepository.existsByEmailAndPasswordAndAuthTrue(id,password);
+    }
+
+    //login
+    public boolean loginAdmin(String id,String password){
+        return userRepository.existsByEmailAndPasswordAndAuthTrueAndAdminTrue(id,password);
     }
 
     //user 탈퇴
@@ -68,6 +74,29 @@ public class UserService {
             e.get().setMajor(user.getMajor());
             e.get().setNumber(user.getNumber());
             e.get().setCourse(user.getCourse());
+            userRepository.save(e.get());
+        }
+    }
+
+    public void updateByIdAdmin(String id,User user){
+        Optional<User> e = userRepository.findById(id);
+
+        if(e.isPresent()){
+            e.get().setId(user.getId());
+            e.get().setPassword(user.getPassword());
+            e.get().setName(user.getName());
+            e.get().setSex(user.getSex());
+            e.get().setMajor(user.getMajor());
+            e.get().setNumber(user.getNumber());
+            e.get().setEmail(user.getEmail());
+            e.get().setRestrctionDate(user.getRestrctionDate());
+            e.get().setCourse(user.getCourse());
+            e.get().setHeart(user.getHeart());
+            e.get().setAdmin(user.isAdmin());
+            e.get().setAuth(user.isAuth());
+            e.get().setClassMatching(user.isClassMatching());
+            e.get().setPublicMatching(user.isPublicMatching());
+
             userRepository.save(e.get());
         }
     }

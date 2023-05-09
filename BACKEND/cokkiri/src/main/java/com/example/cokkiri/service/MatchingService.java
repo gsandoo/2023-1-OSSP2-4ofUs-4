@@ -1,9 +1,6 @@
 package com.example.cokkiri.service;
 
-import com.example.cokkiri.model.ClassMatchedList;
-import com.example.cokkiri.model.ClassMatching;
-import com.example.cokkiri.model.PublicMatchedList;
-import com.example.cokkiri.model.PublicMatching;
+import com.example.cokkiri.model.*;
 import com.example.cokkiri.repository.MatchedListRepository;
 import com.example.cokkiri.repository.PublicMatchedListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -292,6 +289,20 @@ public class MatchingService {
         }else{
         System.out.println(classMatchedList);}
         return classMatchedList;
+    }
+
+    //수업 매칭 전부 반환
+    public List<ClassMatchedList> findAllClassMatching(){
+        List<ClassMatchedList> matchedlist = new ArrayList<>();
+        matchedListRepository.findAll().forEach(e->matchedlist.add(e));
+        return matchedlist;
+    }
+
+    //공강 매칭 전부 반환
+    public List<PublicMatchedList> findAllPublicMatching(){
+        List<PublicMatchedList> matchedlist = new ArrayList<>();
+        publicMatchedListRepository.findAll().forEach(e->matchedlist.add(e));
+        return matchedlist;
     }
 
 }

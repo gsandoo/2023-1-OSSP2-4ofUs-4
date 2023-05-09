@@ -292,7 +292,7 @@ public class MatchingService {
     //수업 매칭 전부 반환
     public List<ClassMatchedList> findAllClassMatching(){
         List<ClassMatchedList> matchedlist = new ArrayList<>();
-        matchedListRepository.findAll().forEach(e->matchedlist.add(e));
+        classMatchedListRepository.findAll().forEach(e->matchedlist.add(e));
         return matchedlist;
     }
 

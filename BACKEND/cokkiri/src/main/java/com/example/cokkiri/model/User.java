@@ -19,7 +19,8 @@ import java.util.List;
 @Entity
 public class User {
 
-    //학번
+    //이메일
+    @Id
     @Column
     private String id;
     //비밀번호
@@ -37,10 +38,9 @@ public class User {
     //번호
     @Column
     private String number;
-    //이메일
-    @Id
+    //학번
     @Column
-    private String email;
+    private String studentNum;
     //제한날짜
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime restrctionDate;

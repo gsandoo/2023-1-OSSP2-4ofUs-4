@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, String> {
     public List<User> findByName(String name);
-    public boolean existsByEmailAndAuthKey(String email,String authKey);
-    public boolean existsByEmailAndPasswordAndAuthTrue(String email,String password);
+    public boolean existsByIdAndAuthKey(String id,String authKey);
+    public boolean existsByIdAndPasswordAndAuthTrue(String id,String password);
     //관리자 로그인
-    public boolean existsByEmailAndPasswordAndAuthTrueAndAdminTrue(String email,String password);
+    public boolean existsByIdAndPasswordAndAuthTrueAndAdminTrue(String id,String password);
 
 }

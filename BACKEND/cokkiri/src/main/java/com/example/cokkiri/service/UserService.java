@@ -34,7 +34,7 @@ public class UserService {
 
     //AuthKey값 check함수
     public boolean checkAuthKey(String email,String authKey){
-        return userRepository.existsByEmailAndAuthKey(email,authKey);
+        return userRepository.existsByIdAndAuthKey(email,authKey);
     }
 
     //user 회원정보 저장
@@ -44,20 +44,20 @@ public class UserService {
     }
 
     //메일 인증 성공시
-    public void updateAuth(String email){
-        Optional<User> user = userRepository.findById(email);
+    public void updateAuth(String id){
+        Optional<User> user = userRepository.findById(id);
         user.get().setAuth(true);
         userRepository.save(user.get());
     }
 
     //login
     public boolean login(String id,String password){
-        return userRepository.existsByEmailAndPasswordAndAuthTrue(id,password);
+        return userRepository.existsByIdAndPasswordAndAuthTrue(id,password);
     }
 
     //login
     public boolean loginAdmin(String id,String password){
-        return userRepository.existsByEmailAndPasswordAndAuthTrueAndAdminTrue(id,password);
+        return userRepository.existsByIdAndPasswordAndAuthTrueAndAdminTrue(id,password);
     }
 
     //user 탈퇴
@@ -88,7 +88,7 @@ public class UserService {
             e.get().setSex(user.getSex());
             e.get().setMajor(user.getMajor());
             e.get().setNumber(user.getNumber());
-            e.get().setEmail(user.getEmail());
+            e.get().setStudentNum(user.getStudentNum());
             e.get().setRestrctionDate(user.getRestrctionDate());
             e.get().setCourse(user.getCourse());
             e.get().setHeart(user.getHeart());

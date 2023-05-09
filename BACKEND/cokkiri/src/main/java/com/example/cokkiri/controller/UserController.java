@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity <User> saveUser(User user){
         //유저에게 메일을 보낸 인증키
-        String authKey = mss.sendAuthMail(user.getEmail());
+        String authKey = mss.sendAuthMail(user.getId());
         user.setAuthKey(authKey);
         return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
     }
@@ -53,11 +53,11 @@ public class UserController {
 
     //user가 인증메일을 눌렀을 떄 처리
     @GetMapping("/signUpConfirm")
-    public ResponseEntity <String> signUpConfirm(@RequestParam(value = "email")String email,@RequestParam(value = "authKey")String authKey){
+    public ResponseEntity <String> signUpConfirm(@RequestParam(value = "id")String id,@RequestParam(value = "authKey")String authKey){
 
         //DB에 있는 authKey값과 맞는지 확인
-        if(userService.checkAuthKey(email,authKey)){
-            userService.updateAuth(email);
+        if(userService.checkAuthKey(id,authKey)){
+            userService.updateAuth(id);
             return new ResponseEntity<String>("인증이 완료 되었습니다!!!",HttpStatus.OK);
         }
         else

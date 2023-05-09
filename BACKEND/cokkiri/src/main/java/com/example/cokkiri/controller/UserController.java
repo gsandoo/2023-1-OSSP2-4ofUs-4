@@ -86,6 +86,13 @@ public class UserController {
         return new ResponseEntity<List<User>>(users,HttpStatus.OK);
     }
 
+    @GetMapping ("/admin/payment")
+    public ResponseEntity<List <Payment>> getAllPayment(){
+        //관리자페이지에서 모든 결제내역 확인
+        List<Payment> payments = paymentService.findAll();
+        return new ResponseEntity<List<Payment>>(payments,HttpStatus.OK);
+    }
+
     @GetMapping ("/admin/user/id")
     public ResponseEntity<User> getUserId(@RequestParam(value="userId")String id){
         //관리자페이지에서 이메일으로 유저 조회 (마이페이지에서도 이걸 사용할 것)
@@ -100,6 +107,15 @@ public class UserController {
         List<User> users = userService.findByName(name);
         return new ResponseEntity<List<User>>(users,HttpStatus.OK);
     }
+
+    @GetMapping ("/admin/user/payment")
+    public ResponseEntity<List<Payment>> getUserPayment(@RequestParam(value="userId")String id){
+        //관리자페이지에서 이름으로 유저 결제내역 조회
+        List<Payment> payments = paymentService.findById(id);
+        return new ResponseEntity<List<Payment>>(payments,HttpStatus.OK);
+    }
+
+
 
     //유저 삭제
     @DeleteMapping(value = "/admin/user/{userId}")

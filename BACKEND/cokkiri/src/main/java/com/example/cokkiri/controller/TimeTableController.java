@@ -17,7 +17,7 @@ public class TimeTableController {
     @Autowired
     private TimeTableService timeTableService;
 
-    @GetMapping ("/timetable")
+    @GetMapping ("/timeTable")
     public ResponseEntity<TimeTable> getLectureId(@RequestParam(value="id")String id){
         //학수 번호를 입력하면 과목에 대한 정보를 반환
         Optional<TimeTable> timeTable = timeTableService.findById(id);

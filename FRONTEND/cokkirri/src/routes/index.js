@@ -3,6 +3,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './Home.vue'
 import SignUpPage from './SignUpPage.vue'
 
+import Payments from './Payments.vue'
+
 export default createRouter({
     // Hash 모드로 설정
     history: createWebHashHistory(),
@@ -15,6 +17,10 @@ export default createRouter({
         {
             path: '/SignUp',
             component: SignUpPage
+        },
+        {
+            path: '/Payments',
+            component: Payments
         }
     ]
 })

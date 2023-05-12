@@ -4,6 +4,7 @@ import Home from './Home.vue'
 import SignUpPage from './SignUpPage.vue'
 
 import Payments from './Payments.vue'
+import Starting from './Starting.vue'
 
 export default createRouter({
     // Hash 모드로 설정
@@ -21,6 +22,10 @@ export default createRouter({
         {
             path: '/Payments',
             component: Payments
+        },
+        {
+            path: '/Starting',
+            component: Starting
         }
     ]
 })

@@ -42,13 +42,13 @@ public class UserController {
     }
 
     //회원가입 처리 부분
-    @PostMapping("/signup")
-    public ResponseEntity <User> saveUser(User user){
-        //유저에게 메일을 보낸 인증키
-        String authKey = mss.sendAuthMail(user.getId());
-        user.setAuthKey(authKey);
-        return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
-    }
+//    @PostMapping("/signup")
+//    public ResponseEntity <User> saveUser(User user){
+//        //유저에게 메일을 보낸 인증키
+//        String authKey = mss.sendAuthMail(user.getId());
+//        user.setAuthKey(authKey);
+//        return new ResponseEntity<User>(userService.save(user),HttpStatus.OK);
+//    }
 
 
 

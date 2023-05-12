@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@Builder
 @ToString
 public class PublicMatching {
 
@@ -33,5 +33,6 @@ public class PublicMatching {
     //매칭타입
     //공강=free , 수업=class
     private  String matchingType;
+
 
 }

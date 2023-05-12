@@ -23,7 +23,7 @@ export default {
     },
     requestPay() {
       const IMP = window.IMP;
-      IMP.init(""); // 예: imp00000000 - github에는 x
+      IMP.init(""); // 실행할 때 코드 입력해서 하기
 
       IMP.request_pay(
         {

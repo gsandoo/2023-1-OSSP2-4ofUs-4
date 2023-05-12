@@ -1,11 +1,12 @@
 package com.example.cokkiri.controller;
 
-import com.example.cokkiri.model.ClassMatchedList;
-import com.example.cokkiri.model.ClassMatching;
-import com.example.cokkiri.model.PublicMatchedList;
-import com.example.cokkiri.model.PublicMatching;
+import com.example.cokkiri.model.*;
 import com.example.cokkiri.service.MatchingService;
+import org.aspectj.bridge.IMessage;
+import org.aspectj.bridge.ISourceLocation;
+import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,8 @@ public class MatchingController {
     public ResponseEntity<PublicMatchedList> publicMatch(@RequestBody PublicMatching user){
         System.out.println(user.getMatchingType());
 
-        if(!(user.isPublicMatching())&&user.getMatchingType().equals("free")){
+        if(user.getMatchingType().equals("free")){
+
             return new ResponseEntity<>(matchingService.PublicMatch(user), HttpStatus.OK);
         }
         else{
@@ -42,7 +44,19 @@ public class MatchingController {
             System.out.println("잘못된 송출");
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @PostMapping("free/cancel")
+    public String cancelPublicMatching(CancelMatching user){
+        user.setCancel(true);
+
+        if(user.getMatchingType().equals("class")){
+
+        }
+        if(user.getMatchingType().equals("free")){
+
+        }
+        return null;
     }
 }
 

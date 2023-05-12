@@ -5,8 +5,8 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
+@Builder
 @ToString
 public class ClassMatching {
 
@@ -19,7 +19,6 @@ public class ClassMatching {
 
     //학수번호
     private List<String> courseNumber;
-    
 
     //매칭타입
     //공강=free , 수업=class

@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db856915-6af8-4bab-9584-ab4b1218b67b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatching.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatching.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatchedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatchedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatching.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatching.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MailSendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MailSendService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -60,23 +66,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/roger/OneDrive/바탕 화면/cokkiri&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;23aec191d7157a0bacfd3ca0dfae4d08&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/roger/OneDrive/바탕 화면/cokkiri",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "spring.configuration.checksum": "23aec191d7157a0bacfd3ca0dfae4d08"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.CokkiriApplication">
     <configuration name="JdbcTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cokkiri" />
@@ -152,7 +158,8 @@
       <workItem from="1683529529246" duration="5621000" />
       <workItem from="1683595169339" duration="4439000" />
       <workItem from="1683794836513" duration="924000" />
-      <workItem from="1683869658850" duration="935000" />
+      <workItem from="1683869658850" duration="2402000" />
+      <workItem from="1683890125934" duration="12773000" />
     </task>
     <servers />
   </component>
@@ -175,563 +182,543 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>61</line>
+          <line>126</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="103" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>73</line>
+          <line>144</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>74</line>
+          <line>145</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>75</line>
+          <line>146</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="133" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="134" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="135" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="136" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>79</line>
+          <line>151</line>
           <option name="timeStamp" value="151" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>81</line>
+          <line>153</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>82</line>
+          <line>154</line>
           <option name="timeStamp" value="153" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>85</line>
+          <line>157</line>
           <option name="timeStamp" value="154" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>89</line>
+          <line>160</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="157" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="158" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="160" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="162" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="164" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="165" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>99</line>
+          <line>179</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>98</line>
+          <line>178</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>100</line>
+          <line>180</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>105</line>
+          <line>184</line>
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>119</line>
+          <line>197</line>
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>120</line>
+          <line>198</line>
           <option name="timeStamp" value="173" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>121</line>
+          <line>199</line>
           <option name="timeStamp" value="174" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>122</line>
+          <line>200</line>
           <option name="timeStamp" value="175" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>125</line>
+          <line>203</line>
           <option name="timeStamp" value="176" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>126</line>
+          <line>204</line>
           <option name="timeStamp" value="177" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>128</line>
+          <line>206</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>127</line>
+          <line>205</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>129</line>
+          <line>207</line>
           <option name="timeStamp" value="180" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>131</line>
+          <line>209</line>
           <option name="timeStamp" value="181" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>141</line>
+          <line>216</line>
           <option name="timeStamp" value="182" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>144</line>
+          <line>219</line>
           <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>147</line>
+          <line>222</line>
           <option name="timeStamp" value="184" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>148</line>
+          <line>223</line>
           <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>151</line>
+          <line>226</line>
           <option name="timeStamp" value="186" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>152</line>
+          <line>227</line>
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>157</line>
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="189" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>106</line>
+          <line>185</line>
           <option name="timeStamp" value="190" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>111</line>
+          <line>189</line>
           <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>113</line>
+          <line>191</line>
           <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>104</line>
+          <line>183</line>
           <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>114</line>
+          <line>192</line>
           <option name="timeStamp" value="200" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>22</line>
+          <line>23</line>
           <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>24</line>
+          <line>25</line>
           <option name="timeStamp" value="207" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="208" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>27</line>
+          <line>29</line>
           <option name="timeStamp" value="210" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>28</line>
+          <line>30</line>
           <option name="timeStamp" value="211" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>29</line>
+          <line>31</line>
           <option name="timeStamp" value="212" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>165</line>
-          <option name="timeStamp" value="214" />
+          <line>127</line>
+          <option name="timeStamp" value="263" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="264" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="265" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="266" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="267" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="268" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>139</line>
+          <option name="timeStamp" value="269" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="270" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>149</line>
+          <option name="timeStamp" value="271" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>162</line>
+          <option name="timeStamp" value="272" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>163</line>
+          <option name="timeStamp" value="273" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="274" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>164</line>
+          <option name="timeStamp" value="275" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>166</line>
-          <option name="timeStamp" value="215" />
+          <option name="timeStamp" value="276" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="216" />
+          <line>165</line>
+          <option name="timeStamp" value="277" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="217" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>172</line>
-          <option name="timeStamp" value="218" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>174</line>
-          <option name="timeStamp" value="219" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>175</line>
-          <option name="timeStamp" value="220" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="221" />
+          <line>167</line>
+          <option name="timeStamp" value="278" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>176</line>
-          <option name="timeStamp" value="222" />
+          <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>178</line>
-          <option name="timeStamp" value="223" />
+          <line>174</line>
+          <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>179</line>
-          <option name="timeStamp" value="224" />
+          <line>173</line>
+          <option name="timeStamp" value="281" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>183</line>
-          <option name="timeStamp" value="225" />
+          <line>171</line>
+          <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>184</line>
-          <option name="timeStamp" value="226" />
+          <line>170</line>
+          <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="227" />
+          <line>172</line>
+          <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>188</line>
-          <option name="timeStamp" value="228" />
+          <line>54</line>
+          <option name="timeStamp" value="285" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>190</line>
-          <option name="timeStamp" value="229" />
+          <line>55</line>
+          <option name="timeStamp" value="286" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="230" />
+          <line>56</line>
+          <option name="timeStamp" value="287" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="231" />
+          <line>57</line>
+          <option name="timeStamp" value="288" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>197</line>
-          <option name="timeStamp" value="232" />
+          <line>61</line>
+          <option name="timeStamp" value="289" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>198</line>
-          <option name="timeStamp" value="233" />
+          <line>62</line>
+          <option name="timeStamp" value="290" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>199</line>
-          <option name="timeStamp" value="234" />
+          <line>67</line>
+          <option name="timeStamp" value="291" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>201</line>
-          <option name="timeStamp" value="235" />
+          <line>68</line>
+          <option name="timeStamp" value="292" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>200</line>
-          <option name="timeStamp" value="236" />
+          <line>69</line>
+          <option name="timeStamp" value="293" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>202</line>
-          <option name="timeStamp" value="237" />
+          <line>70</line>
+          <option name="timeStamp" value="294" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>204</line>
-          <option name="timeStamp" value="238" />
+          <line>71</line>
+          <option name="timeStamp" value="295" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>205</line>
-          <option name="timeStamp" value="239" />
+          <line>72</line>
+          <option name="timeStamp" value="296" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>206</line>
-          <option name="timeStamp" value="240" />
+          <line>73</line>
+          <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>209</line>
-          <option name="timeStamp" value="241" />
+          <line>74</line>
+          <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>211</line>
-          <option name="timeStamp" value="242" />
+          <line>75</line>
+          <option name="timeStamp" value="299" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>212</line>
-          <option name="timeStamp" value="243" />
+          <line>78</line>
+          <option name="timeStamp" value="300" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>217</line>
-          <option name="timeStamp" value="244" />
+          <line>79</line>
+          <option name="timeStamp" value="301" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="245" />
+          <line>80</line>
+          <option name="timeStamp" value="302" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>220</line>
-          <option name="timeStamp" value="246" />
+          <line>84</line>
+          <option name="timeStamp" value="304" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>222</line>
-          <option name="timeStamp" value="247" />
+          <line>85</line>
+          <option name="timeStamp" value="305" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>225</line>
-          <option name="timeStamp" value="248" />
+          <line>86</line>
+          <option name="timeStamp" value="306" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>226</line>
-          <option name="timeStamp" value="249" />
+          <line>88</line>
+          <option name="timeStamp" value="307" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>227</line>
-          <option name="timeStamp" value="250" />
+          <line>89</line>
+          <option name="timeStamp" value="308" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="251" />
+          <line>90</line>
+          <option name="timeStamp" value="309" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>231</line>
-          <option name="timeStamp" value="252" />
+          <line>92</line>
+          <option name="timeStamp" value="310" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>233</line>
-          <option name="timeStamp" value="253" />
+          <line>93</line>
+          <option name="timeStamp" value="311" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>236</line>
-          <option name="timeStamp" value="254" />
+          <line>94</line>
+          <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>239</line>
-          <option name="timeStamp" value="255" />
+          <line>97</line>
+          <option name="timeStamp" value="313" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>240</line>
-          <option name="timeStamp" value="256" />
+          <line>98</line>
+          <option name="timeStamp" value="314" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>241</line>
-          <option name="timeStamp" value="257" />
+          <line>100</line>
+          <option name="timeStamp" value="315" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>244</line>
-          <option name="timeStamp" value="258" />
+          <line>99</line>
+          <option name="timeStamp" value="316" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>246</line>
-          <option name="timeStamp" value="259" />
+          <line>103</line>
+          <option name="timeStamp" value="317" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>249</line>
-          <option name="timeStamp" value="260" />
+          <line>102</line>
+          <option name="timeStamp" value="318" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>261</line>
-          <option name="timeStamp" value="261" />
+          <line>104</line>
+          <option name="timeStamp" value="319" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>262</line>
-          <option name="timeStamp" value="262" />
+          <line>106</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="321" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>111</line>
+          <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>115</line>
+          <option name="timeStamp" value="328" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="329" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>137</line>
+          <option name="timeStamp" value="330" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="331" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>41</line>
-          <properties class="com.example.cokkiri.service.MatchingService" method="findDuplicates">
+          <line>53</line>
+          <properties class="com.example.cokkiri.service.MatchingService" method="findDuplicatTime">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -739,8 +726,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>21</line>
-          <properties class="com.example.cokkiri.controller.MatchingController">
+          <line>22</line>
+          <properties class="com.example.cokkiri.controller.MatchingController" method="publicMatch">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

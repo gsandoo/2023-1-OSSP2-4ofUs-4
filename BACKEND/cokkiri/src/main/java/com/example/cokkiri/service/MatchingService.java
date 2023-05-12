@@ -54,8 +54,7 @@ public class MatchingService {
             return null;
         }
         else{
-            // 객체 생성
-            PublicMatchedList matched = new PublicMatchedList();
+
 
             for(int i =0; i <= userList.size()-2; i++){
                     List<String>firstUserTime = userList.get(i).getPromiseTime();
@@ -72,7 +71,9 @@ public class MatchingService {
                     boolean day = (userList.get(i).getAvailableDay()).equals(userList.get(userList.size()-1).getAvailableDay());
                     boolean head = (userList.get(i).getHeadCount())==(userList.get(userList.size()-1).getHeadCount());
                     if (day&&head&&times!=null) {
-
+                        // 객체 생성
+                        PublicMatchedList matched = new PublicMatchedList();
+                        userList.get(i).setPublicMatching(true);
                         userCount+=1;
                         // 요소를 찾았지만 희망인원이 채워 졌는지 묻는 조건문
                         if(userCount+1==count){
@@ -158,8 +159,7 @@ public class MatchingService {
 
     //수업매칭
     public ClassMatchedList findClassMatch(List<ClassMatching>userList , int count ){
-        // 객체 생성
-        ClassMatchedList matched = new ClassMatchedList();
+
         if(userList.size()<2){
             return null;
         }
@@ -180,7 +180,8 @@ public class MatchingService {
 
                 boolean head = (userList.get(i).getHeadCount())==(userList.get(userList.size()-1).getHeadCount());
                 if (head&&courseNum!=null) {
-
+                    // 객체 생성
+                    ClassMatchedList matched = new ClassMatchedList();
                     userCount+=1;
                     // 요소를 찾았지만 희망인원이 채워 졌는지 묻는 조건문
                     if(userCount+1==count){
@@ -256,7 +257,7 @@ public class MatchingService {
             }
             //끝까지 돌았는데 못찾았을 시
             userCount=0;
-            return matched;
+            return null;
         }
     }
 

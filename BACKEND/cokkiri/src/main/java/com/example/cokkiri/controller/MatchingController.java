@@ -21,7 +21,8 @@ public class MatchingController {
     @PostMapping("/free")
     public ResponseEntity<PublicMatchedList> publicMatch(@RequestBody PublicMatching user){
         System.out.println(user.getMatchingType());
-        if(user.getMatchingType().equals("free")){
+
+        if(!(user.isPublicMatching())&&user.getMatchingType().equals("free")){
             return new ResponseEntity<>(matchingService.PublicMatch(user), HttpStatus.OK);
         }
         else{

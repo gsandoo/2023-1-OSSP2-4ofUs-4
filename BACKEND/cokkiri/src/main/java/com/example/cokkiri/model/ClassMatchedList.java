@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -34,12 +33,16 @@ public class ClassMatchedList {
 
     //매칭된 시간
     @Column
-    private LocalDate matchingTime;
+    private String matchingTime;
 
     //매칭된 사람들 학번
     @ElementCollection
     private List<String> studentIdList;
 
+    //약속시간
+    @Column
+    @ElementCollection
+    private List<String> promiseTime;
 
     @Column
     @ColumnDefault("0")

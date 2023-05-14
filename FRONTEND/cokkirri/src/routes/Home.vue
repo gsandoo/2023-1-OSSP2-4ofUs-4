@@ -1,38 +1,36 @@
 <template>
     <!-- 이곳에 로그인 뼈대 생성. 추후 컴포넌트로 빼내서 활용할 예정.  -->
-    <div class="background-setting">
-        <div class="container" >
-            <div class="form-frame">
-                <div :style="{'margin-left': '341px'}">
-                    <p :style="{'margin-left': '5px','margin-top':'53px','margin-bottom':'0','font-size': '16px','color': '#8D8D8D'}">
-                        아직 회원이 아니라면 ?
-                    </p>
-                    <router-link to="/signup" :style="{'margin-left': '95px','color': '#B87514'}">회원가입</router-link>
-                </div>
-                <h2 :style="{'margin-top': '18px','margin-left': '44px','font-size':'55px'}">로그인</h2>
-                <div :style="{'margin-top': '52px'}">
-                    <p :style="{'margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">아이디 또는 이메일 주소를 입력하세요.</p>
-                    <input
-                        name="user id" 
-                        placeholder="email address"
-                        :style="bigInputStyle" 
-                        @keydown.enter="submitForm"
-                        v-model="user.id">
-                    <p :style="{'margin-top': '69px','margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">비밀번호를 입력하세요</p>
-                    <input 
-                        type="password"
-                        name="password" 
-                        placeholder="password" 
-                        :style="[bigInputStyle,{'margin-bottom': '8px'}]"
-                        @keydown.enter="submitForm"
-                        v-model="user.password">
-                    <router-link @click="alertMassage" to="/" :style="{'margin-left': '416px','color': '#AD3113','font-size': '13px'}">비밀번호 찾기</router-link>
-                    <button 
-                        :style="ButtonStyle"
-                        @click="submitForm">
-                        로그인
-                    </button>
-                </div>
+    <div class="container" >
+        <div class="form-frame">
+            <div :style="{'margin-left': '341px'}">
+                <p :style="{'margin-left': '5px','margin-top':'53px','margin-bottom':'0','font-size': '16px','color': '#8D8D8D'}">
+                    아직 회원이 아니라면 ?
+                </p>
+                <router-link to="/signup" :style="{'margin-left': '95px','color': '#B87514'}">회원가입</router-link>
+            </div>
+            <h2 :style="{'margin-top': '18px','margin-left': '44px','font-size':'55px'}">로그인</h2>
+            <div :style="{'margin-top': '52px'}">
+                <p :style="{'margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">아이디 또는 이메일 주소를 입력하세요.</p>
+                <input
+                    name="user id" 
+                    placeholder="email address"
+                    :style="bigInputStyle" 
+                    @keydown.enter="submitForm"
+                    v-model="user.id">
+                <p :style="{'margin-top': '69px','margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">비밀번호를 입력하세요</p>
+                <input 
+                    type="password"
+                    name="password" 
+                    placeholder="password" 
+                    :style="[bigInputStyle,{'margin-bottom': '8px'}]"
+                    @keydown.enter="submitForm"
+                    v-model="user.password">
+                <router-link @click="alertMassage" to="/" :style="{'margin-left': '416px','color': '#AD3113','font-size': '13px'}">비밀번호 찾기</router-link>
+                <button 
+                    :style="ButtonStyle"
+                    @click="submitForm">
+                    로그인
+                </button>
             </div>
         </div>
     </div>
@@ -118,21 +116,6 @@ export default {
 
 <style lang="scss" scoped>
     @import "../scss/main";
-    // 배경화면 설정
-    .background-setting{
-        height: 100vh;
-        width: 100vw;
-        margin:0;
-        background: url("../assets/login/background.jpg") no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        display: grid;
-        grid-template-rows: auto;
-        justify-items: center;
-        align-items: center;
-    }
     // container 클래스 위치 조정
     .container{
         display: flex;
@@ -143,7 +126,7 @@ export default {
     .form-frame {
         width: 539px;
         height: 741px;
-        background: #FFFEF9;
+        background: #FFFFFF;
         box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
         border-radius: 40px;
     }

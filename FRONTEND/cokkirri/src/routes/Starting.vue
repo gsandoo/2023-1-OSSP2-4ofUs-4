@@ -4,7 +4,7 @@
   <div>
     <div class = "whole">
       <div class="mybutton">
-        <router-link class="link-button" to="/Matching">매칭 페이지</router-link>
+        <router-link class="link-button" to="/my/matching">매칭 페이지</router-link>
       </div>
 
       <div class = "wrap-que">
@@ -26,7 +26,7 @@
       </div>
 
       <div class = "GotoMypage">
-        <router-link class="link-mypage" to = "/Mypage">My Page</router-link>
+        <router-link class="link-mypage" to = "/my">My Page</router-link>
       </div>
     </div>
   </div>
@@ -77,8 +77,8 @@ export default {
   position: absolute;
   width: 230px;
   height: 67px;
-  left: 584px;
-  top: 645px;
+  left: 610px;
+  top: 700px;
 
   background: #B87514;
   border-radius: 50px;
@@ -88,7 +88,7 @@ export default {
   width: 187px;
   height: 24px;
 
-  font-family: 'Poppins';
+  text-decoration : none;
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
@@ -110,7 +110,7 @@ export default {
   left: 1292px;
   top: 63px;
 
-  /* font-family: 'Poppins'; */
+  text-decoration : none;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -132,7 +132,7 @@ export default {
   width: 439px;
   height: 265px;
   left: 540px;
-  top: 81.5px;
+  top: 90px;
 
   /* font-family: 'Poppins'; */
   font-style: normal;
@@ -161,9 +161,8 @@ export default {
   width: 484px;
   height: 158px;
   left: 540px;
-  top: 400px;
+  top: 435px;
 
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: bold;
   font-size: 38px;

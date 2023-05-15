@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import axios from '../api/index.js';
 
 export default {
     data() {
@@ -74,33 +73,7 @@ export default {
         alertMassage(){
             alert("구현 예정")
         },
-        // 로그인 api 요청 부분. 반환값에 토큰 없음.
-        async login() {
-            try{
-                await axios.post('/login', null, {
-                    params: {
-                        id: this.user.id,
-                        password: this.user.password,
-                    }
-                })
-                .then((result) => {
-                    if(result.status === 200){
-                        if(result.data === true){
-                            this.$store.commit('loginSuccess', this.user.id);
-                            alert('로그인 되었습니다.')
-                        }
-                        else{
-                            alert('아이디 밒 비밀번호에 대응되는 회원 정보가 없습니다.')
-                        }
-                    }
-                }).catch(function(error){
-                    console.log(error);
-                });
-            } catch(error){
-                console.log(error);
-            }
-        },
-        // 로그인 입력 값 검사
+        // 로그인 입력 값 검사 후 vuex의 action을 통해 api 요청
         submitForm() {
             if (this.user.id === '') {
                 alert('아이디를 입력하세요.')
@@ -109,7 +82,7 @@ export default {
                 alert('비밀번호를 입력하세요.')
             }
             else{
-                this.login()
+                this.$store.dispatch('loginRequest',{inputId:this.user.id, inputPassword:this.user.password})
             }
         }
     }

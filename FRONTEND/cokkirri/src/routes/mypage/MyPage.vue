@@ -13,7 +13,7 @@
                     <div>
                             <div class="heart-img"></div>
                             <div class="heart-txt">내 하트</div>
-                            <router-link to="/my/heart" class="heart-btn">~쿠키 개수~ &gt;</router-link>
+                            <div class="heart-btn"><router-link to="/Payments">충전 하기</router-link></div>
                             <div style="clear:both;"></div>
                             <div class="line-for-division"></div>
 

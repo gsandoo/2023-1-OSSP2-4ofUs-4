@@ -5,14 +5,14 @@
             <div>
                 <div class="frame-body">
                     <div>
-                            <router-link to="/my" class="my-link">&lt;</router-link>
-                            <div style="clear:both;"></div>
-                            <div class="matching-img"></div>
-                            <div class="matching-txt">매칭 결과</div>
-                            <router-link to="/my/matching" class="matching-btn">새로고침</router-link>
-                            <div style="clear:both;"></div>
-                            <div class="line-for-division"></div>
-                            <div class="font-head">매칭 상황</div>
+                        <router-link to="/my" class="my-link">&lt;</router-link>
+                        <div style="clear:both;"></div>
+                        <div class="matching-img"></div>
+                        <div class="matching-txt">매칭 결과</div>
+                        <router-link to="/my/matching" class="matching-btn">새로고침</router-link>
+                        <div style="clear:both;"></div>
+                        <div class="line-for-division"></div>
+                        <div class="font-head">매칭 상황</div>
                     </div>
                 </div>
             </div>

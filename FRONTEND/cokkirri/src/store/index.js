@@ -21,7 +21,7 @@ export default createStore({
         loginSuccess(state, payload) {
             state.isLogin = true
             state.id = payload
-            router.replace('/my')
+            router.replace('/Starting')
         },
         userInfoApply(state, {major, name, number, sex, studentNum}){
             state.major = major

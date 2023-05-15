@@ -3,43 +3,43 @@
     <div class="background-setting">
         <div class="container" >
             <div class="form-frame">
-                <div :style="{'margin-left': '341px'}">
-                    <p :style="{'margin-left': '9px','margin-top':'53px','margin-bottom':'0','font-size': '16px','color': '#8D8D8D'}">
+                <div>
+                    <p class="describe-link-to-login">
                         계정이 있으신가요 ?
                     </p>
-                    <router-link to="/" :style="{'margin-left': '95px','color': '#B87514'}">로그인</router-link>
+                    <router-link to="/" class="link-to-login">로그인</router-link>
                 </div>
-                <h2 :style="{'padding-top': '10px','margin-left': '44px'}">회원가입</h2>
-                <p :style="{'margin-top': '52px','margin-left': '44px','margin-bottom': '0px'}">동국대 웹메일 주소를 입력하세요</p>
+                <h2 class="font-h1">회원가입</h2>
+                <p class="describe-email-input">동국대 웹메일 주소를 입력하세요</p>
                 <input
                     name="emailAddress" 
                     placeholder="email address"
-                    :style="bigInputStyle" 
+                    class="input-style"
                     @keydown.enter="returnEmailValidationResults"
                     @change="returnEmailValidationResults"
                     v-model="member.userEmailAddress">
                 <p 
                     v-if="formControl.isGoodEmail"
-                    :style="{'margin-left':'44px','color':'royalblue'}">
+                    class="describe-email-state-ok">
                     동국대 웹메일 주소가 확인 되었습니다.</p>
                 <p 
                     v-if="formControl.isErrorEmail"
-                    :style="{'margin-left':'44px','color':'red'}">
+                    class="describe-email-state-warning">
                     동국대 웹메일만 가능합니다. 잘못된 입력입니다.</p>
-                <p :style="{'margin-top': '35px','margin-left': '44px','margin-bottom': '0px'}">비밀번호</p>
+                <p class="describe-password-input">비밀번호</p>
                 <input 
                     type="password"
                     name="password" 
                     placeholder="password" 
-                    :style="bigInputStyle"
+                    class="input-style"
                     @keydown.enter="returnPasswordAgainValidationResult"
                     @change="returnPasswordAgainValidationResult"
                     v-model="member.userPassword" >
-                <p :style="queryStyle">재확인</p>
+                <p class="describe-sub-input">재확인</p>
                 <input
                     type="password"
                     placeholder="password again"
-                    :style="bigInputStyle"
+                    class="input-style"
                     @keydown.enter="returnPasswordAgainValidationResult"
                     @change="returnPasswordAgainValidationResult(), turnOnPasswordAgainValidation()"
                     v-model="member.userPasswordAgain">
@@ -53,12 +53,12 @@
                     :style="{'margin-left':'44px','color':'red'}">
                     비밀번호가 일치하지 않습니다.</p>
                 </div>
-                <p :style="[queryStyle,{'margin-top':'35px'}]">이름</p>
+                <p class="describe-sub-input" :style="[{'margin-top':'35px'}]">이름</p>
                 <input
                     placeholder="name"
-                    :style="bigInputStyle" 
+                    class="input-style"
                     v-model="member.userName">
-                <p :style="queryStyle">성별</p>
+                <p class="describe-sub-input">성별</p>
                 <input
                     type="radio"
                     id="male"
@@ -71,24 +71,24 @@
                     :style="{'margin-left': '10px'}" 
                     value="female" v-model="member.userSex">
                     <label for="female">여자</label>
-                <p :style="queryStyle">학과</p>
+                <p class="describe-sub-input">학과</p>
                 <input
                     placeholder="major"
-                    :style="bigInputStyle" 
+                    class="input-style"
                     v-model="member.userMajor">
-                <p :style="queryStyle">휴대폰 번호</p>
+                <p class="describe-sub-input">휴대폰 번호</p>
                 <input
                     placeholder="phone number"
-                    :style="bigInputStyle" 
+                    class="input-style"
                     v-model="member.userPhoneNumber">
-                <p :style="queryStyle">학번</p>
+                <p class="describe-sub-input">학번</p>
                 <input
                     placeholder="student ID"
-                    :style="[bigInputStyle,{'margin-bottom':'17px'}]" 
+                    class="input-style"
                     v-model="member.userStudentId">
                 <button 
                     @click= "submitForm"
-                    :style="ButtonStyle">
+                    class="btn-style">
                     확인
                 </button>
             </div>
@@ -134,31 +134,6 @@ export default {
                 isErrorPasswordAgain: false,
                 onPasswordAgainValidation: false
             },
-            // 스타일 객체
-            bigInputStyle: {
-                'margin-top': '13px',
-                width: '451px',
-                height: '50px',
-                'margin-left': '44px',
-                background: '#FFFFFF',
-                border: '1px solid #4285F4',
-                'border-radius': '9px'
-            },
-            ButtonStyle: {
-                'box-shadow': '0px 4px 19px rgba(119, 147, 65, 0.3)',
-                'border-radius': '10px',
-                background: '#E48700',
-                'margin-top': '32px',width: '451px', height: '54px',
-                'margin-left': '44px', 'margin-right': '44px',
-                'margin-bottom': '78px',
-                'border-color': '#E48700',
-                color: '#FFFFFF'
-            },
-            queryStyle: {
-                'margin-top': '13px',
-                'margin-left': '44px',
-                'margin-bottom': '0px'
-            }
     }},
     methods: {
         // 이메일 유효성 판단
@@ -263,5 +238,71 @@ export default {
         box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
         border-radius: 40px;
         overflow-y: scroll;
+
+        .describe-link-to-login{
+            margin-left: 350px;
+            margin-top: 53px;
+            margin-bottom: 0px;
+
+            font-size: 16px;
+            color: #8D8D8D;
+        }
+        .link-to-login{
+            margin-left: 436px;
+
+            color: #B87514;
+        }
+        .font-h1{
+            padding-top: 10px;
+            margin-left: 44px;
+        }
+        .describe-email-input{
+            margin-top: 52px;
+            margin-left: 44px;
+            margin-bottom: 0px;
+        }
+        .descrive-email-state-ok{
+            margin-left: 44px;
+            color: royalblue;
+        }
+        .describe-email-state-warning{
+            margin-left: 44px;
+            color: red;
+        }
+        .describe-password-input{
+            margin-top: 35px;
+            margin-left: 44px;
+            margin-bottom: 0px;
+        }
+        .describe-sub-input{
+            margin-top: 13px;
+            margin-left: 44px;
+            margin-bottom: 0px;
+        }
+        .input-style{
+            width: 451px;
+            height: 50px;
+            margin-top: 13px;
+            margin-left: 44px;
+
+            background: #FFFFFF;
+            border: 1px solid #4285F4;
+            border-radius: 9px;
+        }
+        .btn-style{
+            width: 451px;
+            height: 54px;
+            margin-top: 49px;
+            margin-left: 44px;
+            margin-right: 44px;
+            margin-bottom: 78px;
+
+            background: #E48700;
+            border-radius: 10px;
+            border-color: #E48700;
+            box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+
+            color: #FFFFFF;
+        }
     }
 </style>

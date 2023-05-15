@@ -3,32 +3,35 @@
     <div class="background-setting">
         <div class="container" >
             <div class="form-frame">
-                <div :style="{'margin-left': '341px'}">
-                    <p :style="{'margin-left': '5px','margin-top':'53px','margin-bottom':'0','font-size': '16px','color': '#8D8D8D'}">
-                        아직 회원이 아니라면 ?
-                    </p>
-                    <router-link to="/signup" :style="{'margin-left': '95px','color': '#B87514'}">회원가입</router-link>
+                <div>
+                    <p class="link-describe">아직 회원이 아니라면 ?</p>
+                    <router-link 
+                        to="/signup" 
+                        class="link-to-signup">회원가입</router-link>
                 </div>
-                <h2 :style="{'margin-top': '18px','margin-left': '44px','font-size':'55px'}">로그인</h2>
-                <div :style="{'margin-top': '52px'}">
-                    <p :style="{'margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">아이디 또는 이메일 주소를 입력하세요.</p>
+                <h2 class="font-h1">로그인</h2>
+                <div>
+                    <p class="font-login-describe">아이디 또는 이메일 주소를 입력하세요.</p>
                     <input
                         name="user id" 
                         placeholder="email address"
-                        :style="bigInputStyle" 
+                        class="login-id-input"
                         @keydown.enter="submitForm"
                         v-model="user.id">
-                    <p :style="{'margin-top': '69px','margin-left': '44px','font-size': '16px','margin-bottom': '0px'}">비밀번호를 입력하세요</p>
+                    <p class="font-password-describe">비밀번호를 입력하세요</p>
                     <input 
                         type="password"
                         name="password" 
-                        placeholder="password" 
-                        :style="[bigInputStyle,{'margin-bottom': '8px'}]"
+                        placeholder="password"
+                        class="login-password-input"
                         @keydown.enter="submitForm"
                         v-model="user.password">
-                    <router-link @click="alertMassage" to="/" :style="{'margin-left': '416px','color': '#AD3113','font-size': '13px'}">비밀번호 찾기</router-link>
+                    <router-link 
+                        to="/" 
+                        @click="alertMassage" 
+                        class="link-finding-password">비밀번호 찾기</router-link>
                     <button 
-                        :style="ButtonStyle"
+                        class="submit-btn"
                         @click="submitForm">
                         로그인
                     </button>
@@ -47,25 +50,6 @@ export default {
                 id: '',
                 password: '',
             },
-            // 스타일 객체
-            bigInputStyle: {
-                'margin-top': '13px',
-                width: '451px',
-                height: '50px', 
-                'margin-left': '44px',
-                background: '#FFFFFF',
-                border: '1px solid #4285F4',
-                'border-radius': '9px'
-            },
-            ButtonStyle: {
-                'box-shadow': '0px 4px 19px rgba(119, 147, 65, 0.3)',
-                'border-radius': '10px',
-                background: '#E48700',
-                'margin-top': '80px',width: '451px', height: '54px',
-                'margin-left': '44px', 'margin-right': '44px',
-                'border-color': '#E48700',
-                color: '#FFFFFF'
-            }
         }
     },
     // 비밀번호 찾기 api 구현되면 구성할 부분
@@ -119,5 +103,78 @@ export default {
         background: #FFFEF9;
         box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
         border-radius: 40px;
+
+        .link-describe{
+            margin-left: 346px;
+            margin-top: 53px;
+            margin-bottom: 0px;
+
+            font-size: 16px;
+            color: #8D8D8D;
+        }
+        .link-to-signup{
+            margin-left: 436px;
+            color: #B87514;
+        }
+
+        .font-h1{
+            margin-top: 18px;
+            margin-left: 44px;
+            font-size: 55px;
+        }
+
+        .font-login-describe{
+            margin-top: 52px;
+            margin-left: 44px;
+            font-size: 16px;
+            margin-bottom: 0px;
+        }
+        .login-id-input{
+            margin-top: 13px;
+            width: 451px;
+            height: 50px;
+            margin-left: 44px;
+            background: #FFFFFF;
+            border: 1px solid #4285F4;
+            border-radius: 9px;
+        }
+        .font-password-describe{
+            margin-top: 69px;
+            margin-left: 44px;
+            margin-bottom: 0px;
+            
+            font-size: 16px;
+        }
+        .login-password-input{
+            width: 451px;
+            height: 50px;
+            margin-top: 13px;
+            margin-bottom: 8px;
+            margin-left: 44px;
+            background: #FFFFFF;
+            border: 1px solid #4285F4;
+            border-radius: 9px;
+        }
+        .link-finding-password{
+            margin-left: 416px;
+            
+            font-size: 13px;
+            color: #AD3113;
+        }
+        .submit-btn{
+            width: 451px;
+            height: 54px;
+            margin-top: 80px;
+            margin-left: 44px;
+            margin-right: 44px;
+
+            background: #E48700;
+            border-radius: 10px;
+            border-color: #E48700;
+            box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+
+            font-size: 16px;
+            color: #FFFFFF;
+        }
     }
 </style>

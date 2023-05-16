@@ -10,12 +10,14 @@ import java.util.List;
 @ToString
 public class ClassMatching {
 
+    // 학번
+    private String studentId;
 
     //매칭된 사람수
     private int headCount;
 
-    //매칭된 사람들 학번
-    private String studentId;
+    //매칭된 사람들 이메일
+    private String email;
 
     //학수번호
     private List<String> courseNumber;

@@ -19,7 +19,7 @@ public class ClassMatchedList {
 
     //매칭 번호 (auto increment)
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     @Column
     private int matchingId;
 
@@ -36,9 +36,9 @@ public class ClassMatchedList {
     @Column
     private LocalDate matchingTime;
 
-    //매칭된 사람들 학번
+    //매칭된 사람들 이메일
     @ElementCollection
-    private List<String> studentIdList;
+    private List<String> emailList;
 
 
     @Column

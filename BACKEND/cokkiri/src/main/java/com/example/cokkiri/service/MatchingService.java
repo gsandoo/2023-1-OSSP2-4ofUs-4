@@ -1,20 +1,32 @@
 package com.example.cokkiri.service;
 
+import com.example.cokkiri.controller.MatchingController;
 import com.example.cokkiri.model.*;
 import com.example.cokkiri.repository.MatchedListRepository;
 import com.example.cokkiri.repository.PublicMatchedListRepository;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 @Service("service")
 public class MatchingService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MatchingService.class);
+    // 싱글스레드 호출
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
     // 수업 레포지토리
     @Autowired
     private MatchedListRepository classMatchedListRepository;
@@ -37,6 +49,17 @@ public class MatchingService {
     List<Integer> usermatched = new ArrayList<>();
 
 
+    @PostConstruct
+    public void init() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            executor.shutdown();
+            try {
+                executor.awaitTermination(1, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                LOGGER.error(e.toString());
+            }
+        }));
+    }
     // 겹치는 학수번호 확인
     public static Set<String> findDuplicatesCourse(List<String>List) {
         Set<String> seen = new HashSet<>();
@@ -195,13 +218,13 @@ public class MatchingService {
                         userCount = 0;
 
                         // 학번 배열 생성, set
-                        List<String> studentIdList = new ArrayList<>();
+                        List<String> emailList = new ArrayList<>();
                         for (int k = 0; k <= publicUsersList.size() - 1; k++) {
-                            String studentId = publicUsersList.get(k).getStudentId();
-                            studentIdList.add(studentId);
+                            String email = publicUsersList.get(k).getEmail();
+                            emailList.add(email);
                         }
-                        // 매칭된 학생들 학번 리스트
-                        matched.setStudentIdList(studentIdList);
+                        // 매칭된 학생들 이메일 리스트
+                        matched.setEmailList(emailList);
                         // 매칭 타입
                         matched.setMatchingType(userLast.getMatchingType());
                         // 매칭 가능한 요일
@@ -295,13 +318,13 @@ public class MatchingService {
                         userCount =0;
 
                         // 학번 배열 생성, set
-                        List<String> studentIdList = new ArrayList<>();
+                        List<String> emailList = new ArrayList<>();
                         for (int k = 0; k <= classUserList.size() - 1; k++) {
-                            String studentId = classUserList.get(k).getStudentId();
-                            studentIdList.add(studentId);
+                            String email = classUserList.get(k).getEmail();
+                            emailList.add(email);
                         }
                         // 매칭된 학생들 학번 리스트
-                        matched.setStudentIdList(studentIdList);
+                        matched.setEmailList(emailList);
                         // 매칭 타입
                         matched.setMatchingType(userLast.getMatchingType());
 
@@ -332,20 +355,25 @@ public class MatchingService {
             return null;
         }
     }
+    @Autowired
+  NotificationService notificationService;
+    public PublicMatchedList PublicMatch(PublicMatching user) {
 
-
-    public PublicMatchedList PublicMatch(PublicMatching user){
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
-        publicMatchedList=findPublicMatch(publicLectureUsers,count);
-
-        if (publicMatchedList!=null){
-            publicMatchedListRepository.save(publicMatchedList);
+        publicMatchedList = findPublicMatch(publicLectureUsers, count);
+        if (publicMatchedList != null) {
+            publicMatchedListRepository.save(publicMatchedList); // 데베에 저장
+            PublicMatchedList finalPublicMatchedList = publicMatchedList;
+            notificationService.sendNotificationToUser(finalPublicMatchedList.getEmailList(), "매칭이 완료되었습니다");
+            }else{
+                return null;
+            }
+            return  publicMatchedList;
         }
-        return publicMatchedList;
-    }
+
 
 
 
@@ -355,11 +383,14 @@ public class MatchingService {
         classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
         classMatchedList = findClassMatch(classLectureUsers,count);
-
         if (classMatchedList!=null){
-            classMatchedListRepository.save(classMatchedList);
+            classMatchedListRepository.save(classMatchedList); // 데베에 저장
+            ClassMatchedList finalClassMatchedList = classMatchedList;
+            notificationService.sendNotificationToUser(finalClassMatchedList.getEmailList(), "매칭이 완료되었습니다");
+        }else{
+            return null;
         }
-        return classMatchedList;
+        return  classMatchedList;
     }
 
     //수업 매칭 전부 반환

@@ -3,6 +3,13 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from './Home.vue'
 import SignUpPage from './SignUpPage.vue'
 
+import MyPage from './mypage/MyPage.vue'
+import MyProfile from './mypage/Profile.vue'
+import MyTimeTable from './mypage/TimeTable.vue'
+import MyMatching from './mypage/Matching.vue'
+
+import MatchingStartPage from './matchingpage/MatchingStartPage.vue'
+
 import Payments from './Payments.vue'
 import Starting from './Starting.vue'
 
@@ -16,9 +23,32 @@ export default createRouter({
             component: Home
         },
         {
-            path: '/SignUp',
+            path: '/signup',
             component: SignUpPage
         },
+
+        {
+            path: '/my',
+            component: MyPage
+        },
+        {
+            path: '/my/profile',
+            component: MyProfile
+        },
+        {
+            path: '/my/timetable',
+            component: MyTimeTable
+        },
+        {
+            path: '/my/matching',
+            component: MyMatching
+        },
+
+        {
+            path: '/matchingstart',
+            component: MatchingStartPage
+        },
+
         {
             path: '/Payments',
             component: Payments

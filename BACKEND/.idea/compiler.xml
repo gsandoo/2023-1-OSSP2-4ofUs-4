@@ -10,9 +10,6 @@
         <module name="cokkiri" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="cokkiri" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

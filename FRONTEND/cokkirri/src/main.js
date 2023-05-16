@@ -1,8 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// path와 컴포넌트 정보 가져오기
 import router from './routes/index.js'
+import store from "./store/index.js"
+import axios from 'axios'
 
-createApp(App)
-    .use(router)
-    .mount('#app')
+const app = createApp(App)
+app.use(store)
+app.use(router)
+app.mount('#app')
+app.config.globalProperties.$http = axios
+

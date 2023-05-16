@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Logger;
 
 @Controller
 public class SseController {
@@ -40,22 +41,17 @@ public class SseController {
         System.out.println(sseEmitters);
         SseEmitter matcher = new SseEmitter();
         if(sseEmitters.containsKey(email)){
-           matcher = sseEmitters.get(email);
+           try {
+               matcher = sseEmitters.get(email);
+               matcher.send(notification , MediaType.TEXT_PLAIN);
+               matcher.complete();
+               System.out.println(matcher + "에게 알림 전송 완료.");
+           }catch (IOException e){
+               e.printStackTrace();
+           }
         }else{
             System.out.println("sse emitter 에서 등록한 사용자 중 매칭이된 사용자가 없습니다.");
         }
-        if (matcher != null) {
-            try {
-                matcher.send(notification, MediaType.TEXT_PLAIN);
-                matcher.complete();
-                System.out.println(matcher + "에게 알람이 보내졌습니다.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else{
-            System.out.println("error");
-        }
-        System.out.println(matcher);
     }
 
     // 사용자 식별자 생성 메서드 (임의로 구현)

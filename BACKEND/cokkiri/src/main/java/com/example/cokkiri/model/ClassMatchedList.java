@@ -40,6 +40,10 @@ public class ClassMatchedList {
     @ElementCollection
     private List<String> emailList;
 
+    //약속시간
+    @Column
+    @ElementCollection
+    private List<String> promiseTime;
 
     @Column
     @ColumnDefault("0")

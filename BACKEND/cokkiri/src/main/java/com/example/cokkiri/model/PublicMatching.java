@@ -14,13 +14,11 @@ import java.util.List;
 @ToString
 public class PublicMatching {
 
-    // 학번
-    private String studentId;
 
     //매칭된 사람수
     private int headCount;
 
-    //매칭된 사람들 이메일
+    //매칭된 사람들 학번
     private String email;
 
     //매칭 가능한 요일

@@ -23,7 +23,7 @@ public class Payment {
     @Id
     @GeneratedValue
     @Column
-    private String id;
+    private int id;
 
     //결제 한 사람
     @Column

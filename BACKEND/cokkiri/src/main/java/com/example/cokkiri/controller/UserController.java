@@ -4,7 +4,7 @@ import com.example.cokkiri.model.ClassMatchedList;
 import com.example.cokkiri.model.Payment;
 import com.example.cokkiri.model.PublicMatchedList;
 import com.example.cokkiri.model.User;
-//import com.example.cokkiri.service.MailSendService;
+import com.example.cokkiri.service.MailSendService;
 import com.example.cokkiri.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

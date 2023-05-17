@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="db856915-6af8-4bab-9584-ab4b1218b67b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/configuration/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/Chat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/Chatting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/repository/ChatRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/ChatService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-=======
     <list default="true" id="db856915-6af8-4bab-9584-ab4b1218b67b" name="Changes" comment="Changes">
->>>>>>> upstream/beee
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/jarRepositories.xml" afterDir="false" />
@@ -117,12 +105,9 @@
       <change beforePath="$PROJECT_DIR$/BACKEND/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java" afterDir="false" />
->>>>>>> upstream/beee
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/TimeTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/TimeTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" afterDir="false" />
@@ -205,22 +190,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/roger/OneDrive/바탕 화면/cokkiri",
+    "last_opened_file_path": "C:/Users/roger/OneDrive/바탕 화면/co-kkiri/BACKEND/cokkiri",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-<<<<<<< HEAD
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers",
-=======
     "project.structure.last.edited": "프로젝트",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
->>>>>>> upstream/beee
     "spring.configuration.checksum": "23aec191d7157a0bacfd3ca0dfae4d08",
     "vue.rearranger.settings.migration": "true"
   }
@@ -310,9 +288,7 @@
       <workItem from="1683794836513" duration="924000" />
       <workItem from="1683869658850" duration="2402000" />
       <workItem from="1683890125934" duration="12773000" />
-<<<<<<< HEAD
       <workItem from="1683988422508" duration="3720000" />
-=======
       <workItem from="1683951344559" duration="2885000" />
       <workItem from="1684115133738" duration="28353000" />
       <workItem from="1684197824968" duration="10499000" />
@@ -322,7 +298,6 @@
       <workItem from="1684231303854" duration="3256000" />
       <workItem from="1684245553374" duration="196000" />
       <workItem from="1684245765138" duration="1814000" />
->>>>>>> upstream/beee
     </task>
     <servers />
   </component>
@@ -345,7 +320,6 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
           <line>74</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
@@ -376,63 +350,41 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>104</line>
-=======
           <line>162</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>138</line>
-=======
           <line>206</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
           <line>137</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>141</line>
-=======
           <line>250</line>
           <option name="timeStamp" value="168" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>209</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>149</line>
-=======
           <line>217</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>150</line>
-=======
           <line>218</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="176" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>143</line>
-=======
           <line>255</line>
           <option name="timeStamp" value="177" />
         </line-breakpoint>
@@ -479,21 +431,15 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>211</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>145</line>
-=======
           <line>213</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
           <line>140</line>
           <option name="timeStamp" value="199" />
         </line-breakpoint>
@@ -539,8 +485,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>114</line>
-=======
           <line>219</line>
           <option name="timeStamp" value="264" />
         </line-breakpoint>
@@ -572,102 +516,61 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>176</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="272" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>115</line>
-=======
           <line>177</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>129</line>
-=======
           <line>199</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="274" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>116</line>
-=======
           <line>178</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="275" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>118</line>
-=======
           <line>180</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="276" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>117</line>
-=======
           <line>179</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="277" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
           <line>119</line>
           <option name="timeStamp" value="278" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-          <line>134</line>
-=======
           <line>204</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>133</line>
-=======
           <line>203</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>131</line>
-=======
           <line>201</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>130</line>
-=======
           <line>200</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
-          <line>132</line>
-=======
           <line>202</line>
->>>>>>> upstream/beee
           <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -677,15 +580,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
-<<<<<<< HEAD
           <line>78</line>
           <option name="timeStamp" value="330" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="332" />
-=======
           <line>156</line>
           <option name="timeStamp" value="300" />
         </line-breakpoint>
@@ -864,7 +763,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="330" />
->>>>>>> upstream/beee
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />

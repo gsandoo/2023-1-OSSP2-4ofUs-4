@@ -22,6 +22,6 @@ public class ChatService {
 
     //채팅방 내용 불러오기
     public List<Chat> findAllChatByRoomId(int id,String matchingType){
-        return chatRepository.findAllByAndChattingIdAndMatchingType(id,matchingType);
+        return chatRepository.findAllByAndMatchingIdAndMatchingType(id,matchingType);
     }
 }

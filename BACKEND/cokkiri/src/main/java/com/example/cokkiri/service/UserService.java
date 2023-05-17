@@ -26,6 +26,10 @@ public class UserService {
         return user;
     }
 
+    public boolean existsBysId(String id){
+        return userRepository.existsById(id);
+    }
+
     //이름으로 조회하므로 null가능성 있음
     public List<User> findByName(String name){
         List<User> user =userRepository.findByName(name);

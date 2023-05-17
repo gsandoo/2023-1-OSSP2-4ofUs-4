@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="db856915-6af8-4bab-9584-ab4b1218b67b" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/configuration/WebSocketConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MessageController.java" afterDir="false" />
@@ -13,9 +14,115 @@
       <change afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/ChatService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+=======
+    <list default="true" id="db856915-6af8-4bab-9584-ab4b1218b67b" name="Changes" comment="Changes">
+>>>>>>> upstream/beee
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__ch_qos_logback_logback_core_1_4_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_14_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_mysql_mysql_connector_j_8_0_32.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_4_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_sun_mail_javax_mail_1_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__com_zaxxer_HikariCP_5_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__io_micrometer_micrometer_commons_1_10_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__io_micrometer_micrometer_observation_1_10_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_persistence_jakarta_persistence_api_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_transaction_jakarta_transaction_api_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_4_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__javax_activation_activation_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_12_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_12_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__net_minidev_json_smart_2_4_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_antlr_antlr4_runtime_4_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_19_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_19_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_10_1_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_10_1_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_10_1_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_assertj_assertj_core_3_23_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_eclipse_angus_angus_activation_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_core_4_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_4_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_glassfish_jaxb_txw2_4_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_6_0_6_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_hibernate_orm_hibernate_core_6_1_7_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_jboss_jandex_2_4_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_5_0_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_jetbrains_annotations_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_1_7_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_jetbrains_kotlin_kotlin_stdlib_common_1_7_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_mockito_mockito_core_4_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_ow2_asm_asm_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_projectlombok_lombok_1_18_26.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_2_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_3_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_data_spring_data_commons_3_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_3_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_aop_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_aspects_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_beans_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_context_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_context_support_5_3_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_core_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_expression_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_jcl_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_jdbc_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_orm_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_test_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_tx_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_web_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_springframework_spring_webmvc_6_0_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/libraries/Maven__org_yaml_snakeyaml_1_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/pom.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java" afterDir="false" />
+>>>>>>> upstream/beee
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/TimeTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/TimeTableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/ClassMatchedList.java" afterDir="false" />
@@ -24,6 +131,16 @@
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatching.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/model/PublicMatching.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MailSendService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MailSendService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Matching.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Payments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Payments.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/SignUpPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/SignUpPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Starting.vue" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/Starting.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/FRONTEND/cokkirri/src/routes/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +152,8 @@
       <list>
         <option value="Kotlin Class" />
         <option value="Interface" />
+        <option value="HTML File" />
+        <option value="HTML File" />
         <option value="Class" />
         <option value="HTML File" />
       </list>
@@ -54,7 +173,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHome" value="Maven 래퍼 사용" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
@@ -91,10 +210,17 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+<<<<<<< HEAD
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers",
+=======
+    "project.structure.last.edited": "프로젝트",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+>>>>>>> upstream/beee
     "spring.configuration.checksum": "23aec191d7157a0bacfd3ca0dfae4d08",
     "vue.rearranger.settings.migration": "true"
   }
@@ -184,7 +310,19 @@
       <workItem from="1683794836513" duration="924000" />
       <workItem from="1683869658850" duration="2402000" />
       <workItem from="1683890125934" duration="12773000" />
+<<<<<<< HEAD
       <workItem from="1683988422508" duration="3720000" />
+=======
+      <workItem from="1683951344559" duration="2885000" />
+      <workItem from="1684115133738" duration="28353000" />
+      <workItem from="1684197824968" duration="10499000" />
+      <workItem from="1683988422508" duration="3720000" />
+      <workItem from="1684217963196" duration="2747000" />
+      <workItem from="1684220926950" duration="90000" />
+      <workItem from="1684231303854" duration="3256000" />
+      <workItem from="1684245553374" duration="196000" />
+      <workItem from="1684245765138" duration="1814000" />
+>>>>>>> upstream/beee
     </task>
     <servers />
   </component>
@@ -207,6 +345,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>74</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
@@ -238,45 +377,123 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>104</line>
+=======
+          <line>162</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>138</line>
+=======
+          <line>206</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>137</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>141</line>
+=======
+          <line>250</line>
+          <option name="timeStamp" value="168" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>209</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="169" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>149</line>
+=======
+          <line>217</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="172" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>150</line>
+=======
+          <line>218</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="176" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>143</line>
+=======
+          <line>255</line>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>256</line>
+          <option name="timeStamp" value="178" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>257</line>
+          <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>259</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>263</line>
+          <option name="timeStamp" value="182" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>266</line>
+          <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>269</line>
+          <option name="timeStamp" value="184" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>270</line>
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>272</line>
+          <option name="timeStamp" value="186" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>211</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="191" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>145</line>
+=======
+          <line>213</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>140</line>
           <option name="timeStamp" value="199" />
         </line-breakpoint>
@@ -323,61 +540,134 @@
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>114</line>
+=======
+          <line>219</line>
+          <option name="timeStamp" value="264" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>220</line>
+          <option name="timeStamp" value="265" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>221</line>
+          <option name="timeStamp" value="266" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>222</line>
+          <option name="timeStamp" value="267" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>208</line>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>223</line>
+          <option name="timeStamp" value="270" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>176</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="272" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>115</line>
+=======
+          <line>177</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="273" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>129</line>
+=======
+          <line>199</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="274" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>116</line>
+=======
+          <line>178</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="275" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>118</line>
+=======
+          <line>180</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="276" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>117</line>
+=======
+          <line>179</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="277" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>119</line>
           <option name="timeStamp" value="278" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
           <line>134</line>
+=======
+          <line>204</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>133</line>
+=======
+          <line>203</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>131</line>
+=======
+          <line>201</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>130</line>
+=======
+          <line>200</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>132</line>
+=======
+          <line>202</line>
+>>>>>>> upstream/beee
           <option name="timeStamp" value="284" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -387,6 +677,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+<<<<<<< HEAD
           <line>78</line>
           <option name="timeStamp" value="330" />
         </line-breakpoint>
@@ -394,6 +685,186 @@
           <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/MatchingController.java</url>
           <line>22</line>
           <option name="timeStamp" value="332" />
+=======
+          <line>156</line>
+          <option name="timeStamp" value="300" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>160</line>
+          <option name="timeStamp" value="301" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>161</line>
+          <option name="timeStamp" value="302" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="304" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="305" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>171</line>
+          <option name="timeStamp" value="306" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="307" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>174</line>
+          <option name="timeStamp" value="308" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="309" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>181</line>
+          <option name="timeStamp" value="313" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="314" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>184</line>
+          <option name="timeStamp" value="315" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="316" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>187</line>
+          <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>186</line>
+          <option name="timeStamp" value="318" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>188</line>
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>207</line>
+          <option name="timeStamp" value="329" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="330" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>229</line>
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>385</line>
+          <option name="timeStamp" value="346" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>386</line>
+          <option name="timeStamp" value="347" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>387</line>
+          <option name="timeStamp" value="349" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="350" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="352" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="353" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>31</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="354" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>389</line>
+          <option name="timeStamp" value="363" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/NotificationService.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="364" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/NotificationService.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="365" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="367" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="369" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/service/MatchingService.java</url>
+          <line>379</line>
+          <properties class="com.example.cokkiri.service.MatchingService">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="345" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BACKEND/cokkiri/src/main/java/com/example/cokkiri/controller/SseController.java</url>
+          <line>27</line>
+          <properties class="com.example.cokkiri.controller.SseController" method="handleSseRequest">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="330" />
+>>>>>>> upstream/beee
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IndexOutOfBoundsException" package="java.lang" />

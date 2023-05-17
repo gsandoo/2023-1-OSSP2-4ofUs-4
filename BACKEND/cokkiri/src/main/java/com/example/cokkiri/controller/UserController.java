@@ -99,7 +99,7 @@ public class UserController {
         Optional<User> user = userService.findById(id);
         return new ResponseEntity<User>(user.get(),HttpStatus.OK);
     }
-    
+
 
     @GetMapping ("/admin/user/name")
     public ResponseEntity<List<User>> getUserName(@RequestParam(value="userName")String name){

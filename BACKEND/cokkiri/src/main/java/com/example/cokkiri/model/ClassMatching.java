@@ -18,7 +18,7 @@ public class ClassMatching {
     private String matchingTime;
 
     //매칭된 사람들 학번
-    private String studentId;
+    private String email;
 
     //학수번호
     private List<String> courseNumber;

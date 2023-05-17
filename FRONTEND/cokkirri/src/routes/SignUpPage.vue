@@ -261,7 +261,7 @@ export default {
             margin-left: 44px;
             margin-bottom: 0px;
         }
-        .descrive-email-state-ok{
+        .describe-email-state-ok{
             margin-left: 44px;
             color: royalblue;
         }

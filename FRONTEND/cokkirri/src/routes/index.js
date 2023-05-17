@@ -10,6 +10,8 @@ import MyMatching from './mypage/Matching.vue'
 
 import MatchingStartPage from './matchingpage/MatchingStartPage.vue'
 
+import AdminHome from './adminpage/AdminHome.vue'
+
 import Payments from './Payments.vue'
 import Starting from './Starting.vue'
 
@@ -47,6 +49,11 @@ export default createRouter({
         {
             path: '/matchingstart',
             component: MatchingStartPage
+        },
+        
+        {
+            path: '/admin',
+            component: AdminHome
         },
 
         {

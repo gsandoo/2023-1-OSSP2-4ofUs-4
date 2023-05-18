@@ -351,25 +351,24 @@ public class MatchingService {
 
     @Autowired
     NotificationService notificationService;
-    public PublicMatchedList PublicMatch(PublicMatching user){
+    public PublicMatchedList publicMatch(PublicMatching user){
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
         if (publicMatchedList != null) {
-            publicMatchedListRepository.save(publicMatchedList); // 데베에 저장
             PublicMatchedList finalPublicMatchedList = publicMatchedList;
             notificationService.sendNotificationToUser(finalPublicMatchedList.getEmailList(), "매칭이 완료되었습니다");
         }else{
             return null;
         }
-        return  publicMatchedList;
+        return  savePublicUser(publicMatchedList);
     }
 
 
 
-    public ClassMatchedList ClassMatch(ClassMatching user){
+    public ClassMatchedList classMatch(ClassMatching user){
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
         classLectureUsers.add(user);
@@ -377,13 +376,12 @@ public class MatchingService {
         classMatchedList = findClassMatch(classLectureUsers,count);
 
         if (classMatchedList!=null){
-            classMatchedListRepository.save(classMatchedList); // 데베에 저장
             ClassMatchedList finalClassMatchedList = classMatchedList;
             notificationService.sendNotificationToUser(finalClassMatchedList.getEmailList(), "매칭이 완료되었습니다");
         }else{
             return null;
         }
-        return  classMatchedList;
+        return  saveClassUser(classMatchedList);
     }
 
     //수업 매칭 전부 반환
@@ -410,4 +408,27 @@ public class MatchingService {
         return publicMatchedListRepository.findByEmailListContains(id);
     }
 
+
+    public ClassMatchedList saveClassUser(ClassMatchedList matchedList){
+        classMatchedListRepository.save(matchedList); // 데베에 저장
+        return matchedList;
+    };
+    public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
+        publicMatchedListRepository.save(matchedList); // 데베에 저장
+        return matchedList;
+    };
+
+    public String agreePublicMatchedUser(PublicMatching user) {
+        String email = user.getEmail();
+        PublicMatchedList list = (PublicMatchedList) publicMatchedListRepository.findPublicMatchedListByEmailListContaining(email);
+        list.setMatchingAgree(+1);
+        return "등록되었습니다.";
+    }
+
+    public String agreeClassMatchedUser(ClassMatching user) {
+        String email = user.getEmail();
+        ClassMatchedList list = (ClassMatchedList) classMatchedListRepository.findPublicMatchedListByEmailListContaining(email);
+        list.setMatchingAgree(+1);
+        return "등록되었습니다.";
+    }
 }

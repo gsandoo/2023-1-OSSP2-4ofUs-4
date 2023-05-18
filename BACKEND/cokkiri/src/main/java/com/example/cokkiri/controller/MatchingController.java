@@ -26,7 +26,7 @@ public class MatchingController {
     @PostMapping("/free")
     public ResponseEntity<PublicMatchedList> publicMatch(@RequestBody PublicMatching user){
         if(user.getMatchingType().equals("free")){
-            return new ResponseEntity<>(matchingService.PublicMatch(user), HttpStatus.OK);
+            return new ResponseEntity<>(matchingService.publicMatch(user), HttpStatus.OK);
         }
         else{
             System.out.println("잘못된 송출");
@@ -39,11 +39,31 @@ public class MatchingController {
     @PostMapping("/class")
     public ResponseEntity<ClassMatchedList> classMatch(@RequestBody ClassMatching user){
         if(user.getMatchingType().equals("class")) {
-            return  new ResponseEntity<>(matchingService.ClassMatch(user), HttpStatus.OK);
+            return  new ResponseEntity<>(matchingService.classMatch(user), HttpStatus.OK);
         }else{
             System.out.println("잘못된 송출");
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
+    }
+
+    // 매칭시간 내 매칭완료 버튼 누르면 matchingAgree +1
+    @PutMapping("matchagree/free")
+    public String  publicMatchingAgree(@RequestBody PublicMatching user){
+        if(user.getMatchingType().equals("free")){
+            return (matchingService.agreePublicMatchedUser(user));
+        }else{
+            System.out.println("잘못된 송출");
+        }
+        return  null;
+    }
+    @PutMapping("matchagree/class")
+    public String  classMatchingAgree(@RequestBody ClassMatching user){
+        if(user.getMatchingType().equals("class")){
+            return (matchingService.agreeClassMatchedUser(user));
+        }else{
+            System.out.println("잘못된 송출");
+        }
+        return  null;
     }
 }
 

@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface MatchedListRepository extends JpaRepository<ClassMatchedList,Integer> {
     public List<ClassMatchedList> findByEmailListContains(String id);
+
+    public  List<ClassMatchedList> findPublicMatchedListByEmailListContaining(String email);
+
 }

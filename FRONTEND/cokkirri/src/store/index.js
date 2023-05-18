@@ -14,7 +14,8 @@ export default createStore({
         name: null,
         number: null,
         sex: null,
-        studentNum: null
+        studentNum: null,
+        course: null
     },
     mutations: {
         // 로그인 적용 후 ~ 페이지로 이동. 추후 메인 페이지로 이동 변경 예정.
@@ -23,12 +24,13 @@ export default createStore({
             state.id = payload
             router.replace('/Starting')
         },
-        userInfoApply(state, {major, name, number, sex, studentNum}){
+        userInfoApply(state, {major, name, number, sex, studentNum, course}){
             state.major = major
             state.name = name
             state.number = number
             state.sex = sex
             state.studentNum = studentNum
+            state.course = course
         },
         logout(state) { 
             state.isLogin = false
@@ -80,7 +82,8 @@ export default createStore({
                                 name: result.data.name,
                                 number: result.data.number,
                                 sex: result.data.sex,
-                                studentNum: result.data.studentNum
+                                studentNum: result.data.studentNum,
+                                course: result.data.course
                             })
                             console.log("유저 정보 업데이트 완료")
                         }

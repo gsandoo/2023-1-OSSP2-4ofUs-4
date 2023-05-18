@@ -5,73 +5,84 @@
             <div>
                 <div class="frame-head">
                     <div class="user-img"></div>
-                    <div class="user-name">{{this.$store.state.name}}</div>
-                    <div v-if="stateTF.iseditState" class="user-btn-complete" @click="editStateControl()">완료</div>
-                    <div v-else class="user-btn-edit" @click="editStateControl()">수정</div>
+                    <router-link to="/" v-if="!this.$store.state.isLogin" class="user-name">로그인</router-link>
+                    <div v-else class="user-name">{{this.$store.state.name}}</div>
+                    <div v-if="stateTF.isEditState" class="user-btn-complete" @click="editComplete()">완료</div>
+                    <div v-else>
+                        <div class="user-btn-edit" @click="userInfoUpdateServerToClient()">새로고침</div>
+                        <div class="user-btn-edit" :style="{'margin-left': '22px'}" @click="editStateOn()">수정</div>
+                        <div class="user-btn-edit" :style="{'margin-left': '22px'}" @click="passwordEditStateOn()">비밀번호 변경</div>
+                    </div>
                     <div style="clear:both;"></div>
                 </div>
                 <div class="frame-body">
                     <div>
                         <router-link to="/my" class="my-link">&lt;</router-link>
                         <div style="clear:both;"></div>
-                        <div v-if="stateTF.iseditState" class="frame-sub-body">
-                            <div class="font-head" :style="{'margin-top': '35px'}">아이디</div>
-                            <div class="font-body" :style="{'margin-top': '35px'}">{{this.$store.state.id}}</div>
-                            <div style="clear:both;"></div>
+                        <div v-if="!stateTF.isPasswordEditState">
+                            <div v-if="stateTF.isEditState" class="frame-sub-body">
+                                <div class="font-head" :style="{'margin-top': '35px'}">아이디</div>
+                                <div class="font-body" :style="{'margin-top': '35px'}">{{userInfo.id}}</div>
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">전공</div>
-                            <input type="text" class="font-input" v-model="this.$store.state.major">
-                            <div style="clear:both;"></div>
+                                <div class="font-head">전공</div>
+                                <input type="text" class="font-input" v-model="userInfo.major">
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">이름</div>
-                            <div class="font-body">{{this.$store.state.name}}</div>
-                            <div style="clear:both;"></div>
+                                <div class="font-head">이름</div>
+                                <div class="font-body">{{userInfo.name}}</div>
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">H.P</div>
-                            <input type="text" class="font-input" v-model="this.$store.state.number">
-                            <div style="clear:both;"></div>
+                                <div class="font-head">H.P</div>
+                                <input type="text" class="font-input" v-model="userInfo.number">
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">성별</div>
-                            <div class="font-body">{{this.$store.state.sex}}</div>
-                            <div style="clear:both;"></div>
+                                <div class="font-head">성별</div>
+                                <div class="font-body">{{userInfoEToK}}</div>
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">학번</div>
-                            <div class="font-body">{{this.$store.state.studentNum}}</div>
-                            <div style="clear:both;"></div>
+                                <div class="font-head">학번</div>
+                                <div class="font-body">{{userInfo.studentNum}}</div>
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">PWD</div>
-                            <input type="text" class="font-input" placeholder="비밀번호 재설정" v-model="userInfo.password">
-                            <div style="clear:both;"></div>
+                            </div>
+                            <div v-else class="frame-sub-body">
+                                <div class="font-head" :style="{'margin-top': '35px'}">아이디</div>
+                                <div class="font-body" :style="{'margin-top': '35px'}">{{userInfo.id}}</div>
+                                <div style="clear:both;"></div>
 
-                            <div class="font-head">REPWD</div>
-                            <input type="text" class="font-input" placeholder="비밀번호 재설정 확인" v-model="userInfo.repassword">
-                            <div style="clear:both;"></div>
+                                <div class="font-head">전공</div>
+                                <div class="font-body">{{userInfo.major}}</div>
+                                <div style="clear:both;"></div>
 
+                                <div class="font-head">이름</div>
+                                <div class="font-body">{{userInfo.name}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-head">H.P</div>
+                                <div class="font-body">{{userInfo.number}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-head">성별</div>
+                                <div class="font-body">{{userInfoEToK}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-head">학번</div>
+                                <div class="font-body">{{userInfo.studentNum}}</div>
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
-                        <div v-else class="frame-sub-body">
-                            <div class="font-head" :style="{'margin-top': '35px'}">아이디</div>
-                            <div class="font-body" :style="{'margin-top': '35px'}">{{this.$store.state.id}}</div>
-                            <div style="clear:both;"></div>
-
-                            <div class="font-head">전공</div>
-                            <div class="font-body">{{this.$store.state.major}}</div>
-                            <div style="clear:both;"></div>
-
-                            <div class="font-head">이름</div>
-                            <div class="font-body">{{this.$store.state.name}}</div>
-                            <div style="clear:both;"></div>
-
-                            <div class="font-head">H.P</div>
-                            <div class="font-body">{{this.$store.state.number}}</div>
-                            <div style="clear:both;"></div>
-
-                            <div class="font-head">성별</div>
-                            <div class="font-body">{{this.$store.state.sex}}</div>
-                            <div style="clear:both;"></div>
-
-                            <div class="font-head">학번</div>
-                            <div class="font-body">{{this.$store.state.studentNum}}</div>
-                            <div style="clear:both;"></div>
+                        <div v-else class="frame-sub-form-body">
+                            <div>
+                                <div class="font-head">PWD</div>
+                                <input type="text" class="font-input" placeholder="비밀번호 재설정" v-model="userInfo.password">
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div>
+                                <div class="font-head">REPWD</div>
+                                <input type="text" class="font-input" placeholder="비밀번호 재설정 확인" v-model="userInfo.repassword">
+                                <div style="clear:both;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,26 +92,100 @@
 </template>
 
 <script>
+import axios from '../../api/index.js'
 export default {
     data() {
         return {
             userInfo: {
-                major: '',
-                number: '',
+                id : this.$store.state.id,
+                major: this.$store.state.major,
+                name: this.$store.state.name,
+                number: this.$store.state.number,
+                sex: this.$store.state.sex,
+                studentNum: this.$store.state.studentNum,
                 password: '',
                 repassword: ''
             },
             stateTF: {
-                iseditState: false
+                isEditState: false,
+                isPasswordEditState: false
             },
         }
     },
+    computed: {
+        userInfoEToK: function(){
+            if(this.userInfo.sex ==='male'){
+                return '남성'
+            }
+            else if(this.userInfo.sex === 'female'){
+                return '여성'
+            }
+            else{
+                return ''
+            }
+        }
+    },
     methods: {
-        editStateControl() {
-            return this.stateTF.iseditState = !this.stateTF.iseditState;
+        editStateOn() {
+            return this.stateTF.isEditState = true;
         },
-        UserUpdate() {
+        passwordEditStateOn() {
+            this.stateTF.isPasswordEditState = true;
+            this.stateTF.isEditState = true;
+        },
+        editComplete(){
+            if(this.stateTF.isPasswordEditState){  
+                if(this.userInfo.password!='' & this.userInfo.repassword!=''){
+                    this.stateTF.isEditState = false;
+                    this.userInfoUpdateClientToServer()
+                }
+                else{
+                    alert("비밀번호를 입력하지 않았거나 PWD와 REPWD가 동일하지 않습니다.");
+                }
+            }
+            else{
+                if(this.userInfo.major!='' & this.userInfo.number!=''){
+                    this.stateTF.isEditState = false;
+                    this.userInfoUpdateClientToServer()
+                }
+                else{
+                    alert("빈 항목이 존재합니다.");
+                }
+            }
+        },
+        async userInfoUpdateClientToServer(){
+            try{
+                await axios.put('/userMypage/'+this.userInfo.id,null,
+                    {params:{
+                        password: '1111',
+                        major: this.userInfo.major,
+                        number: this.userInfo.number,
+                        course: 'PRI4024-01'
+                    }
+                })
+                .then((result)=>{
+                    if(result.status === 200){
+                        alert("수정 완료")
+                        this.$store.commit('userInfoUpdate')
+                    }
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+        },
+        userInfoUpdateServerToClient(){
             this.$store.dispatch('userInfoUpdate')
+            this.userInfo.id = this.$store.state.id,
+            this.userInfo.major = this.$store.state.major,
+            this.userInfo.name = this.$store.state.name,
+            this.userInfo.number = this.$store.state.number,
+            this.userInfo.sex = this.$store.state.sex,
+            this.userInfo.studentNum = this.$store.state.studentNum,
+            this.userInfo.password = '',
+            this.userInfo.repassword = ''
         }
     }
     
@@ -147,7 +232,7 @@ export default {
             float: left;
         }
         .user-name{
-            width: 121px;
+            width: 286px;
             height: 57px;
             margin-left: 0px;
 
@@ -160,26 +245,41 @@ export default {
         .user-btn-edit{
             width: 163px;
             height: 55px;
-            margin-left: 535px;
-            border-radius: 20px;
+
             float: left;
+
+            border-radius: 20px;
             background-color: #ECBC76;
-            font-size: 23px; 
+
             display: flex;
             justify-content: center;
             align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
         }
         .user-btn-complete{
             width: 163px;
             height: 55px;
-            margin-left: 535px;
-            border-radius: 20px;
+            
+            margin-left: 370px;
             float: left;
+
+            border-radius: 20px;
             background-color: #D9D9D9;
-            font-size: 23px; 
+
             display: flex;
             justify-content: center;
             align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
         }
     }
     .frame-body{
@@ -207,6 +307,22 @@ export default {
             height: 337px;
             margin-top: 0px;
             margin-left: 43px;
+            background-image: url("../../assets/mypage/profile/sub-frame.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            float: left;
+            overflow-y: scroll;
+        }
+        .frame-sub-form-body{
+            width: 910px;
+            height: 337px;
+            margin-top: 0px;
+            margin-left: 43px;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column; 
+
             background-image: url("../../assets/mypage/profile/sub-frame.png");
             background-size: cover;
             background-repeat: no-repeat;

@@ -5,17 +5,53 @@
             <div>
                 <div class="frame-body">
                     <div>
-                            <router-link to="/my" class="my-link">&lt;</router-link>
-                            <div style="clear:both;"></div>
+                        <router-link to="/my" class="my-link">&lt;</router-link>
+                        <div style="clear:both;"></div>
+
+                        <div class="timetable-img-box">
                             <div class="timetable-img"></div>
-                            <div class="timetable-txt">내 시간표</div>
+                        </div>
+                        
 
-                            <div v-if="!stateTF.iseditState" class="timetable-btn-edit" @click="editStateControl()"> 수정</div>
-                            <div v-if="stateTF.iseditState" class="timetable-btn-complete" @click="editStateControl()"> 완료</div>
+                        <div class="timetable-txt">내 시간표</div>
 
+                        <div class="timetable-btn-edit" @click="editStateControl()">저장</div>
+                        <div style="clear:both;"></div>
+
+                        <div class="line-for-division"></div>
+
+                        <div class="frame-sub-body">
+                            <div class="search-box">
+                                <div class="search-box-sub">
+                                    <input type="text" placeholder="학수번호 조회" class="input-search" @change="showtimetable()" v-model="inputData.id">
+                                    <div class="box-for-line"><div class="line-for-division-sub"></div></div>
+                                    <div class="user-recent-course"></div>
+                                </div>
+                                <div class="search-resister-btn" @click="showtimetable()">추가</div>
+                            </div>
+                            <div v-if="stateTF.isknown" class="detail-box">
+                                <div class="font-row-name">넘버</div>
+                                <div class="font-row-content">{{lecture.id}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-row-name">과목</div>
+                                <div class="font-row-content">{{lecture.subjectName}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-row-name">성함</div>
+                                <div class="font-row-content">{{lecture.teacherName}}</div>
+                                <div style="clear:both;"></div>
+
+                                <div class="font-row-name">날짜</div>
+                                <div class="font-row-content">{{lecture.lectureDate}}</div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div v-else class="detail-box-alert">
+                                왼편 입력창을 통해 학수번호를 조회할 수 있습니다.
+                            </div>
+                            
                             <div style="clear:both;"></div>
-                            <div class="line-for-division"></div>
-                            <div class="font-head">시간표</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,11 +60,22 @@
 </template>
 
 <script>
+import axios from '../../api/index.js'
 export default {
     data() {
         return {
+            inputData: {
+                id: ''
+            },
+            lecture: {
+                id: '',
+                lectureDate: '',
+                subjectName: '',
+                teacherName: ''
+            },
             stateTF: {
-                iseditState: false
+                iseditState: false,
+                isknown: false
             },
         }
     },
@@ -36,6 +83,26 @@ export default {
         editStateControl() {
             return this.stateTF.iseditState = !this.stateTF.iseditState;
         },
+        async showtimetable(){
+            try{
+                this.stateTF.isknown = false
+                await axios.get('/timeTable', {
+                params: {
+                    id : this.inputData.id
+                }
+                }).then((result)=>{
+                    this.lecture.id = result.data.id
+                    this.lecture.lectureDate = result.data.lectureDate
+                    this.lecture.subjectName = result.data.subjectName
+                    this.lecture.teacherName = result.data.teacherName
+                    this.stateTF.isknown = true
+                }).catch(function(){
+                    console.log("해당 학수번호는 존재하지 않습니다.")
+                })
+            }catch(error){
+                console.log("해당 학수번호는 존재하지 않습니다.")
+            }
+        }
     }
 }
 </script>
@@ -69,14 +136,30 @@ export default {
         border-radius: 20px;
         display: flex;
         .my-link{
-            width: 100px;
-            height: 71px;
+            width: 51px;
+            height: 46px;
+
             margin-top: 0px;
             margin-left: 17px;
             float:left;
 
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
             font-size: 50px;
+            line-height: 75px;
             color: #B87514;
+            display: flex;
+            align-items: center;
+        }
+        .timetable-img-box{
+            width: 69px;
+            height: 55px;
+            
+            margin-top: 0px;
+            margin-left: 68px;
+            float: left;
+
             display: flex;
             justify-content: left;
             align-items: center;
@@ -84,68 +167,249 @@ export default {
         .timetable-img{
             width: 40px;
             height: 40px;
-            margin-top: 0px;
-            margin-left: 69px;
+
+            float: left;
+
             background-image: url("../../assets/mypage/timetable.png");
             background-size: cover;
             background-repeat: no-repeat;
-            float: left;
         }
         .timetable-txt{
             width: 200px;
-            height: 40px;
+            height: 55px;
+
             margin-top: 0px;
-            margin-left: 31px;
+            margin-left: 0px;
             float: left;
 
-            font-size: 30px; 
             display: flex;
+            justify-content: left;
             align-items: center;
+
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 45px;
         }
         .timetable-btn-edit{
             width: 163px;
             height: 55px;
             background-color: #B87514;
+
             margin-top: 0px;
-            margin-left: 438px;
+            margin-left: 444px;
             border-radius: 20px;
             float: left;
 
-            font-size: 23px; 
+            color: #FFFFFF;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
         }
         .timetable-btn-complete{
             width: 163px;
             height: 55px;
-            background-color: #D9D9D9;
+            background-color: #FFFEF9;
+
             margin-top: 0px;
-            margin-left: 438px;
+            margin-left: 444px;
             border-radius: 20px;
             float: left;
 
-            font-size: 23px; 
+            color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
         }
         .line-for-division{
             width: 891px;
             height: 1px;
-            margin-top: 39px;
+            margin-top: 30px;
             margin-left: 53px;
             margin-bottom: 0px;
 
             border: 1px solid #B87514
         }
-        .font-head{
-            width: 200px;
-            height: 40px;
-            margin-left: 28px;
+        .frame-sub-body{
+            width: 996px;
+            height: 432px;
+            margin-top: 5px;
+            margin-left: 0px;
 
-            font-size: 50px;
-            color: #B87514;
+            background: #FFFEF9;
+            border-radius: 20px;
+            overflow-y: scroll;
+
+            .search-box{
+                width: 273px;
+                height: 310px;
+
+                margin-top: 63px;
+                margin-left: 57px;
+                float: left;
+
+                .search-box-sub{
+                    width: 273px;
+                    height: 242px;
+
+                    border: 5px solid #ECBC76;
+                    border-radius: 20px;
+
+                    .input-search{
+                        width: 263px;
+                        height: 73px;
+
+                        border: none; 
+                        background: transparent;
+                        outline: none;
+
+                        font-family: 'Poppins';
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 25px;
+                        line-height: 38px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        color: #000000;
+                    }
+                    .box-for-line{
+                        width: 263px;
+                        height: 7px;
+
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        justify-content: center;
+
+                        .line-for-division-sub{
+                            width: 223px;
+                            height: 1px;
+
+                            border: 1px solid #B87514;
+                        }
+                    }
+                    .user-recent-course{
+                        width: 263px;
+                        height: 73px;
+
+                        font-family: 'Poppins';
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 25px;
+                        line-height: 38px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        color: #B87514;
+                    }
+                }
+                .search-resister-btn{
+                    width: 163px;
+                    height: 55px;
+                    
+                    margin-top: 13px;
+                    margin-left: 55px;
+
+                    background: #B87514;
+                    border-radius: 20px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    justify-content: center;
+
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 23px;
+                    line-height: 28px;
+                    color: #FFFFFF;
+                }
+            }
+            .detail-box{
+                width: 583px;
+                height: 311px;
+
+                margin-top: 63px;
+                margin-left: 18px;
+                float: left;
+                overflow-y: scroll;
+
+                border: 5px solid #ECBC76;
+                border-radius: 20px;
+                .font-row-name{
+                    width: 95px;
+                    height: 75px;
+
+                    float: left;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 30px;
+                    line-height: 45px;
+                    color: #B87514;
+                }
+                .font-row-content{
+                    width: 478px;
+                    height: 75px;
+
+                    float: left;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 25px;
+                    line-height: 38px;
+                    color: #000000;
+                }
+            }
+            .detail-box-alert{
+                width: 583px;
+                height: 311px;
+
+                margin-top: 63px;
+                margin-left: 18px;
+                float: left;
+
+                border: 5px solid #ECBC76;
+                border-radius: 20px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 25px;
+                line-height: 38px;
+                color: #B87514;
+            }
         }
     }
 

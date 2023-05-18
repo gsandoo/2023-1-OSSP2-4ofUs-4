@@ -63,13 +63,13 @@
                     type="radio"
                     id="male"
                     :style="{'margin-top': '13px','margin-left': '44px'}"
-                    value="male" v-model="member.userSex">
+                    value="남자" v-model="member.userSex">
                     <label for="male">남자</label>
                 <input
                     type="radio"
                     id="female"
                     :style="{'margin-left': '10px'}" 
-                    value="female" v-model="member.userSex">
+                    value="여자" v-model="member.userSex">
                     <label for="female">여자</label>
                 <p class="describe-sub-input">학과</p>
                 <input
@@ -180,10 +180,6 @@ export default {
                     console.log(result.status);
                     if(result.status === 200){
                         alert(this.member.userEmailAddress+"(으)로 인증 메일을 보냈습니다.")
-                        this.$router.replace('/');
-                    }
-                    else{
-                        alert("reponse state가 200이 아닙니다.")
                     }
                 })
                 .catch(function(error){
@@ -196,6 +192,7 @@ export default {
         // 계정, 비밀번호에 대한 유효성 검사 고려. 이외에는 빈칸만 제한 적용.
         submitForm(){
             if(this.formControl.isGoodEmail & !(this.member.userPassword==='') & this.formControl.isGoodPasswordAgain & !(this.member.userName=='') & !(this.member.userSex=='') & !(this.member.userMajor=='') & !(this.member.userPhoneNumber=='') & !(this.member.userStudentId=='')){
+                this.$router.replace('/');
                 this.signUp()
             }
             else{

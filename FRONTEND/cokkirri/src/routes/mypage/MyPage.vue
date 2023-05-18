@@ -5,7 +5,8 @@
             <div>
                 <div class="frame-head">
                     <div class="user-img"></div>
-                    <div class="user-name">{{this.$store.state.name}}</div>
+                    <router-link to="/" v-if="!this.$store.state.isLogin" class="user-name">로그인</router-link>
+                    <div v-else class="user-name">{{this.$store.state.name}}</div>
                     <router-link to="/my/profile" class="user-btn">내 정보</router-link>
                     <div style="clear:both;"></div>
                 </div>
@@ -19,7 +20,7 @@
 
                             <div class="timetable-img"></div>
                             <div class="timetable-txt">내 시간표</div>
-                            <router-link to="/my/timetable" class="timetable-btn"> 등록 및 수정 &gt;</router-link>
+                            <router-link to="/my/timetable" class="timetable-btn">등록 및 수정 &gt;</router-link>
                             <div style="clear:both;"></div>
                             <div class="line-for-division"></div>
 
@@ -33,7 +34,6 @@
         </div>
     </div>
 </template>
-
 
 
 
@@ -75,7 +75,7 @@
             float: left;
         }
         .user-name{
-            width: 121px;
+            width: 286px;
             height: 57px;
             margin-left: 0px;
 
@@ -88,15 +88,22 @@
         .user-btn{
             width: 163px;
             height: 55px;
-            background-color: #D9D9D9;
-            margin-left: 535px;
-            border-radius: 20px;
+            
+            margin-left: 370px;
             float: left;
 
-            font-size: 23px; 
+            border-radius: 20px;
+            background-color: #ECBC76;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
         }
     }
     .frame-body{

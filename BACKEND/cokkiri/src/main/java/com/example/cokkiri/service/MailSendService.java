@@ -8,6 +8,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 @Service("mss")
@@ -43,17 +44,20 @@ public class MailSendService {
 
         //인증메일 보내기
         MimeMessage mail = mailSender.createMimeMessage();
-        String mailContent = "<h1>[Cokkiri 이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
+        String mailContent = "<h1> Cokkiri [이메일 인증]</h1><br><p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"
                 + "<a href='http://3.37.37.164:8080/signUpConfirm?id="
                 + id + "&authKey=" + authKey + "' target='_blenk'>이메일 인증 확인</a>";
 
         try {
             mail.setSubject("회원가입 이메일 인증 ", "utf-8");
             mail.setText(mailContent, "utf-8", "html");
+            mail.setFrom(new InternetAddress("skxkswls@gmail.com","Cokkiri"));
             mail.addRecipient(Message.RecipientType.TO, new InternetAddress(id));
             mailSender.send(mail);
         } catch (MessagingException e) {
             e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
 
         return authKey;

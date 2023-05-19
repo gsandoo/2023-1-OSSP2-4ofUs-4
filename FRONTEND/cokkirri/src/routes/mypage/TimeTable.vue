@@ -84,6 +84,10 @@ export default {
                 isknown: false,
                 isRecordSelected: false
             },
+            temp: {
+                start: false,
+                end: false
+            }
         }
     },
     methods: {
@@ -117,10 +121,43 @@ export default {
                 console.log("해당 학수번호는 존재하지 않습니다.")
             }
         },
-        addCoursToList() {
+        async isthereid(){
+            try{
+                this.temp.start = false
+                await axios.get('/timeTable', {
+                params: {
+                    id : this.inputData.id
+                }
+                }).then(()=>{
+                    this.temp.start = true
+                }).catch(function(){
+                    console.log("해당 학수번호는 존재하지 않습니다.")
+                })
+            }catch(error){
+                console.log("해당 학수번호는 존재하지 않습니다.")
+            }
+            if(this.temp.start){
+                this.temp.end = true
+            }
+            else{
+                this.temp.end = false
+            }
+        },
+        async addCoursToList() {
             if(this.inputData.id !== ''){
-                this.inputData.courseList.push(this.inputData.id)
-                this.inputData.id = ''
+                if(this.inputData.courseList.indexOf(this.inputData.id)===-1){
+                    await this.isthereid()
+                    if(this.temp.end){
+                        this.inputData.courseList.push(this.inputData.id)
+                        this.inputData.id = ''
+                    }
+                    else{
+                        alert("해당 학수번호는 존재하지 않습니다.")
+                    }
+                }
+                else{
+                    alert("이미 추가한 학수번호입니다.")
+                }
             }
             else{
                 alert("입력 학수번호가 없습니다.")

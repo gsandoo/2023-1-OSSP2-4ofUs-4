@@ -15,6 +15,8 @@ import AdminHome from './adminpage/AdminHome.vue'
 import Payments from './Payments.vue'
 import Starting from './Starting.vue'
 
+import ChatRoom from './chatting/ChatRoom.vue'
+
 export default createRouter({
     // Hash 모드로 설정
     history: createWebHashHistory(),
@@ -63,6 +65,10 @@ export default createRouter({
         {
             path: '/Starting',
             component: Starting
+        },
+        {
+            path: '/ChatRoom',
+            component: ChatRoom
         }
     ]
 })

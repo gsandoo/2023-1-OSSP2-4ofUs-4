@@ -1,51 +1,55 @@
 <template>
   <div>
-    <div class = "BoxingPay">
-      <div class = Back>
-        <div class = "Back_img">
+    <div class="BoxingPay">
+      <div class="Back">
+        <div class="Back_img">
           <a href="javascript:history.back();">
             <img :src="imagePath_arrow" alt="Arrow" />
           </a>
         </div>
         <div>
-          <a href="javascript:history.back();" class = "Back_txt">뒤로가기</a>
+          <a href="javascript:history.back();" class="Back_txt">뒤로가기</a>
         </div>
       </div>
-      <div class = "Title">
+      <div class="Title">
         <p>하트 충전소</p>
       </div>
-      <div class = "Parent">
-        <div class = "HeartNum">
-          <div class = "HeartNum_text">
+      <div class="Parent">
+        <div class="HeartNum">
+          <div class="HeartNum_text">
             <p>나의 하트</p>
           </div>
-          <div class = "HeartNum_img">
+          <div class="HeartNum_img">
             <!--뒷그림 수정 예정-->
-            <img :src="imagePath_htnum" alt="Heartnum" class = "htnum"/>
+            <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
           </div>
         </div>
         <div class="GoPay">
-          <div class = "GoPay_text">
+          <div class="GoPay_text">
             <p>하트 충전</p>
           </div>
-          <div class = "GoPay_heart">
+          <div class="GoPay_heart">
             <img :src="imagePath_heart" alt="heart" />
           </div>
-          <div class = "GoPay_10ht">
+          <div class="GoPay_10ht">
             <p>10개</p>
           </div>
-          <div class = "GoPay_img">
+          <div class="GoPay_img">
             <img :src="imagePath_gopay" alt="Heartgopay" />
           </div>
           <div>
-            <a href="#" @click="requestPay" class = "charge">1000원</a>
+            <!-- <a href="#" @click="requestPay" class="charge">1000원</a> -->
+            <a href="#" @click="requestPay(1000)" class="charge1000">1000원</a>
+            <a href="#" @click="requestPay(3000)" class="charge3000">3000원</a>
+            <a href="#" @click="requestPay(5000)" class="charge5000">5000원</a>
+            <a href="#" @click="requestPay(10000)" class="charge10000">10000원</a>
           </div>
         </div>
-        <div class = "UseHistory">
-          <div class = "UseHistory_text">
+        <div class="UseHistory">
+          <div class="UseHistory_text">
             <p>사용 내역</p>
           </div>
-          <div class = "UseHistory_img>">
+          <div class="UseHistory_img">
             <img :src="imagePath_history" alt="UseHistory" />
           </div>
         </div>
@@ -55,18 +59,18 @@
 </template>
 
 <script>
-import axios from '@/api';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      imagePath_arrow: require('@/assets/pay/arrow-left.png'),
-      imagePath_htnum: require('@/assets/pay/rec_heart.png'),
-      imagePath_gopay: require('@/assets/pay/rec_gopay.png'),
-      imagePath_history: require('@/assets/pay/rec_history.png'),
-      imagePath_heart: require('@/assets/pay/heart.png'),
+      imagePath_arrow: require("@/assets/pay/arrow-left.png"),
+      imagePath_htnum: require("@/assets/pay/rec_heart.png"),
+      imagePath_gopay: require("@/assets/pay/rec_gopay.png"),
+      imagePath_history: require("@/assets/pay/rec_history.png"),
+      imagePath_heart: require("@/assets/pay/heart.png"),
 
-      priceAmount: 1000,
+      priceAmount: 1,
       buyerMemberEmail: "skxksls@gmail.com",
       buyerMemberName: "나찬진",
       IMP: null, // IMP 객체 선언
@@ -88,8 +92,8 @@ export default {
       this.IMP = window.IMP; // IMP 객체 초기화
       this.IMP.init(""); // 외부 유출 금지!! API 키를 넣어주세요
     },
-    requestPay() {
-      const { priceAmount, buyerMemberEmail, buyerMemberName, IMP } = this;
+    requestPay(priceAmount) {
+      const { buyerMemberEmail, buyerMemberName, IMP } = this;
 
       if (typeof IMP === "undefined") {
         // IMP 객체가 아직 정의되지 않았을 경우에는 오류 처리
@@ -103,7 +107,7 @@ export default {
           pg: "kakaopay.TC0ONETIME",
           pay_method: "card",
           merchant_uid: "heart_" + new Date().getTime(),
-          name: "heart",
+          name: "cokkirri 하트 결제",
           amount: priceAmount,
           buyer_email: buyerMemberEmail,
           buyer_name: buyerMemberName,
@@ -117,28 +121,45 @@ export default {
     },
     verifyPayment(impUid) {
       // 서버로 결제 검증 요청
-      const apiUrl = `/verifyIamport/${impUid}`;
+      const apiUrl = "/payment";
 
       // AJAX 요청
-      axios.post(apiUrl).then((response) => {
-        const result = response.data;
+      axios
+        .put(apiUrl, { imp_uid: impUid })
+        .then((response) => {
+          const result = response.data;
 
-        // rsp.paid_amount와 result.response.amount(서버 검증) 비교 후 로직 실행
-        if (result && response.paid_amount === result.response.amount) {
-          alert("결제가 완료되었습니다.");
-        } else {
-          alert(
-            "결제에 실패했습니다. 에러코드: " +
-              response.error_code +
-              " 에러 메시지: " +
-              response.error_message
-          );
-        }
-      });
+          // rsp.paid_amount와 result.response.amount(서버 검증) 비교 후 로직 실행
+          if (result && response.paid_amount === result.response.amount) {
+            alert("결제가 완료되었습니다.");
+
+            const paymentDetails = result.response; // 서버에서 받아온 결제 내역 정보
+            console.log(paymentDetails); // 결제 내역 정보 출력
+
+            // 결제가 완료되면 '/Payments' 페이지로 이동
+            this.$router.push("/Payments");
+          } else {
+            alert(
+              "결제에 실패했습니다. 에러코드: " +
+                response.error_code +
+                " 에러 메시지: " +
+                response.error_message
+            );
+            // 결제 실패 시 '/Payments' 페이지로 이동
+            this.$router.push("/Payments");
+          }
+        })
+        .catch((error) => {
+          console.error("결제 검증 요청 중 오류 발생:", error);
+          // 결제 검증 오류 시 '/Payments' 페이지로 이동
+          this.$router.push("/Payments");
+        });
     },
   },
 };
 </script>
+
+
 
 <style scoped>
 @font-face {
@@ -298,7 +319,7 @@ text-align: center;
   text-align: center;
 }
 
-.charge{ color:white;
+.charge1000{ color:white;
   background: #ECBC76;
   border-radius: 50px;
 
@@ -316,5 +337,65 @@ text-align: center;
   height: 1rem;
   left: 15rem;
   top: 15rem;
+}
+
+.charge3000{ color:white;
+  background: #ECBC76;
+  border-radius: 50px;
+
+  text-decoration : none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 20rem;
+}
+
+.charge5000{ color:white;
+  background: #ECBC76;
+  border-radius: 50px;
+
+  text-decoration : none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 25rem;
+}
+
+.charge10000{ color:white;
+  background: #ECBC76;
+  border-radius: 50px;
+
+  text-decoration : none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 30rem;
 }
 </style>

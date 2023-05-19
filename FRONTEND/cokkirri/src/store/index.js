@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import axios from "../api/index.js";
 // vuex의 mutations 및 action 에서 주소관리를 하기 위해서 가져옴
 import router from '../routes/index.js'
+
 // vuex 를 사용하여 로그인 상태와 로그인 id 를 저장
 export default createStore({
     // 컴포넌트에서 해당 state의 값을 불러오고자 한다면, this.$store.state.~ 형식으로 불러올 수 있다.
@@ -57,7 +58,7 @@ export default createStore({
                             alert('로그인 되었습니다.')
                         }
                         else{
-                            alert('아이디 밒 비밀번호에 대응되는 회원 정보가 없습니다.')
+                            alert('아이디 및 비밀번호에 대응되는 회원 정보가 없습니다.')
                         }
                     }
                 }).catch(function(error){
@@ -100,5 +101,5 @@ export default createStore({
         }
 
     },
-    modules: {}
-})
+    modules:{}
+    });

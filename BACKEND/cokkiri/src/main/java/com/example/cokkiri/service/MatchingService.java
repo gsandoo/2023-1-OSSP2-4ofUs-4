@@ -2,8 +2,10 @@ package com.example.cokkiri.service;
 
 import com.example.cokkiri.model.*;
 import com.example.cokkiri.repository.MatchedListRepository;
+import com.example.cokkiri.repository.MatchingAgreeRepository;
 import com.example.cokkiri.repository.PublicMatchedListRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 
+@Transactional
 @Service("matching")
 public class MatchingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(MatchingService.class);
@@ -29,6 +32,8 @@ public class MatchingService {
     // 공강 레포지토리
     @Autowired
     private PublicMatchedListRepository publicMatchedListRepository;
+    @Autowired
+    private MatchingAgreeRepository matchingAgreeRepository;
     // 배열에 저장 (공강)
     List<PublicMatching> publicLectureUsers = new ArrayList<>();
     // 배열에 저장 (수업)
@@ -418,17 +423,32 @@ public class MatchingService {
         return matchedList;
     };
 
-    public String agreePublicMatchedUser(PublicMatching user) {
-        String email = user.getEmail();
-        PublicMatchedList list = (PublicMatchedList) publicMatchedListRepository.findPublicMatchedListByEmailListContaining(email);
-        list.setMatchingAgree(+1);
-        return "등록되었습니다.";
+    public  PublicMatchedList deletePublicUser(PublicMatchedList matchedList){
+        publicMatchedListRepository.delete(matchedList);
+        return matchedList;
     }
 
-    public String agreeClassMatchedUser(ClassMatching user) {
-        String email = user.getEmail();
-        ClassMatchedList list = (ClassMatchedList) classMatchedListRepository.findPublicMatchedListByEmailListContaining(email);
-        list.setMatchingAgree(+1);
-        return "등록되었습니다.";
+    public ClassMatchedList deleteClassUser(ClassMatchedList matchedList){
+        classMatchedListRepository.delete(matchedList);
+        return matchedList;
+    }
+    public MatchingAgree publicMatchAgree(String id) {
+        MatchingAgree matchingAgree = new MatchingAgree();
+        List<PublicMatchedList> list = publicMatchedListRepository.findByEmailListContains(id);
+        matchingAgree.setMatchingId(list.get(0).getMatchingId());
+        matchingAgree.setMatchingType(list.get(0).getMatchingType());
+        matchingAgree.setEmail(id);
+        list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
+        return matchingAgreeRepository.save(matchingAgree);
+    }
+
+    public MatchingAgree classMatchAgree(String id) {
+        MatchingAgree matchingAgree = new MatchingAgree();
+        List<ClassMatchedList> list = classMatchedListRepository.findByEmailListContains(id);
+        matchingAgree.setMatchingId(list.get(0).getMatchingId());
+        matchingAgree.setMatchingType(list.get(0).getMatchingType());
+        matchingAgree.setEmail(id);
+        list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
+        return matchingAgreeRepository.save(matchingAgree);
     }
 }

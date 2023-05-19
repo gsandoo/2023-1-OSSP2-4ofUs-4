@@ -1,11 +1,7 @@
 package com.example.cokkiri.controller;
 
+import com.example.cokkiri.model.*;
 import com.example.cokkiri.service.MatchingService;
-
-import com.example.cokkiri.model.ClassMatchedList;
-import com.example.cokkiri.model.ClassMatching;
-import com.example.cokkiri.model.PublicMatchedList;
-import com.example.cokkiri.model.PublicMatching;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,24 +42,15 @@ public class MatchingController {
         }
     }
 
-    // 매칭시간 내 매칭완료 버튼 누르면 matchingAgree +1
-    @PutMapping("matchagree/free")
-    public String  publicMatchingAgree(@RequestBody PublicMatching user){
-        if(user.getMatchingType().equals("free")){
-            return (matchingService.agreePublicMatchedUser(user));
-        }else{
-            System.out.println("잘못된 송출");
-        }
-        return  null;
+    
+    @GetMapping("agree/free")
+    public MatchingAgree  publicMatchingAgree(@RequestParam(value = "userId")String id){
+        return (matchingService.publicMatchAgree(id));
+
     }
-    @PutMapping("matchagree/class")
-    public String  classMatchingAgree(@RequestBody ClassMatching user){
-        if(user.getMatchingType().equals("class")){
-            return (matchingService.agreeClassMatchedUser(user));
-        }else{
-            System.out.println("잘못된 송출");
-        }
-        return  null;
+    @GetMapping("agree/class")
+    public MatchingAgree classMatchingAgree(@RequestParam(value = "userId")String id){
+        return (matchingService.classMatchAgree(id));
     }
 }
 

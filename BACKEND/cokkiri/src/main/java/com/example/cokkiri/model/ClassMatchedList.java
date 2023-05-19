@@ -40,11 +40,6 @@ public class ClassMatchedList {
     @ElementCollection
     private List<String> emailList;
 
-    //약속시간
-    @Column
-    @ElementCollection
-    private List<String> promiseTime;
-
     @Column
     @ColumnDefault("0")
     //매칭 동의수 사람수랑 같게 되면 matchingRes=true

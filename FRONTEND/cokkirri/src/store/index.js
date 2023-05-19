@@ -1,7 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
 import axios from "../api/index.js";
 // vuex의 mutations 및 action 에서 주소관리를 하기 위해서 가져옴
-import router from '../routes/index.js'
+
+import router from '../routes/index.js';
+// 모듈 불러오기
+import userPlusInfo from './modules/userPlusInfo.js';
+
 
 // vuex 를 사용하여 로그인 상태와 로그인 id 를 저장
 export default createStore({
@@ -16,7 +20,8 @@ export default createStore({
         number: null,
         sex: null,
         studentNum: null,
-        course: null
+        course: [],
+        password: null
     },
     mutations: {
         // 로그인 적용 후 ~ 페이지로 이동. 추후 메인 페이지로 이동 변경 예정.
@@ -25,13 +30,14 @@ export default createStore({
             state.id = payload
             router.replace('/Starting')
         },
-        userInfoApply(state, {major, name, number, sex, studentNum, course}){
+        userInfoApply(state, {major, name, number, sex, studentNum, course, password}){
             state.major = major
             state.name = name
             state.number = number
             state.sex = sex
             state.studentNum = studentNum
             state.course = course
+            state.password = password
         },
         logout(state) { 
             state.isLogin = false
@@ -41,7 +47,7 @@ export default createStore({
     actions: {
         // 각 컴포넌트에서 this.$store.dispatch('메소드 이름', { 데이터 변수: 입력값 }) 형식으로 사용 가능
         // 로그인 요청 및 store 정보 업데이트
-        async loginRequest({commit}, {inputId, inputPassword}){
+        async loginRequest({commit, dispatch}, {inputId, inputPassword}){
             // 로그인 api 요청 부분. 반환값에 토큰 없음.
             try{
                 await axios.post('/login', null, {
@@ -54,7 +60,7 @@ export default createStore({
                     if(result.status === 200){
                         if(result.data === true){
                             commit('loginSuccess', inputId);
-                            this.dispatch('userInfoUpdate')
+                            dispatch('userInfoUpdate')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -69,22 +75,23 @@ export default createStore({
             }
         },
         // vuex의 state.id 기반으로 현재 유저의 정보를 업데이트한다.
-        async userInfoUpdate(){
+        async userInfoUpdate({state, commit}){
             try{
                 await axios.get('/admin/user/id',{
                         params: {
-                            userId: this.state.id
+                            userId: state.id
                         }
                     })
                     .then((result) =>{
                         if(result.status === 200){
-                            this.commit('userInfoApply', {
+                            commit('userInfoApply', {
                                 major: result.data.major,
                                 name: result.data.name,
                                 number: result.data.number,
                                 sex: result.data.sex,
                                 studentNum: result.data.studentNum,
-                                course: result.data.course
+                                course: result.data.course,
+                                password: result.data.password
                             })
                             console.log("유저 정보 업데이트 완료")
                         }
@@ -98,8 +105,34 @@ export default createStore({
             } catch(error){
                 console.log(error);
             }
+        },
+        //마이페이지에서 유저 정보 수정
+        async userInfoEdit({dispatch}, {inputId, inputMajor, inputNumber, inputCourse, inputPassword}){
+            try{
+                await axios.put('/userMypage/'+inputId, null, {
+                    params: {
+                        password: inputPassword,
+                        major: inputMajor,
+                        number: inputNumber,
+                        course: inputCourse.map(encodeURIComponent).join(',')
+                    }
+                })
+                .then((result)=>{
+                    if(result.status === 200){
+                        dispatch('userInfoUpdate')
+                        alert("수정 완료")
+                    }
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
         }
-
     },
-    modules:{}
-    });
+
+    modules: {
+        userPlusInfo
+    }
+})

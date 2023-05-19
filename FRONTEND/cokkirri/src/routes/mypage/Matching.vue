@@ -14,7 +14,7 @@
                         </div>
                         <div class="matching-txt">매칭 결과</div>
 
-                        <router-link to="/my/matching" class="matching-btn">새로고침</router-link>
+                        <div to="/my/matching" class="matching-btn" @click="callMatchingRecord()">새로고침</div>
                         <div style="clear:both;"></div>
 
                         <div class="line-for-division"></div>
@@ -44,7 +44,15 @@
     </div>
 </template>
 
-
+<script>
+export default {
+    methods: {
+        callMatchingRecord() {
+            this.$store.dispatch('userPlusInfo/callRecord')
+        }
+    }
+}
+</script>
 
 
 <style lang="scss" scoped>

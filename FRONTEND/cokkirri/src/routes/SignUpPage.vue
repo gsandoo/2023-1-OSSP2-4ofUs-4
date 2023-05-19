@@ -63,13 +63,13 @@
                     type="radio"
                     id="male"
                     :style="{'margin-top': '13px','margin-left': '44px'}"
-                    value="남자" v-model="member.userSex">
+                    value="male" v-model="member.userSex">
                     <label for="male">남자</label>
                 <input
                     type="radio"
                     id="female"
                     :style="{'margin-left': '10px'}" 
-                    value="여자" v-model="member.userSex">
+                    value="female" v-model="member.userSex">
                     <label for="female">여자</label>
                 <p class="describe-sub-input">학과</p>
                 <input
@@ -122,7 +122,7 @@ export default {
                 // studentNum
                 userStudentId: '',
                 // course 추후에 user Course 추가 가능성 염두
-                // userCourse: ''
+                userCourse: []
             },
             // 유효성 상태 표시
             formControl:    {
@@ -173,7 +173,7 @@ export default {
                         major: this.member.userMajor,
                         number:this.member.userPhoneNumber,
                         studentNum: this.member.userStudentId,
-                        // course: "CSE4051-01"
+                        
                     }
                 })
                 .then((result) => {

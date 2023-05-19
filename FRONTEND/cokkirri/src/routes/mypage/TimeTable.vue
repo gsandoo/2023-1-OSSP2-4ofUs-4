@@ -15,7 +15,7 @@
 
                         <div class="timetable-txt">내 시간표</div>
 
-                        <div class="timetable-btn-edit" @click="editStateControl()">저장</div>
+                        <div class="timetable-btn-edit" @click="userInfoUpdateClientToServer()">저장</div>
                         <div style="clear:both;"></div>
 
                         <div class="line-for-division"></div>
@@ -23,11 +23,16 @@
                         <div class="frame-sub-body">
                             <div class="search-box">
                                 <div class="search-box-sub">
-                                    <input type="text" placeholder="학수번호 조회" class="input-search" @change="showtimetable()" v-model="inputData.id">
+                                    <input type="text" placeholder="학수번호 조회" class="input-search" @change="showtimetable()" @click="inputSelected()" v-model="inputData.id">
                                     <div class="box-for-line"><div class="line-for-division-sub"></div></div>
-                                    <div class="user-recent-course"></div>
+                                    <div class="user-recent-box">
+                                        <div 
+                                            v-for="(course, index) in reversedCourseList" :key="index" 
+                                            class="user-recent-course" @click="recordSelected(course)">{{course}}</div>
+                                    </div>
                                 </div>
-                                <div class="search-resister-btn" @click="showtimetable()">추가</div>
+                                <div v-if="stateTF.isRecordSelected" class="search-resister-btn-delete" @click="deleteCoursFromList()">삭제</div>
+                                <div v-else class="search-resister-btn-add" @click="addCoursToList()">추가</div>
                             </div>
                             <div v-if="stateTF.isknown" class="detail-box">
                                 <div class="font-row-name">넘버</div>
@@ -49,7 +54,6 @@
                             <div v-else class="detail-box-alert">
                                 왼편 입력창을 통해 학수번호를 조회할 수 있습니다.
                             </div>
-                            
                             <div style="clear:both;"></div>
                         </div>
                     </div>
@@ -65,7 +69,9 @@ export default {
     data() {
         return {
             inputData: {
-                id: ''
+                id: '',
+                courseList: [...this.$store.state.course],
+                deleteId: ''
             },
             lecture: {
                 id: '',
@@ -75,11 +81,19 @@ export default {
             },
             stateTF: {
                 iseditState: false,
-                isknown: false
+                isknown: false,
+                isRecordSelected: false
             },
         }
     },
     methods: {
+        recordSelected(course){
+            this.inputData.deleteId = course
+            this.stateTF.isRecordSelected = true
+        },
+        inputSelected(){
+            return this.stateTF.isRecordSelected = false
+        },
         editStateControl() {
             return this.stateTF.iseditState = !this.stateTF.iseditState;
         },
@@ -102,6 +116,36 @@ export default {
             }catch(error){
                 console.log("해당 학수번호는 존재하지 않습니다.")
             }
+        },
+        addCoursToList() {
+            if(this.inputData.id !== ''){
+                this.inputData.courseList.push(this.inputData.id)
+                this.inputData.id = ''
+            }
+            else{
+                alert("입력 학수번호가 없습니다.")
+            }
+        },
+        deleteCoursFromList() {
+            const index = this.inputData.courseList.indexOf(this.inputData.deleteId);
+            if (index !== -1) {
+                this.inputData.courseList.splice(index, 1);
+            }
+            this.stateTF.isRecordSelected = false
+        },
+        userInfoUpdateClientToServer(){
+            this.$store.dispatch('userInfoEdit', {
+                inputId: this.$store.state.id,
+                inputMajor: this.$store.state.major, 
+                inputNumber: this.$store.state.number, 
+                inputCourse: this.inputData.courseList,
+                inputPassword: this.$store.state.password
+            })
+        },
+    },
+    computed:{
+        reversedCourseList() {
+            return [...this.inputData.courseList].reverse();
         }
     }
 }
@@ -134,7 +178,7 @@ export default {
         height: 569px;
         background-color: #FFFEF9;
         border-radius: 20px;
-        display: flex;
+        
         .my-link{
             width: 51px;
             height: 46px;
@@ -302,6 +346,12 @@ export default {
                             border: 1px solid #B87514;
                         }
                     }
+                    .user-recent-box{
+                        width: 263px;
+                        height: 153px;
+
+                        overflow-y: scroll;
+                    }
                     .user-recent-course{
                         width: 263px;
                         height: 73px;
@@ -313,11 +363,12 @@ export default {
                         line-height: 38px;
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         text-align: center;
                         color: #B87514;
                     }
                 }
-                .search-resister-btn{
+                .search-resister-btn-add{
                     width: 163px;
                     height: 55px;
                     
@@ -325,6 +376,28 @@ export default {
                     margin-left: 55px;
 
                     background: #B87514;
+                    border-radius: 20px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    justify-content: center;
+
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 23px;
+                    line-height: 28px;
+                    color: #FFFFFF;
+                }
+                .search-resister-btn-delete{
+                    width: 163px;
+                    height: 55px;
+                    
+                    margin-top: 13px;
+                    margin-left: 55px;
+
+                    background: gray;
                     border-radius: 20px;
 
                     display: flex;

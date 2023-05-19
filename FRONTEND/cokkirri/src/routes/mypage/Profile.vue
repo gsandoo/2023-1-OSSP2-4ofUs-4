@@ -92,7 +92,6 @@
 </template>
 
 <script>
-import axios from '../../api/index.js'
 export default {
     data() {
         return {
@@ -103,8 +102,10 @@ export default {
                 number: this.$store.state.number,
                 sex: this.$store.state.sex,
                 studentNum: this.$store.state.studentNum,
+                course: this.$store.state.course,
                 password: '',
-                repassword: ''
+                repassword: '',
+                submitPassword: this.$store.state.password
             },
             stateTF: {
                 isEditState: false,
@@ -135,9 +136,13 @@ export default {
         },
         editComplete(){
             if(this.stateTF.isPasswordEditState){  
-                if(this.userInfo.password!='' & this.userInfo.repassword!=''){
-                    this.stateTF.isEditState = false;
+                if(this.userInfo.password===this.userInfo.repassword & this.userInfo.password!==''){
+                    this.userInfo.submitPassword = this.userInfo.password
+                    this.userInfo.password = ''
+                    this.userInfo.repassword = ''
                     this.userInfoUpdateClientToServer()
+                    this.stateTF.isEditState = false;
+                    this.stateTF.isPasswordEditState = false;
                 }
                 else{
                     alert("비밀번호를 입력하지 않았거나 PWD와 REPWD가 동일하지 않습니다.");
@@ -153,43 +158,30 @@ export default {
                 }
             }
         },
-        async userInfoUpdateClientToServer(){
-            try{
-                await axios.put('/userMypage/'+this.userInfo.id,null,
-                    {params:{
-                        password: '1111',
-                        major: this.userInfo.major,
-                        number: this.userInfo.number,
-                        course: 'PRI4024-01'
-                    }
-                })
-                .then((result)=>{
-                    if(result.status === 200){
-                        alert("수정 완료")
-                        this.$store.commit('userInfoUpdate')
-                    }
-                })
-                .catch(function(error){
-                    console.log(error)
-                })
-            } catch(error){
-                console.log(error)
-            }
+        userInfoUpdateClientToServer(){
+            this.$store.dispatch('userInfoEdit', {
+                inputId: this.userInfo.id,
+                inputMajor: this.userInfo.major, 
+                inputNumber: this.userInfo.number, 
+                inputCourse: this.userInfo.course, 
+                inputPassword: this.userInfo.submitPassword
+            })
         },
-        userInfoUpdateServerToClient(){
-            this.$store.dispatch('userInfoUpdate')
+        async userInfoUpdateServerToClient(){
+            await this.$store.dispatch('userInfoUpdate')
             this.userInfo.id = this.$store.state.id,
             this.userInfo.major = this.$store.state.major,
             this.userInfo.name = this.$store.state.name,
             this.userInfo.number = this.$store.state.number,
             this.userInfo.sex = this.$store.state.sex,
             this.userInfo.studentNum = this.$store.state.studentNum,
+            this.userInfo.course = this.$store.state.course,
             this.userInfo.password = '',
             this.userInfo.repassword = ''
+            this.userInfo.submitPassword = this.$store.state.password
+            alert("새로고침 완료")
         }
     }
-    
-
 }
 
 </script>

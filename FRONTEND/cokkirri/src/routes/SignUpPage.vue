@@ -15,17 +15,21 @@
                     name="emailAddress" 
                     placeholder="email address"
                     class="input-style"
-                    @keydown.enter="returnEmailValidationResults"
-                    @change="returnEmailValidationResults"
+                    @keydown.enter="returnEmailValidationResults();isEmailKnown()"
+                    @change="returnEmailValidationResults(); isEmailKnown()"
                     v-model="member.userEmailAddress">
                 <p 
-                    v-if="formControl.isGoodEmail"
+                    v-if="formControl.isGoodEmail & !formControl.isAlreadyKnown"
                     class="describe-email-state-ok">
                     동국대 웹메일 주소가 확인 되었습니다.</p>
                 <p 
                     v-if="formControl.isErrorEmail"
                     class="describe-email-state-warning">
                     동국대 웹메일만 가능합니다. 잘못된 입력입니다.</p>
+                <p 
+                    v-if="formControl.isAlreadyKnown"
+                    :style="{'margin-left':'44px','color':'red'}">
+                    이미 가입한 이메일입니다.</p>
                 <p class="describe-password-input">비밀번호</p>
                 <input 
                     type="password"
@@ -129,6 +133,7 @@ export default {
                 // email 유효성
                 isGoodEmail: false,
                 isErrorEmail: false,
+                isAlreadyKnown: false,
                 // passwordAgain
                 isGoodPasswordAgain: false,
                 isErrorPasswordAgain: false,
@@ -136,6 +141,24 @@ export default {
             },
     }},
     methods: {
+        // 이메일 유효성 검사 추가(기존 데이터베이스에서 중복 가입한 이메일이 있는지 확인하는 용도)
+        async isEmailKnown(){
+            try{
+                await axios.get('/emailCheck', {
+                    params: {
+                        id: this.member.userEmailAddress
+                    }
+                })
+                .then((result)=>{
+                    this.formControl.isAlreadyKnown = result.data
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+        },
         // 이메일 유효성 판단
         returnEmailValidationResults(){
             if(this.member.userEmailAddress.endsWith('@dongguk.edu') | this.member.userEmailAddress.endsWith('@dgu.ac.kr')){

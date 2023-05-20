@@ -160,9 +160,9 @@ public class UserController {
 
     //이메일로 결제내역 저장 및 쿠키개수 변경
     @PutMapping(value = {"payment"})
-    public ResponseEntity<User> updateUserHeart( int heart, Payment payment){
+    public ResponseEntity<User> updateUserHeart(Payment payment){
         paymentService.save(payment);
-        userService.updateById(payment.getUserId(),heart);
+        userService.updateById(payment.getUserId(),payment.getAmount()/100);
         return new ResponseEntity<User>(userService.findById(payment.getUserId()).get(),HttpStatus.OK);
     }
 

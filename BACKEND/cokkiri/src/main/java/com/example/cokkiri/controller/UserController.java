@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/emailCheck")
-    public boolean emailCheck(String id){
+    public boolean emailCheck(@RequestParam String id){
         return userService.existsBysId(id);
     }
 
@@ -160,7 +160,7 @@ public class UserController {
 
     //이메일로 결제내역 저장 및 쿠키개수 변경
     @PutMapping(value = {"payment"})
-    public ResponseEntity<User> updateUserHeart(Payment payment){
+    public ResponseEntity<User> updateUserHeart(@RequestParam Payment payment){
         paymentService.save(payment);
         userService.updateById(payment.getUserId(),payment.getAmount()/100);
         return new ResponseEntity<User>(userService.findById(payment.getUserId()).get(),HttpStatus.OK);

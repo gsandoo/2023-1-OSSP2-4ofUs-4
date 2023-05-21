@@ -1,30 +1,26 @@
 package com.example.cokkiri.model;
 
-
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class MatchingAgree {
-    @Id
+public class NoShowClassMatchList {
     @Column
     private int matchingId;
 
+    @Id
     @Column
-    public String matchingType;
+    private String email;
 
     @Column
-    @ElementCollection
-    private List<String> email;
+    private  String matchingType;
 }

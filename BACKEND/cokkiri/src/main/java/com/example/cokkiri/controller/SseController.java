@@ -23,7 +23,7 @@ public class SseController {
     private Map<String, SseEmitter> sseEmitters = new ConcurrentHashMap<>();
 
     // sse 연결
-    @GetMapping("/sse")
+    @GetMapping(value = "/sse" , produces = "text/event-stream")
     public @ResponseBody
     void handleSseRequest(@RequestParam(value = "id" ,required = false)String email) {
         SseEmitter sseEmitter = new SseEmitter();

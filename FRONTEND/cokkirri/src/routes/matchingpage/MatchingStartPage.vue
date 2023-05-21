@@ -26,13 +26,14 @@
                 <div class="font-h4">
                     * ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 2개가 소진됩니다.
                     <br>* 매칭 완료 시 자동으로 채팅방이 생성되며, 생성된 채팅방은 24시간동안 유지됩니다.</div>
-                <div class="matching-submit-btn" @click="MoveOnNext()">매칭 신청</div>
+                <div class="matching-submit-btn" @click="submitMatching()">매칭 신청</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from '../../api/index.js'
 import DetailInput from './component/DetailInput.vue'
 export default {
     components:{
@@ -43,7 +44,7 @@ export default {
             // 인원수
             headCount: '',
             // 매칭 신청 ["이메일"]
-            emailList: [this.$store.state.id],
+            email: this.$store.state.id,
             // 희망 날짜 "2023-05-20"
             availableDay: '',
             //
@@ -52,13 +53,12 @@ export default {
             // 매칭 타입: 공강 - "free", 수업: "class"
             matchingType: '',
             // 매칭 학수번호
-            courseNumber: null
+            courseNumber: []
         }
     },
     methods: {
         clickedBtnHeadCountTwo(){
             this.headCount = '2'
-            console.log(this.courseNumber)
         },
         clickedBtnHeadCountFour(){
             this.headCount = '4'
@@ -68,6 +68,74 @@ export default {
         },
         clickedBtnMatchingTypeClass(){
             this.matchingType = 'class'
+        },
+        submitMatching(){
+            if(this.headCount!==''){
+                if(this.matchingType==='free'){
+                    if(this.availableDay!=='' & this.startTime!=='' & this.endTime!==''){
+                        this.resisterMatchingFree()
+                    }
+                    else{
+                        alert("날짜 및 시간이 설정되지 않았습니다.")
+                    }
+                    
+                }
+                else if(this.matchingType==='class'){
+                    if(this.courseNumber.length!==0){
+                        this.resisterMatchingClass()
+                    }
+                    else{
+                        alert("학수번호가 선택되지 않았습니다.")
+                    }
+                }
+                else{
+                    alert("매칭 타입이 설정되지 않았습니다.")
+                }
+            }
+            else{
+                alert("인원이 설정되지 않았습니다.")
+            }
+
+        },
+        async resisterMatchingFree(){
+            try{
+                await axios.post('/matching/free',{
+                        headCount: this.headCount,
+                        email: this.email,
+                        availableDay: this.availableDay,
+                        startTime:this.startTime,
+                        endTime:this.endTime,
+                        matchingType:"free"
+                }).then((result)=>{
+                    if(result.status===200){
+                        this.$router.replace('/my/matching');
+                        alert("수업 매칭 신청 완료")
+                    }
+                }).catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+        },
+        async resisterMatchingClass(){
+            try{
+                await axios.post('/matching/class',{
+                        headCount: this.headCount,
+                        email: this.email,
+                        courseNumber: this.courseNumber,
+                        matchingType:"class"
+                }).then((result)=>{
+                    if(result.status===200){
+                        this.$router.replace('/my/matching');
+                        alert("공강 매칭 신청 완료")
+                    }
+                }).catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
         }
     },
 

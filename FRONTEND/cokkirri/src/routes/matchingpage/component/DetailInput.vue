@@ -3,7 +3,10 @@
         <div v-if="selectedMatchingType===''" class="font-warning">
             ※ 매칭 타입 선택 필요
         </div>
-        <div v-if="selectedMatchingType==='free'">
+        <router-link to="/" v-else-if="!this.$store.state.isLogin" class="font-warning">
+            로그인을 해야 합니다.
+        </router-link>
+        <div v-else-if="selectedMatchingType==='free'">
             <div class="font-name">날짜</div>
             <div class="font-input">
                 <Calendar
@@ -42,29 +45,22 @@
                 />
             </div>
         </div>
-        <div>
-            <div style="clear:both;"></div>
-            <div v-if="selectedMatchingType==='class'">
-                <router-link to="/" v-if="!this.$store.state.isLogin" class="font-warning">
-                    로그인을 해야 합니다.
-                </router-link>
-                <router-link to="/my/timetable" v-else-if="this.$store.state.course.length===0" class="font-warning">
+        <div v-else>
+                <router-link to="/my/timetable" v-if="this.$store.state.course.length===0" class="font-warning">
                     학수번호를 추가해야 합니다.
                 </router-link>
                 <div v-else>
                     <div class="font-name">학수번호</div>
-                    <div  class="font-input-overflow-x">
+                    <div class="font-input-overflow-x">
                     <div 
                         v-for="(item, index) 
                         in course" :key="index" 
                         :class="{'selected-btn': selectedCourses.includes(item), 'unselected-btn': !selectedCourses.includes(item)}"
-                        @click="toggleSelection(item);updateCorse()"
-                    >
-                    {{item}}</div>
+                        @click="toggleSelection(item);updateCorse()">
+                        {{item}}
+                    </div>
                 </div>
             </div>
-            </div>
-            <div style="clear:both;"></div>
         </div>
     </div>
 </template>
@@ -100,7 +96,7 @@ export default {
     },
     computed: {
         formattedDate() {
-            return moment(this.date).format('YYYY/MM/DD');
+            return moment(this.date).format('YYYY-MM-DD');
         }
     },
     props: [
@@ -116,19 +112,15 @@ export default {
             }
         },
         updateDate(){
-            console.log(this.formattedDate)
             this.$emit('update:date', this.formattedDate)
         },
         updateStartTime(){
-            console.log(this.startTime.code)
             this.$emit('update:starttime', this.startTime.code)
         },
         updateEndTime(){
-            console.log(this.endTime.code)
             this.$emit('update:endtime', this.endTime.code)
         },
         updateCorse(){
-            console.log(this.selectedCourses);
             this.$emit('update:course', this.selectedCourses)
         },
     },

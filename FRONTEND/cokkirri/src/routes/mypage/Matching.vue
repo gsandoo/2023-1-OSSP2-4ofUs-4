@@ -14,7 +14,8 @@
                         </div>
                         <div class="matching-txt">매칭 결과</div>
 
-                        <div to="/my/matching" class="matching-btn" @click="callMatchingRecord()">새로고침</div>
+                        <div class="matching-refresh" @click="callMatchingRecord()">새로고침</div>
+                        <router-link to="/matchingStart" class="matching-btn">매칭추가</router-link>
                         <div style="clear:both;"></div>
 
                         <div class="line-for-division"></div>
@@ -139,13 +140,34 @@ export default {
             font-size: 30px;
             line-height: 45px;
         }
+        .matching-refresh{
+            width: 163px;
+            height: 55px;
+            background-color: #B87514;
+
+            margin-top: 0px;
+            margin-left: 261px;
+            border-radius: 20px;
+            float: left;
+
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 23px;
+            line-height: 28px;
+        }
         .matching-btn{
             width: 163px;
             height: 55px;
             background-color: #B87514;
 
             margin-top: 0px;
-            margin-left: 444px;
+            margin-left: 22px;
             border-radius: 20px;
             float: left;
 

@@ -1,36 +1,76 @@
 <template>
-    <!-- 디자인 완료 -->
-    <!-- 이후 버튼 동학에 따라 입력값을 보내도록 할 예정 -->
-    <!--  튀어나온 걸 누르는 모양새도 있으면 좋겠음-->
+    <!-- 매칭 신청 페이지 -->
     <div class="background-setting">
         <div class="container" >
-            <div class="frame-body">
-                <div class="font-h1">매칭</div>
-                <div class="font-h2">#이런 친구는 어때요?</div>
-                <div :style="{'display': 'flex','margin-top': '21px'}">
-                    <div class="matching-mode-btn-1">수업</div>
-                    <div class="matching-mode-btn-2">공강</div>
+            <div class="frame-first-step-body">
+                <div class="frame-sub">
+                    <div class="font-h1">매칭</div>
+                    <div class="font-h2">#이런 친구는 어때요?</div>
+                    <div style="clear:both;"></div>
+                    <div class="matching-mode-btn-1" :class="{shadow: matchingType === 'class'}" @click="clickedBtnMatchingTypeClass">수업</div>
+                    <div class="matching-mode-btn-2" :class="{shadow: matchingType === 'free'}" @click="clickedBtnMatchingTypeFree">공강</div>
+                    <div style="clear:both;"></div>
+                    <div class="font-h3"># 몇 명이서 모일까요?</div>
+                    <div class="matching-numset-btn-1" :class="{shadow: headCount === '2'}" @click="clickedBtnHeadCountTwo">2명</div>
+                    <div class="matching-numset-btn-2" :class="{shadow: headCount === '4'}" @click="clickedBtnHeadCountFour">4명</div>
+                    <div style="clear:both;"></div>
                 </div>
-                <div class="font-h3"># 몇 명과 함께 할까요?</div>
-                <div :style="{'display': 'flex','margin-top': '15px'}">
-                    <div class="matching-numset-btn-1">1명</div>
-                    <div class="matching-numset-btn-2">3명</div>
-                    <div class="matching-numset-btn-3">5명</div>
-                </div>
-                <div class="font-h4">* ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 2개가 소진됩니다. * 매칭 완료 시 자동으로 채팅방이 생성되며, 생성된 채팅방은 24시간동안 유지됩니다.</div>
-                <div class="matching-submit-btn">동의합니다</div>
+                <DetailInput 
+                    :selectedMatchingType="matchingType" 
+                    @update:date="availableDay = $event"
+                    @update:starttime="startTime = $event"
+                    @update:endtime="endTime = $event"
+                    @update:course="courseNumber = $event"
+                    :style="{'margin-top': '23px', float: left}"/>
+                <div style="clear:both;"></div>
+                <div class="font-h4">
+                    * ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 2개가 소진됩니다.
+                    <br>* 매칭 완료 시 자동으로 채팅방이 생성되며, 생성된 채팅방은 24시간동안 유지됩니다.</div>
+                <div class="matching-submit-btn" @click="MoveOnNext()">매칭 신청</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import DetailInput from './component/DetailInput.vue'
 export default {
+    components:{
+        DetailInput
+    },
     data(){
         return{
-
+            // 인원수
+            headCount: '',
+            // 매칭 신청 ["이메일"]
+            emailList: [this.$store.state.id],
+            // 희망 날짜 "2023-05-20"
+            availableDay: '',
+            //
+            startTime: '',
+            endTime: '',
+            // 매칭 타입: 공강 - "free", 수업: "class"
+            matchingType: '',
+            // 매칭 학수번호
+            courseNumber: null
         }
-    }
+    },
+    methods: {
+        clickedBtnHeadCountTwo(){
+            this.headCount = '2'
+            console.log(this.courseNumber)
+        },
+        clickedBtnHeadCountFour(){
+            this.headCount = '4'
+        },
+        clickedBtnMatchingTypeFree(){
+            this.matchingType = 'free'
+        },
+        clickedBtnMatchingTypeClass(){
+            this.matchingType = 'class'
+        }
+    },
+
 }
 </script>
 
@@ -53,160 +93,18 @@ export default {
         align-items: center;
         justify-content: center;
     }
-    .frame-body{
-        width: 100vw;
-        height: 578px;
-        background-color: #FFFEF9;
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-        justify-content: center;
-        .font-h1{
-            width: 408px;
-            height: 60px;
+    .frame-first-step-body{
+        width: 996px;
+        height: 625px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 75px;
-            font-size: 50px;
-            color: #B87514;
+        border: 5px solid #ECBC76;
+        border-radius: 20px;
+        .shadow{
+            box-shadow: 0 5px #B87514;
         }
-        .font-h2{
-            width: 375px;
-            height: 34px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 500;
-            line-height: 38px;
-            font-size: 25px;
-            color: #B87514;
-        }
-        .matching-mode-btn-1{
-            width: 100px;
-            height: 100px;
-            
-            background: #ECBC76;
-            border-radius: 20px;
-
-            float: left;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 45px;
-            font-size: 30px;
-            color: #000000;
-        }
-        .matching-mode-btn-2{
-            width: 100px;
-            height: 100px;
-            
-            margin-left: 54px;
-            background: #ECBC76;
-            border-radius: 20px;
-
-            float: left;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 45px;
-            font-size: 30px;
-            color: #000000;
-        }
-        .font-h3{
-            width: 375px;
-            height: 34px;
-
-            margin-top: 15px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 500;
-            line-height: 38px;
-            font-size: 25px;
-            color: #B87514;
-        }
-        .matching-numset-btn-1{
-            width: 100px;
-            height: 100px;
-            
-            background: #ECBC76;
-            border-radius: 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 45px;
-            font-size: 30px;
-            color: #000000;
-        }
-        .matching-numset-btn-2{
-            width: 100px;
-            height: 100px;
-            
-            margin-left: 54px;
-            background: #ECBC76;
-            border-radius: 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 45px;
-            font-size: 30px;
-            color: #000000;
-        }
-        .matching-numset-btn-3{
-            width: 100px;
-            height: 100px;
-            
-            margin-left: 54px;
-            background: #ECBC76;
-            border-radius: 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            line-height: 45px;
-            font-size: 30px;
-            color: #000000;
-        }
         .font-h4{
-            width: 989px;
+            width: 986px;
             height: 112px;
 
             margin-top: 0px;
@@ -227,6 +125,8 @@ export default {
             width: 400px;
             height: 60px;
             
+            margin-left: 293px;
+
             background: #B87514;
             border-radius: 50px;
 
@@ -243,6 +143,156 @@ export default {
             color: #FFFFFF;
             line-height: 24px;
             letter-spacing: 0.5px;
+        }
+
+        .frame-sub{
+            width: 301px;
+            height: 401px;
+
+            margin-top: 23px;
+            margin-left: 13px;
+
+            padding-left: 0px;
+            float: left;
+
+            .font-h1{
+                width: 130px;
+                height: 73px;
+
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                line-height: 75px;
+                font-size: 50px;
+                color: #B87514;
+            }
+            .font-h2{
+                width: 301px;
+                height: 34px;
+
+                margin-top: 14px;
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;     
+                line-height: 38px;
+                font-size: 25px;
+                color: #B87514;
+            }
+            .font-h3{
+                width: 301px;
+                height: 34px;
+
+                margin-top: 14px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                line-height: 38px;
+                font-size: 25px;
+                color: #B87514;
+            }
+            .matching-mode-btn-1{
+                width: 100px;
+                height: 100px;
+                
+                background: #ECBC76;
+                border-radius: 20px;
+
+                margin-top: 10px;
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                line-height: 45px;
+                font-size: 30px;
+                color: #000000;
+            }
+            .matching-mode-btn-2{
+                width: 100px;
+                height: 100px;
+                
+                margin-left: 54px;
+                background: #ECBC76;
+                border-radius: 20px;
+
+                margin-top: 10px;
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                line-height: 45px;
+                font-size: 30px;
+                color: #000000;
+            }
+            .matching-numset-btn-1{
+                width: 100px;
+                height: 100px;
+                
+                background: #ECBC76;
+                border-radius: 20px;
+
+                margin-top: 10px;
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                line-height: 45px;
+                font-size: 30px;
+                color: #000000;
+            }
+            .matching-numset-btn-2{
+                width: 100px;
+                height: 100px;
+                
+                margin-left: 54px;
+                background: #ECBC76;
+                border-radius: 20px;
+
+                margin-top: 10px;
+                float: left;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 700;
+                line-height: 45px;
+                font-size: 30px;
+                color: #000000;
+            }
         }
     }
 </style>

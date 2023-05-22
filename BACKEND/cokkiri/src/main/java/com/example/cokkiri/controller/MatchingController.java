@@ -59,46 +59,62 @@ public class MatchingController {
 
 
 
-    @GetMapping("noshow/public")
+    @GetMapping("get/noshow/public")
     public ResponseEntity<List<NoShowPublicMatchList>> getPublicNoShowList(){
         List<NoShowPublicMatchList> noShowLists = matchingService.getNoShowPublicMatchList();
         return new ResponseEntity<List<NoShowPublicMatchList>>(noShowLists,HttpStatus.OK);
-    } @GetMapping("noshow/class")
+    } @GetMapping("get/noshow/class")
     public ResponseEntity<List<NoShowClassMatchList>> getClassNoShowList(){
         List<NoShowClassMatchList> noShowLists = matchingService.getNoShowClassMatchList();
         return new ResponseEntity<List<NoShowClassMatchList>>(noShowLists,HttpStatus.OK);
     }
 
+    @PostMapping("post/noshow/public")
+    public ResponseEntity<NoShowPublicMatchList> postNoShowPublicList(@RequestBody NoShowPublicMatchList user){
+        NoShowPublicMatchList noShowUser = matchingService.postNoShowPublicUser(user);
+        return  new ResponseEntity<NoShowPublicMatchList>(noShowUser, HttpStatus.OK);
+    }
 
+    @PostMapping("post/noshow/class")
+    public ResponseEntity<NoShowClassMatchList> postNoShowClassList(@RequestBody NoShowClassMatchList user){
+        NoShowClassMatchList noShowUser = matchingService.postNoShowClassUser(user);
+        return  new ResponseEntity<NoShowClassMatchList>(noShowUser, HttpStatus.OK);
+    }
+    // 신고 등록
     @PostMapping("post/declaration")
-    public ResponseEntity<MatchDeclaration> postDeclaration(@RequestBody MatchDeclaration declaration){
-        MatchDeclaration list = matchingService.postDeclarationList(declaration);
-        return new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
-    }
-    @GetMapping("get/declaration")
-    public ResponseEntity<List<MatchDeclaration>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
-        List<MatchDeclaration> list = matchingService.getDeclarationList(matchingType);
-        return new ResponseEntity<List<MatchDeclaration>>(list,HttpStatus.OK);
+    public ResponseEntity<MatchAccusation> postDeclaration(@RequestBody MatchAccusation declaration){
+        MatchAccusation list = matchingService.postDeclarationList(declaration);
+        return new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
     }
 
+    // 신고 목록리스트(수업/공강) 조회
+    @GetMapping("get/declaration")
+    public ResponseEntity<List<MatchAccusation>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
+        List<MatchAccusation> list = matchingService.getDeclarationList(matchingType);
+        return new ResponseEntity<List<MatchAccusation>>(list,HttpStatus.OK);
+    }
+
+
+    // 특정 공강 매칭 조회
     @GetMapping("get/publicmatch/declaration")
-    public ResponseEntity<MatchDeclaration> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<MatchAccusation> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
        if(matchingType.equals("free")){
-           MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
-           return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+           MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
+           return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
        }else {
-           return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+           return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
        }
 
     }
+    //특정 수업 매칭 조회
     @GetMapping("get/classmatch/declaration")
-    public ResponseEntity<MatchDeclaration> getClassDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<MatchAccusation> getClassDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
         if(matchingType.equals("class")){
-            MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
-            return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
+            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
         }
         else{
-            return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+            return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
         }
     }
 

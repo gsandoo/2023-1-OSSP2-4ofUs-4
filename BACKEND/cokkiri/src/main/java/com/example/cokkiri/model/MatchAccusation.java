@@ -1,9 +1,12 @@
 package com.example.cokkiri.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,14 +15,14 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-public class MatchDeclaration {
+public class MatchAccusation {
 
     @Id
     @Column
     private int matchingId;
 
-    @Column
-    private  String email;
+    @ElementCollection
+    private List<String> email;
 
     @Column
     private String title;

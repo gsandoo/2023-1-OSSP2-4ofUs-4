@@ -21,7 +21,8 @@ export default createStore({
         sex: null,
         studentNum: null,
         course: [],
-        password: null
+        password: null,
+        notification: null
     },
     mutations: {
         // 로그인 적용 후 ~ 페이지로 이동. 추후 메인 페이지로 이동 변경 예정.
@@ -42,6 +43,9 @@ export default createStore({
         logout(state) { 
             state.isLogin = false
             state.id = null
+        },
+        SET_NOTIFICATION: (state, notification) => {
+            state.notification = notification;
         }
     },
     actions: {
@@ -73,6 +77,7 @@ export default createStore({
             } catch(error){
                 console.log(error);
             }
+            dispatch('sseStart')
         },
         // vuex의 state.id 기반으로 현재 유저의 정보를 업데이트한다.
         async userInfoUpdate({state, commit}){
@@ -129,6 +134,37 @@ export default createStore({
             } catch(error){
                 console.log(error)
             }
+        },
+        sseStart({dispatch}){
+            dispatch('subscribeToSse')
+        },
+        async sseRequest(){
+            try{
+                await axios.get('/sse?id='+this.state.id)
+                .then((result)=>{
+                    console.log(result.status)
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+        },
+
+        subscribeToSse({ state, commit }) {
+            let eventSource = new EventSource('http://3.37.37.164:8080/sse?id=' + state.id);
+        
+            eventSource.onmessage = event => {
+                commit('SET_NOTIFICATION', event.data);
+            };
+        
+            eventSource.onerror = error => {
+                console.error('SSE connection error', error);
+                if (eventSource.readyState === EventSource.CLOSED) {
+                    eventSource = new EventSource('http://3.37.37.164:8080/sse?id=' + state.id);
+                }
+            };
         }
     },
 

@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("matching")
 public class MatchingController {
@@ -44,14 +46,62 @@ public class MatchingController {
 
     
     @GetMapping("agree/free")
-    public MatchingAgree  publicMatchingAgree(@RequestParam(value = "userId")String id){
-        return (matchingService.publicMatchAgree(id));
+    public ResponseEntity<MatchingAgree>  publicMatchingAgree(@RequestParam(value = "userId")String id){
+        MatchingAgree agreeList = matchingService.publicMatchAgree(id);
+        return new ResponseEntity<MatchingAgree>(agreeList,HttpStatus.OK);
 
     }
-    @GetMapping("agree/class")
-    public MatchingAgree classMatchingAgree(@RequestParam(value = "userId")String id){
-        return (matchingService.classMatchAgree(id));
+    @PutMapping("agree/class")
+    public ResponseEntity<MatchingAgree> classMatchingAgree(@RequestParam(value = "userId")String id){
+        MatchingAgree agreeList = matchingService.classMatchAgree(id);
+        return new ResponseEntity<MatchingAgree>(agreeList,HttpStatus.OK);
     }
+
+
+
+    @GetMapping("noshow/public")
+    public ResponseEntity<List<NoShowPublicMatchList>> getPublicNoShowList(){
+        List<NoShowPublicMatchList> noShowLists = matchingService.getNoShowPublicMatchList();
+        return new ResponseEntity<List<NoShowPublicMatchList>>(noShowLists,HttpStatus.OK);
+    } @GetMapping("noshow/class")
+    public ResponseEntity<List<NoShowClassMatchList>> getClassNoShowList(){
+        List<NoShowClassMatchList> noShowLists = matchingService.getNoShowClassMatchList();
+        return new ResponseEntity<List<NoShowClassMatchList>>(noShowLists,HttpStatus.OK);
+    }
+
+
+    @PostMapping("post/declaration")
+    public ResponseEntity<MatchDeclaration> postDeclaration(@RequestBody MatchDeclaration declaration){
+        MatchDeclaration list = matchingService.postDeclarationList(declaration);
+        return new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+    }
+    @GetMapping("get/declaration")
+    public ResponseEntity<List<MatchDeclaration>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
+        List<MatchDeclaration> list = matchingService.getDeclarationList(matchingType);
+        return new ResponseEntity<List<MatchDeclaration>>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("get/publicmatch/declaration")
+    public ResponseEntity<MatchDeclaration> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+       if(matchingType.equals("free")){
+           MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
+           return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+       }else {
+           return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+       }
+
+    }
+    @GetMapping("get/classmatch/declaration")
+    public ResponseEntity<MatchDeclaration> getClassDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+        if(matchingType.equals("class")){
+            MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
+            return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+        }
+        else{
+            return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
 
 

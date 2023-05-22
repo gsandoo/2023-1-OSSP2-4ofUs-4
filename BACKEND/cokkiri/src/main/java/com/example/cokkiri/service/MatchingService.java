@@ -1,14 +1,13 @@
 package com.example.cokkiri.service;
 
 import com.example.cokkiri.model.*;
-import com.example.cokkiri.repository.MatchedListRepository;
-import com.example.cokkiri.repository.MatchingAgreeRepository;
-import com.example.cokkiri.repository.PublicMatchedListRepository;
+import com.example.cokkiri.repository.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,6 +33,12 @@ public class MatchingService {
     private PublicMatchedListRepository publicMatchedListRepository;
     @Autowired
     private MatchingAgreeRepository matchingAgreeRepository;
+    @Autowired
+    private NoShowPublicMatchRepository noShowPublicMatchRepository;
+    @Autowired
+    private NoShowClassMatchRepository noShowClassMatchRepository;
+    @Autowired
+    private  DeclarationRepository declarationRepository;
     // 배열에 저장 (공강)
     List<PublicMatching> publicLectureUsers = new ArrayList<>();
     // 배열에 저장 (수업)
@@ -209,6 +214,7 @@ public class MatchingService {
                                 matched.setPromiseTime(timess);
                                 publicUsersList.add(userList.get(j));
                                 usermatched.add(j);
+
                             }
                         }
                         //마지막 요소 제거
@@ -233,6 +239,8 @@ public class MatchingService {
                         matched.setAvailableDay(userLast.getAvailableDay());
                         // 매칭 희망인원
                         matched.setHeadCount(userLast.getHeadCount());
+
+                        matched.setMatchingRes("매칭중");
 
                         //매칭 시간 현재 날짜로 세팅
                         LocalDate date = LocalDate.now();
@@ -328,9 +336,11 @@ public class MatchingService {
 
                         // 매칭 희망인원
                         matched.setHeadCount(userLast.getHeadCount());
+                        matched.setMatchingRes("매칭중");
 
                         //매칭 시간 현재 날짜로 세팅
                         LocalDate date = LocalDate.now();
+
                         // 매칭 시간
                         matched.setMatchingTime(date);
 
@@ -420,6 +430,12 @@ public class MatchingService {
     };
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
         publicMatchedListRepository.save(matchedList); // 데베에 저장
+
+        // 노쇼용
+        int id = matchedList.getMatchingId();
+        String type = matchedList.getMatchingType();
+        LocalTime hour = matchedList.getPromiseTime().get(0).plusHours(1);
+
         return matchedList;
     };
 
@@ -432,13 +448,24 @@ public class MatchingService {
         classMatchedListRepository.delete(matchedList);
         return matchedList;
     }
+
+
+    List<MatchingAgree> matchingAgreeList = new ArrayList<>();
     public MatchingAgree publicMatchAgree(String id) {
         MatchingAgree matchingAgree = new MatchingAgree();
         List<PublicMatchedList> list = publicMatchedListRepository.findByEmailListContains(id);
         matchingAgree.setMatchingId(list.get(0).getMatchingId());
         matchingAgree.setMatchingType(list.get(0).getMatchingType());
-        matchingAgree.setEmail(id);
+        List<String> emailList = matchingAgree.getEmail();
+        emailList.add(id);
+        matchingAgree.setEmail(emailList);
         list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
+        if(list.get(0).getMatchingAgree()==list.get(0).getHeadCount()){
+            System.out.println("매칭인원 충족되었습니다.");
+            list.get(0).setMatchingRes("매칭 완료");
+        }
+        list.get(0).setMatchingId(list.get(0).getMatchingId());
+        publicMatchedListRepository.save(list.get(0));
         return matchingAgreeRepository.save(matchingAgree);
     }
 
@@ -447,8 +474,101 @@ public class MatchingService {
         List<ClassMatchedList> list = classMatchedListRepository.findByEmailListContains(id);
         matchingAgree.setMatchingId(list.get(0).getMatchingId());
         matchingAgree.setMatchingType(list.get(0).getMatchingType());
-        matchingAgree.setEmail(id);
+        List<String> emailList = matchingAgree.getEmail();
+        emailList.add(id);
+        matchingAgree.setEmail(emailList);
         list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
+        if(list.get(0).getMatchingAgree()==list.get(0).getHeadCount()){
+            System.out.println("매칭인원 충족되었습니다.");
+            list.get(0).setMatchingRes("매칭 완료");
+        }
+        list.get(0).setMatchingId(list.get(0).getMatchingId());
+        classMatchedListRepository.save(list.get(0));
         return matchingAgreeRepository.save(matchingAgree);
+    }
+
+    // 노쇼 리스트 반환
+    public List<NoShowPublicMatchList> getNoShowPublicMatchList(){
+        List<NoShowPublicMatchList> noshow = new ArrayList<>();
+        noShowPublicMatchRepository.findAll().forEach(e->noshow.add(e));
+        return noshow;
+    }
+    public List<NoShowClassMatchList> getNoShowClassMatchList(){
+        List<NoShowClassMatchList> noshow = new ArrayList<>();
+        noShowClassMatchRepository.findAll().forEach(e->noshow.add(e));
+        return noshow;
+    }
+
+
+    // 노쇼 procedure.
+    // MatchingAgree 에서 email과 매칭타입으로 찾고, 마찬가지로 매칭리스트에서도 찾는다.
+
+    // email , matchingType -> 매치된 유저의 이메일과 메칭타입 , hour -> 매치된 리스트에서 시작시간+한시간 지난 시간.
+//    public void chekNoshow(String email,String matchingType, LocalTime hour){
+//        List<MatchingAgree> agreeUserList = matchingAgreeRepository.findByEmailAndMatchingType(email,matchingType);
+//        List<PublicMatchedList> matchedList = publicMatchedListRepository.findByEmailListContains(email);
+//
+//    }
+
+
+
+
+    // 두 entitiy 내 이메일리스트내의 원소를 비교, 없는 원소(이메일)를 찾는다.
+//    @Scheduled(cron = "${cronExpression}")
+//    public String getNoShowUserEmailList(String one[], String two[]) {
+//        String data="";
+//        int check = 0;
+//        try {
+//            if(one.length > 0 && two.length > 0) { //두 배열 데이터가 널이 아닐 경우
+//                for(int i=0; i<one.length; i++) {
+//                    for(int j=0; j<two.length; j++) {
+//                        if(one[i].equals(two[j]) == true) { //배열 값이 같은게 있을 경우
+//                            check ++; //체크값 증가 실시
+//                        }
+//                    }
+//                    if(check <= 0) { //같은 값이 존재하지 않을 경우
+//                        if(data.contains(one[i]) == false) { //중복해서 데이터를 저장하지 않기 위함 (포함하지 않을 경우)
+//                            data += String.valueOf(one[i] + " ");
+//                        }
+//                    }
+//                    check = 0; //값 초기화 실시
+//                }
+//            }
+//            else {
+//                System.out.println("두 배열 데이터가 포함된지 확인해 주세요 ... ");
+//            }
+//        }
+//        catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }//클래스 종료
+
+
+
+    //신고
+    public List<MatchDeclaration> getDeclarationList(String matchingType){
+        List<MatchDeclaration> list = declarationRepository.findByMatchingType(matchingType);
+        return list;
+    }
+    public MatchDeclaration postDeclarationList(MatchDeclaration declaration){
+        System.out.println(declaration);
+        MatchDeclaration declarations = new MatchDeclaration();
+        declarations.setMatchingType(declaration.getMatchingType());
+        declarations.setTitle(declaration.getTitle());
+        declarations.setMatchingId(declaration.getMatchingId());
+        declarations.setEmail(declaration.getEmail());
+        declarations.setComment(declaration.getComment());
+        return declarationRepository.save(declarations);
+    }
+
+    public MatchDeclaration getPublicDeclarationList(String id, String matchingType){
+        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
+    }
+
+    public MatchDeclaration getClassDeclarationList(String id, String matchingType){
+        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
     }
 }

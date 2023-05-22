@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MatchingAgreeRepository extends JpaRepository<MatchingAgree, Integer> {
-    public MatchingAgree findMatchingAgreeByEmail(String email);
+    public List<MatchingAgree> findByEmailAndMatchingType(String email , String matchingType);
 
 }

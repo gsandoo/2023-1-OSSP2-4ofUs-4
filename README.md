@@ -13,3 +13,12 @@
 <div>
 <h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 매칭 서비스)
 </div>
+
+  ### github 키워드
+- feat : 새로운 기능 추가
+- fix : 버그 수정
+- docs : 문서 수정
+- style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+- refactor : 코드 리펙토링
+- test : test code, refactoring test code 추가
+- chore : build 업무 수정, 패키지 매니저 수정

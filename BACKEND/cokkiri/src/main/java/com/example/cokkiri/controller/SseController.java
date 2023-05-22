@@ -43,7 +43,7 @@ public class SseController {
         if(sseEmitters.containsKey(email)){
            try {
                matcher = sseEmitters.get(email);
-               matcher.send(notification , MediaType.TEXT_PLAIN);
+               matcher.send(notification , MediaType.TEXT_EVENT_STREAM);
                matcher.complete();
                System.out.println(matcher + "에게 알림 전송 완료.");
            }catch (IOException e){

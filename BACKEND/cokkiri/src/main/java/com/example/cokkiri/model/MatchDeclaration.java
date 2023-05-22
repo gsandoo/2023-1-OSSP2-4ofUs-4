@@ -19,9 +19,15 @@ public class MatchDeclaration {
     private int matchingId;
 
     @Column
+    private  String email;
+
+    @Column
+    private String title;
+
+    @Column
     private String comment;
 
     @Column
-    private  String email;
+    private String matchingType;
 
 }

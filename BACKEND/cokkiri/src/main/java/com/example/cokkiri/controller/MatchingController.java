@@ -71,16 +71,37 @@ public class MatchingController {
 
 
     @PostMapping("post/declaration")
-    public ResponseEntity<MatchDeclaration> postDeclaration(MatchDeclaration declaration){
+    public ResponseEntity<MatchDeclaration> postDeclaration(@RequestBody MatchDeclaration declaration){
         MatchDeclaration list = matchingService.postDeclarationList(declaration);
         return new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
     }
     @GetMapping("get/declaration")
-    public ResponseEntity<List<MatchDeclaration>> getDeclaration(){
-        List<MatchDeclaration> list = matchingService.getDeclarationList();
+    public ResponseEntity<List<MatchDeclaration>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
+        List<MatchDeclaration> list = matchingService.getDeclarationList(matchingType);
         return new ResponseEntity<List<MatchDeclaration>>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("get/publicmatch/declaration")
+    public ResponseEntity<MatchDeclaration> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+       if(matchingType.equals("free")){
+           MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
+           return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+       }else {
+           return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+       }
 
     }
+    @GetMapping("get/classmatch/declaration")
+    public ResponseEntity<MatchDeclaration> getClassDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+        if(matchingType.equals("class")){
+            MatchDeclaration list = matchingService.getPublicDeclarationList(id, matchingType);
+            return  new ResponseEntity<MatchDeclaration>(list,HttpStatus.OK);
+        }
+        else{
+            return  new ResponseEntity<MatchDeclaration>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
 
 

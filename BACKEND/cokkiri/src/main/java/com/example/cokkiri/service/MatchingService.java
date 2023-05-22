@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,6 +39,8 @@ public class MatchingService {
     private NoShowClassMatchListRepository noShowClassMatchRepository;
     @Autowired
     private AccusationRepository declarationRepository;
+
+
 
     // 배열에 저장 (공강)
     List<PublicMatching> publicLectureUsers = new ArrayList<>();
@@ -372,12 +375,6 @@ public class MatchingService {
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
-        if (publicMatchedList != null) {
-            PublicMatchedList finalPublicMatchedList = publicMatchedList;
-            notificationService.sendNotificationToUser(finalPublicMatchedList.getEmailList(), "matching complete");
-        }else{
-            return null;
-        }
         return  savePublicUser(publicMatchedList);
     }
 
@@ -389,13 +386,6 @@ public class MatchingService {
         classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
         classMatchedList = findClassMatch(classLectureUsers,count);
-
-        if (classMatchedList!=null){
-            ClassMatchedList finalClassMatchedList = classMatchedList;
-            notificationService.sendNotificationToUser(finalClassMatchedList.getEmailList(), "matching complete");
-        }else{
-            return null;
-        }
         return  saveClassUser(classMatchedList);
     }
 

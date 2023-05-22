@@ -514,50 +514,61 @@ public class MatchingService {
 
 
     // 두 entitiy 내 이메일리스트내의 원소를 비교, 없는 원소(이메일)를 찾는다.
-    @Scheduled(cron = "${cronExpression}")
-    public String getNoShowUserEmailList(String one[], String two[]) {
-        String data="";
-        int check = 0;
-        try {
-            if(one.length > 0 && two.length > 0) { //두 배열 데이터가 널이 아닐 경우
-                for(int i=0; i<one.length; i++) {
-                    for(int j=0; j<two.length; j++) {
-                        if(one[i].equals(two[j]) == true) { //배열 값이 같은게 있을 경우
-                            check ++; //체크값 증가 실시
-                        }
-                    }
-                    if(check <= 0) { //같은 값이 존재하지 않을 경우
-                        if(data.contains(one[i]) == false) { //중복해서 데이터를 저장하지 않기 위함 (포함하지 않을 경우)
-                            data += String.valueOf(one[i] + " ");
-                        }
-                    }
-                    check = 0; //값 초기화 실시
-                }
-            }
-            else {
-                System.out.println("두 배열 데이터가 포함된지 확인해 주세요 ... ");
-            }
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-        return data;
-    }//클래스 종료
+//    @Scheduled(cron = "${cronExpression}")
+//    public String getNoShowUserEmailList(String one[], String two[]) {
+//        String data="";
+//        int check = 0;
+//        try {
+//            if(one.length > 0 && two.length > 0) { //두 배열 데이터가 널이 아닐 경우
+//                for(int i=0; i<one.length; i++) {
+//                    for(int j=0; j<two.length; j++) {
+//                        if(one[i].equals(two[j]) == true) { //배열 값이 같은게 있을 경우
+//                            check ++; //체크값 증가 실시
+//                        }
+//                    }
+//                    if(check <= 0) { //같은 값이 존재하지 않을 경우
+//                        if(data.contains(one[i]) == false) { //중복해서 데이터를 저장하지 않기 위함 (포함하지 않을 경우)
+//                            data += String.valueOf(one[i] + " ");
+//                        }
+//                    }
+//                    check = 0; //값 초기화 실시
+//                }
+//            }
+//            else {
+//                System.out.println("두 배열 데이터가 포함된지 확인해 주세요 ... ");
+//            }
+//        }
+//        catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }//클래스 종료
 
 
 
     //신고
-    public List<MatchDeclaration> getDeclarationList(){
-        List<MatchDeclaration> list = declarationRepository.findAll();
+    public List<MatchDeclaration> getDeclarationList(String matchingType){
+        List<MatchDeclaration> list = declarationRepository.findByMatchingType(matchingType);
         return list;
     }
     public MatchDeclaration postDeclarationList(MatchDeclaration declaration){
+        System.out.println(declaration);
         MatchDeclaration declarations = new MatchDeclaration();
+        declarations.setMatchingType(declaration.getMatchingType());
+        declarations.setTitle(declaration.getTitle());
         declarations.setMatchingId(declaration.getMatchingId());
         declarations.setEmail(declaration.getEmail());
         declarations.setComment(declaration.getComment());
         return declarationRepository.save(declarations);
     }
 
+    public MatchDeclaration getPublicDeclarationList(String id, String matchingType){
+        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
+    }
 
+    public MatchDeclaration getClassDeclarationList(String id, String matchingType){
+        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
+    }
 }

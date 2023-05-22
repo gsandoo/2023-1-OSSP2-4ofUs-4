@@ -22,6 +22,8 @@ export default createStore({
         studentNum: null,
         course: [],
         password: null,
+        heart: null,
+
         notification: null
     },
     mutations: {
@@ -31,7 +33,7 @@ export default createStore({
             state.id = payload
             router.replace('/Starting')
         },
-        userInfoApply(state, {major, name, number, sex, studentNum, course, password}){
+        userInfoApply(state, {major, name, number, sex, studentNum, course, password, heart}){
             state.major = major
             state.name = name
             state.number = number
@@ -39,6 +41,7 @@ export default createStore({
             state.studentNum = studentNum
             state.course = course
             state.password = password
+            state.heart = heart
         },
         logout(state) { 
             state.isLogin = false
@@ -96,7 +99,8 @@ export default createStore({
                                 sex: result.data.sex,
                                 studentNum: result.data.studentNum,
                                 course: result.data.course,
-                                password: result.data.password
+                                password: result.data.password,
+                                heart: result.data.heart
                             })
                             console.log("유저 정보 업데이트 완료")
                         }

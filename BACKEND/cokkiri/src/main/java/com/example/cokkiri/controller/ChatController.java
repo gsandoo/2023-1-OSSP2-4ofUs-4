@@ -13,6 +13,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ChatController {
     }
 
     @GetMapping("/room/{matchingId}/{matchingType}")
-    public ResponseEntity<List<Chat>> loadChat(int matchingId, String matchingType){
+    public ResponseEntity<List<Chat>> loadChat(@PathVariable int matchingId,@PathVariable String matchingType){
         List<Chat> chats = chatService.findAllChatByRoomId(matchingId,matchingType);
         return new ResponseEntity<List<Chat>>(chats, HttpStatus.OK);
     }

@@ -85,7 +85,7 @@ public class UserService {
     public void updateById(String id,int heart){
         Optional<User> e = userRepository.findById(id);
         if(e.isPresent()){
-            e.get().setHeart(heart);
+            e.get().setHeart(e.get().getHeart()+heart);
             userRepository.save(e.get());
         }
     }

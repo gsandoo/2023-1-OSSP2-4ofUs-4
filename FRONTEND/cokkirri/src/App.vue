@@ -3,9 +3,9 @@
     <div>
         <RouterView />
     </div>
-    <div id="app">
+    <!-- <div id="app">
         <Chatting />
-    </div>
+    </div> -->
 </template>
 
 <style lang="scss">

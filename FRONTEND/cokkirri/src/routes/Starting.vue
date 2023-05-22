@@ -2,33 +2,39 @@
 
 <template>
   <div>
+    <div class = "BOX">
     <div class = "whole">
-      <div class="mybutton">
-        <router-link class="link-button" to="/my/matching">매칭 페이지</router-link>
-      </div>
 
-      <div class = "wrap-que">
-        <div class = "question">
-          <img :src="imagePath_q" alt="User Question" />
-        </div>
-        <div class = "text-question">
-          <p>심각한<br><br><br>'Co-끼리' 중독입니다.</p>
-        </div>
-      </div>
+      <div class = "parent-talk">
 
-      <div class = "wrqp-ans">
-        <div class = "answer">
-          <img :src="imagePath_a" alt="User Answer" />
+        <div class = "wrap-que">
+          <div class = "question">
+            
+            <div class="mybutton">
+              <router-link class="link-button" to="/my/matching">매칭 페이지</router-link>
+            </div>
+
+            <img :src="imagePath_q" alt="User Question" />
+            <img :src="imagePath_a" alt="User Answer" class = "answer"/>
+
+            <div class = "text-que">
+              <p>심각한<br><br><br>'Co-끼리' 중독입니다.</p>
+            </div>
+
+            <div class = "text-ans">
+              <p>흥, 중독인지 아닌지<br><br><br>매칭된 사람한테 물어봐요.</p>
+            </div>
+
+          </div>
         </div>
-        <div class = "text-answer">
-          <p>흥, 중독인지 아닌지<br><br><br>매칭된 사람한테 물어봐요.</p>
-        </div>
+
       </div>
 
       <div class = "GotoMypage">
         <router-link class="link-mypage" to = "/my">My Page</router-link>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -55,10 +61,15 @@ export default {
   font-family: "Merriweather Sans";
 }
 
+.BOX{
+  height : 100%;
+  width : 100%
+}
+
 .whole{
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: auto;
   margin:0;
   background-image: url("@/assets/startmainpage/MainBack.png");
   background-size: cover;
@@ -77,8 +88,8 @@ export default {
   position: absolute;
   width: 230px;
   height: 67px;
-  left: 610px;
-  top: 700px;
+  left: 100px;
+  top: 600px;
 
   background: #B87514;
   border-radius: 50px;
@@ -103,19 +114,28 @@ export default {
   flex-grow: 0;
 }
 
-.link-mypage{
+.GotoMypage{
   position: absolute;
   width: 82px;
   height: 30px;
   left: 1292px;
   top: 63px;
+}
 
+.link-mypage{
   text-decoration : none;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
   color: #B87514;
+}
+
+.parent-talk{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin : 10px auto;
 }
 
 .question{ /* 중독입니다.*/
@@ -127,14 +147,13 @@ export default {
   mix-blend-mode: normal;
 }
 
-.text-question{
+.text-que{
   position: absolute;
   width: 439px;
   height: 265px;
-  left: 540px;
-  top: 90px;
-
-  /* font-family: 'Poppins'; */
+  left: 30px;
+  top: -35px;
+  
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
@@ -149,19 +168,19 @@ export default {
 
 .answer{ /* 흥! */
   position: absolute;
-  left: 33.82%;
+  left: 0px;
   right: 32.57%;
-  top: 48.33%;
+  top: 300px;
   bottom: 23.68%;
   mix-blend-mode: normal;
 }
 
-.text-answer{
+.text-ans{
   position: absolute;
   width: 484px;
   height: 158px;
-  left: 540px;
-  top: 435px;
+  left: 30px;
+  top: 320px;
 
   font-style: normal;
   font-weight: bold;

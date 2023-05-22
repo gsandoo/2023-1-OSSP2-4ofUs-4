@@ -15,9 +15,13 @@
     "primevue": "^3.29.1",
     "sass": "^1.62.1",
     "sass-loader": "^10.4.1",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "vue": "^3.2.13",
+    "vue-native-websocket": "^2.0.15",
     "vue-router": "^4.1.6",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

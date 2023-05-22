@@ -95,6 +95,8 @@ public class MatchingController {
     }
 
 
+
+
     // 특정 공강 매칭 조회
     @GetMapping("get/publicmatch/declaration")
     public ResponseEntity<MatchAccusation> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){

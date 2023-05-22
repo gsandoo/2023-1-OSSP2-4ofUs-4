@@ -38,7 +38,7 @@ public class MatchingService {
     @Autowired
     private NoShowClassMatchListRepository noShowClassMatchRepository;
     @Autowired
-    private AccusationRepository declarationRepository;
+    private AccusationRepository accusationRepository;
 
 
 
@@ -375,7 +375,10 @@ public class MatchingService {
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
-        return  savePublicUser(publicMatchedList);
+        if (publicMatchedList != null) {
+            return savePublicUser(publicMatchedList);
+        }
+        return null;
     }
 
 
@@ -386,7 +389,10 @@ public class MatchingService {
         classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
         classMatchedList = findClassMatch(classLectureUsers,count);
-        return  saveClassUser(classMatchedList);
+        if(classMatchedList !=null){
+            return saveClassUser(classMatchedList);
+        }
+        return null;
     }
 
     //수업 매칭 전부 반환
@@ -415,18 +421,17 @@ public class MatchingService {
 
 
     public ClassMatchedList saveClassUser(ClassMatchedList matchedList){
-        classMatchedListRepository.save(matchedList); // 데베에 저장
-        return matchedList;
+        return classMatchedListRepository.save(matchedList); // 데베에 저장
+
     };
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
-        publicMatchedListRepository.save(matchedList); // 데베에 저장
+        return publicMatchedListRepository.save(matchedList); // 데베에 저장
 
         // 노쇼용
-        int id = matchedList.getMatchingId();
-        String type = matchedList.getMatchingType();
-        LocalTime hour = matchedList.getPromiseTime().get(0).plusHours(1);
+//        int id = matchedList.getMatchingId();
+//        String type = matchedList.getMatchingType();
+//        LocalTime hour = matchedList.getPromiseTime().get(0).plusHours(1);
 
-        return matchedList;
     };
 
     public  PublicMatchedList deletePublicUser(PublicMatchedList matchedList){
@@ -538,7 +543,7 @@ public class MatchingService {
 
     //신고 목록 조회
     public List<MatchAccusation> getDeclarationList(String matchingType){
-        List<MatchAccusation> list = declarationRepository.findByMatchingType(matchingType);
+        List<MatchAccusation> list = accusationRepository.findByMatchingType(matchingType);
         return list;
     }
     public MatchAccusation postDeclarationList(MatchAccusation accusation){
@@ -553,16 +558,16 @@ public class MatchingService {
         list.setTitle(accusation.getTitle());
         list.setMatchingId(accusation.getMatchingId());
         list.setComment(accusation.getComment());
-        return declarationRepository.save(list);
+        return accusationRepository.save(list);
     }
 
     public MatchAccusation getPublicDeclarationList(String id, String matchingType){
-        MatchAccusation list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
     public MatchAccusation getClassDeclarationList(String id, String matchingType){
-        MatchAccusation list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
@@ -571,10 +576,11 @@ public class MatchingService {
             for(int i = 0 ; i < user.getEmail().size() ; i++){
                 emailList.add(user.getEmail().get(i));
             }
-            NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+            NoShowPublicMatchList noShowUser =new NoShowPublicMatchList();
             noShowUser.setEmail(emailList);
             noShowUser.setMatchingId(user.getMatchingId());
             noShowUser.setMatchingType(user.getMatchingType());
+            System.out.println(noShowUser);
             return noShowPublicMatchRepository.save(noShowUser);
     }
 

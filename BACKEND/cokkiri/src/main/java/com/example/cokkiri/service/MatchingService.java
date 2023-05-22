@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,11 +33,12 @@ public class MatchingService {
     @Autowired
     private MatchingAgreeRepository matchingAgreeRepository;
     @Autowired
-    private NoShowPublicMatchRepository noShowPublicMatchRepository;
+    private NoShowPublicMatchListRepository noShowPublicMatchRepository;
     @Autowired
-    private NoShowClassMatchRepository noShowClassMatchRepository;
+    private NoShowClassMatchListRepository noShowClassMatchRepository;
     @Autowired
-    private  DeclarationRepository declarationRepository;
+    private AccusationRepository declarationRepository;
+
     // 배열에 저장 (공강)
     List<PublicMatching> publicLectureUsers = new ArrayList<>();
     // 배열에 저장 (수업)
@@ -374,7 +374,7 @@ public class MatchingService {
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
         if (publicMatchedList != null) {
             PublicMatchedList finalPublicMatchedList = publicMatchedList;
-            notificationService.sendNotificationToUser(finalPublicMatchedList.getEmailList(), "매칭이 완료되었습니다");
+            notificationService.sendNotificationToUser(finalPublicMatchedList.getEmailList(), "matching complete");
         }else{
             return null;
         }
@@ -392,7 +392,7 @@ public class MatchingService {
 
         if (classMatchedList!=null){
             ClassMatchedList finalClassMatchedList = classMatchedList;
-            notificationService.sendNotificationToUser(finalClassMatchedList.getEmailList(), "매칭이 완료되었습니다");
+            notificationService.sendNotificationToUser(finalClassMatchedList.getEmailList(), "matching complete");
         }else{
             return null;
         }
@@ -546,29 +546,57 @@ public class MatchingService {
 
 
 
-    //신고
-    public List<MatchDeclaration> getDeclarationList(String matchingType){
-        List<MatchDeclaration> list = declarationRepository.findByMatchingType(matchingType);
+    //신고 목록 조회
+    public List<MatchAccusation> getDeclarationList(String matchingType){
+        List<MatchAccusation> list = declarationRepository.findByMatchingType(matchingType);
         return list;
     }
-    public MatchDeclaration postDeclarationList(MatchDeclaration declaration){
-        System.out.println(declaration);
-        MatchDeclaration declarations = new MatchDeclaration();
-        declarations.setMatchingType(declaration.getMatchingType());
-        declarations.setTitle(declaration.getTitle());
-        declarations.setMatchingId(declaration.getMatchingId());
-        declarations.setEmail(declaration.getEmail());
-        declarations.setComment(declaration.getComment());
-        return declarationRepository.save(declarations);
+    public MatchAccusation postDeclarationList(MatchAccusation accusation){
+        List<String> emailList = new ArrayList<>();
+        for (int i = 0 ; i < accusation.getEmail().size() ; i ++) {
+            emailList.add(accusation.getEmail().get(i));
+        }
+        System.out.println(accusation);
+        MatchAccusation list = new MatchAccusation();
+        list.setEmail(emailList);
+        list.setMatchingType(accusation.getMatchingType());
+        list.setTitle(accusation.getTitle());
+        list.setMatchingId(accusation.getMatchingId());
+        list.setComment(accusation.getComment());
+        return declarationRepository.save(list);
     }
 
-    public MatchDeclaration getPublicDeclarationList(String id, String matchingType){
-        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public MatchAccusation getPublicDeclarationList(String id, String matchingType){
+        MatchAccusation list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
-    public MatchDeclaration getClassDeclarationList(String id, String matchingType){
-        MatchDeclaration list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public MatchAccusation getClassDeclarationList(String id, String matchingType){
+        MatchAccusation list =declarationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
+    }
+
+    public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
+            List<String> emailList = new ArrayList<>();
+            for(int i = 0 ; i < user.getEmail().size() ; i++){
+                emailList.add(user.getEmail().get(i));
+            }
+            NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+            noShowUser.setEmail(emailList);
+            noShowUser.setMatchingId(user.getMatchingId());
+            noShowUser.setMatchingType(user.getMatchingType());
+            return noShowPublicMatchRepository.save(noShowUser);
+    }
+
+    public  NoShowClassMatchList postNoShowClassUser(NoShowClassMatchList user){
+        NoShowClassMatchList noShowUser = new NoShowClassMatchList();
+        List<String> emailList = new ArrayList<>();
+        for(int i = 0 ; i < user.getEmail().size() ; i++){
+            emailList.add(user.getEmail().get(i));
+        }
+        noShowUser.setEmail(emailList);
+        noShowUser.setMatchingId(user.getMatchingId());
+        noShowUser.setMatchingType(user.getMatchingType());
+        return noShowClassMatchRepository.save(noShowUser);
     }
 }

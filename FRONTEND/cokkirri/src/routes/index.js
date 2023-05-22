@@ -17,6 +17,7 @@ import Starting from './Starting.vue'
 
 import ChatRoom from './ChatRoom.vue'
 import ChatJebalyo from './ChatJebalyo.vue'
+import ChatTest from './ChatTest.vue'
 
 export default createRouter({
     // Hash 모드로 설정
@@ -74,6 +75,10 @@ export default createRouter({
         ,{
             path: '/ChatJebalyo',
             component: ChatJebalyo
+        }
+        ,{
+            path: '/ChatTest',
+            component: ChatTest
         }
     ]
 })

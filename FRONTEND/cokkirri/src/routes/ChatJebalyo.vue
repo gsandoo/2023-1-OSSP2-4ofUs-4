@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from '../api/index.js';
+// import axios from '../api/index.js';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 
@@ -36,7 +36,6 @@ export default {
   },
   mounted() {
     this.connectToWebSocket();
-    this.fetchChatHistory();
   },
   beforeUnmounted() {
     this.disconnectFromWebSocket();
@@ -61,38 +60,6 @@ export default {
         this.stompClient.disconnect();
       }
     },
-
-    // 예전의 채팅을 불러오는 기능 (이게 지금 안 되는 부분!)
-    // fetchChatHistory() {
-    //   axios.get(`/room/${this.matchingId}/${this.matchingType}`, {
-    //       params: {
-    //         matchingId: this.matchingId,
-    //         matchingType: this.matchingType
-    //       }
-    //     })
-    //     .then(response => {
-    //       this.messages = response.data.messages;
-    //     })
-    //     .catch(error => {
-    //       console.error('Failed to fetch chat history:', error.response);
-    //     });
-    // },
-
-    // 예전의 채팅을 불러오는 기능
-      fetchChatHistory() {
-        axios.get(`/room/1/free`, {
-            params: {
-              matchingId: this.matchingId,
-              matchingType: this.matchingType
-            }
-          })
-          .then(response => {
-            this.messages = response.data.messages;
-          })
-          .catch(error => {
-            console.error('Failed to fetch chat history:', error.response);
-          });
-      },
 
     sendMessage() {
       //값이 없으면 메시지를 보내지 않음.

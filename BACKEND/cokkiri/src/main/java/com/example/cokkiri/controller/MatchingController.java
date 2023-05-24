@@ -1,9 +1,11 @@
 package com.example.cokkiri.controller;
 
 import com.example.cokkiri.model.*;
+import com.example.cokkiri.service.MailSendService;
 import com.example.cokkiri.service.MatchingService;
 
 
+import com.example.cokkiri.service.NoShowMailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -18,6 +20,10 @@ import java.util.List;
 public class MatchingController {
     @Autowired
     private  MatchingService matchingService;
+    @Autowired
+    private  NoShowMailSendService noShowMailSendService;
+    @Autowired
+    private MailSendService mss;
 
 
     //데이터를 받아서 매치 타입 확인 후 match서비스로 연결 해준다.
@@ -46,15 +52,15 @@ public class MatchingController {
 
     
     @PutMapping("agree/free")
-    public String publicMatchingAgree(@RequestParam(value = "matchingId")int matchingId , @RequestParam(value = "userId") String id){
+    public ResponseEntity<String> publicMatchingAgree(@RequestParam(value = "matchingId")int matchingId , @RequestParam(value = "userId") String id){
         String comment = matchingService.publicMatchAgree(matchingId , id);
-        return comment;
+        return new ResponseEntity<String>(comment,HttpStatus.OK);
 
     }
     @PutMapping("agree/class")
-    public String classMatchingAgree(@RequestParam(value = "matchingId")int matchingId,@RequestParam(value = "userId")String id){
+    public ResponseEntity<String> classMatchingAgree(@RequestParam(value = "matchingId")int matchingId,@RequestParam(value = "userId")String id){
         String comment = matchingService.classMatchAgree(matchingId,id);
-        return comment;
+        return new ResponseEntity<String>(comment,HttpStatus.OK);
     }
 
 
@@ -69,6 +75,14 @@ public class MatchingController {
         return new ResponseEntity<List<NoShowClassMatchList>>(noShowLists,HttpStatus.OK);
     }
 
+    //노쇼의심유저에게 메일 보내기
+    @GetMapping("send/noshow")
+    public ResponseEntity<String> sendEmailToNoShowUser(@RequestParam(value = "userId")String id , @RequestParam(value = "matchingType")String matchingType){
+        String send = noShowMailSendService.sendAuthMail(id, matchingType);
+        return new ResponseEntity<String>(send, HttpStatus.OK);
+    }
+
+    // 노쇼 등록
     @PostMapping("post/noshow/public")
     public ResponseEntity<NoShowPublicMatchList> postNoShowPublicList(@RequestBody NoShowPublicMatchList user){
         NoShowPublicMatchList noShowUser = matchingService.postNoShowPublicUser(user);
@@ -119,6 +133,7 @@ public class MatchingController {
             return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
         }
     }
+
 
 }
 

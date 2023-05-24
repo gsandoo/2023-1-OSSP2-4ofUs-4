@@ -45,16 +45,16 @@ public class MatchingController {
     }
 
     
-    @GetMapping("agree/free")
-    public ResponseEntity<MatchingAgree>  publicMatchingAgree(@RequestParam(value = "userId")String id){
-        MatchingAgree agreeList = matchingService.publicMatchAgree(id);
-        return new ResponseEntity<MatchingAgree>(agreeList,HttpStatus.OK);
+    @PutMapping("agree/free")
+    public String publicMatchingAgree(@RequestParam(value = "matchingId")int matchingId , @RequestParam(value = "userId") String id){
+        String comment = matchingService.publicMatchAgree(matchingId , id);
+        return comment;
 
     }
     @PutMapping("agree/class")
-    public ResponseEntity<MatchingAgree> classMatchingAgree(@RequestParam(value = "userId")String id){
-        MatchingAgree agreeList = matchingService.classMatchAgree(id);
-        return new ResponseEntity<MatchingAgree>(agreeList,HttpStatus.OK);
+    public String classMatchingAgree(@RequestParam(value = "matchingId")int matchingId,@RequestParam(value = "userId")String id){
+        String comment = matchingService.classMatchAgree(matchingId,id);
+        return comment;
     }
 
 
@@ -81,14 +81,14 @@ public class MatchingController {
         return  new ResponseEntity<NoShowClassMatchList>(noShowUser, HttpStatus.OK);
     }
     // 신고 등록
-    @PostMapping("post/declaration")
+    @PostMapping("post/accusation")
     public ResponseEntity<MatchAccusation> postDeclaration(@RequestBody MatchAccusation declaration){
         MatchAccusation list = matchingService.postDeclarationList(declaration);
         return new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
     }
 
     // 신고 목록리스트(수업/공강) 조회
-    @GetMapping("get/declaration")
+    @GetMapping("get/accusation")
     public ResponseEntity<List<MatchAccusation>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
         List<MatchAccusation> list = matchingService.getDeclarationList(matchingType);
         return new ResponseEntity<List<MatchAccusation>>(list,HttpStatus.OK);
@@ -98,8 +98,8 @@ public class MatchingController {
 
 
     // 특정 공강 매칭 조회
-    @GetMapping("get/publicmatch/declaration")
-    public ResponseEntity<MatchAccusation> getPublicDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+    @GetMapping("get/publicmatch/accusation")
+    public ResponseEntity<MatchAccusation> getPublicDeclaration(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
        if(matchingType.equals("free")){
            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
@@ -109,10 +109,10 @@ public class MatchingController {
 
     }
     //특정 수업 매칭 조회
-    @GetMapping("get/classmatch/declaration")
-    public ResponseEntity<MatchAccusation> getClassDeclaration(@RequestParam(value = "matchingId")String id , @RequestParam(value = "matchingType")String matchingType){
+    @GetMapping("get/classmatch/accusation")
+    public ResponseEntity<MatchAccusation> getClassDeclaration(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
         if(matchingType.equals("class")){
-            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
+            MatchAccusation list = matchingService.getClassDeclarationList(id, matchingType);
             return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
         }
         else{

@@ -16,8 +16,8 @@ public class NoShowPublicMatchList {
     @Column
     private int matchingId;
 
-    @ElementCollection
-    private List<String> email;
+    @Column
+    private String email;
 
     @Column
     private  String matchingType;

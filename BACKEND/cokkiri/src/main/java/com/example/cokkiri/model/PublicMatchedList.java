@@ -45,7 +45,6 @@ public class PublicMatchedList {
     private List<LocalTime> promiseTime;
 
     @Column
-    @ColumnDefault("0")
     //매칭 동의수 사람수랑 같게 되면 matchingRes=매칭완료
     private int matchingAgree;
 

@@ -19,6 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Log4j2
 public class SseService {
+
     private final NotificationRepositoryImpl emitterRepository;
 
     public SseEmitter subscribe(String email, String lastEventId) {

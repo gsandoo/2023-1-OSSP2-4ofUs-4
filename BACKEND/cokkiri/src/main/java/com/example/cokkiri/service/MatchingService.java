@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,7 +25,7 @@ public class MatchingService {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     // 수업 레포지토리
     @Autowired
-    private MatchedListRepository classMatchedListRepository;
+    private ClassMatchedListRepository classMatchedListRepository;
 
     // 공강 레포지토리
     @Autowired
@@ -34,7 +33,7 @@ public class MatchingService {
     @Autowired
     private MatchingAgreeRepository matchingAgreeRepository;
     @Autowired
-    private NoShowPublicMatchListRepository noShowPublicMatchRepository;
+    private NoShowPublicMatchListRepository noShowPublicMatchListRepository;
     @Autowired
     private NoShowClassMatchListRepository noShowClassMatchRepository;
     @Autowired
@@ -446,46 +445,39 @@ public class MatchingService {
 
 
     List<MatchingAgree> matchingAgreeList = new ArrayList<>();
-    public MatchingAgree publicMatchAgree(String id) {
-        MatchingAgree matchingAgree = new MatchingAgree();
-        List<PublicMatchedList> list = publicMatchedListRepository.findByEmailListContains(id);
-        matchingAgree.setMatchingId(list.get(0).getMatchingId());
-        matchingAgree.setMatchingType(list.get(0).getMatchingType());
-        List<String> emailList = matchingAgree.getEmail();
-        emailList.add(id);
-        matchingAgree.setEmail(emailList);
-        list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
-        if(list.get(0).getMatchingAgree()==list.get(0).getHeadCount()){
-            System.out.println("매칭인원 충족되었습니다.");
-            list.get(0).setMatchingRes("매칭 완료");
+    public String publicMatchAgree(int matchingId , String id) {
+        PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
+        if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
+            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
+            String comment = " 매칭완료 버튼을 눌렀습니다";
+            return comment;
+        }else{
+            matchedList.setMatchingRes("매칭완료");
+            publicMatchedListRepository.save(matchedList);
+            String comment = " 매칭인원이 충족되었습니다";
+            return comment;
         }
-        list.get(0).setMatchingId(list.get(0).getMatchingId());
-        publicMatchedListRepository.save(list.get(0));
-        return matchingAgreeRepository.save(matchingAgree);
     }
 
-    public MatchingAgree classMatchAgree(String id) {
-        MatchingAgree matchingAgree = new MatchingAgree();
-        List<ClassMatchedList> list = classMatchedListRepository.findByEmailListContains(id);
-        matchingAgree.setMatchingId(list.get(0).getMatchingId());
-        matchingAgree.setMatchingType(list.get(0).getMatchingType());
-        List<String> emailList = matchingAgree.getEmail();
-        emailList.add(id);
-        matchingAgree.setEmail(emailList);
-        list.get(0).setMatchingAgree(list.get(0).getMatchingAgree()+1);
-        if(list.get(0).getMatchingAgree()==list.get(0).getHeadCount()){
-            System.out.println("매칭인원 충족되었습니다.");
-            list.get(0).setMatchingRes("매칭 완료");
+    public String classMatchAgree(int matchingId,String id) {
+        ClassMatchedList matchedList = classMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId,id);
+        if(matchedList== null){
+            return "해당 매치를 찾지 못했습니다.";
         }
-        list.get(0).setMatchingId(list.get(0).getMatchingId());
-        classMatchedListRepository.save(list.get(0));
-        return matchingAgreeRepository.save(matchingAgree);
+        if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
+            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
+            return " 매칭완료 버튼을 눌렀습니다.";
+        }else{
+            matchedList.setMatchingRes("매칭완료");
+            classMatchedListRepository.save(matchedList);
+            return "매칭인원이 충족 되었습니다.";
+        }
     }
 
     // 노쇼 리스트 반환
     public List<NoShowPublicMatchList> getNoShowPublicMatchList(){
         List<NoShowPublicMatchList> noshow = new ArrayList<>();
-        noShowPublicMatchRepository.findAll().forEach(e->noshow.add(e));
+        noShowPublicMatchListRepository.findAll().forEach(e->noshow.add(e));
         return noshow;
     }
     public List<NoShowClassMatchList> getNoShowClassMatchList(){
@@ -493,52 +485,6 @@ public class MatchingService {
         noShowClassMatchRepository.findAll().forEach(e->noshow.add(e));
         return noshow;
     }
-
-
-    // 노쇼 procedure.
-    // MatchingAgree 에서 email과 매칭타입으로 찾고, 마찬가지로 매칭리스트에서도 찾는다.
-
-    // email , matchingType -> 매치된 유저의 이메일과 메칭타입 , hour -> 매치된 리스트에서 시작시간+한시간 지난 시간.
-//    public void chekNoshow(String email,String matchingType, LocalTime hour){
-//        List<MatchingAgree> agreeUserList = matchingAgreeRepository.findByEmailAndMatchingType(email,matchingType);
-//        List<PublicMatchedList> matchedList = publicMatchedListRepository.findByEmailListContains(email);
-//
-//    }
-
-
-
-
-    // 두 entitiy 내 이메일리스트내의 원소를 비교, 없는 원소(이메일)를 찾는다.
-//    @Scheduled(cron = "${cronExpression}")
-//    public String getNoShowUserEmailList(String one[], String two[]) {
-//        String data="";
-//        int check = 0;
-//        try {
-//            if(one.length > 0 && two.length > 0) { //두 배열 데이터가 널이 아닐 경우
-//                for(int i=0; i<one.length; i++) {
-//                    for(int j=0; j<two.length; j++) {
-//                        if(one[i].equals(two[j]) == true) { //배열 값이 같은게 있을 경우
-//                            check ++; //체크값 증가 실시
-//                        }
-//                    }
-//                    if(check <= 0) { //같은 값이 존재하지 않을 경우
-//                        if(data.contains(one[i]) == false) { //중복해서 데이터를 저장하지 않기 위함 (포함하지 않을 경우)
-//                            data += String.valueOf(one[i] + " ");
-//                        }
-//                    }
-//                    check = 0; //값 초기화 실시
-//                }
-//            }
-//            else {
-//                System.out.println("두 배열 데이터가 포함된지 확인해 주세요 ... ");
-//            }
-//        }
-//        catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//        return data;
-//    }//클래스 종료
-
 
 
     //신고 목록 조회
@@ -561,37 +507,30 @@ public class MatchingService {
         return accusationRepository.save(list);
     }
 
-    public MatchAccusation getPublicDeclarationList(String id, String matchingType){
+    public MatchAccusation getPublicDeclarationList(int id, String matchingType){
         MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
-    public MatchAccusation getClassDeclarationList(String id, String matchingType){
+    public MatchAccusation getClassDeclarationList(int id, String matchingType){
         MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
     public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
-            List<String> emailList = new ArrayList<>();
-            for(int i = 0 ; i < user.getEmail().size() ; i++){
-                emailList.add(user.getEmail().get(i));
-            }
-            NoShowPublicMatchList noShowUser =new NoShowPublicMatchList();
-            noShowUser.setEmail(emailList);
+
+            NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+            noShowUser.setEmail(user.getEmail());
             noShowUser.setMatchingId(user.getMatchingId());
             noShowUser.setMatchingType(user.getMatchingType());
             System.out.println(noShowUser);
-            return noShowPublicMatchRepository.save(noShowUser);
+            return noShowPublicMatchListRepository.save(noShowUser);
     }
 
     public  NoShowClassMatchList postNoShowClassUser(NoShowClassMatchList user){
         NoShowClassMatchList noShowUser = new NoShowClassMatchList();
-        List<String> emailList = new ArrayList<>();
-        for(int i = 0 ; i < user.getEmail().size() ; i++){
-            emailList.add(user.getEmail().get(i));
-        }
-        noShowUser.setEmail(emailList);
         noShowUser.setMatchingId(user.getMatchingId());
+        noShowUser.setEmail(user.getEmail());
         noShowUser.setMatchingType(user.getMatchingType());
         return noShowClassMatchRepository.save(noShowUser);
     }

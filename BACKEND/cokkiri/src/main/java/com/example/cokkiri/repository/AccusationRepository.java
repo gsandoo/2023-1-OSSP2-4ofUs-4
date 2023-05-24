@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AccusationRepository extends JpaRepository<MatchAccusation,Integer> {
     public List<MatchAccusation> findByMatchingType(String matchingType);
-    public MatchAccusation findByMatchingIdAndMatchingType(String id, String matchingType);
+    public MatchAccusation findByMatchingIdAndMatchingType(int id, String matchingType);
 }

@@ -7,8 +7,9 @@ import java.util.List;
 
 public  interface PublicMatchedListRepository extends JpaRepository<PublicMatchedList,Integer> {
     public List<PublicMatchedList> findByEmailListContains(String id);
-    public PublicMatchedList findByMatchingIdAndMatchingType(String id, String matchingType);
+    public PublicMatchedList findByMatchingIdAndEmailListContains(int matchingId , String id);
 
+    public  PublicMatchedList findByMatchingId(int id);
 
 
 }

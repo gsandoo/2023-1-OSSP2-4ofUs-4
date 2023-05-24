@@ -19,6 +19,9 @@
         <div class="HeartNum_text">
           <p>나의 하트</p>
         </div>
+        <div class = "NumOfHeart">
+          {{this.$store.state.heart}} &gt;
+        </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
         </div>

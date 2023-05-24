@@ -21,7 +21,8 @@
     "vue-native-websocket": "^2.0.15",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0",
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "webstomp-client": "^1.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -1,32 +1,34 @@
 import axios from '../../api/index.js'
-export default{
+
+export default {
     namespaced: true,
 
     state: {
-        publicMatchingRecord: '',
-        classMatchingRecord: '',
+        publicMatchingRecord: null,
+        classMatchingRecord: null,
     },
     mutations: {
         publicSave(state, record){
-            console.log("공강 매칭 불러오기 완료")
             state.publicMatchingRecord = record
+            console.log(state.publicMatchingRecord)
             console.log("공강 매칭 불러오기 완료")
         },
         classSave(state, record){
-            console.log("수업 매칭 불러오기 완료")
             state.classMatchingRecord = record
+            console.log(state.classMatchingRecord)
             console.log("수업 매칭 불러오기 완료")
         },
     },
     actions: {
-        async callRecord({commit, rootstate}) {
+        async callRecord({commit, rootState}) {
             try{
-                await axios.get('/userMypage/publicMatching',{
+                console.log(rootState.id)
+                await axios.get('/userMypage/publicMatchedList',{
                     params:{
-                        userId: rootstate.id
+                        userId: rootState.id
                 }}).then((result)=>{
                     console.log(result.data)
-                    commit('publicSave',result.data)
+                    commit('publicSave',result.data.data)
                 }).catch(function(error){
                     console.log(error)
                 })
@@ -34,12 +36,13 @@ export default{
                 console.log(error)
             }
             try{
-                await axios.get('/userMypage/classMatching',{
+                console.log(rootState.id)
+                await axios.get('/userMypage/classMatchedList',{
                     params:{
-                        userId: rootstate.id
+                        userId: rootState.id
                 }}).then((result)=>{
                     console.log(result.data)
-                    commit('publicSave',result.data)
+                    commit('publicSave',result.data.data)
                 }).catch(function(error){
                     console.log(error)
                 })

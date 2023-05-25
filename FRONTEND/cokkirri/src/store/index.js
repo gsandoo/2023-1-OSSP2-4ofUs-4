@@ -4,7 +4,6 @@ import axios from "../api/index.js";
 
 import router from '../routes/index.js';
 // 모듈 불러오기
-import userPlusInfo from './modules/userPlusInfo.js';
 
 
 // vuex 를 사용하여 로그인 상태와 로그인 id 를 저장
@@ -24,9 +23,24 @@ export default createStore({
         password: null,
         heart: null,
 
-        notification: null
+        notification: null,
+
+        publicMatchingRecord: [],
+        classMatchingRecord: [],
     },
     mutations: {
+        // 사용자 매칭 정보 불러오기
+        publicSave(state, record){
+            state.publicMatchingRecord = record
+            console.log(state.publicMatchingRecord)
+        },
+        classSave(state, record){
+            state.classMatchingRecord = record
+            console.log(state.classMatchingRecord)
+        },
+
+
+
         // 로그인 적용 후 ~ 페이지로 이동. 추후 메인 페이지로 이동 변경 예정.
         loginSuccess(state, payload) {
             state.isLogin = true
@@ -52,6 +66,34 @@ export default createStore({
         }
     },
     actions: {
+        // 매칭 정보 불러오기
+        async callRecord({commit, state}) {
+            try{
+                await axios.get('/userMypage/publicMatchedList',{
+                    params:{
+                        userId: state.id
+                }}).then((result)=>{
+                    commit('publicSave',result.data)
+                }).catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+            try{
+                await axios.get('/userMypage/classMatchedList',{
+                    params:{
+                        userId: state.id
+                }}).then((result)=>{
+                    commit('classSave',result.data)
+                }).catch(function(error){
+                    console.log(error)
+                })
+            } catch(error){
+                console.log(error)
+            }
+        },
+
         // 각 컴포넌트에서 this.$store.dispatch('메소드 이름', { 데이터 변수: 입력값 }) 형식으로 사용 가능
         // 로그인 요청 및 store 정보 업데이트
         async loginRequest({commit, dispatch}, {inputId, inputPassword}){
@@ -68,6 +110,7 @@ export default createStore({
                         if(result.data === true){
                             commit('loginSuccess', inputId);
                             dispatch('userInfoUpdate')
+                            dispatch('callRecord')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -171,8 +214,4 @@ export default createStore({
             };
         }
     },
-
-    modules: {
-        userPlusInfo
-    }
 })

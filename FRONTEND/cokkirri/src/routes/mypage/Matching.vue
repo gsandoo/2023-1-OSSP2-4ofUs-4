@@ -1,6 +1,5 @@
 <template>
-    <!-- 마이페이지의 매칭 세부정보  -->
-    <!-- 회원정보 수정 put에 대해 cors 에러 발생. 해결 필요. -->
+    <!-- 매칭 기록  -->
     <div class="background-setting">
         <div class="container" >
             <div>
@@ -21,21 +20,41 @@
                         <div class="line-for-division"></div>
 
                         <div class="frame-sub-body">
-                            <div class="font-hash-h1"># 예시</div>
-                            <div class="font-state-box"></div>
-
-                            <div class="font-hash-h1"># 예시</div>
-                            <div class="font-state-box"></div>
-
-                            <div class="font-hash-h1"># 예시</div>
-                            <div class="font-state-box"></div>
-
-                            <div class="font-hash-h1"># 예시</div>
-                            <div class="font-state-box"></div>
-
-                            <div class="font-hash-h1"># 예시</div>
-                            <div class="font-state-box"></div>
-
+                            <div v-for="(record, index) in matchingListClass" :key="index" class="frame-data-box">
+                                <div class="font-hash-h1">
+                                    # 신청 날짜 : {{record.matchingTime}}
+                                </div>
+                                <div class="font-state-box">
+                                    <div class="record-img"></div>
+                                    <div class="record-type">수업 매칭</div>
+                                    <div class="record-head-count">인원 {{record.headCount}}명</div>
+                                    <div class="record-timetable">
+                                        <div v-for="(timeId, index) in record.courseNumber" :key="index" class="time-id">
+                                            {{timeId}}
+                                        </div>
+                                    </div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
+                                </div>
+                            </div>
+                            <div v-for="(record, index) in matchingListFree" :key="index" class="frame-data-box">
+                                <div class="font-hash-h1">
+                                    # 신청 날짜 : {{record.matchingTime}}
+                                </div>
+                                <div class="font-state-box">
+                                    <div class="record-img"></div>
+                                    <div class="record-type">공강 매칭</div>
+                                    <div class="record-head-count">인원 {{record.headCount}}명</div>
+                                    <div class="record-detail">{{record.availableDay}}</div>
+                                    <div class="record-detail">{{record.promiseTime[0].slice(0,5)}}~{{record.promiseTime[1].slice(0,5)}}</div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
+                                </div>
+                            </div>
+                            <div class="frame-data-box">
+                                <div class="font-hash-h1"># 매칭 기록이 더이상 없습니다.</div>
+                                <div class="font-state-box-ex">
+                                    매칭을 원하실 경우, 매칭 추가 버튼을 누르십시오.
+                                </div>
+                            </div>
                             <div :style="{'margin-top': '30px'}"></div>
                         </div>
                     </div>
@@ -47,11 +66,21 @@
 
 <script>
 export default {
+    data(){
+        return {
+            matchingListClass: [...this.$store.state.classMatchingRecord].reverse(),
+            matchingListFree: [...this.$store.state.publicMatchingRecord].reverse(),
+        }
+    },
     methods: {
         callMatchingRecord() {
-            this.$store.dispatch('userPlusInfo/callRecord')
-        }
-    }
+            this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
+            this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
+            console.log(this.$store.state.publicMatchingRecord)
+            console.log(this.$store.state.classMatchingRecord)
+        },
+
+    },
 }
 </script>
 
@@ -202,12 +231,16 @@ export default {
         background: #FFFEF9;
         border-radius: 20px;
         overflow-y: scroll;
+        .frame-data-box{
+            width: 996px;
+            height: 160px;
+
+            margin-top: 30px;
+            margin-left: 53px;
+        }
         .font-hash-h1{
             width: 891px;
             height: 34px;
-            
-            margin-top: 30px;
-            margin-left: 53px;
 
             display: flex;
             justify-content: left;
@@ -225,10 +258,164 @@ export default {
             height: 110px;
 
             margin-top: 16px;
-            margin-left: 53px;
 
             border: 5px solid #ECBC76;
             border-radius: 20px;
+            .record-img{
+                width: 50px;
+                height: 51px;
+                
+                margin-top: 26px;
+                margin-left: 27px;
+                float: left;
+
+                background-image: url("../../assets/mypage/matching/people.png");
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .record-type{
+                width: 100px;
+                height: 74px;
+
+                margin-top: 18px;
+                margin-left: 49px;
+                float: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 25px;
+                line-height: 38px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                color: #B87514;
+            }
+            .record-head-count{
+                width: 100px;
+                height: 74px;
+
+                margin-top: 18px;
+                float: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 25px;
+                line-height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                color: #B87514;
+            }
+            .record-detail{
+                width: 170px;
+                height: 74px;
+
+                margin-top: 18px;
+                float: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 25px;
+                line-height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                color: #B87514;
+            }
+
+            .record-timetable{
+                width: 340px;
+                height: 74px;
+
+                margin-top: 18px;
+                float: left;
+                overflow-x: auto;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 25px;
+                line-height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                color: #B87514;
+                .time-id{
+                    width: 120px;
+                    height: 50px;
+
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 20px;
+                    line-height: 45px;
+                    color: #FFFFFF;
+
+                    background: #B87514;
+                    border-radius: 10px;
+                }
+            }
+            .record-ing-btn{
+                width: 150px;
+                height: 72px;
+
+                margin-top: 18px;
+                margin-left: 35px;
+                float: left;
+
+                border: 5px solid #ECBC76;
+                border-radius: 20px;
+
+                align-items: center;
+                text-align: center;
+                justify-content: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 30px;
+                line-height: 45px;
+                display: flex;
+
+                color: #B87514;
+            }
+        } 
+        .font-state-box-ex{
+            width: 891px;
+            height: 110px;
+
+            margin-top: 16px;
+
+            border: 5px solid #ECBC76;
+            border-radius: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 25px;
+            line-height: 38px;
+            color: #B87514;
         }  
     }
 </style>

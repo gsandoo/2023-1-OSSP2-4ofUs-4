@@ -78,7 +78,6 @@ export default {
                     else{
                         alert("날짜 및 시간이 설정되지 않았습니다.")
                     }
-                    
                 }
                 else if(this.matchingType==='class'){
                     if(this.courseNumber.length!==0){
@@ -108,8 +107,10 @@ export default {
                         matchingType:"free"
                 }).then((result)=>{
                     if(result.status===200){
+                        this.$store.dispatch('callRecord')
                         this.$router.replace('/my/matching');
-                        alert("수업 매칭 신청 완료")
+                        console.log(result.status)
+                        alert("공강 매칭 신청 완료")
                     }
                 }).catch(function(error){
                     console.log(error)
@@ -127,8 +128,10 @@ export default {
                         matchingType:"class"
                 }).then((result)=>{
                     if(result.status===200){
+                        this.$store.dispatch('callRecord')
                         this.$router.replace('/my/matching');
-                        alert("공강 매칭 신청 완료")
+                        console.log(result.status)
+                        alert("수업 매칭 신청 완료")
                     }
                 }).catch(function(error){
                     console.log(error)

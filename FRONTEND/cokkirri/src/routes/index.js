@@ -16,6 +16,7 @@ import Payments from './Payments.vue'
 import Starting from './Starting.vue'
 
 import ChatRoom from './ChatRoom.vue'
+import chatting from './chatting.vue'
 
 export default createRouter({
     // Hash 모드로 설정
@@ -69,6 +70,10 @@ export default createRouter({
         ,{
             path: '/ChatRoom',
             component: ChatRoom
+        }
+        ,{
+            path: '/chatting',
+            component: chatting
         }
     ]
 })

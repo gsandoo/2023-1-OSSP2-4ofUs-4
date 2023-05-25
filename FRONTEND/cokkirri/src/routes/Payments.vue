@@ -20,7 +20,8 @@
           <p>나의 하트</p>
         </div>
         <div class = "NumOfHeart">
-          {{this.$store.state.heart}} &gt;
+          <!-- {{this.$store.state.heart}} &gt; -->
+          <p>2</p>
         </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
@@ -36,9 +37,12 @@
           <img :src="imagePath_heart" alt="heart" class = "heart-5000"/>
           <img :src="imagePath_heart" alt="heart" class = "heart-10000"/>
         </div>
-        <div class="GoPay_10ht">
-          <p>10개</p>
-        </div>
+
+        <div class="GoPay_5ht"> <p>5개</p> </div>
+        <div class="GoPay_10ht"> <p>10개</p> </div>
+        <div class="GoPay_15ht"> <p>15개</p> </div>
+        <div class="GoPay_20ht"> <p>20개</p> </div>
+
         <div class="GoPay_img">
           <img :src="imagePath_gopay" alt="Heartgopay" />
         </div>
@@ -253,12 +257,34 @@ top : 15rem;
 vertical-align: auto;
 }
 
-
+.GoPay_5ht{
+position : absolute;
+left : 7.5rem;
+top : 14.25rem;
+font-weight: bold;
+font-size: 20px;
+}
 
 .GoPay_10ht{
 position : absolute;
 left : 7.5rem;
-top : 14.25rem;
+top : 19.25rem;
+font-weight: bold;
+font-size: 20px;
+}
+
+.GoPay_15ht{
+position : absolute;
+left : 7.5rem;
+top : 24.25rem;
+font-weight: bold;
+font-size: 20px;
+}
+
+.GoPay_20ht{
+position : absolute;
+left : 7.5rem;
+top : 29.25rem;
 font-weight: bold;
 font-size: 20px;
 }
@@ -325,6 +351,34 @@ left: 15rem;
 top: 15rem;
 }
 
+.heart-1000{
+  position : absolute;
+  left : 0.1rem;
+  top : 0rem;
+  vertical-align: auto;
+}
+
+.heart-3000{
+  position : absolute;
+  left : 0.1rem;
+  top : 5rem;
+  vertical-align: auto;
+}
+
+.heart-5000{
+  position : absolute;
+  left : 0.1rem;
+  top : 10rem;
+  vertical-align: auto;
+}
+
+.heart-10000{
+  position : absolute;
+  left : 0.1rem;
+  top : 15rem;
+  vertical-align: auto;
+}
+
 .charge3000{ color:white;
 background: #ECBC76;
 border-radius: 50px;
@@ -383,5 +437,23 @@ width: 5rem;
 height: 1rem;
 left: 15rem;
 top: 30rem;
+}
+
+.NumOfHeart{
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 190px;
+  top: 300px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 75px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
 }
 </style>

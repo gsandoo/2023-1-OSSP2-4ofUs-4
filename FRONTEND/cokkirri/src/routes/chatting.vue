@@ -23,8 +23,8 @@
         <div class="chat-room">
           <div class="messages">
             <div v-for="message in messages" :key="message.id" class="message">
-              <div :class="{'sent-by-me': message.isSentByMe, 'received-from': !message.isSentByMe}" class = "message-content">
-                {{ message.text }}
+              <div :class="{'sent-by-me': message.isSentByMe, 'received-from': !message.isSentByMe}" class="message-content">
+                {{ message.isSentByMe ? message.text : message.received }}
               </div>
             </div>
           </div>
@@ -43,80 +43,82 @@
 
 
 <script>
-  import { ref, onMounted } from 'vue';
-  import Stomp from 'stompjs';
-  import SockJS from 'sockjs-client';
-  import axios from '../api/index.js'; // Use axios directly here.
+import { ref, onMounted } from 'vue';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import axios from '../api/index.js';
 
-  export default {
-  data(){
-    return{
-      // 이미지 삽입
+export default {
+  data() {
+    return {
       imagePath_arrow: require("@/assets/pay/arrow-left.png"),
-    }
+    };
   },
   setup() {
-      const messages = ref([]);
-      const newMessage = ref('');
-      const matchingId = ref(1);
-      const matchingType = ref('free');
-      const sender = ref('skxkswls@gmail.com');
-      let stompClient = null;
+    const messages = ref([]);
+    const newMessage = ref('');
+    const matchingId = ref(1);
+    const matchingType = ref('free');
+    const sender = ref('skxkswls@gmail.com');
+    let stompClient = null;
+    
+    /*추가한 부분*/
+    const received = ref('');
 
-      const connectToWebSocket = () => {
+    const connectToWebSocket = () => {
       const socket = new SockJS('http://3.37.37.164:8080/ws');
       stompClient = Stomp.over(socket);
 
       socket.onopen = () => {
-          stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
+        stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
           const receivedMessage = JSON.parse(message.body);
-          messages.value.push(receivedMessage);
-
-          console.log(receivedMessage); // Added console.log statement
-          console.log(receivedMessage.text); // Added console.log statement
-      });
-      };
-  };
-
-      // 메시지 보내기
-      const sendMessage = () => {
-          if (!newMessage.value || !stompClient) {
-              return;
-          }
-
-          const chatMessage = {
-              matchingId: parseInt(matchingId.value),
-              matchingType: matchingType.value,
-              sender: sender.value,
-              content: newMessage.value
-          };
-
-          stompClient.send('/send/{matchingId}/{matchingType}', {}, JSON.stringify(chatMessage));
-          messages.value.push({
+          messages.value = [
+            ...messages.value,
+            {
               id: Date.now(),
-              text: newMessage.value,
-              isSentByMe: true
-          });
-          newMessage.value = '';
+              text: receivedMessage.content, // 수정: message.content 값을 사용
+              isSentByMe: false // 수정: 서버에서 받은 메시지이므로 false로 설정
+            }
+          ];
+          received.value = receivedMessage.content; // 추가된 부분
+        });
       };
 
-      // 과거 채팅 내역 불러오기.
-      const fetchChatHistory = async () => {
-          try {
-              const response = await axios.get(`/room/${matchingId.value}/${matchingType.value}`);
-              messages.value = response.data;  // 가져온 데이터를 메시지에 직접 할당.
-              console.log(response.data);
-          } catch (error) {
-              console.error('Failed to fetch chat history:', error);
-          }
+    };
+
+    const sendMessage = () => {
+      if (!newMessage.value || !stompClient) {
+        return;
       }
 
-  // onMounted(() => {
-  //     connectToWebSocket();
-  //         fetchChatHistory().catch(error => {
-  //         console.error('Failed to load chat history:', error);
-  //     });
-  // });
+      const chatMessage = {
+        matchingId: parseInt(matchingId.value),
+        matchingType: matchingType.value,
+        sender: sender.value,
+        content: newMessage.value
+      };
+
+      stompClient.send('/send/{matchingId}/{matchingType}', {}, JSON.stringify(chatMessage));
+      messages.value = [
+        ...messages.value,
+        {
+          id: Date.now(),
+          text: newMessage.value,
+          isSentByMe: true
+        }
+      ];
+      newMessage.value = '';
+    };
+
+    const fetchChatHistory = async () => {
+      try {
+        const response = await axios.get(`/room/${matchingId.value}/${matchingType.value}`);
+        messages.value = response.data;
+        console.log(response.data);
+      } catch (error) {
+        console.error('Failed to fetch chat history:', error);
+      }
+    }
 
     onMounted(async () => {
       connectToWebSocket();
@@ -126,15 +128,16 @@
         console.error('Failed to load chat history:', error);
       }
     });
-  
-  return {
+
+    return {
       messages,
       newMessage,
       matchingId,
       matchingType,
       sender,
-      sendMessage
-  };
+      sendMessage,
+      received // received 속성 반환
+    };
   },
   filters: {
     formatTimestamp(timestamp) {
@@ -150,6 +153,7 @@
     },
   },
 };
+
 </script>
 
 <style scoped>

@@ -24,7 +24,7 @@
                     :style="{'margin-top': '23px', float: left}"/>
                 <div style="clear:both;"></div>
                 <div class="font-h4">
-                    * ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 2개가 소진됩니다.
+                    * ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 3개가 소진됩니다.
                     <br>* 매칭 완료 시 자동으로 채팅방이 생성되며, 생성된 채팅방은 24시간동안 유지됩니다.</div>
                 <div class="matching-submit-btn" @click="submitMatching()">매칭 신청</div>
             </div>

@@ -75,12 +75,12 @@
                         <div v-else class="frame-sub-form-body">
                             <div>
                                 <div class="font-head">PWD</div>
-                                <input type="text" class="font-input" placeholder="비밀번호 재설정" v-model="userInfo.password">
+                                <input type="password" class="font-input" placeholder="비밀번호 재설정" v-model="userInfo.password">
                                 <div style="clear:both;"></div>
                             </div>
                             <div>
                                 <div class="font-head">REPWD</div>
-                                <input type="text" class="font-input" placeholder="비밀번호 재설정 확인" v-model="userInfo.repassword">
+                                <input type="password" class="font-input" placeholder="비밀번호 재설정 확인" v-model="userInfo.repassword">
                                 <div style="clear:both;"></div>
                             </div>
                         </div>

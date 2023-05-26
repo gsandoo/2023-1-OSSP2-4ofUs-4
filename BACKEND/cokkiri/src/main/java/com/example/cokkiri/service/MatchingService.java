@@ -38,6 +38,8 @@ public class MatchingService {
     private NoShowClassMatchListRepository noShowClassMatchRepository;
     @Autowired
     private AccusationRepository accusationRepository;
+    @Autowired
+    private  UserRepository userRepository;
 
 
 
@@ -419,20 +421,28 @@ public class MatchingService {
     }
 
 
+    // 매칭 타입별로 저장
     public ClassMatchedList saveClassUser(ClassMatchedList matchedList){
+        for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
+            String email = matchedList.getEmailList().get(i);
+            Optional<User> user = userRepository.findById(email);
+            user.get().setHeart((user.get().getHeart())-10);
+            userRepository.save(user.get());
+        }
         return classMatchedListRepository.save(matchedList); // 데베에 저장
 
     };
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
+        for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
+            String email = matchedList.getEmailList().get(i);
+            Optional<User> user = userRepository.findById(email);
+            user.get().setHeart((user.get().getHeart())-10);
+            userRepository.save(user.get());
+        }
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
-
-        // 노쇼용
-//        int id = matchedList.getMatchingId();
-//        String type = matchedList.getMatchingType();
-//        LocalTime hour = matchedList.getPromiseTime().get(0).plusHours(1);
-
     };
 
+    // 매치된 리스트에서 삭제
     public  PublicMatchedList deletePublicUser(PublicMatchedList matchedList){
         publicMatchedListRepository.delete(matchedList);
         return matchedList;
@@ -444,7 +454,6 @@ public class MatchingService {
     }
 
 
-    List<MatchingAgree> matchingAgreeList = new ArrayList<>();
     public String publicMatchAgree(int matchingId , String id) {
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
         if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
@@ -534,4 +543,6 @@ public class MatchingService {
         noShowUser.setMatchingType(user.getMatchingType());
         return noShowClassMatchRepository.save(noShowUser);
     }
+
+
 }

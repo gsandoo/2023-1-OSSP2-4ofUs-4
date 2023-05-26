@@ -96,24 +96,21 @@ public class MatchingController {
     }
     // 신고 등록
     @PostMapping("post/accusation")
-    public ResponseEntity<MatchAccusation> postDeclaration(@RequestBody MatchAccusation declaration){
+    public ResponseEntity<MatchAccusation> postAccusation(@RequestBody MatchAccusation declaration){
         MatchAccusation list = matchingService.postDeclarationList(declaration);
         return new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
     }
 
     // 신고 목록리스트(수업/공강) 조회
     @GetMapping("get/accusation")
-    public ResponseEntity<List<MatchAccusation>> getDeclaration(@RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<List<MatchAccusation>> getAccusation(@RequestParam(value = "matchingType")String matchingType){
         List<MatchAccusation> list = matchingService.getDeclarationList(matchingType);
         return new ResponseEntity<List<MatchAccusation>>(list,HttpStatus.OK);
     }
 
-
-
-
-    // 특정 공강 매칭 조회
+    // 특정 공강 매칭 신고조회
     @GetMapping("get/publicmatch/accusation")
-    public ResponseEntity<MatchAccusation> getPublicDeclaration(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<MatchAccusation> getPublicAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
        if(matchingType.equals("free")){
            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
@@ -122,9 +119,9 @@ public class MatchingController {
        }
 
     }
-    //특정 수업 매칭 조회
+    //특정 수업 매칭 신고조회
     @GetMapping("get/classmatch/accusation")
-    public ResponseEntity<MatchAccusation> getClassDeclaration(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<MatchAccusation> getClassAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
         if(matchingType.equals("class")){
             MatchAccusation list = matchingService.getClassDeclarationList(id, matchingType);
             return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
@@ -134,7 +131,12 @@ public class MatchingController {
         }
     }
 
+    // 노쇼 발생 시 하트 반환
+    @PutMapping("rollback/heart")
+    public ResponseEntity<User> rollbackHeart(){
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 
 

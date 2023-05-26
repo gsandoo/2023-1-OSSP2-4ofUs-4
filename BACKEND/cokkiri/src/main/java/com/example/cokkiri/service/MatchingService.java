@@ -155,8 +155,11 @@ public class MatchingService {
 
 
     public PublicMatchedList findPublicMatch(List<PublicMatching>userList , int count ) {
+        // 객체 생성
+        PublicMatchedList matched = new PublicMatchedList();
+        matched.setMatchingRes("매칭 대기중");
         if (userList.size() < 2) {
-            return null;
+            return matched;
         } else {
             for (int i = 0; i <= userList.size() - 2; i++) {
                 LocalTime UserStartDate = userList.get(i).getStartTime();
@@ -180,8 +183,7 @@ public class MatchingService {
                 boolean head = (userList.get(i).getHeadCount()) == (userList.get(userList.size() - 1).getHeadCount());
                 if (day && head && times != null) {
 
-                    // 객체 생성
-                    PublicMatchedList matched = new PublicMatchedList();
+
 
                     userCount += 1;
                     //요소를 찾았지만 희망인원이 채워 졌는지 묻는 조건문
@@ -268,14 +270,16 @@ public class MatchingService {
         }
         //끝까지 돌았는데 못찾았을 시
         userCount = 0;
-        return null;
+        return matched;
     };
 
     //수업매칭
     public ClassMatchedList findClassMatch(List<ClassMatching>userList , int count ){
-
+        // 객체 생성
+        ClassMatchedList matched = new ClassMatchedList();
+        matched.setMatchingRes("매칭 대기중");
         if(userList.size()<2){
-            return null;
+            return matched;
         }
         else{
             for(int i =0; i <= userList.size()-2; i++){
@@ -290,8 +294,7 @@ public class MatchingService {
                 // 마지막 요소와 시간요일,희망인원이 같은 요소있으면 배열 다 돌아
                 boolean head = (userList.get(i).getHeadCount())==(userList.get(userList.size()-1).getHeadCount());
                 if (head&&courseNum!=null) {
-                    // 객체 생성
-                    ClassMatchedList matched = new ClassMatchedList();
+
                     userCount+=1;
                     // 요소를 찾았지만 희망인원이 채워 졌는지 묻는 조건문
                     if(userCount+1==count){
@@ -364,7 +367,7 @@ public class MatchingService {
             }
             //끝까지 돌았는데 못찾았을 시
             userCount=0;
-            return null;
+            return matched;
         }
     }
 
@@ -376,10 +379,10 @@ public class MatchingService {
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
-        if (publicMatchedList != null) {
+        if (publicMatchedList.getMatchingRes() != "매칭 대기중") {
             return savePublicUser(publicMatchedList);
         }
-        return null;
+        return publicMatchedList;
     }
 
 
@@ -390,10 +393,10 @@ public class MatchingService {
         classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
         classMatchedList = findClassMatch(classLectureUsers,count);
-        if(classMatchedList !=null){
+        if(classMatchedList.getMatchingRes() != "매칭 대기중"){
             return saveClassUser(classMatchedList);
         }
-        return null;
+        return classMatchedList;
     }
 
     //수업 매칭 전부 반환
@@ -426,7 +429,7 @@ public class MatchingService {
         for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
             String email = matchedList.getEmailList().get(i);
             Optional<User> user = userRepository.findById(email);
-            user.get().setHeart((user.get().getHeart())-10);
+            user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
         }
         return classMatchedListRepository.save(matchedList); // 데베에 저장
@@ -436,7 +439,7 @@ public class MatchingService {
         for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
             String email = matchedList.getEmailList().get(i);
             Optional<User> user = userRepository.findById(email);
-            user.get().setHeart((user.get().getHeart())-10);
+            user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
         }
         return publicMatchedListRepository.save(matchedList); // 데베에 저장

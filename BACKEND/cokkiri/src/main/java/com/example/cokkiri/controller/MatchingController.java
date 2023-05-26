@@ -50,7 +50,17 @@ public class MatchingController {
         }
     }
 
-    
+    // 매치된 리스트 삭제
+    @GetMapping("delete/free")
+    public  ResponseEntity<String> deletePublucMatch(@RequestParam(value = "matchingId")int id){
+        return new ResponseEntity<String>(matchingService.deletePublicUser(id),HttpStatus.OK);
+    }
+    @GetMapping("delete/class")
+    public ResponseEntity<String> deleteClassMatch(@RequestParam(value = "matchingId")int id){
+        return new ResponseEntity<String>(matchingService.deleteClassUser(id),HttpStatus.OK);
+    }
+
+
     @PutMapping("agree/free")
     public ResponseEntity<String> publicMatchingAgree(@RequestParam(value = "matchingId")int matchingId , @RequestParam(value = "userId") String id){
         String comment = matchingService.publicMatchAgree(matchingId , id);

@@ -446,14 +446,24 @@ public class MatchingService {
     };
 
     // 매치된 리스트에서 삭제
-    public  PublicMatchedList deletePublicUser(PublicMatchedList matchedList){
-        publicMatchedListRepository.delete(matchedList);
-        return matchedList;
+    public  String deletePublicUser(int id){
+        PublicMatchedList list = publicMatchedListRepository.findByMatchingId(id);
+        if (list != null) {
+            publicMatchedListRepository.delete(list);
+            return "삭제 되었습니다.";
+        }else{
+            return "해당 매칭 아이디에 맞는 리스트가 조회되지 않습니다.";
+        }
     }
 
-    public ClassMatchedList deleteClassUser(ClassMatchedList matchedList){
-        classMatchedListRepository.delete(matchedList);
-        return matchedList;
+    public String deleteClassUser(int id){
+        ClassMatchedList list = classMatchedListRepository.findByMatchingId(id);
+        if (list != null) {
+            classMatchedListRepository.delete(list);;
+            return "삭제 되었습니다";
+        }else{
+            return "해당 매칭 아이디에 맞는 리스트가 조회되지 않습니다";
+        }
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -378,7 +379,19 @@ public class MatchingService {
         int count = user.getHeadCount();
         publicLectureUsers.add(user);
         PublicMatchedList publicMatchedList = new PublicMatchedList();
+
+        String id = user.getEmail();
+        Optional<User> userInfo = userRepository.findById(id);
+        if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
         publicMatchedList = findPublicMatch(publicLectureUsers, count);
+        }else{
+            LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
+            String string = " : 매칭이 해당일자 까지 제한됩니다.";
+            StringBuffer buffer = new StringBuffer(string);
+            buffer.insert(0,restrictionDate);
+            String str = buffer.toString();
+            publicMatchedList.setMatchingRes(str);
+        }
         if (publicMatchedList.getMatchingRes() != "매칭 대기중") {
             return savePublicUser(publicMatchedList);
         }
@@ -392,7 +405,18 @@ public class MatchingService {
         int count = user.getHeadCount();
         classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
-        classMatchedList = findClassMatch(classLectureUsers,count);
+        String id = user.getEmail();
+        Optional<User> userInfo = userRepository.findById(id);
+        if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
+            classMatchedList = findClassMatch(classLectureUsers,count);
+        }else{
+            LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
+            String string = " : 매칭이 해당일자 까지 제한됩니다.";
+            StringBuffer buffer = new StringBuffer(string);
+            buffer.insert(0,restrictionDate);
+            String str = buffer.toString();
+            classMatchedList.setMatchingRes(str);
+        }
         if(classMatchedList.getMatchingRes() != "매칭 대기중"){
             return saveClassUser(classMatchedList);
         }

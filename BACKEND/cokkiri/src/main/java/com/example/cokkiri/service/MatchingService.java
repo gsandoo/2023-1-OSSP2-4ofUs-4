@@ -569,7 +569,10 @@ public class MatchingService {
             noShowUser.setEmail(user.getEmail());
             noShowUser.setMatchingId(user.getMatchingId());
             noShowUser.setMatchingType(user.getMatchingType());
-            System.out.println(noShowUser);
+
+            Optional<User> noshowuser = userRepository.findById(user.getEmail());
+            noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
+            userRepository.save(noshowuser.get()); // 다시 저장
             return noShowPublicMatchListRepository.save(noShowUser);
     }
 
@@ -578,6 +581,10 @@ public class MatchingService {
         noShowUser.setMatchingId(user.getMatchingId());
         noShowUser.setEmail(user.getEmail());
         noShowUser.setMatchingType(user.getMatchingType());
+
+        Optional<User> noshowuser = userRepository.findById(user.getEmail());
+        noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
+        userRepository.save(noshowuser.get()); // 다시 저장
         return noShowClassMatchRepository.save(noShowUser);
     }
 

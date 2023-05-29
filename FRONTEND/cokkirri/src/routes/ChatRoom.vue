@@ -24,7 +24,7 @@
           <div class="messages">
             <div v-for="message in messages" :key="message.id" class="message">
               <div :class="{'sent-by-me': message.isSentByMe, 'received-from': !message.isSentByMe}" class = "message-content">
-                {{ message.content }}
+                {{ message.isSentByMe ? message.text : message.content }}
               </div>
             </div>
           </div>
@@ -182,6 +182,7 @@ header {
   /* background-color:black; */
   max-height: 700px;
   overflow-y: scroll;
+  flex-direction: column-reverse;
   }
 
 .message {
@@ -203,6 +204,7 @@ header {
   text-align: left;
   padding: 5px;
   color : black;
+  border-radius: 15px;
 }
 
 .input-section {

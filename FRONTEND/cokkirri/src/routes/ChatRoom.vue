@@ -111,13 +111,6 @@
           }
       }
 
-  // onMounted(() => {
-  //     connectToWebSocket();
-  //         fetchChatHistory().catch(error => {
-  //         console.error('Failed to load chat history:', error);
-  //     });
-  // });
-
     onMounted(async () => {
       connectToWebSocket();
       try {
@@ -197,13 +190,15 @@ header {
 
 .sent-by-me {
   text-align: right;
+  text-size-adjust : 20px;
   background-color: #B87514;
   padding: 5px;
   color : white;
+  border-radius: 15px;
 }
 
 .received-from {
-  background-color : #ECBC76;
+  /* background-color : #ECBC76; */
   text-align: left;
   padding: 5px;
   color : black;

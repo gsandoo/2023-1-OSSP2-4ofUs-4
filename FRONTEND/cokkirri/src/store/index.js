@@ -23,6 +23,8 @@ export default createStore({
         password: null,
         heart: null,
 
+        usageHistory: [],
+
         notification: null,
 
         publicMatchingRecord: [],
@@ -37,6 +39,11 @@ export default createStore({
         classSave(state, record){
             state.classMatchingRecord = record
             console.log(state.classMatchingRecord)
+        },
+
+        //하트 사용내역 불러오기
+        setUsageHistory(state, history) {
+            state.usageHistory = history;
         },
 
 
@@ -212,6 +219,16 @@ export default createStore({
                     eventSource = new EventSource('http://3.37.37.164:8080/sse?id=' + state.id);
                 }
             };
+        },
+
+        async fetchUsageHistory({ commit }) {
+            try {
+              const response = await axios.get('/api/usage-history'); // 적절한 API 엔드포인트로 변경
+              const history = response.data; // 가져온 데이터를 적절히 가공하여 history 변수에 저장
+                commit('setUsageHistory', history);
+            } catch (error) {
+                console.log(error);
+            }
         }
     },
 })

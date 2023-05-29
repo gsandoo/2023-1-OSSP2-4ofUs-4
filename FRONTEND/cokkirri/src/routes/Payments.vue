@@ -20,8 +20,7 @@
           <p>나의 하트</p>
         </div>
         <div class = "NumOfHeart">
-          <!-- {{this.$store.state.heart}} &gt; -->
-          <p>2</p>
+          {{this.$store.state.heart}} &gt;
         </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
@@ -59,6 +58,10 @@
         </div>
         <div class="UseHistory_img">
           <img :src="imagePath_history" alt="UseHistory" />
+        </div>
+        <div class = "UseHistory_his">
+          {{this.$store.state.usageHistory}}
+          <!-- <p> >> &nbsp; 2023.05.25 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +5개</p> -->
         </div>
       </div>
     </div>
@@ -329,6 +332,23 @@ line-height: 60px;
 display: flex;
 align-items: center;
 text-align: center;
+}
+
+.UseHistory_his{
+  position: absolute;
+  width: 251px;
+  height: 43px;
+  left: 95px;
+  top: 300px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+
+  color : white;
 }
 
 .charge1000{ color:white;

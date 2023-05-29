@@ -29,7 +29,8 @@
             </div>
           </div>
           <div class="input-section">
-            <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="메시지를 입력하세요" class="messageInput">
+            <!-- <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="메시지를 입력하세요" class="messageInput"> -->
+            <textarea v-model="newMessage" @keyup.enter="sendMessage" placeholder="메시지를 입력하세요" class="messageInput"></textarea>
             <a @click="sendMessage" class="sendMessage">
               <!--전송하기 화살표 구현해야함.-->
               <i class="fa-paper-plane-top" style="color: #b87514;"></i>
@@ -80,8 +81,11 @@
 
       // 메시지 보내기
       const sendMessage = () => {
-          if (!newMessage.value || !stompClient) {
-              return;
+          // if (!newMessage.value || !stompClient) {
+          //     return;
+          // }
+          if (!newMessage.value || !stompClient || newMessage.value.trim() === '') {
+            return;
           }
 
           const chatMessage = {
@@ -219,24 +223,24 @@ header {
 .input-section button {
   margin-left: 10px;
 }
-
 .messageInput {
-  background-color: FFFEF9;
-  width: 500px;
-  height: 32px;
+  background-color: #FFFEF9;
+  width: 100%; /* 화면의 너비에 맞게 조절됨 */
+  height: auto; /* 내용에 맞게 자동으로 조절됨 */
   font-size: 15px;
   border: 0;
-  /* border-radius: 15px; */
   border: 1.5px solid #B87514;
   border-radius: 40px;
   outline: none;
-  padding-left: 10px;
+  padding: 8px 10px;
   display: flex;
-  color : #B87514;
+  color: #B87514;
+  resize: none;
 }
 
 .messageInput::placeholder{
   color : #B87514;
+  text-align: left;
 }
 
 .sendMessage{

@@ -24,7 +24,7 @@
           <div class="messages">
             <div v-for="message in messages" :key="message.id" class="message">
               <div :class="{'sent-by-me': message.isSentByMe, 'received-from': !message.isSentByMe}" class = "message-content">
-                {{ message.text }}
+                {{ message.content }}
               </div>
             </div>
           </div>
@@ -64,17 +64,17 @@
       let stompClient = null;
 
       const connectToWebSocket = () => {
-      const socket = new SockJS('http://3.37.37.164:8080/ws');
-      stompClient = Stomp.over(socket);
+        const socket = new SockJS('http://3.37.37.164:8080/ws');
+        stompClient = Stomp.over(socket);
 
-      socket.onopen = () => {
+        socket.onopen = () => {
           stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
-          const receivedMessage = JSON.parse(message.body);
-          messages.value.push(receivedMessage);
+            const receivedMessage = JSON.parse(message.body);
+            messages.value.push(receivedMessage);
 
-          console.log(receivedMessage); // Added console.log statement
-          console.log(receivedMessage.text); // Added console.log statement
-      });
+            console.log(receivedMessage);
+            console.log(receivedMessage.text);
+          });
       };
   };
 
@@ -118,6 +118,7 @@
       } catch (error) {
         console.error('Failed to load chat history:', error);
       }
+      console.log(messages, newMessage);
     });
   
   return {
@@ -198,7 +199,7 @@ header {
 }
 
 .received-from {
-  /* background-color : #ECBC76; */
+  background-color : #ECBC76;
   text-align: left;
   padding: 5px;
   color : black;

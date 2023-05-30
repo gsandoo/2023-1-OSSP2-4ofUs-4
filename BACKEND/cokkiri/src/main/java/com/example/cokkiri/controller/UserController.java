@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,15 +62,19 @@ public class UserController {
 
     //user가 인증메일을 눌렀을 떄 처리
     @GetMapping("/signUpConfirm")
-    public ResponseEntity <String> signUpConfirm(@RequestParam(value = "id")String id,@RequestParam(value = "authKey")String authKey){
-
-        //DB에 있는 authKey값과 맞는지 확인
-        if(userService.checkAuthKey(id,authKey)){
+    public RedirectView signUpConfirm(@RequestParam(value = "id") String id, @RequestParam(value = "authKey") String authKey) {
+        if (userService.checkAuthKey(id, authKey)) {
             userService.updateAuth(id);
-            return new ResponseEntity<String>("인증이 완료 되었습니다!!!",HttpStatus.OK);
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            params.add("userId", id);
+            params.add("status", "verified");
+            RedirectView redirectView = new RedirectView("/", true);
+            redirectView.setAttributesMap(params);
+            return redirectView;
+        } else {
+            //잘못된 접근
+            return null;
         }
-        else
-            return new ResponseEntity<String>("잘못된 접근!",HttpStatus.OK);
     }
 
     @GetMapping ("/admin/classMatching")

@@ -28,7 +28,7 @@ public class SseService {
 
         SseEmitter emitter;
 
-        //글쓴이가 버그 방지용으로 만든 코드입니다.
+        //버그 방지용으로 만든 코드입니다.
         if (emitterRepository.findAllEmitterStartWithByEmail(email) != null){
             emitterRepository.deleteAllEmitterStartWithId(email);
             emitter = emitterRepository.save(emitterId, new SseEmitter(Long.MAX_VALUE)); //id가 key, SseEmitter가 value

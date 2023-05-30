@@ -49,7 +49,6 @@ public class PublicMatchedList {
     private int matchingAgree;
 
     @Column
-    @ColumnDefault("매칭중")
     //매칭결과
     private String matchingRes;
 

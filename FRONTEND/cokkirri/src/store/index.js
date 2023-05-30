@@ -194,7 +194,7 @@ export default createStore({
         },
         async sseRequest(){
             try{
-                await axios.get('/sse?id='+this.state.id)
+                await axios.get('/subscribe/'+this.state.id)
                 .then((result)=>{
                     console.log(result.status)
                 })
@@ -207,7 +207,7 @@ export default createStore({
         },
 
         subscribeToSse({ state, commit }) {
-            let eventSource = new EventSource('http://3.37.37.164:8080/sse?id=' + state.id);
+            let eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
         
             eventSource.onmessage = event => {
                 commit('SET_NOTIFICATION', event.data);
@@ -216,7 +216,7 @@ export default createStore({
             eventSource.onerror = error => {
                 console.error('SSE connection error', error);
                 if (eventSource.readyState === EventSource.CLOSED) {
-                    eventSource = new EventSource('http://3.37.37.164:8080/sse?id=' + state.id);
+                    eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
                 }
             };
         },

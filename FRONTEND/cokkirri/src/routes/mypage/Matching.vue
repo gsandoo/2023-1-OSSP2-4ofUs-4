@@ -20,17 +20,18 @@
                         <div class="line-for-division"></div>
 
                         <div class="frame-sub-body">
-                            <div v-for="(record, index) in matchingListClass" :key="index" class="frame-data-box">
-                                <div class="font-hash-h1">
+                            <div v-for="(record, index) in matchingListClass" :key="index" :class="{'frame-data-box': record.courseNumber.length!==0}">
+                                <div v-if="record.courseNumber.length!==0" class="font-hash-h1">
                                     # 신청 날짜 : {{record.matchingTime}}
                                 </div>
-                                <div class="font-state-box">
+                                <div v-if="record.courseNumber.length!==0" class="font-state-box">
                                     <div class="record-img"></div>
                                     <div class="record-type">수업 매칭</div>
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
                                     <div class="record-timetable">
                                         <div v-for="(timeId, index) in record.courseNumber" :key="index" class="time-id">
-                                            {{timeId}}
+                                            <div v-if="timeId==='CSE1111-00'">CSE4083-01</div>
+                                            <div v-else>{{timeId}}</div>
                                         </div>
                                     </div>
                                     <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
@@ -230,9 +231,9 @@ export default {
 
         background: #FFFEF9;
         border-radius: 20px;
-        overflow-y: scroll;
+        overflow-y: auto;
         .frame-data-box{
-            width: 996px;
+            width: 891px;
             height: 160px;
 
             margin-top: 30px;

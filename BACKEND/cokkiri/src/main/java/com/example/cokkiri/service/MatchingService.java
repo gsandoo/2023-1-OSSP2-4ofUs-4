@@ -158,7 +158,7 @@ public class MatchingService {
     public PublicMatchedList findPublicMatch(List<PublicMatching>userList , int count ) {
         // 객체 생성
         PublicMatchedList matched = new PublicMatchedList();
-        matched.setMatchingRes("매칭 대기중");
+        matched.setMatchingRes("매칭 대기");
         if (userList.size() < 2) {
             return matched;
         } else {
@@ -278,7 +278,7 @@ public class MatchingService {
     public ClassMatchedList findClassMatch(List<ClassMatching>userList , int count ){
         // 객체 생성
         ClassMatchedList matched = new ClassMatchedList();
-        matched.setMatchingRes("매칭 대기중");
+        matched.setMatchingRes("매칭 대기");
         if(userList.size()<2){
             return matched;
         }
@@ -392,7 +392,7 @@ public class MatchingService {
             String str = buffer.toString();
             publicMatchedList.setMatchingRes(str);
         }
-        if (publicMatchedList.getMatchingRes() != "매칭 대기중") {
+        if (publicMatchedList.getMatchingRes() != "매칭 대기") {
             return savePublicUser(publicMatchedList);
         }
         return publicMatchedList;
@@ -417,7 +417,7 @@ public class MatchingService {
             String str = buffer.toString();
             classMatchedList.setMatchingRes(str);
         }
-        if(classMatchedList.getMatchingRes() != "매칭 대기중"){
+        if(classMatchedList.getMatchingRes() != "매칭 대기"){
             return saveClassUser(classMatchedList);
         }
         return classMatchedList;
@@ -437,8 +437,10 @@ public class MatchingService {
 
     //공강 매칭 전부 반환
     public List<PublicMatchedList> findAllPublicMatching(){
+        LocalDate nowDate = LocalDate.now();
         List<PublicMatchedList> matchedlist = new ArrayList<>();
         publicMatchedListRepository.findAll().forEach(e->matchedlist.add(e));
+
         return matchedlist;
     }
 

@@ -41,7 +41,7 @@ public class ClassMatchedList {
     private List<String> emailList;
 
     @Column
-    //매칭 동의수 사람수랑 같게 되면 matchingRes=매칭완료
+    //매칭 동의수 사람수랑 같게 되면 matchingRes=매칭중
     private int matchingAgree;
 
     @Column

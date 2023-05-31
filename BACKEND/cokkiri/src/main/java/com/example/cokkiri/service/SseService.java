@@ -106,7 +106,8 @@ public class SseService {
         );
     }
     //1ㄷ1로 List에 존재하는 특정 유저에게 알림 전송
-    public void sendList(List receiverList, String content, String type, String urlValue) {
+    // param : emailList , "매칭이 성사되었습니다" , class or free
+    public void sendList(List<String> receiverList, String content, String type) {
 
         List<Notification> notifications = new ArrayList<>();
 
@@ -118,7 +119,7 @@ public class SseService {
 
             sseEmitters = new HashMap<>();
 
-            notifications.add(createNotification(receiverList.get(i).toString(), content, type, urlValue));
+            notifications.add(createNotifications(receiverList.get(i).toString(), content, type));
 
             sseEmitters.putAll(emitterRepository.findAllEmitterStartWithByEmail(receiverList.get(i).toString()));
 
@@ -133,6 +134,31 @@ public class SseService {
         }
     }
 
+
+    private Notification createNotifications(String receiver, String content, String type) {
+
+        if (type.equals("free")) {
+            return Notification.builder()
+                    .receiver(receiver)     // 사용자 이메일
+                    .content(content)       // "매칭이 성사되었습니다"
+                    .notificationType(type) // free
+                    .url("")                // 일단 empty
+                    .isRead(false)          // 사용자가 읽었는지 판단
+                    .build();
+        } else if (type.equals("class")) {
+            return Notification.builder()
+                    .content(content)
+                    .notificationType(type)
+                    .url("")
+                    .isRead(false)
+                    .build();
+        }
+        else {
+            return null;
+        }
+    }
+
+
     //타입별 알림 생성
     private Notification createNotification(String receiver, String content, String type, String urlValue) {
 
@@ -140,13 +166,13 @@ public class SseService {
             return Notification.builder()
                     .receiver(receiver)
                     .content(content)
-                    .url("/chat/sender/room/" + urlValue)
+                    .url("/room/" + urlValue)
                     .notificationType(type)
                     .isRead(false)
                     .build();
         }
 
-        else if (type.equals("survey")) {
+        else if (type.equals("quotation")) {
             return Notification.builder()
                     .content(content)
                     .url("/quotation/" + urlValue)
@@ -176,7 +202,7 @@ public class SseService {
         try {
             emitter.send(SseEmitter.event()
                     .id(id)
-                    .name("sse")
+                    .name("match complete")
                     .data(data, MediaType.APPLICATION_JSON)
                     .reconnectTime(0));
 

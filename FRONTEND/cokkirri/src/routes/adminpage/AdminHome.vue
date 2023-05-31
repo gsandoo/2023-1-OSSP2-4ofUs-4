@@ -19,6 +19,7 @@
         <!---관리자 페이지 기본(유저)--->
         <div class="frame-body">
             <div v-if="state.btnState==='user'">
+                <!---
                 <div class="frame-body-head">
                     <div class="btn-1">All</div>
                     <div class="btn-2">Edit</div>
@@ -29,16 +30,17 @@
                 <div class="frame-body-body">
                     
                 </div>
+                --->
             </div>
             <!---관리자 페이지 결제--->
             <div v-else-if="state.btnState==='payment'">  
-                결제
-                <User/>
+                <Payment/>
             </div>
 
             <!---관리자 페이지 매칭--->
             <div v-else-if="state.btnState==='matching'">
                 매칭
+                <User/>
             </div>
         </div>
     </div>
@@ -46,9 +48,11 @@
 
 <script>
 import User from './component/User.vue'
+import Payment from './component/Payment.vue'
 export default {
     components:{
-        User
+        User,
+        Payment,
     },
     data() {
         return {

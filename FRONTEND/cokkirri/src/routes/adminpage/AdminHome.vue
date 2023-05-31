@@ -16,9 +16,9 @@
                 :class="{'selected-btn':state.btnState==='matching', 'unselected-btn':state.btnState!=='matching'}"
                 @click="btnStateApply('matching')">매칭</div>
         </div>
+        <!---관리자 페이지 기본(유저)--->
         <div class="frame-body">
-            <!---관리자 페이지 기본--->
-            <div v-if="state.btnState===''">
+            <div v-if="state.btnState==='user'">
                 <div class="frame-body-head">
                     <div class="btn-1">All</div>
                     <div class="btn-2">Edit</div>
@@ -30,15 +30,10 @@
                     
                 </div>
             </div>
-
-            <!---관리자 페이지 유저--->
-            <div v-else-if="state.btnState==='user'">
-                유저
-            </div>
-
             <!---관리자 페이지 결제--->
             <div v-else-if="state.btnState==='payment'">  
                 결제
+                <User/>
             </div>
 
             <!---관리자 페이지 매칭--->
@@ -50,11 +45,15 @@
 </template>
 
 <script>
+import User from './component/User.vue'
 export default {
+    components:{
+        User
+    },
     data() {
         return {
             state: {
-                btnState: ''
+                btnState: 'user'
             }
         }
     },

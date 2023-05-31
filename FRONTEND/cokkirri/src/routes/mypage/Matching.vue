@@ -30,8 +30,7 @@
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
                                     <div class="record-timetable">
                                         <div v-for="(timeId, index) in record.courseNumber" :key="index" class="time-id">
-                                            <div v-if="timeId==='CSE1111-00'">CSE4083-01</div>
-                                            <div v-else>{{timeId}}</div>
+                                            {{timeId}}
                                         </div>
                                     </div>
                                     <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>

@@ -393,6 +393,7 @@ public class MatchingService {
             publicMatchedList.setMatchingRes(str);
         }
         if (publicMatchedList.getMatchingRes() != "매칭 대기") {
+            sendSSEtoPublicUser(publicMatchedList);
             return savePublicUser(publicMatchedList);
         }
         return publicMatchedList;
@@ -417,7 +418,10 @@ public class MatchingService {
             String str = buffer.toString();
             classMatchedList.setMatchingRes(str);
         }
+
+
         if(classMatchedList.getMatchingRes() != "매칭 대기"){
+            sendSSEtoClassUser(classMatchedList);
             return saveClassUser(classMatchedList);
         }
         return classMatchedList;
@@ -461,6 +465,22 @@ public class MatchingService {
         return classMatchedListRepository.save(matchedList); // 데베에 저장
 
     };
+
+    @Autowired
+    SseService sseService;
+    public void sendSSEtoClassUser(ClassMatchedList matchedList){
+            List receiver = matchedList.getEmailList();
+            String content = "매칭이 성사되었습니다.";
+            String type = matchedList.getMatchingType();
+            sseService.sendList(receiver,content,type);
+    }
+
+    public void sendSSEtoPublicUser(PublicMatchedList matchedList){
+        List receiver = matchedList.getEmailList();
+        String content = "매칭이 성사되었습니다.";
+        String type = matchedList.getMatchingType();
+        sseService.sendList(receiver,content,type);
+    }
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
         for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
             String email = matchedList.getEmailList().get(i);

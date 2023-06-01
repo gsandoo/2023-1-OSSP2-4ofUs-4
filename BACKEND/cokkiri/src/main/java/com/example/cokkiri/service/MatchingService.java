@@ -411,15 +411,19 @@ public class MatchingService {
 
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
-        if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-            publicMatchedList = findPublicMatch(publicLectureUsers, count);
+        if(userInfo.get().isPublicMatching()==false){
+            if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
+                publicMatchedList = findPublicMatch(publicLectureUsers, count);
+            }else{
+                LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
+                String string = " : 매칭이 해당일자 까지 제한됩니다.";
+                StringBuffer buffer = new StringBuffer(string);
+                buffer.insert(0,restrictionDate);
+                String str = buffer.toString();
+                publicMatchedList.setMatchingRes(str);
+            }
         }else{
-            LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
-            String string = " : 매칭이 해당일자 까지 제한됩니다.";
-            StringBuffer buffer = new StringBuffer(string);
-            buffer.insert(0,restrictionDate);
-            String str = buffer.toString();
-            publicMatchedList.setMatchingRes(str);
+            publicMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
         sendSSEtoPublicUser(publicMatchedList);
         savePublicUser(publicMatchedList);
@@ -435,17 +439,21 @@ public class MatchingService {
         ClassMatchedList classMatchedList = new ClassMatchedList();
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
-
-        // 유저의 제한날짜가 없거나 제한 날짜가 현재 날짜 보다 전에 있으면
-        if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-            classMatchedList = findClassMatch(classLectureUsers,count);
+        if(userInfo.get().isClassMatching()==false){
+            // 유저의 제한날짜가 없거나 제한 날짜가 현재 날짜 보다 전에 있으면
+            if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
+                userInfo.get().setClassMatching(true);
+                classMatchedList = findClassMatch(classLectureUsers,count);
+            }else{
+                LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
+                String string = " : 매칭이 해당일자 까지 제한됩니다.";
+                StringBuffer buffer = new StringBuffer(string);
+                buffer.insert(0,restrictionDate);
+                String str = buffer.toString();
+                classMatchedList.setMatchingRes(str);
+            }
         }else{
-            LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
-            String string = " : 매칭이 해당일자 까지 제한됩니다.";
-            StringBuffer buffer = new StringBuffer(string);
-            buffer.insert(0,restrictionDate);
-            String str = buffer.toString();
-            classMatchedList.setMatchingRes(str);
+            classMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
         sendSSEtoClassUser(classMatchedList);
         saveClassUser(classMatchedList);
@@ -494,6 +502,10 @@ public class MatchingService {
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
+            List<MatchingWait> waitUser = matchingWaitRepository.findByEmail(email);
+            if(waitUser.get(i).getMatchingType()=="class"){
+                matchingWaitRepository.delete(waitUser.get(i));
+            }
         }
         return classMatchedListRepository.save(matchedList); // 데베에 저장
 
@@ -520,6 +532,10 @@ public class MatchingService {
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
+            List<MatchingWait> waitUser = matchingWaitRepository.findByEmail(email);
+            if(waitUser.get(i).getMatchingType()=="free"){
+                matchingWaitRepository.delete(waitUser.get(i));
+            }
         }
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
     };

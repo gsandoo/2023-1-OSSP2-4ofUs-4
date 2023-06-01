@@ -11,13 +11,6 @@
             <div class="btn-searchUserName" @click="searchUserName()">이름 검색</div>
             <input type="text" placeholder="Search Name" class="input-searchUserName" v-model="searchName" @change="searchUserName()">
             <div style="clear:both;"></div>
-
-            <!--- 버튼으로 구현할 예정
-            <input type="text" placeholder="Delete Id" v-model="deleteId">
-            <button @click="deleteUserById()">입력된 Delete Id 에 해당하는 User 삭제 요청</button>
-            <br>
-            --->
-            <div style="clear:both;"></div>
         </div>
         <div class="frame-sub-body">
             <div class="line-for-division"></div>

@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import retrofit2.http.HTTP;
 
 import java.util.List;
 
@@ -122,12 +121,12 @@ public class MatchingController {
     // 특정 공강 매칭 신고조회
     @GetMapping("get/publicmatch/accusation")
     public ResponseEntity<MatchAccusation> getPublicAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
-       if(matchingType.equals("free")){
-           MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
-           return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
-       }else {
-           return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
-       }
+        if(matchingType.equals("free")){
+            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
+            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
+        }else {
+            return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
+        }
 
     }
     //특정 수업 매칭 신고조회
@@ -164,26 +163,26 @@ public class MatchingController {
     }
 
     @GetMapping("admin/matchingWait")
-    public ResponseEntity<List<MatchingWait>> getAllMatchingWait(){
-        List<MatchingWait> list = matchingService.findAllMatchingWait();
-        return  new ResponseEntity<List<MatchingWait>>(list, HttpStatus.OK);
+    public ResponseEntity<List<PublicMatchingWait>> getAllMatchingWait(){
+        List<PublicMatchingWait> list = matchingService.findAllMatchingWait();
+        return  new ResponseEntity<List<PublicMatchingWait>>(list, HttpStatus.OK);
     }
 
     @GetMapping("get/matchingWait")
-    public ResponseEntity<List<MatchingWait>> getMatchingWaitById(@RequestParam (value = "email")String id){
-        List<MatchingWait> list = matchingService.findMatchingWaitByEmail(id);
-        return  new ResponseEntity<List<MatchingWait>>(list, HttpStatus.OK);
+    public ResponseEntity<List<PublicMatchingWait>> getMatchingWaitById(@RequestParam (value = "email")String id){
+        List<PublicMatchingWait> list = matchingService.findMatchingWaitByEmail(id);
+        return  new ResponseEntity<List<PublicMatchingWait>>(list, HttpStatus.OK);
     }
     @GetMapping("delete/free/matchingWait")
-    public ResponseEntity<MatchingWait> deletePublicMatchingWait(@RequestParam (value = "waitId")int id){
-        MatchingWait deletedUser = matchingService.deletePublicMatchingWaitById(id);
-        return new ResponseEntity<MatchingWait>(deletedUser, HttpStatus.OK);
+    public ResponseEntity<PublicMatchingWait> deletePublicMatchingWait(@RequestParam (value = "waitId")int id){
+        PublicMatchingWait deletedUser = matchingService.deletePublicMatchingWaitById(id);
+        return new ResponseEntity<PublicMatchingWait>(deletedUser, HttpStatus.OK);
     }
 
     @GetMapping("delete/class/matchingWait")
-    public ResponseEntity<MatchingWait> deleteClassMatchingWait(@RequestParam (value = "waitId")int id){
-        MatchingWait deletedUser = matchingService.deleteClassMatchingWaitById(id);
-        return new ResponseEntity<MatchingWait>(deletedUser, HttpStatus.OK);
+    public ResponseEntity<ClassMatchingWait> deleteClassMatchingWait(@RequestParam (value = "waitId")int id){
+        ClassMatchingWait deletedUser = matchingService.deleteClassMatchingWaitById(id);
+        return new ResponseEntity<ClassMatchingWait>(deletedUser, HttpStatus.OK);
     }
 }
 

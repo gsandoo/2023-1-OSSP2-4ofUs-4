@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import retrofit2.http.HTTP;
 
 import java.util.List;
 
@@ -173,7 +174,17 @@ public class MatchingController {
         List<MatchingWait> list = matchingService.findMatchingWaitByEmail(id);
         return  new ResponseEntity<List<MatchingWait>>(list, HttpStatus.OK);
     }
+    @GetMapping("delete/free/matchingWait")
+    public ResponseEntity<MatchingWait> deletePublicMatchingWait(@RequestParam (value = "waitId")int id){
+        MatchingWait deletedUser = matchingService.deletePublicMatchingWaitById(id);
+        return new ResponseEntity<MatchingWait>(deletedUser, HttpStatus.OK);
+    }
 
+    @GetMapping("delete/class/matchingWait")
+    public ResponseEntity<MatchingWait> deleteClassMatchingWait(@RequestParam (value = "waitId")int id){
+        MatchingWait deletedUser = matchingService.deleteClassMatchingWaitById(id);
+        return new ResponseEntity<MatchingWait>(deletedUser, HttpStatus.OK);
+    }
 }
 
 

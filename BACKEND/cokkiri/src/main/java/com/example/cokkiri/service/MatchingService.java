@@ -545,6 +545,37 @@ public class MatchingService {
         }
     }
 
+    // 매치 대기 상태에서 삭제
+    public MatchingWait deletePublicMatchingWaitById(int id){
+        MatchingWait waitUser = matchingWaitRepository.findById(id);
+        String email = waitUser.getEmail();
+        Optional<User> user = userRepository.findById(email);
+        user.get().setHeart(user.get().getHeart()+10);                // 하트 반환
+        for (int i = 0 ; i < publicLectureUsers.size() ; i ++){
+            if(email == publicLectureUsers.get(i).getEmail()){
+                publicLectureUsers.remove(publicLectureUsers.get(i)); // 배열에서 삭제
+            }
+        }
+        userRepository.save(user.get());
+        matchingWaitRepository.delete(waitUser);
+        return  waitUser;
+    }
+
+    public MatchingWait deleteClassMatchingWaitById(int id){
+        MatchingWait waitUser = matchingWaitRepository.findById(id);
+        String email = waitUser.getEmail();
+        Optional<User> user = userRepository.findById(email);
+        user.get().setHeart(user.get().getHeart()+10);              // 하트 반환
+        for (int i = 0 ; i < classLectureUsers.size() ; i ++){
+            if(email == classLectureUsers.get(i).getEmail()){
+                classLectureUsers.remove(classLectureUsers.get(i)); // 배열에서 삭제
+            }
+        }
+        userRepository.save(user.get());
+        matchingWaitRepository.delete(waitUser);
+        return  waitUser;
+    }
+
 
     public String publicMatchAgree(int matchingId , String id) {
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);

@@ -152,6 +152,16 @@ public class MatchingService {
         return times;
     }
 
+    // 매칭 대기 api
+    public  PublicMatchedList publicMatchedListWaitUser(List<PublicMatching>userList){
+        PublicMatchedList matched = new PublicMatchedList();
+        List<String> emailList  = new ArrayList<>();
+        emailList.add(userList.get(userList.size()-1).getEmail());
+        matched.setEmailList(emailList);
+        matched.setMatchingRes("매칭 대기");
+        return  matched;
+    }
+
 
 
 
@@ -160,7 +170,8 @@ public class MatchingService {
         PublicMatchedList matched = new PublicMatchedList();
         matched.setMatchingRes("매칭 대기");
         if (userList.size() < 2) {
-            return matched;
+            PublicMatchedList waitUser = publicMatchedListWaitUser(userList);
+            return waitUser;
         } else {
             for (int i = 0; i <= userList.size() - 2; i++) {
                 LocalTime UserStartDate = userList.get(i).getStartTime();
@@ -434,6 +445,7 @@ public class MatchingService {
         return matchedlist;
     }
 
+
     //수업 매칭 Id로 찾아서 반환
     public List<ClassMatchedList> findClassMatchingById(String id){
         return classMatchedListRepository.findByEmailListContains(id);
@@ -453,6 +465,13 @@ public class MatchingService {
         return publicMatchedListRepository.findByEmailListContains(id);
     }
 
+    public ClassMatchedList findClassMatchingByMatchId(int id){
+        return classMatchedListRepository.findByMatchingId(id);
+    }
+
+    public PublicMatchedList findPublicMatchingByMatchId(int id){
+        return publicMatchedListRepository.findByMatchingId(id);
+    }
 
     // 매칭 타입별로 저장
     public ClassMatchedList saveClassUser(ClassMatchedList matchedList){

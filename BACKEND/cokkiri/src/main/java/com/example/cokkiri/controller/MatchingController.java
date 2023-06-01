@@ -147,6 +147,20 @@ public class MatchingController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    //관리자페이지에서 매칭id로 매칭중 리스트 반환
+    @GetMapping("admin/publicMatchedList")
+    public ResponseEntity<PublicMatchedList> findPublicMatchedListByEmail(@RequestParam (value = "matchingId")int id){
+        PublicMatchedList matchList =  matchingService.findPublicMatchingByMatchId(id);
+        return  new ResponseEntity<PublicMatchedList>(matchList , HttpStatus.OK);
+    }
+
+    @GetMapping("admin/classMatchedList")
+    public ResponseEntity<ClassMatchedList> findClassMatchedListByEmail(@RequestParam (value = "matchingId")int id){
+        ClassMatchedList matchList =  matchingService.findClassMatchingByMatchId(id);
+        return  new ResponseEntity<ClassMatchedList>(matchList , HttpStatus.OK);
+    }
 }
 
 

@@ -161,6 +161,19 @@ public class MatchingController {
         ClassMatchedList matchList =  matchingService.findClassMatchingByMatchId(id);
         return  new ResponseEntity<ClassMatchedList>(matchList , HttpStatus.OK);
     }
+
+    @GetMapping("admin/matchingWait")
+    public ResponseEntity<List<MatchingWait>> getAllMatchingWait(){
+        List<MatchingWait> list = matchingService.findAllMatchingWait();
+        return  new ResponseEntity<List<MatchingWait>>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("get/matchingWait")
+    public ResponseEntity<List<MatchingWait>> getMatchingWaitById(@RequestParam (value = "email")String id){
+        List<MatchingWait> list = matchingService.findMatchingWaitByEmail(id);
+        return  new ResponseEntity<List<MatchingWait>>(list, HttpStatus.OK);
+    }
+
 }
 
 

@@ -42,6 +42,9 @@ public class MatchingService {
     @Autowired
     private  UserRepository userRepository;
 
+    @Autowired
+    private  MatchingWaitRepository matchingWaitRepository;
+
 
 
     // 배열에 저장 (공강)
@@ -153,25 +156,39 @@ public class MatchingService {
     }
 
     // 매칭 대기 api
-    public  PublicMatchedList publicMatchedListWaitUser(List<PublicMatching>userList){
-        PublicMatchedList matched = new PublicMatchedList();
-        List<String> emailList  = new ArrayList<>();
-        emailList.add(userList.get(userList.size()-1).getEmail());
-        matched.setEmailList(emailList);
-        matched.setMatchingRes("매칭 대기");
-        return  matched;
+    public  MatchingWait savePublicMatchingWaitUser(List<PublicMatching>userList){
+        MatchingWait waitUser = new MatchingWait();
+        waitUser.setMatchingType(userList.get(userList.size()-1).getMatchingType());
+        waitUser.setEmail(userList.get(userList.size()-1).getEmail());
+        waitUser.setStatus("매칭 대기중");
+        matchingWaitRepository.save(waitUser);
+        return  waitUser;
     }
 
+    public  MatchingWait saveClassMatchingWaitUser(List<ClassMatching>userList){
+        MatchingWait waitUser = new MatchingWait();
+        waitUser.setMatchingType(userList.get(userList.size()-1).getMatchingType());
+        waitUser.setEmail(userList.get(userList.size()-1).getEmail());
+        waitUser.setStatus("매칭 대기중");
+        matchingWaitRepository.save(waitUser);
+        return  waitUser;
+    }
 
+    // 매칭 대기중 유저 모두 반환
+    public List<MatchingWait> findAllMatchingWait(){
+        return matchingWaitRepository.findAll();
+    }
 
-
+    // 이메일로 매칭 대기중 반환
+    public List<MatchingWait> findMatchingWaitByEmail(String id){
+        return matchingWaitRepository.findByEmail(id);
+    }
     public PublicMatchedList findPublicMatch(List<PublicMatching>userList , int count ) {
         // 객체 생성
         PublicMatchedList matched = new PublicMatchedList();
-        matched.setMatchingRes("매칭 대기");
         if (userList.size() < 2) {
-            PublicMatchedList waitUser = publicMatchedListWaitUser(userList);
-            return waitUser;
+            savePublicMatchingWaitUser(userList);
+            return null;
         } else {
             for (int i = 0; i <= userList.size() - 2; i++) {
                 LocalTime UserStartDate = userList.get(i).getStartTime();
@@ -282,16 +299,17 @@ public class MatchingService {
         }
         //끝까지 돌았는데 못찾았을 시
         userCount = 0;
-        return matched;
+        savePublicMatchingWaitUser(userList);
+        return null;
     };
 
     //수업매칭
     public ClassMatchedList findClassMatch(List<ClassMatching>userList , int count ){
         // 객체 생성
         ClassMatchedList matched = new ClassMatchedList();
-        matched.setMatchingRes("매칭 대기");
         if(userList.size()<2){
-            return matched;
+            saveClassMatchingWaitUser(userList);
+            return null;
         }
         else{
             for(int i =0; i <= userList.size()-2; i++){
@@ -379,12 +397,12 @@ public class MatchingService {
             }
             //끝까지 돌았는데 못찾았을 시
             userCount=0;
-            return matched;
+            saveClassMatchingWaitUser(userList);
+            return null;
         }
     }
 
-    @Autowired
-    NotificationService notificationService;
+
     public PublicMatchedList publicMatch(PublicMatching user){
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
@@ -394,7 +412,7 @@ public class MatchingService {
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
         if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-        publicMatchedList = findPublicMatch(publicLectureUsers, count);
+            publicMatchedList = findPublicMatch(publicLectureUsers, count);
         }else{
             LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
             String string = " : 매칭이 해당일자 까지 제한됩니다.";
@@ -403,10 +421,8 @@ public class MatchingService {
             String str = buffer.toString();
             publicMatchedList.setMatchingRes(str);
         }
-        if (publicMatchedList.getMatchingRes() != "매칭 대기") {
-            sendSSEtoPublicUser(publicMatchedList);
-            return savePublicUser(publicMatchedList);
-        }
+        sendSSEtoPublicUser(publicMatchedList);
+        savePublicUser(publicMatchedList);
         return publicMatchedList;
     }
 
@@ -419,6 +435,8 @@ public class MatchingService {
         ClassMatchedList classMatchedList = new ClassMatchedList();
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
+
+        // 유저의 제한날짜가 없거나 제한 날짜가 현재 날짜 보다 전에 있으면
         if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
             classMatchedList = findClassMatch(classLectureUsers,count);
         }else{
@@ -429,12 +447,8 @@ public class MatchingService {
             String str = buffer.toString();
             classMatchedList.setMatchingRes(str);
         }
-
-
-        if(classMatchedList.getMatchingRes() != "매칭 대기"){
-            sendSSEtoClassUser(classMatchedList);
-            return saveClassUser(classMatchedList);
-        }
+        sendSSEtoClassUser(classMatchedList);
+        saveClassUser(classMatchedList);
         return classMatchedList;
     }
 
@@ -488,10 +502,10 @@ public class MatchingService {
     @Autowired
     SseService sseService;
     public void sendSSEtoClassUser(ClassMatchedList matchedList){
-            List receiver = matchedList.getEmailList();
-            String content = "매칭이 성사되었습니다.";
-            String type = matchedList.getMatchingType();
-            sseService.sendList(receiver,content,type);
+        List receiver = matchedList.getEmailList();
+        String content = "매칭이 성사되었습니다.";
+        String type = matchedList.getMatchingType();
+        sseService.sendList(receiver,content,type);
     }
 
     public void sendSSEtoPublicUser(PublicMatchedList matchedList){
@@ -606,15 +620,15 @@ public class MatchingService {
 
     public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
 
-            NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
-            noShowUser.setEmail(user.getEmail());
-            noShowUser.setMatchingId(user.getMatchingId());
-            noShowUser.setMatchingType(user.getMatchingType());
+        NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+        noShowUser.setEmail(user.getEmail());
+        noShowUser.setMatchingId(user.getMatchingId());
+        noShowUser.setMatchingType(user.getMatchingType());
 
-            Optional<User> noshowuser = userRepository.findById(user.getEmail());
-            noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
-            userRepository.save(noshowuser.get()); // 다시 저장
-            return noShowPublicMatchListRepository.save(noShowUser);
+        Optional<User> noshowuser = userRepository.findById(user.getEmail());
+        noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
+        userRepository.save(noshowuser.get()); // 다시 저장
+        return noShowPublicMatchListRepository.save(noShowUser);
     }
 
     public  NoShowClassMatchList postNoShowClassUser(NoShowClassMatchList user){

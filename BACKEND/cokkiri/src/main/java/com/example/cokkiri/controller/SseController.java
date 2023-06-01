@@ -31,8 +31,4 @@ public class SseController {
         return sseService.subscribe(email, lastEventId);
     }
 
-    // 사용자 식별자 생성 메서드 (임의로 구현)
-    private String generatePublicUserEmail(String email) {
-        return email;
-    }
 }

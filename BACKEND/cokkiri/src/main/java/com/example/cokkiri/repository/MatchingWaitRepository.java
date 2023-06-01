@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface MatchingWaitRepository extends JpaRepository<MatchingWait , Integer> {
     public List<MatchingWait> findByEmail(String id);
+    public MatchingWait findById(int id);
 }

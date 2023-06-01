@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     public boolean existsByIdAndPasswordAndAuthTrue(String id,String password);
     //관리자 로그인
     public boolean existsByIdAndPasswordAndAuthTrueAndAdminTrue(String id,String password);
-
+    public Optional<User> findById(String id);
 }

@@ -43,9 +43,9 @@ public class MatchingService {
     private  UserRepository userRepository;
 
     @Autowired
-    private  MatchingWaitRepository matchingWaitRepository;
-
-
+    private PublicMatchingWaitRepository publicMatchingWaitRepository;
+    @Autowired
+    private ClassMatchingWaitRepository classMatchingWaitRepository;
 
     // 배열에 저장 (공강)
     List<PublicMatching> publicLectureUsers = new ArrayList<>();
@@ -156,32 +156,58 @@ public class MatchingService {
     }
 
     // 매칭 대기 api
-    public  MatchingWait savePublicMatchingWaitUser(List<PublicMatching>userList){
-        MatchingWait waitUser = new MatchingWait();
+    public PublicMatchingWait savePublicMatchingWaitUser(List<PublicMatching>userList){
+        PublicMatchingWait waitUser = new PublicMatchingWait();
         waitUser.setMatchingType(userList.get(userList.size()-1).getMatchingType());
         waitUser.setEmail(userList.get(userList.size()-1).getEmail());
         waitUser.setStatus("매칭 대기중");
-        matchingWaitRepository.save(waitUser);
+        // 매칭 신청한 시간
+        waitUser.setMatchingTime(LocalDate.now());
+
+        // 사용자가 설정한 약속시간
+        List<LocalTime> timeList = new ArrayList<>();
+        LocalTime startTime = userList.get(userList.size()-1).getStartTime();
+        LocalTime endTime = userList.get(userList.size()-1).getEndTime();
+        timeList.add(startTime);
+        timeList.add(endTime);
+        waitUser.setPromiseTime(timeList);
+
+        //매칭 가능한 시간
+        waitUser.setAvailableDay(userList.get(userList.size()-1).getAvailableDay());
+        publicMatchingWaitRepository.save(waitUser);
         return  waitUser;
     }
 
-    public  MatchingWait saveClassMatchingWaitUser(List<ClassMatching>userList){
-        MatchingWait waitUser = new MatchingWait();
+    public ClassMatchingWait saveClassMatchingWaitUser(List<ClassMatching>userList){
+        ClassMatchingWait waitUser = new ClassMatchingWait();
         waitUser.setMatchingType(userList.get(userList.size()-1).getMatchingType());
         waitUser.setEmail(userList.get(userList.size()-1).getEmail());
         waitUser.setStatus("매칭 대기중");
-        matchingWaitRepository.save(waitUser);
+        // 신청시간
+        waitUser.setMatchingTime(LocalDate.now());
+        // 학수번호
+        waitUser.setCourseNumber(userList.get(userList.size()-1).getCourseNumber());
+        classMatchingWaitRepository.save(waitUser);
         return  waitUser;
     }
 
     // 매칭 대기중 유저 모두 반환
-    public List<MatchingWait> findAllMatchingWait(){
-        return matchingWaitRepository.findAll();
+    public List<PublicMatchingWait> findAllMatchingWait(){
+        return publicMatchingWaitRepository.findAll();
     }
 
     // 이메일로 매칭 대기중 반환
-    public List<MatchingWait> findMatchingWaitByEmail(String id){
-        return matchingWaitRepository.findByEmail(id);
+    public List<PublicMatchingWait> findMatchingWaitByEmail(String id){
+        return publicMatchingWaitRepository.findByEmail(id);
+    }
+
+    public List<ClassMatchingWait> findAllClassMatchingWait(){
+        return classMatchingWaitRepository.findAll();
+    }
+
+    // 이메일로 매칭 대기중 반환
+    public List<ClassMatchingWait> findClassMatchingWaitByEmail(String id){
+        return classMatchingWaitRepository.findByEmail(id);
     }
     public PublicMatchedList findPublicMatch(List<PublicMatching>userList , int count ) {
         // 객체 생성
@@ -264,6 +290,8 @@ public class MatchingService {
                         List<String> emailList = new ArrayList<>();
                         for (int k = 0; k <= publicUsersList.size() - 1; k++) {
                             String studentId = publicUsersList.get(k).getEmail();
+                            Optional<User> matchedUser = userRepository.findById(studentId);
+                            matchedUser.get().setPublicMatching(false);
                             emailList.add(studentId);
                         }
                         // 매칭된 학생들 학번 리스트
@@ -364,6 +392,8 @@ public class MatchingService {
                         List<String> emailList = new ArrayList<>();
                         for (int k = 0; k <= classUserList.size() - 1; k++) {
                             String email = classUserList.get(k).getEmail();
+                            Optional<User> matchedUser = userRepository.findById(email);
+                            matchedUser.get().setPublicMatching(false);
                             emailList.add(email);
                         }
                         // 매칭된 학생들 학번 리스트
@@ -502,9 +532,9 @@ public class MatchingService {
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
-            List<MatchingWait> waitUser = matchingWaitRepository.findByEmail(email);
+            List<ClassMatchingWait> waitUser = classMatchingWaitRepository.findByEmail(email);
             if(waitUser.get(i).getMatchingType()=="class"){
-                matchingWaitRepository.delete(waitUser.get(i));
+                classMatchingWaitRepository.delete(waitUser.get(i));
             }
         }
         return classMatchedListRepository.save(matchedList); // 데베에 저장
@@ -532,9 +562,9 @@ public class MatchingService {
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
-            List<MatchingWait> waitUser = matchingWaitRepository.findByEmail(email);
+            List<PublicMatchingWait> waitUser = publicMatchingWaitRepository.findByEmail(email);
             if(waitUser.get(i).getMatchingType()=="free"){
-                matchingWaitRepository.delete(waitUser.get(i));
+                publicMatchingWaitRepository.delete(waitUser.get(i));
             }
         }
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
@@ -562,8 +592,8 @@ public class MatchingService {
     }
 
     // 매치 대기 상태에서 삭제
-    public MatchingWait deletePublicMatchingWaitById(int id){
-        MatchingWait waitUser = matchingWaitRepository.findById(id);
+    public PublicMatchingWait deletePublicMatchingWaitById(int id){
+        PublicMatchingWait waitUser = publicMatchingWaitRepository.findById(id);
         String email = waitUser.getEmail();
         Optional<User> user = userRepository.findById(email);
         user.get().setHeart(user.get().getHeart()+10);                // 하트 반환
@@ -573,12 +603,12 @@ public class MatchingService {
             }
         }
         userRepository.save(user.get());
-        matchingWaitRepository.delete(waitUser);
+        publicMatchingWaitRepository.delete(waitUser);
         return  waitUser;
     }
 
-    public MatchingWait deleteClassMatchingWaitById(int id){
-        MatchingWait waitUser = matchingWaitRepository.findById(id);
+    public ClassMatchingWait deleteClassMatchingWaitById(int id){
+        ClassMatchingWait waitUser = classMatchingWaitRepository.findById(id);
         String email = waitUser.getEmail();
         Optional<User> user = userRepository.findById(email);
         user.get().setHeart(user.get().getHeart()+10);              // 하트 반환
@@ -588,7 +618,7 @@ public class MatchingService {
             }
         }
         userRepository.save(user.get());
-        matchingWaitRepository.delete(waitUser);
+        classMatchingWaitRepository.delete(waitUser);
         return  waitUser;
     }
 

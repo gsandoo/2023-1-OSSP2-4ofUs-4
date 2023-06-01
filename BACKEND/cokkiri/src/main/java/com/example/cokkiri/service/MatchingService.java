@@ -192,12 +192,12 @@ public class MatchingService {
     }
 
     // 매칭 대기중 유저 모두 반환
-    public List<PublicMatchingWait> findAllMatchingWait(){
+    public List<PublicMatchingWait> findAllPublicMatchingWait(){
         return publicMatchingWaitRepository.findAll();
     }
 
     // 이메일로 매칭 대기중 반환
-    public List<PublicMatchingWait> findMatchingWaitByEmail(String id){
+    public List<PublicMatchingWait> findPublicMatchingWaitByEmail(String id){
         return publicMatchingWaitRepository.findByEmail(id);
     }
 
@@ -209,6 +209,9 @@ public class MatchingService {
     public List<ClassMatchingWait> findClassMatchingWaitByEmail(String id){
         return classMatchingWaitRepository.findByEmail(id);
     }
+
+
+
     public PublicMatchedList findPublicMatch(List<PublicMatching>userList , int count ) {
         // 객체 생성
         PublicMatchedList matched = new PublicMatchedList();

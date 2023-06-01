@@ -162,17 +162,31 @@ public class MatchingController {
         return  new ResponseEntity<ClassMatchedList>(matchList , HttpStatus.OK);
     }
 
-    @GetMapping("admin/matchingWait")
-    public ResponseEntity<List<PublicMatchingWait>> getAllMatchingWait(){
-        List<PublicMatchingWait> list = matchingService.findAllMatchingWait();
+    @GetMapping("admin/free/matchingWait")
+    public ResponseEntity<List<PublicMatchingWait>> getAllPublicMatchingWait(){
+        List<PublicMatchingWait> list = matchingService.findAllPublicMatchingWait();
         return  new ResponseEntity<List<PublicMatchingWait>>(list, HttpStatus.OK);
     }
 
-    @GetMapping("get/matchingWait")
-    public ResponseEntity<List<PublicMatchingWait>> getMatchingWaitById(@RequestParam (value = "email")String id){
-        List<PublicMatchingWait> list = matchingService.findMatchingWaitByEmail(id);
+    @GetMapping("get/free/matchingWait")
+    public ResponseEntity<List<PublicMatchingWait>> getPublicMatchingWaitById(@RequestParam (value = "email")String id){
+        List<PublicMatchingWait> list = matchingService.findPublicMatchingWaitByEmail(id);
         return  new ResponseEntity<List<PublicMatchingWait>>(list, HttpStatus.OK);
     }
+
+    @GetMapping("admin/class/matchingWait")
+    public ResponseEntity<List<ClassMatchingWait>> getAllClassMatchingWait(){
+        List<ClassMatchingWait> list = matchingService.findAllClassMatchingWait();
+        return  new ResponseEntity<List<ClassMatchingWait>>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("get/class/matchingWait")
+    public ResponseEntity<List<ClassMatchingWait>> getClassMatchingWaitById(@RequestParam (value = "email")String id){
+        List<ClassMatchingWait> list = matchingService.findClassMatchingWaitByEmail(id);
+        return  new ResponseEntity<List<ClassMatchingWait>>(list, HttpStatus.OK);
+    }
+
+
     @GetMapping("delete/free/matchingWait")
     public ResponseEntity<PublicMatchingWait> deletePublicMatchingWait(@RequestParam (value = "waitId")int id){
         PublicMatchingWait deletedUser = matchingService.deletePublicMatchingWaitById(id);

@@ -15,6 +15,9 @@
             <div 
                 :class="{'selected-btn':state.btnState==='matching', 'unselected-btn':state.btnState!=='matching'}"
                 @click="btnStateApply('matching')">매칭</div>
+            <div 
+                :class="{'selected-btn':state.btnState==='noshow', 'unselected-btn':state.btnState!=='noshow'}"
+                @click="btnStateApply('noshow')">노쇼</div>
         </div>
         <!---관리자 페이지 기본(유저)--->
         <div class="frame-body">
@@ -42,6 +45,9 @@
             <div v-else-if="state.btnState==='matching'">
                 <Matching/>
             </div>
+            <div v-else-if="state.btnState==='noshow'">
+                <Noshow/>
+            </div>
         </div>
     </div>
 </template>
@@ -50,11 +56,13 @@
     import User from './component/User.vue'
     import Payment from './component/Payment.vue'
     import Matching from './component/Matching.vue'
+    import Noshow from './component/Noshow.vue'
     export default {
         components:{
             User,
             Payment,
             Matching,
+            Noshow,
         },
         data() {
             return {

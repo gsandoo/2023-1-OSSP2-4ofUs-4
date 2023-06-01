@@ -1,7 +1,9 @@
 <template>
     <div>
         <button @click="loadPaymentList()">결제내역 전체 반환</button>
+        <br>
         <input type="text" placeholder="Id 결제내역 조회" v-model="SearchingId" @change="searchPaymentById()">
+        <br>
         <div v-for="(payment,index) in paymentList" :key="index">
             {{payment}}
         </div>
@@ -18,6 +20,7 @@
             }
         },
         methods:{
+            // 모든 결제내역 불러오기
             async loadPaymentList(){
                 try{
                     await axios.get('/admin/payment')
@@ -33,6 +36,7 @@
                     console.log(error)
                 }
             },
+            // 아이디로 결제내역 검색하기
             async searchPaymentById(){
                 try{
                     await axios.get('/admin/user/payment',{

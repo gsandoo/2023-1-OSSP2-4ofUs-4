@@ -1,10 +1,13 @@
 <template>
     <div>
         <button @click="loadUserList()">PrintUserListToConsole</button>
+        <br>
         <input type="text" placeholder="Search Id" v-model="searchId" @change="searchUserId()">
         <input type="text" placeholder="Search Name" v-model="searchName" @change="searchUserName()">
+        <br>
         <input type="text" placeholder="Delete Id" v-model="deleteId">
         <button @click="deleteUserById()">입력된 Delete Id 에 해당하는 User 삭제 요청</button>
+        <br>
         <div v-for="(user,index) in userList" :key="index">
             {{user}}
             <br>
@@ -24,6 +27,7 @@
             }
         },
         methods:{
+            // 모든 유저 정보 불러오기
             async loadUserList(){
                 try{
                     await axios.get('/admin/user')
@@ -35,6 +39,7 @@
                     console.log(error)
                 }
             },
+            // 유저를 아이디로 검색
             async searchUserId(){
                 try{
                     await axios.get('/admin/user/id',{
@@ -55,6 +60,7 @@
                     console.log(error)
                 }
             },
+            // 유저를 이름으로 검색
             async searchUserName(){
                 
                 try{
@@ -76,6 +82,7 @@
                     console.log(error)
                 }    
             },
+            // 유저의 아이디로 해당 유저 삭제
             async deleteUserById(){
                 try{
                     await axios.delete('/admin/user/'+this.deleteId)

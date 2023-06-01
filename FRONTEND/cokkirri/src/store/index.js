@@ -68,8 +68,10 @@ export default createStore({
             state.isLogin = false
             state.id = null
         },
-        SET_NOTIFICATION: (state, notification) => {
-            state.notification = notification;
+        SET_NOTIFICATION(state, notification){
+            console.log("들어온 신호"+notification)
+            state.notification = notification
+            console.log("저장한 신호"+state.notification)
         }
     },
     actions: {
@@ -130,7 +132,7 @@ export default createStore({
             } catch(error){
                 console.log(error);
             }
-            dispatch('sseStart')
+            dispatch('subscribeToSse')
         },
         // vuex의 state.id 기반으로 현재 유저의 정보를 업데이트한다.
         async userInfoUpdate({state, commit}){
@@ -189,28 +191,12 @@ export default createStore({
                 console.log(error)
             }
         },
-        sseStart({dispatch}){
-            dispatch('subscribeToSse')
-        },
-        async sseRequest(){
-            try{
-                await axios.get('/subscribe/'+this.state.id)
-                .then((result)=>{
-                    console.log(result.status)
-                })
-                .catch(function(error){
-                    console.log(error)
-                })
-            } catch(error){
-                console.log(error)
-            }
-        },
 
         subscribeToSse({ state, commit }) {
             let eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
         
             eventSource.onmessage = event => {
-                commit('SET_NOTIFICATION', event.data);
+                commit('SET_NOTIFICATION', event);
             };
         
             eventSource.onerror = error => {
@@ -218,7 +204,10 @@ export default createStore({
                 if (eventSource.readyState === EventSource.CLOSED) {
                     eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
                 }
-            };
+                else{
+                    console.log("sse 연결된 상태입니다. 하지만 sse 응답 에러가 발생했습니다.")
+                }
+            }; 
         },
 
         async fetchUsageHistory({ commit }) {

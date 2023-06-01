@@ -31,6 +31,7 @@
                     
                 </div>
                 --->
+                <User/>
             </div>
             <!---관리자 페이지 결제--->
             <div v-else-if="state.btnState==='payment'">  
@@ -39,39 +40,40 @@
 
             <!---관리자 페이지 매칭--->
             <div v-else-if="state.btnState==='matching'">
-                매칭
-                <User/>
+                <Matching/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import User from './component/User.vue'
-import Payment from './component/Payment.vue'
-export default {
-    components:{
-        User,
-        Payment,
-    },
-    data() {
-        return {
-            state: {
-                btnState: 'user'
+    import User from './component/User.vue'
+    import Payment from './component/Payment.vue'
+    import Matching from './component/Matching.vue'
+    export default {
+        components:{
+            User,
+            Payment,
+            Matching,
+        },
+        data() {
+            return {
+                state: {
+                    btnState: 'user'
+                }
             }
-        }
-    },
-    methods: {
-        btnStateApply(btnState){
-            if(this.state.btnState === btnState){
-                this.state.btnState = ''
-            }
-            else{
-                this.state.btnState = btnState
+        },
+        methods: {
+            btnStateApply(btnState){
+                if(this.state.btnState === btnState){
+                    this.state.btnState = ''
+                }
+                else{
+                    this.state.btnState = btnState
+                }
             }
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>

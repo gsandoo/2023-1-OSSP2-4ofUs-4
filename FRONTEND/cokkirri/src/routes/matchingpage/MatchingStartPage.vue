@@ -105,13 +105,10 @@ export default {
                         startTime:this.startTime,
                         endTime:this.endTime,
                         matchingType:"free"
-                }).then((result)=>{
-                    if(result.status===200){
-                        this.$store.dispatch('callRecord')
-                        this.$router.replace('/my/matching');
-                        console.log(result.status)
-                        alert("공강 매칭 신청 완료")
-                    }
+                }).then(()=>{
+                    this.$store.dispatch('callRecord')
+                    this.$router.replace('/my/matching');
+                    alert("공강 매칭 신청 완료")
                 }).catch(function(error){
                     console.log(error)
                 })
@@ -122,17 +119,14 @@ export default {
         async resisterMatchingClass(){
             try{
                 await axios.post('/matching/class',{
-                        headCount: this.headCount,
-                        email: this.email,
-                        courseNumber: this.courseNumber,
-                        matchingType:"class"
-                }).then((result)=>{
-                    if(result.status===200){
-                        this.$store.dispatch('callRecord')
-                        this.$router.replace('/my/matching');
-                        console.log(result.status)
-                        alert("수업 매칭 신청 완료")
-                    }
+                    headCount: this.headCount,
+                    email: this.email,
+                    courseNumber: this.courseNumber,
+                    matchingType:"class"
+                }).then(()=>{
+                    this.$store.dispatch('callRecord')
+                    this.$router.replace('/my/matching');
+                    alert("수업 매칭 신청 완료")
                 }).catch(function(error){
                     console.log(error)
                 })

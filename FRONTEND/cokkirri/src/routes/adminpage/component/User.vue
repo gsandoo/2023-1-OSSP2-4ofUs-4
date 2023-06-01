@@ -5,6 +5,10 @@
         <input type="text" placeholder="Search Name" v-model="searchName" @change="searchUserName()">
         <input type="text" placeholder="Delete Id" v-model="deleteId">
         <button @click="deleteUserById()">입력된 Delete Id 에 해당하는 User 삭제 요청</button>
+        <div v-for="(user,index) in userList" :key="index">
+            {{user}}
+            <br>
+        </div>
     </div>
 </template>
 
@@ -24,6 +28,7 @@
                 try{
                     await axios.get('/admin/user')
                     .then(result=>{
+                        this.userList = result.data
                         console.log(result)
                     })
                 }catch(error){
@@ -39,6 +44,7 @@
                     })
                     .then((result) =>{
                         // id 검색 결과는 {} 반환됨
+                        this.userList = [result.data]
                         console.log("Id 검색결과")
                         console.log(result)
                     })
@@ -59,6 +65,7 @@
                     })
                     .then((result) =>{
                         // Name 검색 결과는 [{},...] 반환됨
+                        this.userList = result.data
                         console.log("Name 검색결과")
                         console.log(result)
                     })

@@ -2,6 +2,9 @@
     <div>
         <button @click="loadPaymentList()">결제내역 전체 반환</button>
         <input type="text" placeholder="Id 결제내역 조회" v-model="SearchingId" @change="searchPaymentById()">
+        <div v-for="(payment,index) in paymentList" :key="index">
+            {{payment}}
+        </div>
     </div>
 </template>
 
@@ -20,6 +23,7 @@
                     await axios.get('/admin/payment')
                     .then((result)=>{
                         console.log("결제내역 출력")
+                        this.paymentList = result.data
                         console.log(result)
                     })
                     .catch(function(error){
@@ -38,6 +42,7 @@
                     })
                     .then((result)=>{
                         console.log(this.SearchingId+"의 결제내역 조회 요청")
+                        this.paymentList = result.data
                         console.log(result)
                     })
                     .catch(function(error){

@@ -1,17 +1,40 @@
 <template>
-    <div>
-        <button @click="loadUserList()">PrintUserListToConsole</button>
-        <br>
-        <input type="text" placeholder="Search Id" v-model="searchId" @change="searchUserId()">
-        <input type="text" placeholder="Search Name" v-model="searchName" @change="searchUserName()">
-        <br>
-        <input type="text" placeholder="Delete Id" v-model="deleteId">
-        <button @click="deleteUserById()">입력된 Delete Id 에 해당하는 User 삭제 요청</button>
-        <br>
-        <div v-for="(user,index) in userList" :key="index">
-            {{user}}
+    <div class="frame-main">
+        <div class="title-h1">유저 기록 관리</div>
+        <div class="line-for-division"></div>
+        <div class="frame-sub-head">
+            <div class="btn-loadUserList" @click="loadUserList()">전체 조회</div>
+
+            <div class="btn-searchUserId" @click="searchUserId()">아이디 검색</div>
+            <input type="text" placeholder="Search Id" class="input-searchUserId" v-model="searchId" @change="searchUserId()">
+
+            <div class="btn-searchUserName" @click="searchUserName()">이름 검색</div>
+            <input type="text" placeholder="Search Name" class="input-searchUserName" v-model="searchName" @change="searchUserName()">
+            <div style="clear:both;"></div>
+
+            <!--- 버튼으로 구현할 예정
+            <input type="text" placeholder="Delete Id" v-model="deleteId">
+            <button @click="deleteUserById()">입력된 Delete Id 에 해당하는 User 삭제 요청</button>
             <br>
+            --->
+            <div style="clear:both;"></div>
         </div>
+        <div class="frame-sub-body">
+            <div class="line-for-division"></div>
+            <div class="attribute-name">이름</div>
+            <div class="attribute-email">이메일</div>
+            <div style="clear:both;"></div>
+            <div class="line-for-division"></div>
+
+            <div v-for="(user,index) in userList" :key="index">
+                <div class="content-row-name">{{user.name}}</div>
+                <div class="content-row-email">{{user.id}}</div>
+                <div class="content-row-btn-edit">수정</div>
+                <div class="content-row-btn-delete" @click="deleteUserById(user.id)">제거</div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div class="line-for-division"></div>
     </div>
 </template>
 
@@ -21,9 +44,9 @@
         data(){
             return{
                 userList: [],
+
                 searchId: '',
                 searchName: '',
-                deleteId: '',
             }
         },
         methods:{
@@ -83,11 +106,11 @@
                 }    
             },
             // 유저의 아이디로 해당 유저 삭제
-            async deleteUserById(){
+            async deleteUserById(deleteId){
                 try{
-                    await axios.delete('/admin/user/'+this.deleteId)
+                    await axios.delete('/admin/user/'+deleteId)
                     .then((result)=>{
-                        console.log("상태: "+result.status+", "+this.deleteId+"제거 요청 완료")
+                        console.log("상태: "+result.status+", "+deleteId+"제거 요청 완료")
                     })
                     .catch(function(error){
                         console.log(error)
@@ -102,5 +125,305 @@
 
 
 <style lang="scss" scoped>
+        .frame-main{
+            width: 600px;
+            height: 600px;
 
+            //border: 1px solid #ECBC76; // frame 표시용 시용
+            .title-h1{
+                width: 600px;
+                height: 50px;
+
+                padding: 0px;
+                margin-top: 0px;
+                margin-left: 5px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                text-align: left;
+
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 24px;
+                color: #B87514;
+            }
+            .frame-sub-head{
+                width: 600px;
+                height: 110px;
+                
+                // border: 1px solid #ECBC76; // frame 표시용 시용
+
+                .btn-loadUserList{
+                    width: 590px;
+                    height: 45px;
+
+                    margin-top: 10px;
+                    margin-left: 5px;
+
+                    background: #B87514;
+                    border-radius: 10px;    
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+
+                    color: #FFFEF9;
+                }
+                .btn-searchUserId{
+                    width: 95px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 5px;
+                    float: left;
+
+                    background: #ECBC76;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+                .input-searchUserId{
+                    width: 183px;
+                    height: 43px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 0px;
+                    float: left;
+
+                    border: 1px solid #C4C4C4;
+                    border-radius: 8px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 130%;
+                    color: #000000;
+                }
+                .btn-searchUserName{
+                    width: 95px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    float: left;
+
+                    background: #ECBC76;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+                .input-searchUserName{
+                    width: 183px;
+                    height: 43px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 0px;
+                    float: left;
+
+                    border: 1px solid #C4C4C4;
+                    border-radius: 8px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 130%;
+                    color: #000000;
+                }
+            }
+            .frame-sub-body{
+                width: 600px;
+                height: 428px;
+
+                overflow-y: auto;
+
+                .attribute-name{
+                    width: 115px;
+                    height: 54px;
+
+                    padding: 0px;
+                    margin-top: 0px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ECBC76;
+                }
+                .attribute-email{
+                    width: 266px;
+                    height: 54px;
+
+                    padding: 0px;
+                    margin-top: 0px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ECBC76;
+                }
+                .content-row-name{
+                    width: 115px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #B87514;
+                }
+                .content-row-email{
+                    width: 266px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #B87514;
+                }
+                .content-row-btn-edit{
+                    width: 90px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 10px;
+                    float: left;
+
+                    background: #ECBC76;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+                .content-row-btn-delete{
+                    width: 90px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 10px;
+                    float: left;
+
+                    background: #B87514;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+            }
+            .line-for-division{
+                width: 580px;
+                height: 0px;
+                margin-top: 0px;
+                margin-left: 9px;
+                margin-bottom: 0px;
+
+                border: 1px solid #ECBC76;
+            }
+        }
+        
 </style>

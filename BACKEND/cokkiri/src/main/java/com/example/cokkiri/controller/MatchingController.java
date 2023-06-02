@@ -202,9 +202,15 @@ public class MatchingController {
         return new ResponseEntity<ClassMatchingWait>(deletedUser, HttpStatus.OK);
     }
 
-    @GetMapping("change/noshow")
-    public  ResponseEntity<User> changeStatusNoShowUser(@RequestParam (value = "email")String email){
-        User user  = matchingService.changeNoShowUserStatus(email);
+    @GetMapping("change/class/noshow")
+    public  ResponseEntity<User> changeStatusClassNoShowUser(@RequestParam (value = "email")String email){
+        User user  = matchingService.changeClassNoShowUserStatus(email);
+        return  new ResponseEntity<User>(user , HttpStatus.OK);
+    }
+
+    @GetMapping("change/free/noshow")
+    public  ResponseEntity<User> changeStatusPublicNoShowUser(@RequestParam (value = "email")String email){
+        User user  = matchingService.changePublicNoShowUserStatus(email);
         return  new ResponseEntity<User>(user , HttpStatus.OK);
     }
 }

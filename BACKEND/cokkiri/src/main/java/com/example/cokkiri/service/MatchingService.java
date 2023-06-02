@@ -751,12 +751,27 @@ public class MatchingService {
         return noShowClassMatchRepository.save(noShowUser);
     }
 
-    public User changeNoShowUserStatus(String email){
+    public User changeClassNoShowUserStatus(String email){
         Optional<User> noshowUser= userRepository.findById(email);
         if(noshowUser.isEmpty()){
             return  null;
         }else{
             noshowUser.get().setRestrctionDate(null);
+            NoShowClassMatchList user  = noShowClassMatchRepository.findByEmail(email);
+            noShowClassMatchRepository.delete(user);
+            return noshowUser.get();
+        }
+    }
+
+
+    public User changePublicNoShowUserStatus(String email){
+        Optional<User> noshowUser= userRepository.findById(email);
+        if(noshowUser.isEmpty()){
+            return  null;
+        }else{
+            noshowUser.get().setRestrctionDate(null);
+            NoShowPublicMatchList user  = noShowPublicMatchListRepository.findByEmail(email);
+            noShowPublicMatchListRepository.delete(user);
             return noshowUser.get();
         }
     }

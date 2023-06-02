@@ -601,6 +601,9 @@ public class MatchingService {
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
     };
 
+    //노쇼 발생 시 하트 반환
+
+
     // 매치된 리스트에서 삭제
     public  String deletePublicUser(int id){
         PublicMatchedList list = publicMatchedListRepository.findByMatchingId(id);
@@ -702,13 +705,9 @@ public class MatchingService {
         return list;
     }
     public MatchAccusation postDeclarationList(MatchAccusation accusation){
-        List<String> emailList = new ArrayList<>();
-        for (int i = 0 ; i < accusation.getEmail().size() ; i ++) {
-            emailList.add(accusation.getEmail().get(i));
-        }
         System.out.println(accusation);
         MatchAccusation list = new MatchAccusation();
-        list.setEmail(emailList);
+        list.setEmail(accusation.getEmail());
         list.setMatchingType(accusation.getMatchingType());
         list.setTitle(accusation.getTitle());
         list.setMatchingId(accusation.getMatchingId());
@@ -732,7 +731,7 @@ public class MatchingService {
         noShowUser.setEmail(user.getEmail());
         noShowUser.setMatchingId(user.getMatchingId());
         noShowUser.setMatchingType(user.getMatchingType());
-
+        noShowUser.setRestrictionTime(LocalDateTime.now().plusDays(7));
         Optional<User> noshowuser = userRepository.findById(user.getEmail());
         noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
         userRepository.save(noshowuser.get()); // 다시 저장
@@ -744,6 +743,7 @@ public class MatchingService {
         noShowUser.setMatchingId(user.getMatchingId());
         noShowUser.setEmail(user.getEmail());
         noShowUser.setMatchingType(user.getMatchingType());
+        noShowUser.setRestrictionTime(LocalDateTime.now().plusDays(7));
 
         Optional<User> noshowuser = userRepository.findById(user.getEmail());
         noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
@@ -751,6 +751,17 @@ public class MatchingService {
         return noShowClassMatchRepository.save(noShowUser);
     }
 
+
+    //하트 반환
+    public  User rollbackHeart(String id){
+        Optional<User> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            return  null;
+        }else{
+            user.get().setHeart(user.get().getHeart()+10);
+        }
+        return  userRepository.save(user.get());
+    }
     public User changeClassNoShowUserStatus(String email){
         Optional<User> noshowUser= userRepository.findById(email);
         if(noshowUser.isEmpty()){

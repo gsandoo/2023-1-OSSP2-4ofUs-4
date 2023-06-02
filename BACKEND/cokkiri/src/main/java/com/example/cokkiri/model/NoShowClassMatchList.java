@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -23,4 +24,7 @@ public class NoShowClassMatchList {
 
     @Column
     private  String matchingType;
+
+    @Column
+    private LocalDateTime restrictionTime;
 }

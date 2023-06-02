@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,4 +23,7 @@ public class NoShowPublicMatchList {
 
     @Column
     private  String matchingType;
+
+    @Column
+    private LocalDateTime restrictionTime;
 }

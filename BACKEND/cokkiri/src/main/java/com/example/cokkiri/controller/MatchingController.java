@@ -201,6 +201,12 @@ public class MatchingController {
         ClassMatchingWait deletedUser = matchingService.deleteClassMatchingWaitById(id);
         return new ResponseEntity<ClassMatchingWait>(deletedUser, HttpStatus.OK);
     }
+
+    @GetMapping("change/noshow")
+    public  ResponseEntity<User> changeStatusNoShowUser(@RequestParam (value = "email")String email){
+        User user  = matchingService.changeNoShowUserStatus(email);
+        return  new ResponseEntity<User>(user , HttpStatus.OK);
+    }
 }
 
 

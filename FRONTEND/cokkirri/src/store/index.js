@@ -192,13 +192,14 @@ export default createStore({
             }
         },
 
-        subscribeToSse({ state, commit }) {
+        subscribeToSse({ state }) {
             let eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
         
-            eventSource.onmessage = event => {
-                commit('SET_NOTIFICATION', event);
-            };
-        
+            eventSource.addEventListener("sse",(event)=>{
+                console.log(event.data)
+                //commit('SET_NOTIFICATION', event);
+            });
+            
             eventSource.onerror = error => {
                 console.error('SSE connection error', error);
                 if (eventSource.readyState === EventSource.CLOSED) {
@@ -208,6 +209,7 @@ export default createStore({
                     console.log("sse 연결된 상태입니다. 하지만 sse 응답 에러가 발생했습니다.")
                 }
             }; 
+            
         },
 
         async fetchUsageHistory({ commit }) {

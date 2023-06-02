@@ -23,7 +23,7 @@
                     <div class="content-row-id">{{payment.id}}</div>
                     <div class="content-row-detail">{{payment.userId}}</div>
                     <div class="content-row-detail">{{payment.payDate}}</div>
-                    <div class="content-row-detail">{{payment.amount}}</div>
+                    <div class="content-row-detail">{{payment.amount/200}}</div>
                     <div style="clear:both;"></div>
                 </div>
             </div>

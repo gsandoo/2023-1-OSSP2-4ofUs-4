@@ -1,23 +1,4 @@
 <template>
-    <!---
-    <div>
-        <input type="text" placeholder="Delete 수업 Matching By Id" v-model="classMatchingIdForDelete">
-        <button @click="deleteClassMatchingByMatchingId()">입력한 매칭 번호에 대응되는 수업 매칭 삭제하기</button>
-        <br>
-        <input type="text" placeholder="Delete 공강 Matching By Id" v-model="publicMatchingIdForDelete">
-        <button @click="deletePublicMatchingByMatchingId()">입력한 매칭 번호에 대응되는 공강 매칭 삭제하기</button>
-
-        <div v-for="(matching,index) in publicMatchingList" :key="index">
-            {{matching}}
-            <br>
-        </div>
-        <div v-for="(matching,index) in classMatchingList" :key="index">
-            {{matching}}
-            <br>
-        </div>
-    </div>
-    --->
-
     <div class="frame-main">
         <div class="title-h1">매칭 기록 관리</div>
         <div class="line-for-division"></div>
@@ -28,7 +9,7 @@
             <input type="text" placeholder="Search Id" class="input-temp" v-model="searchId" @change="searchMatchingId()">
 
             <div class="btn-searchMatchingId" @click="searchMatchingId()">매칭ID검색</div>
-            <input type="text" placeholder="Search Matching ID" class="input-searchMatchingId" v-model="searchName" @change="searchMatchingId()">
+            <input type="text" placeholder="Search Matching ID" class="input-searchMatchingId" v-model="MatchingIdForSearch" @change="searchMatchingId()">
             <div style="clear:both;"></div>
         </div>
         <div class="frame-sub-body">
@@ -51,11 +32,11 @@
                 emailList ["","",...]
             --->
             <div v-for="(matching,index) in publicMatchingList" :key="index">
-                <div class="content-row-type">수업 매칭</div>
+                <div class="content-row-type">공강 매칭</div>
                 <div class="content-row-sub-small">{{matching.matchingId}}</div>
                 <div class="content-row-sub-small">{{matching.headCount}}</div>
                 <div class="content-row-sub-small">{{matching.matchingTime}}</div>
-                <dir class="content-row-btn-delete">제거</dir>
+                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'class')">제거</dir>
                 <div style="clear:both;"></div>
 
                 <div class="content-row-sub-long">-</div>
@@ -70,11 +51,11 @@
                 emailList ["","",...]
             --->
             <div v-for="(matching,index) in classMatchingList" :key="index">
-                <div class="content-row-type">공강 매칭</div>
+                <div class="content-row-type">수업 매칭</div>
                 <div class="content-row-sub-small">{{matching.matchingId}}</div>
                 <div class="content-row-sub-small">{{matching.headCount}}</div>
                 <div class="content-row-sub-small">{{matching.matchingTime}}</div>
-                <dir class="content-row-btn-delete">제거</dir>
+                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'free')">제거</dir>
                 <div style="clear:both;"></div>
 
                 <div class="content-row-sub-long">{{matching.courseNumber}}</div>
@@ -146,8 +127,10 @@
                             matchingId: this.MatchingIdForSearch
                         }
                     }).then((result)=>{
-                        this.publicMatchingList = result.data
-                        //this.classMatchingList = []
+                        console.log("매칭 검색- 수업")
+                        console.log(result)
+                        //this.publicMatchingList = []
+                        this.classMatchingList = [result.data]
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -162,8 +145,10 @@
                             matchingId: this.MatchingIdForSearch
                         }
                     }).then((result)=>{
-                        //this.publicMatchingList = []
-                        this.classMatchingList = result.data
+                        console.log("매칭 검색- 공강")
+                        console.log(result)
+                        this.publicMatchingList = [result.data]
+                        //this.classMatchingList = []
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -173,11 +158,21 @@
             },
 
             // 매칭아이디로 타입별 매칭 삭제하기
-            async deleteClassMatchingByMatchingId(){
+            async deleteMatchingByMatchingId(matchingId,matchingType){
+                if(matchingType==="class"){
+                    this.deleteClassMatchingByMatchingId(matchingId)
+                }
+                else if(matchingType==="free"){
+                    this.deletePublicMatchingByMatchingId(matchingId)
+                }
+                
+
+            },
+            async deleteClassMatchingByMatchingId(matchingId){
                 try{
                     await axios.get('/matching/delete/class',{
                         params:{
-                            matchingId: this.classMatchingIdForDelete
+                            matchingId: matchingId
                         }
                     })
                     .then((result)=>{
@@ -187,11 +182,11 @@
                     console.log(error)
                 }
             },
-            async deletePublicMatchingByMatchingId(){
+            async deletePublicMatchingByMatchingId(matchingId){
                 try{
                     await axios.get('/matching/delete/class',{
                         params:{
-                            matchingId: this.publicMatchingIdForDelete
+                            matchingId: matchingId
                         }
                     })
                     .then((result)=>{

@@ -751,5 +751,14 @@ public class MatchingService {
         return noShowClassMatchRepository.save(noShowUser);
     }
 
+    public User changeNoShowUserStatus(String email){
+        Optional<User> noshowUser= userRepository.findById(email);
+        if(noshowUser.isEmpty()){
+            return  null;
+        }else{
+            noshowUser.get().setRestrctionDate(null);
+            return noshowUser.get();
+        }
+    }
 
 }

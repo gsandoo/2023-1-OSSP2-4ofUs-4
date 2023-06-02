@@ -201,6 +201,8 @@ header {
   padding: 5px;
   color : white;
   border-radius: 15px;
+  width : 400px;
+  float : right;
 }
 
 .received-from {
@@ -209,6 +211,7 @@ header {
   padding: 5px;
   color : black;
   border-radius: 15px;
+  max-width: 400px;
 }
 
 .input-section {

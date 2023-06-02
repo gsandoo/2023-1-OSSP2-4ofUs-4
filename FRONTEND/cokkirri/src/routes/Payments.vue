@@ -20,7 +20,7 @@
           <p>나의 하트</p>
         </div>
         <div class = "NumOfHeart">
-          {{this.$store.state.heart}} &gt;
+          {{this.$store.state.heart}} <!--&gt;-->
         </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
@@ -54,7 +54,7 @@
       </div>
       <div class="UseHistory">
         <div class="UseHistory_text">
-          <p>사용 내역</p>
+          <p>결제 내역</p>
         </div>
         <div class="UseHistory_img">
           <img :src="imagePath_history" alt="UseHistory" />
@@ -82,12 +82,36 @@ data() {
     imagePath_history: require("@/assets/pay/rec_history.png"),
     imagePath_heart: require("@/assets/pay/heart.png"),
 
-    userId: "skxkswls@gmail.com",
-    payDate: '2023-05-15',
+    userId: "",
+    payDate: "",
   };
 },
 
+// 수정
+created() {
+    // 오늘 날짜로 payDate 설정
+    this.payDate = this.getCurrentDate();
+
+    // 서버로부터 로그인한 사용자의 정보를 받아오기
+    axios.get('/admin/user/id?userId=2018113033@dgu.ac.kr')
+      .then(response => {
+        this.userId = response.data.userId;
+      })
+      .catch(error => {
+        console.error('사용자 정보를 가져오는데 실패했습니다:', error);
+      });
+  },
+
 methods: {
+  //결제날짜
+  getCurrentDate() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, '0');
+      const day = String(today.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    },
+
   // 금액에 따라 결제를 달리하기 위해 checkModule(amount) 형태로 작성
   checkModule(amount) {
     var IMP = window.IMP;
@@ -110,10 +134,12 @@ methods: {
         if (rsp.success) {
           msg = '결제가 완료되었습니다.';
           this.$router.push("/Payments"); // Payments 페이지로 이동
-          // msg += '고유ID : ' + rsp.imp_uid;
-          // msg += '상점 거래ID : ' + rsp.merchant_uid;
-          // msg += '결제 금액 : ' + rsp.paid_amount;
-          // msg += '카드 승인번호 : ' + rsp.apply_num;
+
+          // 결제 정보 및 날짜 데이터 콘솔에 출력
+          console.log('고유ID:', rsp.imp_uid);
+          console.log('상점 거래ID:', rsp.merchant_uid);
+          console.log('결제 금액:', rsp.paid_amount);
+          console.log('카드 승인번호:', rsp.apply_num);
 
           // 서버에 결제 정보 전송
           this.sendPaymentInfo(amount);
@@ -129,18 +155,33 @@ methods: {
   
   sendPaymentInfo(amount) {
     const paymentData = {
-      userId: this.userId,
+      //반환
+      userId: this.userId = "2018113033@dgu.ac.kr",
       payDate: this.payDate,
       amount: parseInt(amount),
     };
     
+    // axios.put('/payment', paymentData)
+    //   .then(response => {
+    //     console.log('결제 성공!:', response.data);
+    //   })
+    
+    //   .catch(error => {
+    //     console.error('결제 실패:', error);
+    //   });
+
     axios.put('/payment', paymentData)
-      .then(response => {
-        console.log('결제 성공!:', response.data);
-      })
-      .catch(error => {
-        console.error('결제 실패:', error);
-      });
+    .then(response => {
+      console.log('결제 성공!:', response.data);
+      
+      // 결제 내역 가공
+      const formattedHistory = `${this.payDate} +${amount}개`;
+      // Vuex 스토어의 usageHistory 상태 값을 업데이트
+      this.$store.commit('updateUsageHistory', formattedHistory);
+    })
+    .catch(error => {
+      console.error('결제 실패:', error);
+    });
   },
 },
 };
@@ -338,7 +379,7 @@ text-align: center;
   position: absolute;
   width: 251px;
   height: 43px;
-  left: 95px;
+  left: 90px;
   top: 300px;
 
   font-style: normal;
@@ -463,7 +504,7 @@ top: 30rem;
   position: absolute;
   width: 100px;
   height: 100px;
-  left: 190px;
+  left: 180px;
   top: 300px;
 
   font-style: normal;

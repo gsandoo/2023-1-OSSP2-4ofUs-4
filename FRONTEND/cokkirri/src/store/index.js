@@ -72,7 +72,12 @@ export default createStore({
             console.log("들어온 신호"+notification)
             state.notification = notification
             console.log("저장한 신호"+state.notification)
-        }
+        },
+
+        // 사용내역 업데이트
+        updateUsageHistory(state, newHistory) {
+            state.usageHistory = newHistory;
+        },
     },
     actions: {
         // 매칭 정보 불러오기
@@ -214,7 +219,7 @@ export default createStore({
 
         async fetchUsageHistory({ commit }) {
             try {
-              const response = await axios.get('/api/usage-history'); // 적절한 API 엔드포인트로 변경
+              const response = await axios.get('/admin/user/payment'); // 적절한 API 엔드포인트로 변경
               const history = response.data; // 가져온 데이터를 적절히 가공하여 history 변수에 저장
                 commit('setUsageHistory', history);
             } catch (error) {

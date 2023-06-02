@@ -85,6 +85,9 @@ public class MatchingController {
         return new ResponseEntity<List<NoShowClassMatchList>>(noShowLists,HttpStatus.OK);
     }
 
+    // 노쇼 취소
+//    public Re
+
     //노쇼의심유저에게 메일 보내기
     @GetMapping("send/noshow")
     public ResponseEntity<String> sendEmailToNoShowUser(@RequestParam(value = "userId")String id , @RequestParam(value = "matchingType")String matchingType){
@@ -169,9 +172,9 @@ public class MatchingController {
     }
 
     @GetMapping("get/free/matchingWait")
-    public ResponseEntity<List<PublicMatchingWait>> getPublicMatchingWaitById(@RequestParam (value = "email")String id){
-        List<PublicMatchingWait> list = matchingService.findPublicMatchingWaitByEmail(id);
-        return  new ResponseEntity<List<PublicMatchingWait>>(list, HttpStatus.OK);
+    public ResponseEntity<PublicMatchingWait> getPublicMatchingWaitById(@RequestParam (value = "email")String id){
+        PublicMatchingWait list = matchingService.findPublicMatchingWaitByEmail(id);
+        return  new ResponseEntity<PublicMatchingWait>(list, HttpStatus.OK);
     }
 
     @GetMapping("admin/class/matchingWait")
@@ -181,9 +184,9 @@ public class MatchingController {
     }
 
     @GetMapping("get/class/matchingWait")
-    public ResponseEntity<List<ClassMatchingWait>> getClassMatchingWaitById(@RequestParam (value = "email")String id){
-        List<ClassMatchingWait> list = matchingService.findClassMatchingWaitByEmail(id);
-        return  new ResponseEntity<List<ClassMatchingWait>>(list, HttpStatus.OK);
+    public ResponseEntity<ClassMatchingWait> getClassMatchingWaitById(@RequestParam (value = "email")String id){
+        ClassMatchingWait list = matchingService.findClassMatchingWaitByEmail(id);
+        return  new ResponseEntity<ClassMatchingWait>(list, HttpStatus.OK);
     }
 
 

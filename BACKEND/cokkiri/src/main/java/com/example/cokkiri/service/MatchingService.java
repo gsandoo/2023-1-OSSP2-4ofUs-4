@@ -197,8 +197,14 @@ public class MatchingService {
     }
 
     // 이메일로 매칭 대기중 반환
-    public List<PublicMatchingWait> findPublicMatchingWaitByEmail(String id){
-        return publicMatchingWaitRepository.findByEmail(id);
+    public PublicMatchingWait findPublicMatchingWaitByEmail(String id){
+        Optional<PublicMatchingWait> publicMatchWait =publicMatchingWaitRepository.findByEmail(id);
+        if(publicMatchWait.isEmpty()){
+            return null;
+        }
+        else {
+        return publicMatchWait.get();
+        }
     }
 
     public List<ClassMatchingWait> findAllClassMatchingWait(){
@@ -206,8 +212,13 @@ public class MatchingService {
     }
 
     // 이메일로 매칭 대기중 반환
-    public List<ClassMatchingWait> findClassMatchingWaitByEmail(String id){
-        return classMatchingWaitRepository.findByEmail(id);
+    public ClassMatchingWait findClassMatchingWaitByEmail(String id){
+            Optional<ClassMatchingWait> classMatchingWait = classMatchingWaitRepository.findByEmail(id);
+            if (classMatchingWait.isEmpty()){
+                return null;
+            }else{
+                return classMatchingWait.get();
+            }
     }
 
 
@@ -458,8 +469,10 @@ public class MatchingService {
         }else{
             publicMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
-        sendSSEtoPublicUser(publicMatchedList);
-        savePublicUser(publicMatchedList);
+        if(publicMatchedList!=null){
+            sendSSEtoPublicUser(publicMatchedList);
+            savePublicUser(publicMatchedList);
+        }
         return publicMatchedList;
     }
 
@@ -488,8 +501,10 @@ public class MatchingService {
         }else{
             classMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
-        sendSSEtoClassUser(classMatchedList);
-        saveClassUser(classMatchedList);
+        if(classMatchedList!=null){
+            sendSSEtoClassUser(classMatchedList);
+            saveClassUser(classMatchedList);
+        }
         return classMatchedList;
     }
 
@@ -535,9 +550,13 @@ public class MatchingService {
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
-            List<ClassMatchingWait> waitUser = classMatchingWaitRepository.findByEmail(email);
-            if(waitUser.get(i).getMatchingType()=="class"){
-                classMatchingWaitRepository.delete(waitUser.get(i));
+            Optional<ClassMatchingWait> waitUser = classMatchingWaitRepository.findByEmail(email);
+            if(waitUser.isEmpty()){
+                continue;
+            }else{
+                if(waitUser.get().getMatchingType().equals("free")){
+                    classMatchingWaitRepository.delete(waitUser.get());
+                }
             }
         }
         return classMatchedListRepository.save(matchedList); // 데베에 저장
@@ -560,14 +579,18 @@ public class MatchingService {
         sseService.sendList(receiver,content,type);
     }
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
-        for(int i = 0 ; i < matchedList.getEmailList().size() ; i++){
+        for(int i = 0 ; i <matchedList.getEmailList().size(); i++){
             String email = matchedList.getEmailList().get(i);
             Optional<User> user = userRepository.findById(email);
             user.get().setHeart((user.get().getHeart())-10); //하트 10개 차감
             userRepository.save(user.get());
-            List<PublicMatchingWait> waitUser = publicMatchingWaitRepository.findByEmail(email);
-            if(waitUser.get(i).getMatchingType()=="free"){
-                publicMatchingWaitRepository.delete(waitUser.get(i));
+            Optional<PublicMatchingWait> waitUser = publicMatchingWaitRepository.findByEmail(email);
+            if(waitUser.isEmpty()){
+                continue;
+            }else{
+                if(waitUser.get().getMatchingType().equals("free")){
+                    publicMatchingWaitRepository.delete(waitUser.get());
+                }
             }
         }
         return publicMatchedListRepository.save(matchedList); // 데베에 저장

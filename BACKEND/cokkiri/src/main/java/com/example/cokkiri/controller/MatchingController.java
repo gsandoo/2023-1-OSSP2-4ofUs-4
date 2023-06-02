@@ -146,9 +146,9 @@ public class MatchingController {
 
     // 노쇼 발생 시 하트 반환
     @PutMapping("rollback/heart")
-    public ResponseEntity<User> rollbackHeart(){
-
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<User> rollbackHeart(@RequestParam (value = "email")String id){
+        User user = matchingService.rollbackHeart(id);
+        return new ResponseEntity<User>(user , HttpStatus.OK);
     }
 
 

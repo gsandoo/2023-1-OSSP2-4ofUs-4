@@ -16,21 +16,20 @@ import java.util.List;
 @Builder
 @Entity
 public class MatchAccusation {
-
     @Id
     @Column
-    private int matchingId;
-
-    @ElementCollection
-    private List<String> email;
+    private int matchingId; // 신고할 매치의 id
 
     @Column
-    private String title;
+    private String email; // 신고자
 
     @Column
-    private String comment;
+    private String title; // 신고내용 제목
 
     @Column
-    private String matchingType;
+    private String comment; // 신고 내용
+
+    @Column
+    private String matchingType; // 신고 발생 matching type
 
 }

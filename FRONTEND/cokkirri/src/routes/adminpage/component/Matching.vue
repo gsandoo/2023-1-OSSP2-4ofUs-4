@@ -1,20 +1,12 @@
 <template>
+    <!---
     <div>
-        <button @click="loadPublicMatchingList()">모든 공강 매칭 불러오기</button>
-        <button @click="loadClassMatchingList()">모든 수업 매칭 불러오기</button>
-        <br>
-        <input type="text" placeholder="Search 수업 By Matching Id" v-model="classMatchingIdForSearch">
-        <button @click="searchClassMatchingId()">수업 매칭 검색</button>
-        <br>
-        <input type="text" placeholder="Search 공강 By Matching Id" v-model="publicMatchingIdForSearch">
-        <button @click="searchPublicMatchingId()">공강 매칭 검색</button>
-        <br>
         <input type="text" placeholder="Delete 수업 Matching By Id" v-model="classMatchingIdForDelete">
         <button @click="deleteClassMatchingByMatchingId()">입력한 매칭 번호에 대응되는 수업 매칭 삭제하기</button>
         <br>
         <input type="text" placeholder="Delete 공강 Matching By Id" v-model="publicMatchingIdForDelete">
         <button @click="deletePublicMatchingByMatchingId()">입력한 매칭 번호에 대응되는 공강 매칭 삭제하기</button>
-        <br>
+
         <div v-for="(matching,index) in publicMatchingList" :key="index">
             {{matching}}
             <br>
@@ -23,6 +15,75 @@
             {{matching}}
             <br>
         </div>
+    </div>
+    --->
+
+    <div class="frame-main">
+        <div class="title-h1">매칭 기록 관리</div>
+        <div class="line-for-division"></div>
+        <div class="frame-sub-head">
+            <div class="btn-loadMatchingList" @click="loadMatchingList()">전체 조회</div>
+
+            <div class="btn-temp" @click="searchMatchingId()">점검중</div>
+            <input type="text" placeholder="Search Id" class="input-temp" v-model="searchId" @change="searchMatchingId()">
+
+            <div class="btn-searchMatchingId" @click="searchMatchingId()">매칭ID검색</div>
+            <input type="text" placeholder="Search Matching ID" class="input-searchMatchingId" v-model="searchName" @change="searchMatchingId()">
+            <div style="clear:both;"></div>
+        </div>
+        <div class="frame-sub-body">
+            <div class="line-for-division"></div>
+            <div class="attribute-type">타입</div>
+            <div class="attribute-sub-small">매칭ID</div>
+            <div class="attribute-sub-small">인원</div>
+            <div class="attribute-sub-small">매칭잡힌날</div>
+            <div style="clear:both;"></div>
+
+            <div class="attribute-sub-long">클래스</div>
+            <div class="attribute-sub-long">매칭구성원</div>
+            <div style="clear:both;"></div>
+            <div class="line-for-division"></div>
+            <div style="clear:both;"></div>
+            <!---
+                matchingId
+                headCount
+                matchingTime
+                emailList ["","",...]
+            --->
+            <div v-for="(matching,index) in publicMatchingList" :key="index">
+                <div class="content-row-type">수업 매칭</div>
+                <div class="content-row-sub-small">{{matching.matchingId}}</div>
+                <div class="content-row-sub-small">{{matching.headCount}}</div>
+                <div class="content-row-sub-small">{{matching.matchingTime}}</div>
+                <dir class="content-row-btn-delete">제거</dir>
+                <div style="clear:both;"></div>
+
+                <div class="content-row-sub-long">-</div>
+                <div class="content-row-sub-long">{{matching.emailList}}</div>
+                <div style="clear:both;"></div>
+            </div>
+            <!---
+                matchingId
+                headCount
+                matchingTime
+                courseNumber ["","",...]
+                emailList ["","",...]
+            --->
+            <div v-for="(matching,index) in classMatchingList" :key="index">
+                <div class="content-row-type">공강 매칭</div>
+                <div class="content-row-sub-small">{{matching.matchingId}}</div>
+                <div class="content-row-sub-small">{{matching.headCount}}</div>
+                <div class="content-row-sub-small">{{matching.matchingTime}}</div>
+                <dir class="content-row-btn-delete">제거</dir>
+                <div style="clear:both;"></div>
+
+                <div class="content-row-sub-long">{{matching.courseNumber}}</div>
+                <div class="content-row-sub-long">{{matching.emailList}}</div>
+                <div style="clear:both;"></div>
+                
+            </div>
+        </div>
+        <div class="line-for-division"></div>
     </div>
 </template>
 
@@ -34,8 +95,7 @@
                 publicMatchingList: [],
                 classMatchingList: [],
 
-                classMatchingIdForSearch: '',
-                publicMatchingIdForSearch: '',
+                MatchingIdForSearch: '',
 
                 classMatchingIdForDelete: '',
                 publicMatchingIdForDelete: '',
@@ -43,13 +103,17 @@
         },
         methods:{
             // 전체 각 타입별 매칭 리스트 불러오기
+            loadMatchingList(){
+                this.loadPublicMatchingList()
+                this.loadClassMatchingList()
+            },
             async loadPublicMatchingList(){
                 try{
                     await axios.get('/admin/publicMatching')
                     .then((result)=>{
                         console.log("공강 매칭 리스트 모두 불러오기")
                         this.publicMatchingList = result.data
-                        this.classMatchingList = []
+                        //this.classMatchingList = []
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -62,7 +126,7 @@
                     await axios.get('/admin/classMatching')
                     .then((result)=>{
                         console.log("수업 매칭 리스트 모두 불러오기")
-                        this.publicMatchingList = []
+                        //this.publicMatchingList = []
                         this.classMatchingList = result.data
                     })
                 }catch(error){
@@ -70,16 +134,20 @@
                 }
             },
             // Ec2에 아래 두 개 api 업데이트가 아직 안 된 상황임
+            searchMatchingId(){
+                this.searchClassMatchingId()
+                this.searchPublicMatchingId()
+            },
             // 매칭아이디로 타입별 매칭 검색하기
             async searchClassMatchingId(){
                 try{
                     await axios.get('/matching/admin/classMatchedList',{
                         params:{
-                            matchingId: this.classMatchingIdForSearch
+                            matchingId: this.MatchingIdForSearch
                         }
                     }).then((result)=>{
                         this.publicMatchingList = result.data
-                        this.classMatchingList = []
+                        //this.classMatchingList = []
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -89,12 +157,12 @@
             },
             async searchPublicMatchingId(){
                 try{
-                    await axios.get('/matching/admin/classMatchedList',{
+                    await axios.get('/matching/admin/publicMatchedList',{
                         params:{
-                            matchingId: this.publicMatchingIdForSearch
+                            matchingId: this.MatchingIdForSearch
                         }
                     }).then((result)=>{
-                        this.publicMatchingList = []
+                        //this.publicMatchingList = []
                         this.classMatchingList = result.data
                     }).catch(function(error){
                         console.log(error)
@@ -138,5 +206,331 @@
 </script>
 
 <style lang="scss" scoped>
+        .frame-main{
+            width: 600px;
+            height: 600px;
 
+            //border: 1px solid #ECBC76; // frame 표시용 시용
+            .title-h1{
+                width: 600px;
+                height: 50px;
+
+                padding: 0px;
+                margin-top: 0px;
+                margin-left: 5px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                text-align: left;
+
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 24px;
+                color: #B87514;
+            }
+            .frame-sub-head{
+                width: 600px;
+                height: 110px;
+                
+                // border: 1px solid #ECBC76; // frame 표시용 시용
+
+                .btn-loadMatchingList{
+                    width: 590px;
+                    height: 45px;
+
+                    margin-top: 10px;
+                    margin-left: 5px;
+
+                    background: #B87514;
+                    border-radius: 10px;    
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+
+                    color: #FFFEF9;
+                }
+                .btn-temp{
+                    width: 95px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 5px;
+                    float: left;
+
+                    background: #ECBC76;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+                .input-temp{
+                    width: 183px;
+                    height: 43px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 0px;
+                    float: left;
+
+                    border: 1px solid #C4C4C4;
+                    border-radius: 8px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 130%;
+                    color: #000000;
+                }
+                .btn-searchMatchingId{
+                    width: 95px;
+                    height: 45px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    float: left;
+
+                    background: #ECBC76;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+                .input-searchMatchingId{
+                    width: 183px;
+                    height: 43px;
+
+                    padding: 0px;
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    margin-right: 0px;
+                    float: left;
+
+                    border: 1px solid #C4C4C4;
+                    border-radius: 8px;
+
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 15px;
+                    line-height: 130%;
+                    color: #000000;
+                }
+            }
+            .frame-sub-body{
+                width: 600px;
+                height: 428px;
+
+                overflow-y: auto;
+
+                .attribute-type{
+                    width: 100px;
+                    height: 54px;
+
+                    padding: 0px;
+                    margin-top: 0px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ECBC76;
+                }
+                .attribute-sub-small{
+                    width: 100px;
+                    height: 54px;
+
+                    padding: 0px;
+                    margin-top: 0px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ECBC76;
+                }
+                .attribute-sub-long{
+                    width: 300px;
+                    height: 54px;
+
+                    padding: 0px;
+                    margin-top: 0px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #ECBC76;
+                }
+                .content-row-type{
+                    width: 100px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #B87514;
+                }
+                .content-row-sub-small{
+                    width: 100px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #B87514;
+                }
+                .content-row-sub-long{
+                    width: 300px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 0px;
+                    float: left;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    line-height: 24px;
+                    color: #B87514;
+                }
+                .content-row-btn-delete{
+                    width: 100px;
+                    height: 44px;
+
+                    padding: 0px;
+                    margin-top: 5px;
+                    margin-left: 50px;
+                    float: left;
+
+                    background: #B87514;
+                    border-radius: 10px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: #FFFEF9;
+                }
+            }
+            .line-for-division{
+                width: 580px;
+                height: 0px;
+                margin-top: 0px;
+                margin-left: 9px;
+                margin-bottom: 0px;
+
+                border: 1px solid #ECBC76;
+            }
+            .line-for-division-short{
+                width: 500px;
+                height: 0px;
+                margin-top: 0px;
+                margin-left: 49px;
+                margin-bottom: 0px;
+
+                border: 1px solid #ECBC76;
+            }
+        }
 </style>

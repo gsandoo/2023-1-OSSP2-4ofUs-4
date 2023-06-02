@@ -74,10 +74,9 @@ export default createStore({
             console.log("저장한 신호"+state.notification)
         },
 
-        // 사용내역 업데이트
         updateUsageHistory(state, newHistory) {
-            state.usageHistory = newHistory;
-        },
+            state.usageHistory.push(newHistory);
+        }
     },
     actions: {
         // 매칭 정보 불러오기

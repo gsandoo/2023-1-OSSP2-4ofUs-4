@@ -101,7 +101,7 @@ export default {
     // 결제 내역 검색 함수 호출
     this.searchPaymentById();
 
-    // 서버로부터 로그인한 사용자의 정보를 받아오기
+    //서버로부터 로그인한 사용자의 정보를 받아오기
     axios.get('/admin/user/id?userId=2018113033@dgu.ac.kr')
       .then(response => {
         // this.userId = response.data.userId;
@@ -125,7 +125,7 @@ export default {
     // 금액에 따라 결제를 달리하기 위해 checkModule(amount) 형태로 작성
     checkModule(amount) {
       var IMP = window.IMP;
-      IMP.init("imp22834460"); // 대외비, 가맹점 코드 입력
+      IMP.init(""); // 대외비, 가맹점 코드 입력
 
       IMP.request_pay(
         {
@@ -189,11 +189,10 @@ export default {
 
         console.log(result);
 
-        // Vuex 스토어의 usageHistory 상태 값을 업데이트
-        // this.$store.commit('updateUsageHistory', formattedHistory);
-
           // // 결제 내역 가공
           // const formattedHistory = `${this.payDate} +${paymentData.amount}개`;
+          // // Vuex 스토어의 usageHistory 상태 값을 업데이트
+          // this.$store.commit('updateUsageHistory', formattedHistory);
           // console.log(result);
         })
         .catch(function(error) {
@@ -207,7 +206,8 @@ export default {
     sendPaymentInfo(amount) {
       const paymentData = {
         //반환
-        userId: this.userId = this.$store.state.id,
+        userId: this.$store.state.id,
+        // userId: "2018113033@dgu.ac.kr",
         payDate: this.payDate,
         amount: parseInt(amount),
       };

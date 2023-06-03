@@ -82,7 +82,8 @@
                 console.log(this.$store.state.classMatchingRecord)
             },
             openReportWindow(){
-                const route = this.$router.resolve({ path: '/my/matching/report' });
+                alert(this.$store.state.id )
+                const route = this.$router.resolve({ path: '/my/matching/report', query: { email: this.$store.state.id } });
                 
                 const width = 600;
                 const height = 750;

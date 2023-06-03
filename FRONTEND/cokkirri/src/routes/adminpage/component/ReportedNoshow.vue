@@ -30,10 +30,10 @@
                 <div class="content-row-medium">{{Reported.matchingId}}</div>
                 <div class="content-row-long">{{Reported.email}}</div>
                 <div class="content-row-title">
-                    {{Reported.title}}
+                    제목 : {{Reported.title}}
                 </div>
                 <div class="content-row-content">
-                    {{Reported.comment}}
+                    내용 : {{Reported.comment}}
                 </div>
                 <div style="clear:both;"></div>
             </div>
@@ -45,11 +45,15 @@
                 comment 신고 내용
             --->
             <div v-for="(Reported,index) in publicReportedNoshow" :key="index">
-                <div class="content-row-short"></div>
-                <div class="content-row-short"></div>
-                <div class="content-row-long"></div>
-                <div class="content-row-medium"></div>
-                <div style="clear:both;"></div>
+                <div class="content-row-medium">공강</div>
+                <div class="content-row-medium">{{Reported.matchingId}}</div>
+                <div class="content-row-long">{{Reported.email}}</div>
+                <div class="content-row-title">
+                    제목 : {{Reported.title}}
+                </div>
+                <div class="content-row-content">
+                    내용 : {{Reported.comment}}
+                </div>
             </div>
         </div>
         <div class="line-for-division"></div>
@@ -406,7 +410,7 @@
                 float: left;
 
                 display: flex;
-                align-items: center;
+                align-items: top;
                 justify-content: center;
                 text-align: center;
 

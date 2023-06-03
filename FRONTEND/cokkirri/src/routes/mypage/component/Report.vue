@@ -1,5 +1,5 @@
 <template>
-    <div class="frame-body">
+    <div class="container">
         <!---
             matchingType 신고된 매칭의 타입
             matchingId 신고된 매칭의 id
@@ -7,9 +7,11 @@
             title 신고 제목
             comment 신고 내용
         --->
-        
-        노쇼 신고
 
+        <button @click="reportNoshow()">노쇼 신고</button>
+        <div>
+            신고자 : {{email}}
+        </div>
         <!---
         matchingType
         상위 컴포넌트에서 가져온 값 예시 : free 또는 class
@@ -26,27 +28,50 @@
 </template>
 
 <script>
-export default {
-    data(){
-        return{
-            isOpen: false
-        }
-    },
-    methods:{
-        open(){
-            this.isOpen = true
+    import axios from '../../../api/index.js'
+    export default {
+        
+        data(){
+            return{
+                matchingType: 'free',
+                matchingId: '1',
+                email: '',
+                title: '노쇼 신고',
+                comment: '제곧내',
+            }
         },
-        close(){
-            this.isOpen = false
-        }
+        methods:{
+            async reportNoshow(){
+                try{
+                    await axios.post('matching/post/accusation',{
+                        matchingType: this.matchingType,
+                        matchingId: this.matchingId,
+                        email: this.email,
+                        title: this.title,
+                        comment: this.comment
+                    }).then((result)=>{
+                        console.log(result)
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
+            },
+            close(){
+                window.close()
+            }
+        },
+        mounted() {
+            this.email = this.$route.query.email;
+        },
     }
-}
 </script>
 
 <style lang="scss" scoped>
-    .frame-body{
-        width: 600px;
-        height: 750px;
+    .container{
+        width: 100vw;
+        height: 100vh;
 
         display: flex;
         align-items: center;
@@ -55,5 +80,8 @@ export default {
 
         background-color: #ECBC76; 
         
+        .frame-main{
+
+        }
     }
 </style>

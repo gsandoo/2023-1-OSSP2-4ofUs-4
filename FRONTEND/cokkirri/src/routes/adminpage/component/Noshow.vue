@@ -3,7 +3,7 @@
         <div class="title-h1">노쇼 기록 관리</div>
         <div class="line-for-division"></div>
         <div class="frame-sub-head">
-            <div class="btn-loadNoshow" @click="loadNoshow()">노쇼 확정 조회</div>
+            <div class="btn-loadNoshow" @click="loadNoshow()">전체 조회</div>
             <div style="clear:both;"></div>
 
             <div class="btn-resisterClassNoshow" @click="resisterNoshow('class')">수업 노쇼 등록</div>
@@ -421,7 +421,7 @@ export default {
                 font-family: 'Roboto';
                 font-style: normal;
                 font-weight: 400;
-                font-size: 16px;
+                font-size: 12px;
                 line-height: 24px;
                 color: #B87514;
             }

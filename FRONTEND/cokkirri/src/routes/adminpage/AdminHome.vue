@@ -18,6 +18,9 @@
             <div 
                 :class="{'selected-btn':state.btnState==='noshow', 'unselected-btn':state.btnState!=='noshow'}"
                 @click="btnStateApply('noshow')">노쇼</div>
+            <div 
+                :class="{'selected-btn':state.btnState==='reported', 'unselected-btn':state.btnState!=='reported'}"
+                @click="btnStateApply('reported')">신고</div>
         </div>
         <!---관리자 페이지 기본(유저)--->
         <div class="frame-body">
@@ -36,6 +39,12 @@
             <div v-else-if="state.btnState==='noshow'">
                 <Noshow/>
             </div>
+            <div v-else-if="state.btnState==='reported'">
+                <Reported/>
+            </div>
+            <div v-else class="title"> 
+                메뉴를 선택해 주세요!
+            </div>
         </div>
     </div>
 </template>
@@ -45,12 +54,14 @@
     import Payment from './component/Payment.vue'
     import Matching from './component/Matching.vue'
     import Noshow from './component/Noshow.vue'
+    import Reported from './component/ReportedNoshow.vue'
     export default {
         components:{
             User,
             Payment,
             Matching,
             Noshow,
+            Reported,
         },
         data() {
             return {
@@ -173,6 +184,22 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        .title{
+            width: 500px;
+            height: 2000px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 50px;
+            line-height: 24px;
+            color: #ECBC76;
+        }
     }
 
 </style>

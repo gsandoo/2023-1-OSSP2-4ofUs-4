@@ -14,7 +14,7 @@
     <div class="Title">
       <p>하트 충전소</p>
     </div>
-    <div class="Parent">
+    <div class="Parent flex container">
       <div class="HeartNum">
         <div class="HeartNum_text">
           <p>나의 하트</p>
@@ -60,12 +60,9 @@
           <img :src="imagePath_history" alt="UseHistory" />
         </div>
         <div class = "UseHistory_his">
-          <!-- {{ usageHistory }} -->
-          <!-- {{this.$store.state.usageHistory}} -->
-          <!-- <p> >> &nbsp; 2023.05.25 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +5개</p> -->
           <div v-for="history in usageHistory" :key="history.date">
             <p>
-              >> &nbsp; {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount }}개
+              >> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount }}개
             </p>
           </div>
         </div>
@@ -88,7 +85,7 @@ export default {
       imagePath_history: require("@/assets/pay/rec_history.png"),
       imagePath_heart: require("@/assets/pay/heart.png"),
 
-      userId: "",
+      userId:"",
       payDate: "",
       usageHistory: [], // 결제 내역을 저장할 배열
     };
@@ -101,11 +98,11 @@ export default {
     // 결제 내역 검색 함수 호출
     this.searchPaymentById();
 
-    // 서버로부터 로그인한 사용자의 정보를 받아오기
-    axios.get('/admin/user/id?userId=2018113033@dgu.ac.kr')
+    //서버로부터 로그인한 사용자의 정보를 받아오기
+    axios.get('/admin/user/id?userId=' + this.$store.state.id)
       .then(response => {
-        // this.userId = response.data.userId;
-        this.$store.state.id = response.data.userId;
+        this.userId = response.data.userId;
+        this.searchPaymentById(this.userId);
       })
       .catch(error => {
         console.error('사용자 정보를 가져오는데 실패했습니다:', error);
@@ -122,7 +119,7 @@ export default {
       return `${year}-${month}-${day}`;
     },
 
-    // 금액에 따라 결제를 달리하기 위해 checkModule(amount) 형태로 작성
+    // 금액에 따른 결제
     checkModule(amount) {
       var IMP = window.IMP;
       IMP.init("imp22834460"); // 대외비, 가맹점 코드 입력
@@ -135,7 +132,7 @@ export default {
           name: 'cokkirri 하트 결제',
           payDate: this.payDate,
           amount: amount,
-          buyer_email: this.userId,
+          buyer_email: String(this.userId),
         },
         (rsp) => {
           console.log(rsp);
@@ -166,35 +163,27 @@ export default {
     searchPaymentById() {
       try {
         const userId = this.$store.state.id;
+        
         axios.get('/admin/user/payment', {
           params: {
-            userId: userId
+            userId: this.$store.state.id
           }
         })
         .then((result) => {
           console.log(userId + '의 결제내역 조회 요청');
+          this.userId = this.$store.state.id; // 이거였다.. 이거였어... 이것이 문제였습니다...
           const paymentData = result.data;
 
-          // this.usageHistory = paymentData;
-          // console.log(result);
+          // 결제 내역 데이터를 필요한 형식으로 가공
+          const formattedHistory = paymentData.map(item => ({
+            date: item.payDate,
+            amount: item.amount
+          }));
 
-      // 결제 내역 데이터를 필요한 형식으로 가공
-        const formattedHistory = paymentData.map(item => ({
-          date: item.payDate,
-          amount: item.amount
-        }));
+          // 가공된 데이터를 usageHistory 배열에 할당
+          this.usageHistory = formattedHistory;
 
-        // 가공된 데이터를 usageHistory 배열에 할당
-        this.usageHistory = formattedHistory;
-
-        console.log(result);
-
-        // Vuex 스토어의 usageHistory 상태 값을 업데이트
-        // this.$store.commit('updateUsageHistory', formattedHistory);
-
-          // // 결제 내역 가공
-          // const formattedHistory = `${this.payDate} +${paymentData.amount}개`;
-          // console.log(result);
+          console.log(result);
         })
         .catch(function(error) {
           console.log(error);
@@ -206,18 +195,17 @@ export default {
 
     sendPaymentInfo(amount) {
       const paymentData = {
-        //반환
-        userId: this.userId = this.$store.state.id,
+        userId: this.userId,
         payDate: this.payDate,
         amount: parseInt(amount),
       };
+
+      console.log(paymentData);
 
       axios.put('/payment', paymentData)
       .then(response => {
         console.log('결제 성공!:', response.data);
 
-        // 결제 내역 가공
-        // const formattedHistory = `${this.payDate} +${amount}개`;
         // 결제 내역 가공
         const formattedHistory = {
             date: this.payDate,
@@ -226,8 +214,6 @@ export default {
 
         // Vuex 스토어의 usageHistory 상태 값을 업데이트
         this.$store.commit('updateUsageHistory', formattedHistory);
-
-        // 추가한 부분!!!
         // 변경된 정보를 즉각 반영하기 위해 userInfoUpdate 액션을 디스패치
         this.$store.dispatch('userInfoUpdate');
       })
@@ -301,6 +287,11 @@ text-align: center;
 .Parent{
 width: 90vw;
 margin: 10px auto;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .htnum{

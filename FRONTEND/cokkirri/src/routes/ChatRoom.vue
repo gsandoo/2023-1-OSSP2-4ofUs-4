@@ -47,7 +47,8 @@
   import { ref, onMounted } from 'vue';
   import Stomp from 'stompjs';
   import SockJS from 'sockjs-client';
-  import axios from '../api/index.js'; // Use axios directly here.
+  import axios from '../api/index.js';
+  import { useStore } from 'vuex';
 
   export default {
   data(){
@@ -57,12 +58,14 @@
     }
   },
   setup() {
-      const messages = ref([]);
-      const newMessage = ref('');
-      const matchingId = ref(1);
-      const matchingType = ref('free');
-      const sender = ref('skxkswls@gmail.com');
-      let stompClient = null;
+    const store = useStore();
+    
+    const messages = ref([]);
+    const newMessage = ref('');
+    const matchingId = ref(1);
+    const matchingType = ref('free');
+    const sender = ref(store.state.id);
+    let stompClient = null;
 
       const connectToWebSocket = () => {
         const socket = new SockJS('http://3.37.37.164:8080/ws');
@@ -81,9 +84,6 @@
 
       // 메시지 보내기
       const sendMessage = () => {
-          // if (!newMessage.value || !stompClient) {
-          //     return;
-          // }
           if (!newMessage.value || !stompClient || newMessage.value.trim() === '') {
             return;
           }

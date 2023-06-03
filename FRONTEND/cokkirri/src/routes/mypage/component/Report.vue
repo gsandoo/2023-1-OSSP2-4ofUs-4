@@ -7,23 +7,20 @@
             title 신고 제목
             comment 신고 내용
         --->
-
-        <button @click="reportNoshow()">노쇼 신고</button>
-        <div>
-            신고자 : {{email}}
+        <div class="frame-main">
+            <div class="title">노쇼 신고</div>
+            <div class="sub-title">
+                신고 매칭ID : {{matchingId}}<br>
+                매칭 종류 : {{alteredmatchingType}}
+            </div>
+            <div class="describe-title">제목</div>
+            <input type="text" placeholder="  제목을 입력해주세요." class="input-title" v-model="title">
+            <div class="describe-content">내용</div>
+            <textarea type="text" placeholder=" 내용을 입력해주세요." class="input-content" v-model="comment"/>
+            <div class="btn-submit" @click="submitReport()">제출</div>
+            <div class="btn-cancel" @click="cancleReport()">취소</div>
+            <div style="clear:both;"></div>
         </div>
-        <!---
-        matchingType
-        상위 컴포넌트에서 가져온 값 예시 : free 또는 class
-        matchingId
-        위 컴포넌트에서 가져온 값 예시 : 1~
-        위의 항목은 상위 컴포넌트에서만 조작 가능
-        신고 취소 버튼
-        신고자는 자동으로 처리됨
-        신고 제목
-        신고 내용
-        제출하기
-        --->
     </div>
 </template>
 
@@ -33,14 +30,38 @@
         
         data(){
             return{
-                matchingType: 'free',
-                matchingId: '1',
+                matchingType: '',
+                matchingId: '',
                 email: '',
-                title: '노쇼 신고',
-                comment: '제곧내',
+                title: '',
+                comment: '',
+            }
+        },
+        computed:{
+            alteredmatchingType(){
+                if(this.matchingType==='class'){
+                    return '수업 매칭'
+                }
+                else if(this.matchingType==='free'){
+                    return '공강 매칭'
+                }
+                else{
+                    return '지정된 매칭이 없음'
+                }
             }
         },
         methods:{
+            submitReport(){
+                if(this.title===''){
+                    alert("제목이 입력되지 않았습니다.")
+                }
+                else if(this.comment===''){
+                    alert("내용이 입력되지 않았습니다.")
+                }
+                else{
+                    this.reportNoshow()
+                }
+            },
             async reportNoshow(){
                 try{
                     await axios.post('matching/post/accusation',{
@@ -51,6 +72,8 @@
                         comment: this.comment
                     }).then((result)=>{
                         console.log(result)
+                        alert("노쇼 신고가 완료되었습니다.")
+                        window.close()
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -58,12 +81,15 @@
                     console.log(error)
                 }
             },
-            close(){
+            cancleReport(){
+                alert("노쇼 신고가 취소되었습니다.")
                 window.close()
-            }
+            },
         },
-        mounted() {
+        mounted(){
             this.email = this.$route.query.email;
+            this.matchingType = this.$route.query.matchingType;
+            this.matchingId = this.$route.query.matchingId;
         },
     }
 </script>
@@ -81,7 +107,173 @@
         background-color: #ECBC76; 
         
         .frame-main{
+            width: 550px;
+            height: 700px;
 
+            background: #FFFEF9;
+            box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
+            border-radius: 40px;
+            
+            .title{
+                width: 150;
+                height: 35;
+
+                margin-left: 25px;
+                margin-top: 34px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 36px;
+                color: #B87514;
+            }
+            .sub-title{
+                width: 300px;
+                height: 60px;
+
+                margin-left: 25px;
+                margin-top: 0px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                text-align: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;
+                color: #8D8D8D;
+            }
+            .describe-title{
+                width: 150px;
+                height: 30px;
+
+                margin-left: 25px;
+                margin-top: 5px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 30px;
+
+                color: #000000;
+            }
+            .input-title{
+                // 테두리 고려해서 가로 세로 2px 감소 적용됨
+                width: 498px;
+                height: 43px;
+
+                box-sizing: border-box;
+                margin-left: 25px;
+                margin-right: 25px;
+                margin-top: 0px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                background: #FFFFFF;
+                border: 1px solid #4285F4;
+                border-radius: 9px;
+            }
+            .describe-content{
+                width: 150px;
+                height: 30px;
+
+                margin-left: 25px;
+                margin-top: 10px;
+
+                display: flex;
+                align-items: center;
+                justify-content: left;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 30px;
+
+                color: #000000;
+            }
+            .input-content{
+                // 테두리 고려해서 가로 세로 2px 감소 적용됨
+                width: 498px;
+                height: 340px;
+
+                box-sizing: border-box;
+                margin-left: 25px;
+                margin-right: 25px;
+                margin-top: 0px;
+
+                text-align: left;
+                vertical-align: top;
+
+                background: #FFFFFF;
+                border: 1px solid #4285F4;
+                border-radius: 9px;
+            }
+            .btn-submit{
+                width: 150px;
+                height: 63px;
+
+                float: left;
+                margin-left: 210px;
+                margin-top: 18px;
+
+                background: #E48700;
+                box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+                border-radius: 10px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 36px;
+
+                color: #FFFFFF;
+            }
+            .btn-cancel{
+                width: 150px;
+                height: 63px;
+
+                float: left;
+                margin-left: 15px;
+                margin-top: 18px;
+
+                background: #E48700;
+                box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+                border-radius: 10px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 36px;
+
+                color: #FFFFFF;
+            }
         }
     }
 </style>

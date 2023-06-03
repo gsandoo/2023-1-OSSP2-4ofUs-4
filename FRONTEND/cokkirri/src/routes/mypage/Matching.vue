@@ -22,7 +22,8 @@
                         <div class="frame-sub-body">
                             <div v-for="(record, index) in matchingListClass" :key="index" :class="{'frame-data-box': record.courseNumber.length!==0}">
                                 <div v-if="record.courseNumber.length!==0" class="font-hash-h1">
-                                    # 신청 날짜 : {{record.matchingTime}}
+                                    # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
+                                    <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
                                 </div>
                                 <div v-if="record.courseNumber.length!==0" class="font-state-box">
                                     <div class="record-img"></div>
@@ -81,9 +82,14 @@
                 console.log(this.$store.state.publicMatchingRecord)
                 console.log(this.$store.state.classMatchingRecord)
             },
-            openReportWindow(){
-                alert(this.$store.state.id )
-                const route = this.$router.resolve({ path: '/my/matching/report', query: { email: this.$store.state.id } });
+            openReportWindow(matchingType,matchingId){
+                const route = this.$router.resolve({
+                    path: '/my/matching/report', 
+                    query: { 
+                        email: this.$store.state.id, 
+                        matchingType: matchingType,
+                        matchingId: matchingId
+                    } });
                 
                 const width = 600;
                 const height = 750;
@@ -264,6 +270,20 @@
             font-size: 25px;
             line-height: 38px;
             color: #B87514;
+        }
+        .btn-report{
+            width: 135px;
+            height: 34px;
+
+            margin-left: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #E48700;
+            border-radius: 10px;
+            color: #FFFFFF;
         }
         .font-state-box{
             width: 891px;

@@ -196,6 +196,9 @@
                 }
             },
         },
+        mounted(){
+            this.loadMatchingList()
+        }
     }
 </script>
 

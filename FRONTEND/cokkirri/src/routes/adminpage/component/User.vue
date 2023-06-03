@@ -112,6 +112,9 @@
                     console.log(error)
                 }
             }
+        },
+        mounted(){
+            this.loadUserList()
         }
     }
 </script>

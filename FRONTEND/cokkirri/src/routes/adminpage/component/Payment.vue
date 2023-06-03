@@ -67,9 +67,9 @@
                         }
                     })
                     .then((result)=>{
-                        console.log(this.searchingId+"의 결제내역 조회 요청")
+                        //console.log(this.searchingId+"의 결제내역 조회 요청")
                         this.paymentList = result.data
-                        console.log(result)
+                        //console.log(result)
                     })
                     .catch(function(error){
                         console.log(error)
@@ -78,7 +78,9 @@
                     console.log(error)
                 }
             }
-
+        },
+        mounted(){
+            this.loadPaymentList()
         }
     }
 </script>

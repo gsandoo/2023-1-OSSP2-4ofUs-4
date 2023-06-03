@@ -165,8 +165,7 @@
                 else if(matchingType==="free"){
                     this.deletePublicMatchingByMatchingId(matchingId)
                 }
-                
-
+                this.loadMatchingList()
             },
             async deleteClassMatchingByMatchingId(matchingId){
                 try{

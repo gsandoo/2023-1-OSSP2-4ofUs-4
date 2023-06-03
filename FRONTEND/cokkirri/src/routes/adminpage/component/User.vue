@@ -78,7 +78,6 @@
             },
             // 유저를 이름으로 검색
             async searchUserName(){
-                
                 try{
                     await axios.get('/admin/user/name',{
                         params: {
@@ -104,6 +103,7 @@
                     await axios.delete('/admin/user/'+deleteId)
                     .then((result)=>{
                         console.log("상태: "+result.status+", "+deleteId+"제거 요청 완료")
+                        this.loadUserList()
                     })
                     .catch(function(error){
                         console.log(error)

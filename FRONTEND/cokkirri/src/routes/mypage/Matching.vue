@@ -62,26 +62,37 @@
             </div>
         </div>
     </div>
+    <button @click="openReportWindow()">보고서 작성</button>
 </template>
 
 <script>
-export default {
-    data(){
-        return {
-            matchingListClass: [...this.$store.state.classMatchingRecord].reverse(),
-            matchingListFree: [...this.$store.state.publicMatchingRecord].reverse(),
-        }
-    },
-    methods: {
-        callMatchingRecord() {
-            this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
-            this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
-            console.log(this.$store.state.publicMatchingRecord)
-            console.log(this.$store.state.classMatchingRecord)
+    //import Report from './component/Report.vue'
+    export default {
+        data(){
+            return {
+                matchingListClass: [...this.$store.state.classMatchingRecord].reverse(),
+                matchingListFree: [...this.$store.state.publicMatchingRecord].reverse(),
+            }
         },
+        methods: {
+            callMatchingRecord() {
+                this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
+                this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
+                console.log(this.$store.state.publicMatchingRecord)
+                console.log(this.$store.state.classMatchingRecord)
+            },
+            openReportWindow(){
+                const route = this.$router.resolve({ path: '/my/matching/report' });
+                
+                const width = 600;
+                const height = 750;
+                const left = (window.screen.width - width) / 2;
+                const top = (window.screen.height - height) / 2;
 
-    },
-}
+                window.open(window.location.origin + route.href, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+            },
+        },
+    }
 </script>
 
 

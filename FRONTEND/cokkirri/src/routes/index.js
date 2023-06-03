@@ -7,6 +7,7 @@ import MyPage from './mypage/MyPage.vue'
 import MyProfile from './mypage/Profile.vue'
 import MyTimeTable from './mypage/TimeTable.vue'
 import MyMatching from './mypage/Matching.vue'
+import Report from './mypage/component/Report.vue'
 
 import MatchingStartPage from './matchingpage/MatchingStartPage.vue'
 
@@ -46,6 +47,10 @@ export default createRouter({
         {
             path: '/my/matching',
             component: MyMatching
+        },
+        {
+            path: '/my/matching/report',
+            component: Report
         },
 
         {

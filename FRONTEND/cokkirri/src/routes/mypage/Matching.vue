@@ -23,7 +23,8 @@
                             <div v-for="(record, index) in matchingListClass" :key="index" :class="{'frame-data-box': record.courseNumber.length!==0}">
                                 <div v-if="record.courseNumber.length!==0" class="font-hash-h1">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
-                                    <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
+                                    <div class="btn-report" @click="openReportWindow('class',record.matchingId)">노쇼 신고</div>
+                                    <div class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 종료</div>
                                 </div>
                                 <div v-if="record.courseNumber.length!==0" class="font-state-box">
                                     <div class="record-img"></div>
@@ -39,7 +40,9 @@
                             </div>
                             <div v-for="(record, index) in matchingListFree" :key="index" class="frame-data-box">
                                 <div class="font-hash-h1">
-                                    # 신청 날짜 : {{record.matchingTime}}
+                                    # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
+                                    <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
+                                    <div class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 종료</div>
                                 </div>
                                 <div class="font-state-box">
                                     <div class="record-img"></div>
@@ -63,16 +66,16 @@
             </div>
         </div>
     </div>
-    <button @click="openReportWindow()">보고서 작성</button>
 </template>
 
 <script>
     //import Report from './component/Report.vue'
+    import axios from '../../api/index.js'
     export default {
         data(){
             return {
-                matchingListClass: [...this.$store.state.classMatchingRecord].reverse(),
-                matchingListFree: [...this.$store.state.publicMatchingRecord].reverse(),
+                matchingListClass: [],
+                matchingListFree: [],
             }
         },
         methods: {
@@ -98,6 +101,44 @@
 
                 window.open(window.location.origin + route.href, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
             },
+            async closeClassMatching(matchingId){
+                try{
+                    await axios.put('matching/agree/class',null,{
+                        params:{
+                            matchingId: matchingId,
+                            userId: this.$store.state.id
+                        }
+                    }).then((result)=>{
+                        console.log("매칭 완료")
+                        console.log(result)
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
+            },
+            async closePublicMatching(matchingId){
+                try{
+                    await axios.put('matching/agree/free',null,{
+                        params:{
+                            matchingId: matchingId,
+                            userId: this.$store.state.id
+                        }
+                    }).then((result)=>{
+                        console.log("매칭 완료")
+                        console.log(result)
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
+            },
+        },
+        mounted(){
+            this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();
+            this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse();
         },
     }
 </script>

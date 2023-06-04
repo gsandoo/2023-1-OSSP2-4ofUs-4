@@ -129,6 +129,7 @@ export default {
                 .then(()=>{
                     alert("노쇼 등록 성공")
                     this.loadNoshow()
+                    this.sendEmailAboutNoshow('class')
                     this.matchingIdForNoshowResister = ''
                     this.idForNoshowResister = ''
                 }).catch(function(error){
@@ -148,6 +149,7 @@ export default {
                 .then(()=>{
                     alert("노쇼 등록 성공")
                     this.loadNoshow()
+                    this.sendEmailAboutNoshow('free')
                     this.matchingIdForNoshowResister = ''
                     this.idForNoshowResister = ''
                 }).catch(function(error){
@@ -157,6 +159,23 @@ export default {
                 console.log(error)
             }
         },
+        async sendEmailAboutNoshow(matchingType){
+            try{
+                await axios.get('/matching/send/noshow',{
+                    params:{
+                        userId: this.idForNoshowResister,
+                        matchingType: matchingType
+                    }
+                }).then((result)=>{
+                    alert("노쇼 유저에게 이메일을 보냈습니다.")
+                    console.log(result)
+                }).catch(function(error){
+                    console.log(error)
+                })
+            }catch(error){
+                console.log(error)
+            }
+        }
     },
     mounted(){
         this.loadNoshow()

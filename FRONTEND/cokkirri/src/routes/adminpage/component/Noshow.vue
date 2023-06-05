@@ -31,6 +31,7 @@
                 <div class="content-row-short">수업</div>
                 <div class="content-row-short">{{noshow.matchingId}}</div>
                 <div class="content-row-medium">{{noshow.restrictionTime}}</div>
+                <div class="btn-delete" @click="cancelNoshow(noshow.email,'class')">취소</div>
                 <div style="clear:both;"></div>
             </div>
             <!---
@@ -44,6 +45,7 @@
                 <div class="content-row-short">공강</div>
                 <div class="content-row-short">{{noshow.matchingId}}</div>
                 <div class="content-row-medium">{{noshow.restrictionTime}}</div>
+                <div class="btn-delete" @click="cancelNoshow(noshow.email,'free')">취소</div>
                 <div style="clear:both;"></div>
             </div>
         </div>
@@ -174,6 +176,40 @@ export default {
                 })
             }catch(error){
                 console.log(error)
+            }
+        },
+        async cancelNoshow(email,matchingType){
+            if(matchingType==='class'){
+                try{
+                    await axios.get('/matching/change/class/noshow',{
+                        params:{
+                            email: email
+                        }
+                    }).then(()=>{
+                        alert(email+" 의 노쇼 등록 취소가 완료되었습니다.")
+                        this.loadNoshow()
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
+            }
+            else if(matchingType==='free'){
+                try{
+                    await axios.get('/matching/change/free/noshow',{
+                        params:{
+                            email: email
+                        }
+                    }).then(()=>{
+                        alert(email+" 의 노쇼 등록 취소가 완료되었습니다.")
+                        this.loadNoshow()
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
             }
         }
     },
@@ -340,7 +376,7 @@ export default {
             overflow-y: auto;
 
             .attribute-long{
-                width: 300px;
+                width: 230px;
                 height: 54px;
 
                 padding: 0px;
@@ -403,7 +439,7 @@ export default {
                 color: #ECBC76;
             }
             .content-row-long{
-                width: 300px;
+                width: 230px;
                 height: 44px;
 
                 padding: 0px;
@@ -464,6 +500,31 @@ export default {
                 font-size: 16px;
                 line-height: 24px;
                 color: #B87514;
+            }
+            .btn-delete{
+                width: 60px;
+                height: 30px;
+
+                padding: 0px;
+                margin-top: 7px;
+                margin-bottom: 7px;
+                margin-left: 10px;
+                float: left;
+
+                background-color: #B87514;
+                border-radius: 5px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;
+                color: #FFFFFF;
             }
         }
         .line-for-division{

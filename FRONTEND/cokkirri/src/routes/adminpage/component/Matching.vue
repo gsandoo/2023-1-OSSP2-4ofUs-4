@@ -36,7 +36,7 @@
                 <div class="content-row-sub-small">{{matching.matchingId}}</div>
                 <div class="content-row-sub-small">{{matching.headCount}}</div>
                 <div class="content-row-sub-small">{{matching.matchingTime}}</div>
-                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'class')">제거</dir>
+                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'free')">제거</dir>
                 <div style="clear:both;"></div>
 
                 <div class="content-row-sub-long">-</div>
@@ -55,7 +55,7 @@
                 <div class="content-row-sub-small">{{matching.matchingId}}</div>
                 <div class="content-row-sub-small">{{matching.headCount}}</div>
                 <div class="content-row-sub-small">{{matching.matchingTime}}</div>
-                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'free')">제거</dir>
+                <dir class="content-row-btn-delete" @click="deleteMatchingByMatchingId(matching.matchingId,'class')">제거</dir>
                 <div style="clear:both;"></div>
 
                 <div class="content-row-sub-long">{{matching.courseNumber}}</div>
@@ -176,6 +176,7 @@
                     })
                     .then((result)=>{
                         alert(result.data)
+                        this.loadMatchingList()
                     })
                 }catch(error){
                     console.log(error)
@@ -183,13 +184,14 @@
             },
             async deletePublicMatchingByMatchingId(matchingId){
                 try{
-                    await axios.get('/matching/delete/class',{
+                    await axios.get('/matching/delete/free',{
                         params:{
                             matchingId: matchingId
                         }
                     })
                     .then((result)=>{
                         alert(result.data)
+                        this.loadMatchingList()
                     })
                 }catch(error){
                     console.log(error)

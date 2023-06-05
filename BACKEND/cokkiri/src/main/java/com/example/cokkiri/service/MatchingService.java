@@ -456,11 +456,11 @@ public class MatchingService {
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
         if(userInfo.get().isPublicMatching()==false){
-            if(userInfo.get().getPublicRestrictionDate()==null || userInfo.get().getPublicRestrictionDate().isBefore(LocalDateTime.now())){
+            if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
                 userInfo.get().setPublicMatching(true);
                 publicMatchedList = findPublicMatch(publicLectureUsers, count);
             }else{
-                LocalDateTime restrictionDate = userInfo.get().getPublicRestrictionDate();
+                LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
                 String string = " : 매칭이 해당일자 까지 제한됩니다.";
                 StringBuffer buffer = new StringBuffer(string);
                 buffer.insert(0,restrictionDate);
@@ -728,29 +728,57 @@ public class MatchingService {
 
     public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
         LocalDateTime time = LocalDateTime.now().plusDays(7);
-        NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
-        noShowUser.setEmail(user.getEmail());
-        noShowUser.setMatchingId(user.getMatchingId());
-        noShowUser.setMatchingType(user.getMatchingType());
-        noShowUser.setRestrictionTime(time);
-        Optional<User> noshowuser = userRepository.findById(user.getEmail());
-        noshowuser.get().setPublicRestrictionDate(time); // 일주일 제한
-        userRepository.save(noshowuser.get()); // 다시 저장
-        return noShowPublicMatchListRepository.save(noShowUser);
+        Optional<User> users = userRepository.findById(user.getEmail());
+        
+        if(users.isEmpty()){
+            return null;
+        }else{
+            if(users.get().getRestrctionDate()!=null){
+                return null;
+            }else{
+                NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+                if(user.getMatchingId() != 0 && user.getMatchingType() !=null && user.getEmail() != null){
+                    noShowUser.setEmail(user.getEmail());
+                    noShowUser.setMatchingId(user.getMatchingId());
+                    noShowUser.setMatchingType(user.getMatchingType());
+                    noShowUser.setRestrictionTime(time);
+                    Optional<User> noshowuser = userRepository.findById(user.getEmail());
+                    noshowuser.get().setRestrctionDate(time); // 일주일 제한
+                    userRepository.save(noshowuser.get()); // 다시 저장
+                    return noShowPublicMatchListRepository.save(noShowUser);
+                }else{
+                    return  null;
+                }
+            }
+        }
     }
 
     public  NoShowClassMatchList postNoShowClassUser(NoShowClassMatchList user){
-        LocalDateTime time = LocalDateTime.now().plusDays(7);
         NoShowClassMatchList noShowUser = new NoShowClassMatchList();
-        noShowUser.setMatchingId(user.getMatchingId());
-        noShowUser.setEmail(user.getEmail());
-        noShowUser.setMatchingType(user.getMatchingType());
-        noShowUser.setRestrictionTime(time);
+        Optional<User> users = userRepository.findById(user.getEmail());
 
-        Optional<User> noshowuser = userRepository.findById(user.getEmail());
-        noshowuser.get().setRestrctionDate(time); // 일주일 제한
-        userRepository.save(noshowuser.get()); // 다시 저장
-        return noShowClassMatchRepository.save(noShowUser);
+        if(users.isEmpty()){
+            return null;
+        }else{
+            if(users.get().getRestrctionDate()!=null){
+                return null;
+            }else{
+                if(user.getMatchingId() != 0 && user.getMatchingType() !=null && user.getEmail() != null){
+                    LocalDateTime time = LocalDateTime.now().plusDays(7);
+                    noShowUser.setMatchingId(user.getMatchingId());
+                    noShowUser.setEmail(user.getEmail());
+                    noShowUser.setMatchingType(user.getMatchingType());
+                    noShowUser.setRestrictionTime(time);
+
+                    Optional<User> noshowuser = userRepository.findById(user.getEmail());
+                    noshowuser.get().setRestrctionDate(time); // 일주일 제한
+                    userRepository.save(noshowuser.get()); // 다시 저장
+                    return noShowClassMatchRepository.save(noShowUser);
+                }else{
+                    return  null;
+                }
+            }
+        }
     }
 
 
@@ -783,7 +811,7 @@ public class MatchingService {
         if(noshowUser.isEmpty()){
             return  null;
         }else{
-            noshowUser.get().setPublicRestrictionDate(null);
+            noshowUser.get().setRestrctionDate(null);
             userRepository.save(noshowUser.get());
 
             NoShowPublicMatchList user  = noShowPublicMatchListRepository.findByEmail(email);

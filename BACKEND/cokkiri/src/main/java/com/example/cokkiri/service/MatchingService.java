@@ -770,6 +770,7 @@ public class MatchingService {
             return  null;
         }else{
             noshowUser.get().setRestrctionDate(null);
+            userRepository.save(noshowUser.get());
             NoShowClassMatchList user  = noShowClassMatchRepository.findByEmail(email);
             noShowClassMatchRepository.delete(user);
             return noshowUser.get();
@@ -783,6 +784,8 @@ public class MatchingService {
             return  null;
         }else{
             noshowUser.get().setPublicRestrictionDate(null);
+            userRepository.save(noshowUser.get());
+
             NoShowPublicMatchList user  = noShowPublicMatchListRepository.findByEmail(email);
             noShowPublicMatchListRepository.delete(user);
             return noshowUser.get();

@@ -29,25 +29,36 @@ export default createStore({
 
         publicMatchingRecord: [],
         classMatchingRecord: [],
+
+        // 매칭 대기 정보 불러오기
+        classMatchingWait: '',
+        publicMatchingWait: '',
     },
     mutations: {
+        // 매칭 대기 저장
+        SaveClassWait(state,record){
+            console.log("수업")
+            state.classMatchingWait = record
+            console.log(state.classMatchingWait)
+        },
+        SavePublicWait(state,record){
+            console.log("공강")
+            state.publicMatchingWait = record
+            console.log(state.publicMatchingWait)
+        },
+
         // 사용자 매칭 정보 불러오기
         publicSave(state, record){
             state.publicMatchingRecord = record
-            console.log(state.publicMatchingRecord)
         },
         classSave(state, record){
             state.classMatchingRecord = record
-            console.log(state.classMatchingRecord)
         },
 
         //하트 사용내역 불러오기
         setUsageHistory(state, history) {
             state.usageHistory = history;
         },
-
-
-
         // 로그인 적용 후 ~ 페이지로 이동. 추후 메인 페이지로 이동 변경 예정.
         loginSuccess(state, payload) {
             state.isLogin = true
@@ -124,6 +135,7 @@ export default createStore({
                             commit('loginSuccess', inputId);
                             dispatch('userInfoUpdate')
                             dispatch('callRecord')
+                            dispatch('callMatchingWaitRecord')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -182,11 +194,9 @@ export default createStore({
                         course: inputCourse.map(encodeURIComponent).join(',')
                     }
                 })
-                .then((result)=>{
-                    if(result.status === 200){
-                        dispatch('userInfoUpdate')
-                        alert("수정 완료")
-                    }
+                .then(()=>{
+                    dispatch('userInfoUpdate')
+                    alert("수정 완료")
                 })
                 .catch(function(error){
                     console.log(error)
@@ -224,6 +234,42 @@ export default createStore({
             } catch (error) {
                 console.log(error);
             }
+        },
+        async callMatchingWaitRecord({state, commit}){
+            try{
+                await axios.get('/matching/get/class/matchingWait',{
+                    params:{
+                        email: state.id
+                    }
+                })
+                .then((result)=>{
+                    commit('SaveClassWait',result.data)
+                    console.log(result)
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            }catch(error){
+                console.log(error)
+            }
+            try{
+                await axios.get('/matching/get/free/matchingWait',{
+                    params:{
+                        email: state.id
+                    }
+                })
+                .then((result)=>{
+                    commit('SavePublicWait',result.data)
+                    console.log(result)
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            }catch(error){
+                console.log(error)
+            }
+
         }
+
     },
 })

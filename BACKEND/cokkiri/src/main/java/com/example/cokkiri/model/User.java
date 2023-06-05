@@ -44,9 +44,7 @@ public class User {
     //수업 제한날짜
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime restrctionDate;
-    // 공강 제한날짜
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime publicRestrictionDate;
+
     //수강과목
     @ElementCollection
     private List<String> course;

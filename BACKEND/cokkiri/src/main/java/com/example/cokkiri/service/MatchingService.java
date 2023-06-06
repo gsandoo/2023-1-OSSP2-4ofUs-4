@@ -40,6 +40,8 @@ public class MatchingService {
     @Autowired
     private AccusationRepository accusationRepository;
     @Autowired
+    private PublicAccusationRepository publicAccusationRepository;
+    @Autowired
     private  UserRepository userRepository;
 
     @Autowired
@@ -699,51 +701,72 @@ public class MatchingService {
     }
 
 
-    //신고 목록 조회
-    public List<MatchAccusation> getDeclarationList(String matchingType){
-        List<MatchAccusation> list = accusationRepository.findByMatchingType(matchingType);
-        return list;
-    }
-    public MatchAccusation postDeclarationList(MatchAccusation accusation){
-        System.out.println(accusation);
-        Optional<MatchAccusation> acc= accusationRepository.findByEmail(accusation.getEmail());
-        if(acc.isEmpty()){ // 신고 내역에 없으면 새로 만들어서 하기
-            MatchAccusation list = new MatchAccusation();
-            list.setEmail(accusation.getEmail());
-            list.setMatchingType(accusation.getMatchingType());
-            list.setTitle(accusation.getTitle());
-            list.setMatchingId(accusation.getMatchingId());
-            list.setComment(accusation.getComment());
-            return accusationRepository.save(list);
-        }else{ // 신고 내역에 있으면
-            String type = accusation.getMatchingType(); // 입력값의 매칭 타입을 확인하고
-            if(acc.get().getMatchingType()==type){ // 같다면 수정
-                acc.get().setMatchingId(accusation.getMatchingId());
-                acc.get().setEmail(accusation.getEmail());
+
+    // 신고 등록, 타입별
+    public ClassAccusation postDeclarationList(ClassAccusation accusation){
+        String classType = accusation.getMatchingType();
+        String email = accusation.getEmail();
+        int id = accusation.getMatchingId();
+        if(classType.equals("class")){
+            Optional<ClassAccusation> acc = accusationRepository.findByMatchingIdAndEmail(id,email);
+            if(acc.isEmpty()){
+                ClassAccusation list = new ClassAccusation();
+                list.setMatchingId(id);
+                list.setEmail(email);
+                list.setTitle(accusation.getTitle());
+                list.setComment(accusation.getComment());
+                list.setMatchingType(classType);
+                return accusationRepository.save(list);
+            }else{
                 acc.get().setTitle(accusation.getTitle());
                 acc.get().setComment(accusation.getComment());
-                acc.get().setMatchingType(accusation.getMatchingType());
                 return accusationRepository.save(acc.get());
             }
-            else{ // 다르면 새로 만들어서 추가
-                MatchAccusation list = new MatchAccusation();
-                list.setEmail(accusation.getEmail());
-                list.setMatchingType(accusation.getMatchingType());
-                list.setTitle(accusation.getTitle());
-                list.setMatchingId(accusation.getMatchingId());
-                list.setComment(accusation.getComment());
-                return accusationRepository.save(list);
-            }
+        }else{
+            return  null;
         }
     }
 
-    public MatchAccusation getPublicDeclarationList(int id, String matchingType){
-        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public PublicAccusation postPublicDeclarationList(PublicAccusation accusation){
+        String classType = accusation.getMatchingType();
+        String email = accusation.getEmail();
+        int id = accusation.getMatchingId();
+        if(classType.equals("free")){
+            Optional<PublicAccusation> acc = publicAccusationRepository.findByMatchingIdAndEmail(id,email);
+            if(acc.isEmpty()){
+                PublicAccusation list = new PublicAccusation();
+                list.setMatchingId(id);
+                list.setEmail(email);
+                list.setTitle(accusation.getTitle());
+                list.setComment(accusation.getComment());
+                list.setMatchingType(classType);
+                return publicAccusationRepository.save(list);
+            }else{
+                acc.get().setTitle(accusation.getTitle());
+                acc.get().setComment(accusation.getComment());
+                return publicAccusationRepository.save(acc.get());
+            }
+        }else{
+            return  null;
+        }
+    }
+
+    public List<PublicAccusation> getPublicDeclaration(String matchingType){
+        List<PublicAccusation> list = publicAccusationRepository.findByMatchingType(matchingType);
         return  list;
     }
 
-    public MatchAccusation getClassDeclarationList(int id, String matchingType){
-        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public List<ClassAccusation> getClassDeclaration(String matchingType){
+        List<ClassAccusation> list = accusationRepository.findByMatchingType(matchingType);
+        return  list;
+    }
+    public List<PublicAccusation> getPublicDeclarationList(int id, String matchingType){
+        List<PublicAccusation> list =publicAccusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
+    }
+
+    public List<ClassAccusation> getClassDeclarationList(int id, String matchingType){
+        List<ClassAccusation> list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 

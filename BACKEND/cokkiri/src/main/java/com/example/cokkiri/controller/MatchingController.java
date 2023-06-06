@@ -108,39 +108,57 @@ public class MatchingController {
         return  new ResponseEntity<NoShowClassMatchList>(noShowUser, HttpStatus.OK);
     }
     // 신고 등록
-    @PostMapping("post/accusation")
-    public ResponseEntity<MatchAccusation> postAccusation(@RequestBody MatchAccusation declaration){
-        MatchAccusation list = matchingService.postDeclarationList(declaration);
-        return new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
+    @PostMapping("post/class/accusation")
+    public ResponseEntity<ClassAccusation> postAccusation(@RequestBody ClassAccusation declaration){
+        ClassAccusation list = matchingService.postDeclarationList(declaration);
+        return new ResponseEntity<ClassAccusation>(list,HttpStatus.OK);
+    }
+    @PostMapping("post/free/accusation")
+    public ResponseEntity<PublicAccusation> postAccusation(@RequestBody PublicAccusation declaration){
+        PublicAccusation list = matchingService.postPublicDeclarationList(declaration);
+        return new ResponseEntity<PublicAccusation>(list,HttpStatus.OK);
     }
 
-    // 신고 목록리스트(수업/공강) 조회
-    @GetMapping("get/accusation")
-    public ResponseEntity<List<MatchAccusation>> getAccusation(@RequestParam(value = "matchingType")String matchingType){
-        List<MatchAccusation> list = matchingService.getDeclarationList(matchingType);
-        return new ResponseEntity<List<MatchAccusation>>(list,HttpStatus.OK);
+
+    // 타입별 신고목록 조회
+    @GetMapping("get/public/accusation")
+    public ResponseEntity<List<PublicAccusation>> getPublicAccusationList(@RequestParam (value = "matchingType")String matchingType){
+        if(matchingType.equals("free")){
+            List<PublicAccusation> list = matchingService.getPublicDeclaration(matchingType);
+            return new ResponseEntity<List<PublicAccusation>>(list,HttpStatus.OK);
+        }
+        else{ return null;}
+    }
+
+    @GetMapping("get/class/accusation")
+    public ResponseEntity<List<ClassAccusation>> getClassAccusationList(@RequestParam (value = "matchingType")String matchingType){
+        if(matchingType.equals("class")){
+            List<ClassAccusation> list = matchingService.getClassDeclaration(matchingType);
+            return new ResponseEntity<List<ClassAccusation>>(list,HttpStatus.OK);
+        }
+        else{ return null;}
     }
 
     // 특정 공강 매칭 신고조회
     @GetMapping("get/publicmatch/accusation")
-    public ResponseEntity<MatchAccusation> getPublicAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<List<PublicAccusation>> getPublicAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
         if(matchingType.equals("free")){
-            MatchAccusation list = matchingService.getPublicDeclarationList(id, matchingType);
-            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
+            List<PublicAccusation> list = matchingService.getPublicDeclarationList(id, matchingType);
+            return  new ResponseEntity<List<PublicAccusation>>(list,HttpStatus.OK);
         }else {
-            return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
+            return  new ResponseEntity<List<PublicAccusation>>(HttpStatus.BAD_REQUEST);
         }
 
     }
     //특정 수업 매칭 신고조회
     @GetMapping("get/classmatch/accusation")
-    public ResponseEntity<MatchAccusation> getClassAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
+    public ResponseEntity<List<ClassAccusation>> getClassAccusation(@RequestParam(value = "matchingId")int id , @RequestParam(value = "matchingType")String matchingType){
         if(matchingType.equals("class")){
-            MatchAccusation list = matchingService.getClassDeclarationList(id, matchingType);
-            return  new ResponseEntity<MatchAccusation>(list,HttpStatus.OK);
+            List<ClassAccusation> list = matchingService.getClassDeclarationList(id, matchingType);
+            return  new ResponseEntity<List<ClassAccusation>>(list,HttpStatus.OK);
         }
         else{
-            return  new ResponseEntity<MatchAccusation>(HttpStatus.BAD_REQUEST);
+            return  new ResponseEntity<List<ClassAccusation>>(HttpStatus.BAD_REQUEST);
         }
     }
 

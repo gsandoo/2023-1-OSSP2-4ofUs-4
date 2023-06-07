@@ -603,9 +603,18 @@ public class MatchingService {
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
     };
 
-    //노쇼 발생 시 하트 반환
+    //노쇼 취소
+    public NoShowPublicMatchList deleteNoShowPublicUser(int id, String matchingType){
+        NoShowPublicMatchList user =noShowPublicMatchListRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        noShowPublicMatchListRepository.delete(user);
+        return  user;
+    }
 
-
+    public NoShowClassMatchList deleteNoShowClassUser(int id, String matchingType){
+        NoShowClassMatchList user =noShowClassMatchRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        noShowClassMatchRepository.delete(user);
+        return  user;
+    }
     // 매치된 리스트에서 삭제
     public  String deletePublicUser(int id){
         PublicMatchedList list = publicMatchedListRepository.findByMatchingId(id);

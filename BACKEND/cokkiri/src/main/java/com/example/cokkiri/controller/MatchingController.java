@@ -86,7 +86,21 @@ public class MatchingController {
     }
 
     // 노쇼 취소
-//    public Re
+    @GetMapping("delete/noshow/free")
+    public ResponseEntity<NoShowPublicMatchList> removeNoshowPublicUser(@RequestParam(value = "matchingId")int id , @RequestParam (value = "matchingType")String matchingType){
+
+        NoShowPublicMatchList user = matchingService.deleteNoShowPublicUser(id, matchingType);
+        return new ResponseEntity<NoShowPublicMatchList>(user, HttpStatus.OK);
+
+    }
+    @GetMapping("delete/noshow/class")
+
+    public ResponseEntity<NoShowClassMatchList> removeNoshowClassUser(@RequestParam(value = "matchingId")int id , @RequestParam (value = "matchingType")String matchingType){
+
+        NoShowClassMatchList user = matchingService.deleteNoShowClassUser(id, matchingType);
+        return new ResponseEntity<NoShowClassMatchList>(user, HttpStatus.OK);
+
+    }
 
     //노쇼의심유저에게 메일 보내기
     @GetMapping("send/noshow")

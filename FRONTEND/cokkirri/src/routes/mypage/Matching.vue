@@ -20,13 +20,39 @@
                         <div class="line-for-division"></div>
 
                         <div class="frame-sub-body">
-                            <div v-for="(record, index) in matchingListClass" :key="index" :class="{'frame-data-box': record.courseNumber.length!==0}">
-                                <div v-if="record.courseNumber.length!==0" class="font-hash-h1">
+                            <div v-if="this.$store.state.classMatchingWait!==null" class="matching-frame">
+                                <div class="matching-describe">
+                                    # 신청 날짜 : {{this.$store.state.classMatchingWait.matchingTime}}
+                                    <div class="btn-report" @click="cancelClassWait(this.$store.state.classMatchingWait.id)">매칭 신청 취소</div>
+                                </div>
+                                <div class="matching-box">
+                                    <div class="record-img"></div>
+                                    <div class="record-type">수업 매칭</div>
+                                    <div class="record-head-count"></div>
+                                    <div class="record-timetable"></div>
+                                    <div class="record-ing-btn">#매칭 대기</div>
+                                </div>
+                            </div>
+                            <div v-if="this.$store.state.publicMatchingWait!==null" class="matching-frame">
+                                <div class="matching-describe">
+                                    # 신청 날짜 : {{this.$store.state.publicMatchingWait.matchingTime}}
+                                    <div class="btn-report" @click="cancelPublicWait(this.$store.state.publicMatchingWait.id)">매칭 신청 취소</div>
+                                </div>
+                                <div class="matching-box">
+                                    <div class="record-img"></div>
+                                    <div class="record-type">공강 매칭</div>
+                                    <div class="record-head-count"></div>
+                                    <div class="record-timetable"></div>
+                                    <div class="record-ing-btn">#매칭 대기</div>
+                                </div>
+                            </div>
+                            <div v-for="(record, index) in matchingListClass" :key="index" :class="{'matching-frame': record.courseNumber.length!==0}">
+                                <div v-if="record.courseNumber.length!==0" class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('class',record.matchingId)">노쇼 신고</div>
                                     <div class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 종료</div>
                                 </div>
-                                <div v-if="record.courseNumber.length!==0" class="font-state-box">
+                                <div v-if="record.courseNumber.length!==0" class="matching-box">
                                     <div class="record-img"></div>
                                     <div class="record-type">수업 매칭</div>
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
@@ -38,13 +64,13 @@
                                     <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
                                 </div>
                             </div>
-                            <div v-for="(record, index) in matchingListFree" :key="index" class="frame-data-box">
-                                <div class="font-hash-h1">
+                            <div v-for="(record, index) in matchingListFree" :key="index" class="matching-frame">
+                                <div class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
                                     <div class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 종료</div>
                                 </div>
-                                <div class="font-state-box">
+                                <div class="matching-box">
                                     <div class="record-img"></div>
                                     <div class="record-type">공강 매칭</div>
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
@@ -53,9 +79,9 @@
                                     <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
                                 </div>
                             </div>
-                            <div class="frame-data-box">
-                                <div class="font-hash-h1"># 매칭 기록이 더이상 없습니다.</div>
-                                <div class="font-state-box-ex">
+                            <div class="matching-frame">
+                                <div class="matching-describe"># 매칭 기록이 더이상 없습니다.</div>
+                                <div class="matching-box-ex">
                                     매칭을 원하실 경우, 매칭 추가 버튼을 누르십시오.
                                 </div>
                             </div>
@@ -82,8 +108,6 @@
             callMatchingRecord() {
                 this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
                 this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
-                console.log(this.$store.state.publicMatchingRecord)
-                console.log(this.$store.state.classMatchingRecord)
             },
             openReportWindow(matchingType,matchingId){
                 const route = this.$router.resolve({
@@ -134,6 +158,28 @@
                 }catch(error){
                     console.log(error)
                 }
+            },
+            async cancelClassWait(waitId){
+                await axios.get('/matching/delete/class/matchingWait',{
+                    params:{
+                        waitId: waitId
+                    }
+                }).then(()=>{
+                    console.log("매칭대기 취소 완료")
+                }).catch(function(error){
+                    console.log(error)
+                })
+            },
+            async cancelPublicWait(waitId){
+                await axios.get('/matching/delete/free/matchingWait',{
+                    params:{
+                        waitId: waitId
+                    }
+                }).then(()=>{
+                    console.log("매칭대기 취소 완료")
+                }).catch(function(error){
+                    console.log(error)
+                })
             },
         },
         mounted(){
@@ -243,7 +289,7 @@
             justify-content: center;
             align-items: center;
 
-            font-family: 'Inter';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 23px;
@@ -264,7 +310,7 @@
             justify-content: center;
             align-items: center;
 
-            font-family: 'Inter';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 23px;
@@ -290,14 +336,14 @@
         background: #FFFEF9;
         border-radius: 20px;
         overflow-y: auto;
-        .frame-data-box{
+        .matching-frame{
             width: 891px;
             height: 160px;
 
             margin-top: 30px;
             margin-left: 53px;
         }
-        .font-hash-h1{
+        .matching-describe{
             width: 891px;
             height: 34px;
 
@@ -326,7 +372,7 @@
             border-radius: 10px;
             color: #FFFFFF;
         }
-        .font-state-box{
+        .matching-box{
             width: 891px;
             height: 110px;
 
@@ -470,7 +516,7 @@
                 color: #B87514;
             }
         } 
-        .font-state-box-ex{
+        .matching-box-ex{
             width: 891px;
             height: 110px;
 

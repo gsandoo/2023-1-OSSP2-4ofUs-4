@@ -71,7 +71,6 @@ export default {
         },
         submitMatching(){
             if(this.$store.state.restrctionDate === null){
-                    console.log("규제 기간 없다고 판단->매칭 신고")
                 if(this.headCount!==''){
                     if(this.matchingType==='free'){
                         if(this.availableDay!=='' & this.startTime!=='' & this.endTime!==''){

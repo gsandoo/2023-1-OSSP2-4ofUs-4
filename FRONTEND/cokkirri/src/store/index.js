@@ -28,24 +28,34 @@ export default createStore({
 
         notification: null,
 
-        publicMatchingRecord: [],
-        classMatchingRecord: [],
+        publicMatchingRecord: null,
+        classMatchingRecord: null,
 
         // 매칭 대기 정보 불러오기
-        classMatchingWait: '',
-        publicMatchingWait: '',
+        classMatchingWait: null,
+        publicMatchingWait: null,
     },
     mutations: {
         // 매칭 대기 저장
         SaveClassWait(state,record){
-            //console.log("수업")
-            state.classMatchingWait = record
-            //console.log(state.classMatchingWait)
+            if(Object.keys(record).length > 0){
+                state.classMatchingWait = record
+                console.log("수업")
+                console.log(state.classMatchingWait)
+            }
+            else{
+                console.log("수업 대기 없다고 판단")
+            }
         },
         SavePublicWait(state,record){
-            //console.log("공강")
-            state.publicMatchingWait = record
-            //console.log(state.publicMatchingWait)
+            if(Object.keys(record).length > 0){
+                state.publicMatchingWait = record
+                console.log("공강")
+                console.log(state.publicMatchingWait)
+            }
+            else{
+                console.log("공강 대기 없다고 판단")
+            }
         },
 
         // 사용자 매칭 정보 불러오기
@@ -149,6 +159,7 @@ export default createStore({
                             dispatch('userInfoUpdate')
                             dispatch('callRecord')
                             dispatch('callMatchingWaitRecord')
+                            dispatch('subscribeToSse')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -161,7 +172,6 @@ export default createStore({
             } catch(error){
                 console.log(error);
             }
-            dispatch('subscribeToSse')
         },
         // vuex의 state.id 기반으로 현재 유저의 정보를 업데이트한다.
         async userInfoUpdate({state,commit}){
@@ -175,7 +185,6 @@ export default createStore({
                         if(result.status === 200){
                             commit('userInfoApply', result.data)
                             console.log(result.data)
-                            console.log(result.data.restrctionDate)
                             console.log("유저 정보 업데이트 완료")
                         }
                         else{
@@ -250,7 +259,6 @@ export default createStore({
                 })
                 .then((result)=>{
                     commit('SaveClassWait',result.data)
-                    console.log(result)
                 })
                 .catch(function(error){
                     console.log(error)
@@ -266,7 +274,6 @@ export default createStore({
                 })
                 .then((result)=>{
                     commit('SavePublicWait',result.data)
-                    console.log(result)
                 })
                 .catch(function(error){
                     console.log(error)

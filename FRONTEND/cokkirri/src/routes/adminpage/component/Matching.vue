@@ -470,6 +470,7 @@
                     margin-top: 5px;
                     margin-left: 0px;
                     float: left;
+                    overflow-x: auto;
 
                     display: flex;
                     align-items: center;

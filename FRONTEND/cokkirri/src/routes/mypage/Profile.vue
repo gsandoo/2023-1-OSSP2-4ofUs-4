@@ -247,7 +247,7 @@ export default {
             justify-content: center;
             align-items: center;
 
-            font-family: 'Inter';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 23px;
@@ -267,7 +267,7 @@ export default {
             justify-content: center;
             align-items: center;
 
-            font-family: 'Inter';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 23px;

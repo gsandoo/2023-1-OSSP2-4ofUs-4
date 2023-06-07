@@ -125,7 +125,6 @@
             align-items: center;
             text-align: center;
 
-            font-family: 'Poppins';
             font-style: normal;
             font-weight: 600;
             font-size: 20px;
@@ -146,7 +145,6 @@
             align-items: center;
             justify-content: center;
 
-            font-family: 'Roboto';
             font-style: normal;
             font-weight: 700;
             font-size: 16px;
@@ -167,7 +165,6 @@
             align-items: center;
             justify-content: center;
 
-            font-family: 'Roboto';
             font-style: normal;
             font-weight: 700;
             font-size: 16px;
@@ -193,7 +190,6 @@
             justify-content: center;
             text-align: center;
 
-            font-family: 'Poppins';
             font-style: normal;
             font-weight: 700;
             font-size: 50px;

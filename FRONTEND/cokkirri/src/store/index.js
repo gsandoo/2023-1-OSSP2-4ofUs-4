@@ -34,6 +34,10 @@ export default createStore({
         // 매칭 대기 정보 불러오기
         classMatchingWait: null,
         publicMatchingWait: null,
+
+        // 선택된 매칭 번호
+        matchingIdForChatroom: null,
+        matchingTypeForChatroom: null
     },
     mutations: {
         // 매칭 대기 저장

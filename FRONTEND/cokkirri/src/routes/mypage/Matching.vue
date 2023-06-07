@@ -61,7 +61,7 @@
                                             {{timeId}}
                                         </div>
                                     </div>
-                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn" @click="moveToChatroom(record.matchingId,'class')">#채팅방</div>
                                 </div>
                             </div>
                             <div v-for="(record, index) in matchingListFree" :key="index" class="matching-frame">
@@ -76,7 +76,7 @@
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
                                     <div class="record-detail">{{record.availableDay}}</div>
                                     <div class="record-detail">{{record.promiseTime[0].slice(0,5)}}~{{record.promiseTime[1].slice(0,5)}}</div>
-                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn">#매칭 중</div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn" @click="moveToChatroom(record.matchingId,'free')">#채팅방</div>
                                 </div>
                             </div>
                             <div class="matching-frame">
@@ -181,6 +181,11 @@
                     console.log(error)
                 })
             },
+            moveToChatroom(matchingId, matchingType){
+                this.$store.state.matchingIdForChatroom = matchingId
+                this.$store.state.matchingTypeForChatroom = matchingType
+                this.$router.replace('/ChatRoom')
+            }
         },
         mounted(){
             this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();

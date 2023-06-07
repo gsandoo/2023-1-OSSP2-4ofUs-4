@@ -62,8 +62,8 @@
     
     const messages = ref([]);
     const newMessage = ref('');
-    const matchingId = ref(1);
-    const matchingType = ref('free');
+    const matchingId = ref(store.state.matchingIdForChatroom);
+    const matchingType = ref(store.state.matchingTypeForChatroom);
     const sender = ref(store.state.id);
     let stompClient = null;
 
@@ -95,7 +95,7 @@
               content: newMessage.value
           };
 
-          stompClient.send('/send/{matchingId}/{matchingType}', {}, JSON.stringify(chatMessage));
+          stompClient.send(`/send/${matchingId.value}/${matchingType.value}`, {}, JSON.stringify(chatMessage));
           messages.value.push({
               id: Date.now(),
               text: newMessage.value,

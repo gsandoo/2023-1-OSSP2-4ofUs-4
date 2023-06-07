@@ -459,8 +459,13 @@ public class MatchingService {
         Optional<User> userInfo = userRepository.findById(id);
         if(userInfo.get().isPublicMatching()==false){
             if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-                userInfo.get().setPublicMatching(true);
+
                 publicMatchedList = findPublicMatch(publicLectureUsers, count);
+                if(publicMatchedList!=null){
+                    userInfo.get().setPublicMatching(true);
+                    sendSSEtoPublicUser(publicMatchedList);
+                    savePublicUser(publicMatchedList);
+                }
             }else{
                 LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
                 String string = " : 매칭이 해당일자 까지 제한됩니다.";
@@ -472,10 +477,7 @@ public class MatchingService {
         }else{
             publicMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
-        if(publicMatchedList!=null){
-            sendSSEtoPublicUser(publicMatchedList);
-            savePublicUser(publicMatchedList);
-        }
+
         return publicMatchedList;
     }
 
@@ -491,8 +493,13 @@ public class MatchingService {
         if(userInfo.get().isClassMatching()==false){
             // 유저의 제한날짜가 없거나 제한 날짜가 현재 날짜 보다 전에 있으면
             if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-                userInfo.get().setClassMatching(true);
+
                 classMatchedList = findClassMatch(classLectureUsers,count);
+                if(classMatchedList!=null){
+                    userInfo.get().setClassMatching(true);
+                    sendSSEtoClassUser(classMatchedList);
+                    saveClassUser(classMatchedList);
+                }
             }else{
                 LocalDateTime restrictionDate = userInfo.get().getRestrctionDate();
                 String string = " : 매칭이 해당일자 까지 제한됩니다.";
@@ -504,10 +511,7 @@ public class MatchingService {
         }else{
             classMatchedList.setMatchingRes("중복 매칭은 불가합니다.");
         }
-        if(classMatchedList!=null){
-            sendSSEtoClassUser(classMatchedList);
-            saveClassUser(classMatchedList);
-        }
+
         return classMatchedList;
     }
 
@@ -782,7 +786,7 @@ public class MatchingService {
     public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
         LocalDateTime time = LocalDateTime.now().plusDays(7);
         Optional<User> users = userRepository.findById(user.getEmail());
-        
+
         if(users.isEmpty()){
             return null;
         }else{

@@ -40,6 +40,8 @@ public class MatchingService {
     @Autowired
     private AccusationRepository accusationRepository;
     @Autowired
+    private PublicAccusationRepository publicAccusationRepository;
+    @Autowired
     private  UserRepository userRepository;
 
     @Autowired
@@ -601,9 +603,18 @@ public class MatchingService {
         return publicMatchedListRepository.save(matchedList); // 데베에 저장
     };
 
-    //노쇼 발생 시 하트 반환
+    //노쇼 취소
+    public NoShowPublicMatchList deleteNoShowPublicUser(int id, String matchingType){
+        NoShowPublicMatchList user =noShowPublicMatchListRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        noShowPublicMatchListRepository.delete(user);
+        return  user;
+    }
 
-
+    public NoShowClassMatchList deleteNoShowClassUser(int id, String matchingType){
+        NoShowClassMatchList user =noShowClassMatchRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        noShowClassMatchRepository.delete(user);
+        return  user;
+    }
     // 매치된 리스트에서 삭제
     public  String deletePublicUser(int id){
         PublicMatchedList list = publicMatchedListRepository.findByMatchingId(id);
@@ -699,56 +710,128 @@ public class MatchingService {
     }
 
 
-    //신고 목록 조회
-    public List<MatchAccusation> getDeclarationList(String matchingType){
-        List<MatchAccusation> list = accusationRepository.findByMatchingType(matchingType);
-        return list;
-    }
-    public MatchAccusation postDeclarationList(MatchAccusation accusation){
-        System.out.println(accusation);
-        MatchAccusation list = new MatchAccusation();
-        list.setEmail(accusation.getEmail());
-        list.setMatchingType(accusation.getMatchingType());
-        list.setTitle(accusation.getTitle());
-        list.setMatchingId(accusation.getMatchingId());
-        list.setComment(accusation.getComment());
-        return accusationRepository.save(list);
+
+    // 신고 등록, 타입별
+    public ClassAccusation postDeclarationList(ClassAccusation accusation){
+        String classType = accusation.getMatchingType();
+        String email = accusation.getEmail();
+        int id = accusation.getMatchingId();
+        if(classType.equals("class")){
+            Optional<ClassAccusation> acc = accusationRepository.findByMatchingIdAndEmail(id,email);
+            if(acc.isEmpty()){
+                ClassAccusation list = new ClassAccusation();
+                list.setMatchingId(id);
+                list.setEmail(email);
+                list.setTitle(accusation.getTitle());
+                list.setComment(accusation.getComment());
+                list.setMatchingType(classType);
+                return accusationRepository.save(list);
+            }else{
+                acc.get().setTitle(accusation.getTitle());
+                acc.get().setComment(accusation.getComment());
+                return accusationRepository.save(acc.get());
+            }
+        }else{
+            return  null;
+        }
     }
 
-    public MatchAccusation getPublicDeclarationList(int id, String matchingType){
-        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public PublicAccusation postPublicDeclarationList(PublicAccusation accusation){
+        String classType = accusation.getMatchingType();
+        String email = accusation.getEmail();
+        int id = accusation.getMatchingId();
+        if(classType.equals("free")){
+            Optional<PublicAccusation> acc = publicAccusationRepository.findByMatchingIdAndEmail(id,email);
+            if(acc.isEmpty()){
+                PublicAccusation list = new PublicAccusation();
+                list.setMatchingId(id);
+                list.setEmail(email);
+                list.setTitle(accusation.getTitle());
+                list.setComment(accusation.getComment());
+                list.setMatchingType(classType);
+                return publicAccusationRepository.save(list);
+            }else{
+                acc.get().setTitle(accusation.getTitle());
+                acc.get().setComment(accusation.getComment());
+                return publicAccusationRepository.save(acc.get());
+            }
+        }else{
+            return  null;
+        }
+    }
+
+    public List<PublicAccusation> getPublicDeclaration(String matchingType){
+        List<PublicAccusation> list = publicAccusationRepository.findByMatchingType(matchingType);
         return  list;
     }
 
-    public MatchAccusation getClassDeclarationList(int id, String matchingType){
-        MatchAccusation list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+    public List<ClassAccusation> getClassDeclaration(String matchingType){
+        List<ClassAccusation> list = accusationRepository.findByMatchingType(matchingType);
+        return  list;
+    }
+    public List<PublicAccusation> getPublicDeclarationList(int id, String matchingType){
+        List<PublicAccusation> list =publicAccusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
+        return  list;
+    }
+
+    public List<ClassAccusation> getClassDeclarationList(int id, String matchingType){
+        List<ClassAccusation> list =accusationRepository.findByMatchingIdAndMatchingType(id, matchingType);
         return  list;
     }
 
     public  NoShowPublicMatchList postNoShowPublicUser(NoShowPublicMatchList user){
-
-        NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
-        noShowUser.setEmail(user.getEmail());
-        noShowUser.setMatchingId(user.getMatchingId());
-        noShowUser.setMatchingType(user.getMatchingType());
-        noShowUser.setRestrictionTime(LocalDateTime.now().plusDays(7));
-        Optional<User> noshowuser = userRepository.findById(user.getEmail());
-        noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
-        userRepository.save(noshowuser.get()); // 다시 저장
-        return noShowPublicMatchListRepository.save(noShowUser);
+        LocalDateTime time = LocalDateTime.now().plusDays(7);
+        Optional<User> users = userRepository.findById(user.getEmail());
+        
+        if(users.isEmpty()){
+            return null;
+        }else{
+            if(users.get().getRestrctionDate()!=null){
+                return null;
+            }else{
+                NoShowPublicMatchList noShowUser = new NoShowPublicMatchList();
+                if(user.getMatchingId() != 0 && user.getMatchingType() !=null && user.getEmail() != null){
+                    noShowUser.setEmail(user.getEmail());
+                    noShowUser.setMatchingId(user.getMatchingId());
+                    noShowUser.setMatchingType(user.getMatchingType());
+                    noShowUser.setRestrictionTime(time);
+                    Optional<User> noshowuser = userRepository.findById(user.getEmail());
+                    noshowuser.get().setRestrctionDate(time); // 일주일 제한
+                    userRepository.save(noshowuser.get()); // 다시 저장
+                    return noShowPublicMatchListRepository.save(noShowUser);
+                }else{
+                    return  null;
+                }
+            }
+        }
     }
 
     public  NoShowClassMatchList postNoShowClassUser(NoShowClassMatchList user){
         NoShowClassMatchList noShowUser = new NoShowClassMatchList();
-        noShowUser.setMatchingId(user.getMatchingId());
-        noShowUser.setEmail(user.getEmail());
-        noShowUser.setMatchingType(user.getMatchingType());
-        noShowUser.setRestrictionTime(LocalDateTime.now().plusDays(7));
+        Optional<User> users = userRepository.findById(user.getEmail());
 
-        Optional<User> noshowuser = userRepository.findById(user.getEmail());
-        noshowuser.get().setRestrctionDate(LocalDateTime.now().plusDays(7)); // 일주일 제한
-        userRepository.save(noshowuser.get()); // 다시 저장
-        return noShowClassMatchRepository.save(noShowUser);
+        if(users.isEmpty()){
+            return null;
+        }else{
+            if(users.get().getRestrctionDate()!=null){
+                return null;
+            }else{
+                if(user.getMatchingId() != 0 && user.getMatchingType() !=null && user.getEmail() != null){
+                    LocalDateTime time = LocalDateTime.now().plusDays(7);
+                    noShowUser.setMatchingId(user.getMatchingId());
+                    noShowUser.setEmail(user.getEmail());
+                    noShowUser.setMatchingType(user.getMatchingType());
+                    noShowUser.setRestrictionTime(time);
+
+                    Optional<User> noshowuser = userRepository.findById(user.getEmail());
+                    noshowuser.get().setRestrctionDate(time); // 일주일 제한
+                    userRepository.save(noshowuser.get()); // 다시 저장
+                    return noShowClassMatchRepository.save(noShowUser);
+                }else{
+                    return  null;
+                }
+            }
+        }
     }
 
 
@@ -768,6 +851,7 @@ public class MatchingService {
             return  null;
         }else{
             noshowUser.get().setRestrctionDate(null);
+            userRepository.save(noshowUser.get());
             NoShowClassMatchList user  = noShowClassMatchRepository.findByEmail(email);
             noShowClassMatchRepository.delete(user);
             return noshowUser.get();
@@ -781,6 +865,8 @@ public class MatchingService {
             return  null;
         }else{
             noshowUser.get().setRestrctionDate(null);
+            userRepository.save(noshowUser.get());
+
             NoShowPublicMatchList user  = noShowPublicMatchListRepository.findByEmail(email);
             noShowPublicMatchListRepository.delete(user);
             return noshowUser.get();

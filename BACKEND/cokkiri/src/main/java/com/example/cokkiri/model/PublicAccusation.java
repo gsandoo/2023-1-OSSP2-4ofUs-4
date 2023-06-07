@@ -15,11 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class MatchAccusation {
-    @Id
+public class PublicAccusation {
+
     @Column
     private int matchingId; // 신고할 매치의 id
 
+    @Id
     @Column
     private String email; // 신고자
 

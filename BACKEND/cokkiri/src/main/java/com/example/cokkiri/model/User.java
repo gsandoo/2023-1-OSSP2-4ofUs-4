@@ -41,9 +41,10 @@ public class User {
     //학번
     @Column
     private String studentNum;
-    //제한날짜
+    //수업 제한날짜
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime restrctionDate;
+
     //수강과목
     @ElementCollection
     private List<String> course;

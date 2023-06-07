@@ -238,7 +238,7 @@ export default {
             justify-content: left;
             text-align: left;
 
-            font-family: 'Roboto';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 30px;
@@ -266,7 +266,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -290,7 +290,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -314,7 +314,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -338,7 +338,7 @@ export default {
                 align-items: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 15px;
@@ -361,7 +361,7 @@ export default {
                 align-items: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 15px;
@@ -389,7 +389,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -410,7 +410,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -431,7 +431,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 font-size: 16px;
@@ -452,7 +452,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
@@ -473,7 +473,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 12px;
@@ -494,7 +494,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
@@ -519,7 +519,7 @@ export default {
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Roboto';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;

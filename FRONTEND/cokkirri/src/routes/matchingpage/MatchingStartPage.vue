@@ -188,7 +188,7 @@ export default {
             justify-content: center;
             text-align: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             line-height: 38px;
@@ -209,7 +209,7 @@ export default {
             justify-content: center;
             text-align: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 700;
 
@@ -239,7 +239,7 @@ export default {
                 align-items: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 line-height: 75px;
@@ -257,7 +257,7 @@ export default {
                 align-items: center;
                 justify-content: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;     
                 line-height: 38px;
@@ -274,7 +274,7 @@ export default {
                 align-items: center;
                 justify-content: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;
                 line-height: 38px;
@@ -295,7 +295,7 @@ export default {
                 align-items: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 line-height: 45px;
@@ -317,7 +317,7 @@ export default {
                 align-items: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 line-height: 45px;
@@ -338,7 +338,7 @@ export default {
                 align-items: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 line-height: 45px;
@@ -360,7 +360,7 @@ export default {
                 align-items: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 700;
                 line-height: 45px;

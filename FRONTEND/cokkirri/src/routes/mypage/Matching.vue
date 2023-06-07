@@ -179,7 +179,7 @@
             margin-left: 17px;
             float:left;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 50px;
@@ -222,7 +222,7 @@
             justify-content: left;
             align-items: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 30px;
@@ -305,7 +305,7 @@
             justify-content: left;
             align-items: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 25px;
@@ -354,7 +354,7 @@
                 margin-left: 49px;
                 float: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;
                 font-size: 25px;
@@ -372,7 +372,7 @@
                 margin-top: 18px;
                 float: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 300;
                 font-size: 25px;
@@ -391,7 +391,7 @@
                 margin-top: 18px;
                 float: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 300;
                 font-size: 25px;
@@ -412,7 +412,7 @@
                 float: left;
                 overflow-x: auto;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 300;
                 font-size: 25px;
@@ -434,7 +434,7 @@
                     justify-content: center;
                     text-align: center;
                     
-                    font-family: 'Poppins';
+                    
                     font-style: normal;
                     font-weight: 300;
                     font-size: 20px;
@@ -460,7 +460,7 @@
                 text-align: center;
                 justify-content: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 300;
                 font-size: 30px;
@@ -483,7 +483,7 @@
             justify-content: center;
             align-items: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 25px;

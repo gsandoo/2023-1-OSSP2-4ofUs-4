@@ -90,11 +90,11 @@
                     placeholder="student ID"
                     class="input-style"
                     v-model="member.userStudentId">
-                <button 
+                <div 
                     @click= "submitForm"
                     class="btn-style">
                     확인
-                </button>
+                </div>
             </div>
         </div>
     </div>
@@ -321,6 +321,11 @@ export default {
             border-radius: 10px;
             border-color: #E48700;
             box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
             color: #FFFFFF;
         }

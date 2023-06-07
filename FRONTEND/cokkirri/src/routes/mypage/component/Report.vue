@@ -125,7 +125,7 @@
                 align-items: center;
                 justify-content: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 24px;
@@ -144,7 +144,7 @@
                 justify-content: left;
                 text-align: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 16px;
@@ -162,7 +162,7 @@
                 align-items: center;
                 justify-content: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 20px;
@@ -199,7 +199,7 @@
                 align-items: center;
                 justify-content: left;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 400;
                 font-size: 20px;
@@ -241,7 +241,7 @@
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;
                 font-size: 24px;
@@ -266,7 +266,7 @@
                 justify-content: center;
                 text-align: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;
                 font-size: 24px;

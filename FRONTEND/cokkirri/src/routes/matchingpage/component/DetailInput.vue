@@ -151,7 +151,7 @@ export default {
             margin-top:8px;
             float: left;
             
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 30px;
@@ -171,7 +171,7 @@ export default {
             margin-top:8px;
             float: left;
             
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 30px;
@@ -228,7 +228,7 @@ export default {
             align-items: center;
             justify-content: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 700;
             line-height: 45px;
@@ -248,7 +248,7 @@ export default {
             align-items: center;
             justify-content: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 700;
             line-height: 45px;

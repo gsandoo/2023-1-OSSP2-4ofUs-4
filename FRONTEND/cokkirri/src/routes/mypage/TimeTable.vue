@@ -224,7 +224,7 @@ export default {
             margin-left: 17px;
             float:left;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 50px;
@@ -267,7 +267,7 @@ export default {
             justify-content: left;
             align-items: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 400;
             font-size: 30px;
@@ -357,7 +357,7 @@ export default {
                         background: transparent;
                         outline: none;
 
-                        font-family: 'Poppins';
+                        
                         font-style: normal;
                         font-weight: 500;
                         font-size: 25px;
@@ -393,7 +393,7 @@ export default {
                         width: 263px;
                         height: 73px;
 
-                        font-family: 'Poppins';
+                        
                         font-style: normal;
                         font-weight: 500;
                         font-size: 25px;
@@ -472,7 +472,7 @@ export default {
                     align-items: center;
                     text-align: center;
 
-                    font-family: 'Poppins';
+                    
                     font-style: normal;
                     font-weight: 500;
                     font-size: 30px;
@@ -490,7 +490,7 @@ export default {
                     align-items: center;
                     text-align: center;
 
-                    font-family: 'Poppins';
+                    
                     font-style: normal;
                     font-weight: 500;
                     font-size: 25px;
@@ -513,7 +513,7 @@ export default {
                 justify-content: center;
                 align-items: center;
 
-                font-family: 'Poppins';
+                
                 font-style: normal;
                 font-weight: 500;
                 font-size: 25px;

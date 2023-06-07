@@ -342,7 +342,7 @@ export default {
             align-items: center;
             text-align: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 30px;
@@ -360,7 +360,7 @@ export default {
             align-items: center;
             text-align: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 25px;
@@ -382,7 +382,7 @@ export default {
             align-items: center;
             text-align: center;
 
-            font-family: 'Poppins';
+            
             font-style: normal;
             font-weight: 500;
             font-size: 25px;

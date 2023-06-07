@@ -30,11 +30,11 @@
                         to="/" 
                         @click="alertMassage" 
                         class="link-finding-password">비밀번호 찾기</router-link>
-                    <button 
+                    <div 
                         class="submit-btn"
                         @click="submitForm">
                         로그인
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +172,11 @@ export default {
             border-radius: 10px;
             border-color: #E48700;
             box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
             font-size: 16px;
             color: #FFFFFF;

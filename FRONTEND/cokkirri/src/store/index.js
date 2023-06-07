@@ -22,6 +22,7 @@ export default createStore({
         course: [],
         password: null,
         heart: null,
+        restrctionDate: null,
 
         usageHistory: [],
 
@@ -37,14 +38,14 @@ export default createStore({
     mutations: {
         // 매칭 대기 저장
         SaveClassWait(state,record){
-            console.log("수업")
+            //console.log("수업")
             state.classMatchingWait = record
-            console.log(state.classMatchingWait)
+            //console.log(state.classMatchingWait)
         },
         SavePublicWait(state,record){
-            console.log("공강")
+            //console.log("공강")
             state.publicMatchingWait = record
-            console.log(state.publicMatchingWait)
+            //console.log(state.publicMatchingWait)
         },
 
         // 사용자 매칭 정보 불러오기
@@ -65,15 +66,27 @@ export default createStore({
             state.id = payload
             router.replace('/Starting')
         },
-        userInfoApply(state, {major, name, number, sex, studentNum, course, password, heart}){
-            state.major = major
-            state.name = name
-            state.number = number
-            state.sex = sex
-            state.studentNum = studentNum
-            state.course = course
-            state.password = password
-            state.heart = heart
+        userInfoApply(state, payload){
+            state.major = payload.major
+            state.name = payload.name
+            state.number = payload.number
+            state.sex = payload.sex
+            state.studentNum = payload.studentNum
+            state.course = payload.course
+            state.password = payload.password
+            state.heart = payload.heart
+            state.restrctionDate = payload.restrctionDate
+        },
+        dateReform(state){
+            if(state.restrctionDate===null){
+                console.log("규제 기간 없다고 판단->매칭 신고")
+                return
+            }
+            else{
+                console.log(state.restrctionDate)
+                const dateTemp = new Date(state.restrctionDate)
+                alert("현재 사용자는 과거 노쇼를 한 기록으로 인해 " + dateTemp.getFullYear() + "년 " + dateTemp.getMonth() + "월 " + dateTemp.getDay() + "일 " + dateTemp.getHours() + "시 " + dateTemp.getMinutes() + "분까지 매칭이 금지된 상태입니다.")
+            }
         },
         logout(state) { 
             state.isLogin = false
@@ -151,7 +164,7 @@ export default createStore({
             dispatch('subscribeToSse')
         },
         // vuex의 state.id 기반으로 현재 유저의 정보를 업데이트한다.
-        async userInfoUpdate({state, commit}){
+        async userInfoUpdate({state,commit}){
             try{
                 await axios.get('/admin/user/id',{
                         params: {
@@ -160,20 +173,13 @@ export default createStore({
                     })
                     .then((result) =>{
                         if(result.status === 200){
-                            commit('userInfoApply', {
-                                major: result.data.major,
-                                name: result.data.name,
-                                number: result.data.number,
-                                sex: result.data.sex,
-                                studentNum: result.data.studentNum,
-                                course: result.data.course,
-                                password: result.data.password,
-                                heart: result.data.heart
-                            })
+                            commit('userInfoApply', result.data)
+                            console.log(result.data)
+                            console.log(result.data.restrctionDate)
                             console.log("유저 정보 업데이트 완료")
                         }
                         else{
-                            console.log("response가 200이 아님")
+                            console.log("로그인 실패")
                         }
                     })
                     .catch(function(error){

@@ -70,30 +70,39 @@ export default {
             this.matchingType = 'class'
         },
         submitMatching(){
-            if(this.headCount!==''){
-                if(this.matchingType==='free'){
-                    if(this.availableDay!=='' & this.startTime!=='' & this.endTime!==''){
-                        this.resisterMatchingFree()
+            if(this.$store.state.restrctionDate === null){
+                    console.log("규제 기간 없다고 판단->매칭 신고")
+                if(this.headCount!==''){
+                    if(this.matchingType==='free'){
+                        if(this.availableDay!=='' & this.startTime!=='' & this.endTime!==''){
+                            this.resisterMatchingFree()
+                        }
+                        else{
+                            alert("날짜 및 시간이 설정되지 않았습니다.")
+                        }
+                    }
+                    else if(this.matchingType==='class'){
+                        if(this.courseNumber.length!==0){
+                            this.resisterMatchingClass()
+                        }
+                        else{
+                            alert("학수번호가 선택되지 않았습니다.")
+                        }
                     }
                     else{
-                        alert("날짜 및 시간이 설정되지 않았습니다.")
-                    }
-                }
-                else if(this.matchingType==='class'){
-                    if(this.courseNumber.length!==0){
-                        this.resisterMatchingClass()
-                    }
-                    else{
-                        alert("학수번호가 선택되지 않았습니다.")
+                        alert("매칭 타입이 설정되지 않았습니다.")
                     }
                 }
                 else{
-                    alert("매칭 타입이 설정되지 않았습니다.")
+                    alert("인원이 설정되지 않았습니다.")
                 }
             }
             else{
-                alert("인원이 설정되지 않았습니다.")
+                console.log("규제 기간 확인됨: "+this.$store.state.restrctionDate)
+                const dateTemp = new Date(this.$store.state.restrctionDate.thString())
+                alert("현재 사용자는 과거 노쇼를 한 기록으로 인해 " + dateTemp.getFullYear() + "년 " + dateTemp.getMonth() + "월 " + dateTemp.getDay() + "일 " + dateTemp.getHours() + "시 " + dateTemp.getMinutes() + "분까지 매칭이 금지된 상태입니다.")
             }
+
 
         },
         async resisterMatchingFree(){

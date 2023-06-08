@@ -106,8 +106,11 @@
         },
         methods: {
             callMatchingRecord() {
-                this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
-                this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
+                if(this.$store.state.isLogin){
+                    this.$store.dispatch('callMatchingRecord')
+                    this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
+                    this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
+                }
             },
             openReportWindow(matchingType,matchingId){
                 const route = this.$router.resolve({
@@ -188,8 +191,11 @@
             }
         },
         mounted(){
-            this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();
-            this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse();
+            if(this.$store.state.isLogin){
+                this.$store.dispatch('callMatchingRecord')
+                this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();
+                this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse();
+            }
         },
     }
 </script>

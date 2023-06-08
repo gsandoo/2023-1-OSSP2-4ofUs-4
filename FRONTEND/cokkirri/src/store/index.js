@@ -118,7 +118,7 @@ export default createStore({
     },
     actions: {
         // 매칭 정보 불러오기
-        async callRecord({commit, state}) {
+        async callMatchingRecord({commit, dispatch, state}) {
             try{
                 await axios.get('/userMypage/publicMatchedList',{
                     params:{
@@ -143,6 +143,7 @@ export default createStore({
             } catch(error){
                 console.log(error)
             }
+            dispatch('callMatchingWaitRecord')
         },
 
         // 각 컴포넌트에서 this.$store.dispatch('메소드 이름', { 데이터 변수: 입력값 }) 형식으로 사용 가능
@@ -161,8 +162,7 @@ export default createStore({
                         if(result.data === true){
                             commit('loginSuccess', inputId);
                             dispatch('userInfoUpdate')
-                            dispatch('callRecord')
-                            dispatch('callMatchingWaitRecord')
+                            dispatch('callMatchingRecord')
                             dispatch('subscribeToSse')
                             alert('로그인 되었습니다.')
                         }

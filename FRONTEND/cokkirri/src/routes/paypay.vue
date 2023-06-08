@@ -37,10 +37,10 @@
           <img :src="imagePath_heart" alt="heart" class = "heart-10000"/>
         </div>
 
-        <div class="GoPay_5ht"> <p>10개</p> </div>
-        <div class="GoPay_10ht"> <p>15개</p> </div>
-        <div class="GoPay_15ht"> <p>25개</p> </div>
-        <div class="GoPay_20ht"> <p>50개</p> </div>
+        <div class="GoPay_5ht"> <p>5개</p> </div>
+        <div class="GoPay_10ht"> <p>10개</p> </div>
+        <div class="GoPay_15ht"> <p>15개</p> </div>
+        <div class="GoPay_20ht"> <p>20개</p> </div>
 
         <div class="GoPay_img">
           <img :src="imagePath_gopay" alt="Heartgopay" />
@@ -235,6 +235,20 @@ src: url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@800&di
 font-family: "Merriweather Sans";
 }
 
+@media (max-width: 768px) {
+  .Parent {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .HeartNum,
+  .GoPay,
+  .UseHistory {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
 .BoxingPay{
   background-color : #FFFEF9;
   display: flex;
@@ -306,6 +320,7 @@ float: left;
 width:30%;
 top : 5rem;
 box-sizing: border-box;
+overflow-y: auto; /* 스크롤 추가 */
 }
 
 .HeartNum_text{color: #000;
@@ -335,6 +350,7 @@ top: 5rem;
 float: left;
 width:30%;
 box-sizing: border-box;
+overflow-y: auto; /* 스크롤 추가 */
 }
 
 .GoPay_heart{
@@ -360,190 +376,182 @@ font-weight: bold;
 font-size: 20px;
 }
 
-.GoPay_15ht{
-position : absolute;
-left : 7.5rem;
-top : 24.25rem;
-font-weight: bold;
-font-size: 20px;
+.GoPay_15ht {
+  position: absolute;
+  left: 7.5rem;
+  top: 24.25rem;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.GoPay_20ht{
-position : absolute;
-left : 7.5rem;
-top : 29.25rem;
-font-weight: bold;
-font-size: 20px;
+.GoPay_20ht {
+  position: absolute;
+  left: 7.5rem;
+  top: 29.25rem;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.GoPay_text{ color: #000;
-position: absolute;
-width: 10rem;
-height: 5rem;
-left: 8rem;
-top: 5rem;
-
-font-style: normal;
-font-weight: 600;
-font-size: 40px;
-line-height: 60px;
-display: flex;
-align-items: center;
-text-align: center;
+.GoPay_text {
+  color: #000;
+  position: absolute;
+  width: 10rem;
+  height: 5rem;
+  left: 8rem;
+  top: 5rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.UseHistory{  /*border: 1px solid blue;*/
-position: relative;
-text-align: center;
-
-top: 5rem;
-float: right;
-width:30%;
-box-sizing: border-box;
+.UseHistory {
+  position: relative;
+  text-align: center;
+  top: 5rem;
+  float: right;
+  width: 30%;
+  box-sizing: border-box;
 }
 
-.UseHistory_text{color: #FFFEF9;
-position: absolute;
-width: 10rem;
-height: 5rem;
-left: 8.5rem;
-top: 5rem;
-
-font-style: normal;
-font-weight: 600;
-font-size: 40px;
-line-height: 60px;
-display: flex;
-align-items: center;
-text-align: center;
+.UseHistory_text {
+  color: #FFFEF9;
+  position: absolute;
+  width: 10rem;
+  height: 5rem;
+  left: 8.5rem;
+  top: 5rem;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.UseHistory_his{
+.UseHistory_his {
   position: absolute;
   width: 251px;
   height: 800px;
   left: 90px;
   top: 200px;
-
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
   line-height: 30px;
   display: block;
   align-items: center;
-
-  color : white;
-
-  max-height: 350px; /* 최대높이 */
-  overflow-y: auto; /* 세로 스크롤 활성화 */
+  color: white;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
-.charge1000{ color:white;
-background: #ECBC76;
-border-radius: 50px;
-
-text-decoration : none;
-font-weight: bold;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 12px 20px;
-gap: 10px;
-
-position: absolute;
-width: 5rem;
-height: 1rem;
-left: 15rem;
-top: 15rem;
+.charge1000 {
+  color: white;
+  background: #ECBC76;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 15rem;
 }
 
-.heart-1000{
-  position : absolute;
-  left : 0.1rem;
-  top : 0rem;
+.heart-1000 {
+  position: absolute;
+  left: 0.1rem;
+  top: 0rem;
   vertical-align: auto;
 }
 
-.heart-3000{
-  position : absolute;
-  left : 0.1rem;
-  top : 5rem;
+.heart-3000 {
+  position: absolute;
+  left: 0.1rem;
+  top: 5rem;
   vertical-align: auto;
 }
 
-.heart-5000{
-  position : absolute;
-  left : 0.1rem;
-  top : 10rem;
+.heart-5000 {
+  position: absolute;
+  left: 0.1rem;
+  top: 10rem;
   vertical-align: auto;
 }
 
-.heart-10000{
-  position : absolute;
-  left : 0.1rem;
-  top : 15rem;
+.heart-10000 {
+  position: absolute;
+  left: 0.1rem;
+  top: 15rem;
   vertical-align: auto;
 }
 
-.charge3000{ color:white;
-background: #ECBC76;
-border-radius: 50px;
-
-text-decoration : none;
-font-weight: bold;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 12px 20px;
-gap: 10px;
-
-position: absolute;
-width: 5rem;
-height: 1rem;
-left: 15rem;
-top: 20rem;
+.charge3000 {
+  color: white;
+  background: #ECBC76;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 20rem;
 }
 
-.charge5000{ color:white;
-background: #ECBC76;
-border-radius: 50px;
-
-text-decoration : none;
-font-weight: bold;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 12px 20px;
-gap: 10px;
-
-position: absolute;
-width: 5rem;
-height: 1rem;
-left: 15rem;
-top: 25rem;
+.charge5000 {
+  color: white;
+  background: #ECBC76;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 25rem;
 }
 
-.charge10000{ color:white;
-background: #ECBC76;
-border-radius: 50px;
-
-text-decoration : none;
-font-weight: bold;
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 12px 20px;
-gap: 10px;
-
-position: absolute;
-width: 5rem;
-height: 1rem;
-left: 15rem;
-top: 30rem;
+.charge10000 {
+  color: white;
+  background: #ECBC76;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  width: 5rem;
+  height: 1rem;
+  left: 15rem;
+  top: 30rem;
 }
 
 .NumOfHeart{

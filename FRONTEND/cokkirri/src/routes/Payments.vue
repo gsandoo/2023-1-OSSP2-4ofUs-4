@@ -226,15 +226,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-font-family: 'Merriweather Sans', sans-serif;
-src: url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@800&display=swap");
-}
-
-* {
-font-family: "Merriweather Sans";
-}
-
 .BoxingPay{
   background-color : #FFFEF9;
   display: flex;

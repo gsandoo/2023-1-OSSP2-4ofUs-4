@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '../store/index.js'
 // 연결된 페이지들
 import Home from './Home.vue'
 import SignUpPage from './SignUpPage.vue'
@@ -19,14 +20,17 @@ import Starting from './Starting.vue'
 import ChatRoom from './ChatRoom.vue'
 import paypay from './paypay.vue'
 
-export default createRouter({
+const router = createRouter({
     // Hash 모드로 설정
     history: createWebHashHistory(),
     // 연결된 페이지들
     routes: [
         {
             path: '',
-            component: Home
+            component: Home,
+            meta:{
+                isLoginPage: true
+            }
         },
         {
             path: '/signup',
@@ -35,19 +39,31 @@ export default createRouter({
 
         {
             path: '/my',
-            component: MyPage
+            component: MyPage, 
+            meta:{
+                requiresAuth: true
+            }
         },
         {
             path: '/my/profile',
-            component: MyProfile
+            component: MyProfile, 
+            meta:{
+                requiresAuth: true
+            }
         },
         {
             path: '/my/timetable',
-            component: MyTimeTable
+            component: MyTimeTable, 
+            meta:{
+                requiresAuth: true
+            }
         },
         {
             path: '/my/matching',
-            component: MyMatching
+            component: MyMatching, 
+            meta:{
+                requiresAuth: true
+            }
         },
         {
             path: '/my/matching/report',
@@ -56,7 +72,10 @@ export default createRouter({
 
         {
             path: '/matchingstart',
-            component: MatchingStartPage
+            component: MatchingStartPage, 
+            meta:{
+                requiresAuth: true
+            }
         },
         
         {
@@ -66,15 +85,24 @@ export default createRouter({
 
         {
             path: '/Payments',
-            component: Payments
+            component: Payments, 
+            meta:{
+                requiresAuth: true
+            }
         },
         {
             path: '/Starting',
-            component: Starting
+            component: Starting, 
+            meta:{
+                requiresAuth: true
+            }
         }
         ,{
             path: '/ChatRoom',
-            component: ChatRoom
+            component: ChatRoom, 
+            meta:{
+                requiresAuth: true
+            }
         }
         ,{
             path: '/paypay',
@@ -82,3 +110,19 @@ export default createRouter({
         }
     ]
 })
+router.beforeEach((to,from,next)=>{
+    const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+    const isLoginPage = to.matched.some(record => record.meta.isLoginPage);
+    const isLoggedIn = store.state.isLogin;
+    if(requiresAuth && !isLoggedIn){
+        alert("로그인이 필요합니다.")
+        next('/');
+    }else if(isLoginPage && isLoggedIn){
+        alert("이미 로그인 상태입니다.")
+        next('/Starting');
+    }else{
+        next();
+    }
+})
+
+export default router;

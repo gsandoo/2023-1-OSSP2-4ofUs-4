@@ -35,7 +35,21 @@
     </div>
 </template>
 
-
+<script>
+    export default {
+        data(){
+            return{
+                heart: ''
+            }
+        },
+        mounted(){
+            if(this.$store.state.isLogin){
+                this.$store.dispatch('userInfoUpdate')
+                this.heart = this.$store.state.heart
+            }
+        }
+    }
+</script>
 
 <style lang="scss" scoped>
     @import "../../scss/main";

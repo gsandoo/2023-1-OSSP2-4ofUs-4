@@ -98,9 +98,6 @@ export default {
         inputSelected(){
             return this.stateTF.isRecordSelected = false
         },
-        editStateControl() {
-            return this.stateTF.iseditState = !this.stateTF.iseditState;
-        },
         async showtimetable(){
             try{
                 this.stateTF.isknown = false
@@ -178,6 +175,7 @@ export default {
                 inputCourse: this.inputData.courseList,
                 inputPassword: this.$store.state.password
             })
+            this.$router.replace('/my');
         },
     },
     computed:{

@@ -188,7 +188,6 @@ export default createStore({
                     .then((result) =>{
                         if(result.status === 200){
                             commit('userInfoApply', result.data)
-                            console.log(result.data)
                             console.log("유저 정보 업데이트 완료")
                         }
                         else{

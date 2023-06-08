@@ -57,6 +57,17 @@ export default {
         }
     },
     methods: {
+        checkHeartCount(){
+            this.$store.dispatch('userInfoUpdate')
+            console.log("하트개수: "+this.$store.state.heart+"개 확인 완료")
+            if(this.$store.state.heart >= 10){
+                this.submitMatching()
+                this.$store.dispatch('userInfoUpdate')
+                console.log("사용자 정보 자동 업데이트")
+            }else{
+                console.log("하트 개수가 "+this.$store.state.heart+"개 입니다."+"10개 이상 소지하고 있어야 매칭 신청이 가능합니다")
+            }
+        },
         clickedBtnHeadCountTwo(){
             this.headCount = '2'
         },

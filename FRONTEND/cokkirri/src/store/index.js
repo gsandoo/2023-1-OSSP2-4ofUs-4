@@ -37,28 +37,32 @@ export default createStore({
 
         // 선택된 매칭 번호
         matchingIdForChatroom: null,
-        matchingTypeForChatroom: null
+        matchingTypeForChatroom: null,
+
+        // 매칭 대기 상태
+        isExistClassMatchingWait: false,
+        isExistPublicMatchingWait: false,
     },
     mutations: {
         // 매칭 대기 저장
         SaveClassWait(state,record){
             if(Object.keys(record).length > 0){
                 state.classMatchingWait = record
-                console.log("수업")
-                console.log(state.classMatchingWait)
+                state.isExistClassMatchingWait = true
             }
             else{
                 console.log("수업 대기 없다고 판단")
+                state.isExistClassMatchingWait = false
             }
         },
         SavePublicWait(state,record){
             if(Object.keys(record).length > 0){
                 state.publicMatchingWait = record
-                console.log("공강")
-                console.log(state.publicMatchingWait)
+                state.isExistPublicMatchingWait = true
             }
             else{
                 console.log("공강 대기 없다고 판단")
+                state.isExistPublicMatchingWait = false
             }
         },
 
@@ -117,6 +121,11 @@ export default createStore({
         }
     },
     actions: {
+        // 매칭 대기 존재하는지 반환
+        async checkMatchingSubmitState({dispatch,state}){
+            await dispatch('callMatchingWaitRecord')
+            return (state.isExistClassMatchingWait | state.isExistPublicMatchingWait)
+        },
         // 매칭 정보 불러오기
         async callMatchingRecord({commit, dispatch, state}) {
             try{

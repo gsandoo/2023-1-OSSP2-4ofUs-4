@@ -14,7 +14,7 @@
                         <div class="matching-txt">매칭 결과</div>
 
                         <div class="matching-refresh" @click="callMatchingRecord()">새로고침</div>
-                        <router-link to="/matchingStart" class="matching-btn">매칭추가</router-link>
+                        <div class="matching-btn" @click="goToApply()">매칭추가</div>
                         <div style="clear:both;"></div>
 
                         <div class="line-for-division"></div>
@@ -24,6 +24,7 @@
                                 <div class="matching-describe">
                                     # 신청 날짜 : {{this.$store.state.classMatchingWait.matchingTime}}
                                     <div class="btn-report" @click="cancelClassWait(this.$store.state.classMatchingWait.id)">매칭 신청 취소</div>
+                                    <div>&nbsp;# 매칭 완료 후 하트 10개 차감 예정~!</div>
                                 </div>
                                 <div class="matching-box">
                                     <div class="record-img"></div>
@@ -37,6 +38,7 @@
                                 <div class="matching-describe">
                                     # 신청 날짜 : {{this.$store.state.publicMatchingWait.matchingTime}}
                                     <div class="btn-report" @click="cancelPublicWait(this.$store.state.publicMatchingWait.id)">매칭 신청 취소</div>
+                                    <div>&nbsp;# 매칭 완료 후 하트 10개 차감 예정~!</div>
                                 </div>
                                 <div class="matching-box">
                                     <div class="record-img"></div>
@@ -105,6 +107,19 @@
             }
         },
         methods: {
+            goToApply(){
+                this.checkSubmitState().then((result)=>{
+                    if(result){
+                        alert("이미 매칭 대기 중인 항목이 존재합니다.")
+                    }
+                    else{
+                        this.$router.replace('/matchingStart')
+                    }
+                })
+            },
+            async checkSubmitState(){
+                return await this.$store.dispatch('checkMatchingSubmitState')
+            },
             callMatchingRecord() {
                 if(this.$store.state.isLogin){
                     this.$store.dispatch('callMatchingRecord')
@@ -138,6 +153,7 @@
                     }).then((result)=>{
                         console.log("매칭 완료")
                         console.log(result)
+                        this.$store.dispatch('callMatchingRecord')
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -155,6 +171,7 @@
                     }).then((result)=>{
                         console.log("매칭 완료")
                         console.log(result)
+                        this.$store.dispatch('callMatchingRecord')
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -169,6 +186,7 @@
                     }
                 }).then(()=>{
                     console.log("매칭대기 취소 완료")
+                    this.$store.dispatch('callMatchingRecord')
                 }).catch(function(error){
                     console.log(error)
                 })
@@ -180,6 +198,7 @@
                     }
                 }).then(()=>{
                     console.log("매칭대기 취소 완료")
+                    this.$store.dispatch('callMatchingRecord')
                 }).catch(function(error){
                     console.log(error)
                 })

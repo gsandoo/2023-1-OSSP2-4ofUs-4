@@ -456,17 +456,21 @@ public class MatchingService {
     public PublicMatchedList publicMatch(PublicMatching user){
         // 매칭된 사람 수 = 희망인원
         int count = user.getHeadCount();
-        publicLectureUsers.add(user);
         if(publicLectureUsers.contains(user.getEmail())==true){
             return null;
         }
         PublicMatchedList publicMatchedList = new PublicMatchedList();
-
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
+        if(userInfo.isEmpty()){
+            return null;
+        }
         if(userInfo.get().isPublicMatching()==false){
             if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-
+                if(userInfo.get().getHeart() < 10){
+                    return null;
+                }
+                publicLectureUsers.add(user);
                 publicMatchedList = findPublicMatch(publicLectureUsers, count);
                 if(publicMatchedList!=null){
                     for (int i =0 ; i < publicMatchedList.getEmailList().size(); i++){
@@ -502,14 +506,19 @@ public class MatchingService {
         if(classLectureUsers.contains(user.getEmail())==true){
             return null;
         }
-        classLectureUsers.add(user);
         ClassMatchedList classMatchedList = new ClassMatchedList();
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
+        if(userInfo.isEmpty()){
+            return null;
+        }
         if(userInfo.get().isClassMatching()==false){
             // 유저의 제한날짜가 없거나 제한 날짜가 현재 날짜 보다 전에 있으면
             if(userInfo.get().getRestrctionDate()==null || userInfo.get().getRestrctionDate().isBefore(LocalDateTime.now())){
-
+                if(userInfo.get().getHeart() < 10){
+                    return null;
+                }
+                classLectureUsers.add(user);
                 classMatchedList = findClassMatch(classLectureUsers,count);
                 if(classMatchedList!=null){ // 매치가 되면
                     for (int i =0 ; i < classMatchedList.getEmailList().size(); i++){

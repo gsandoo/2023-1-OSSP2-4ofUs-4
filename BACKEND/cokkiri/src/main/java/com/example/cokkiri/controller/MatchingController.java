@@ -61,9 +61,11 @@ public class MatchingController {
     }
 
 
+    // 매칭 완료 버튼
     @PutMapping("agree/free")
     public ResponseEntity<String> publicMatchingAgree(@RequestParam(value = "matchingId")int matchingId , @RequestParam(value = "userId") String id){
         String comment = matchingService.publicMatchAgree(matchingId , id);
+
         return new ResponseEntity<String>(comment,HttpStatus.OK);
 
     }

@@ -35,6 +35,11 @@ public class PublicMatchedList {
     @Column
     private List<String> emailList;
 
+    // 매칭 완료 누르면 이메일 주소 이동
+    @ElementCollection
+    @Column
+    private List<String> agreeList;
+
     @Column
     //매칭 가능한 요일
     private  LocalDate availableDay;

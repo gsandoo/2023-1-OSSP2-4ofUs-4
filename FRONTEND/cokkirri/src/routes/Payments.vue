@@ -38,9 +38,9 @@
         </div>
 
         <div class="GoPay_5ht"> <p>10개</p> </div>
-        <div class="GoPay_10ht"> <p>15개</p> </div>
-        <div class="GoPay_15ht"> <p>25개</p> </div>
-        <div class="GoPay_20ht"> <p>50개</p> </div>
+        <div class="GoPay_10ht"> <p>30개</p> </div>
+        <div class="GoPay_15ht"> <p>50개</p> </div>
+        <div class="GoPay_20ht"> <p>100개</p> </div>
 
         <div class="GoPay_img">
           <img :src="imagePath_gopay" alt="Heartgopay" />
@@ -122,7 +122,7 @@ export default {
     // 금액에 따른 결제
     checkModule(amount) {
       var IMP = window.IMP;
-      IMP.init("imp22834460"); // 대외비, 가맹점 코드 입력
+      IMP.init(""); // 대외비, 가맹점 코드 입력
 
       IMP.request_pay(
         {

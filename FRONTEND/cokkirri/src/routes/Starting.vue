@@ -30,8 +30,11 @@
 
       </div>
 
-      <div class = "GotoMypage">
-        <router-link class="link-mypage" to = "/my">My Page</router-link>
+      <div class = "Gotopage">
+        <router-link class="link-page1" to = "/my">My Page</router-link>
+        <!-- 요소 두 개 추가 -->
+        <router-link class="link-page2" to = "/my">My Page</router-link>
+        <router-link class="link-page3" to = "/my">My Page</router-link>
       </div>
     </div>
   </div>
@@ -106,21 +109,49 @@ export default {
   flex-grow: 0;
 }
 
-.GotoMypage{
-  position: absolute;
-  width: 82px;
+.Gotopage{
+  position: absolute; /* 세 개 묶음 박스 width여기서 수정 */
+  width: 300px;
   height: 30px;
-  left: 75rem;
+  left : 1190px;
   top: 63px;
+
+  float : right;
 }
 
-.link-mypage{
+/* 각 요소 스타일 수정 */
+.link-page1{
+  text-decoration : none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+
+  line-height: 30px;
+  color: #B87514;
+
+  padding-right : 20px;
+}
+
+.link-page2{
   text-decoration : none;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
   color: #B87514;
+
+  padding-right : 20px;
+}
+
+.link-page3{
+  text-decoration : none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #B87514;
+
+  padding-right : 20px;
 }
 
 .parent-talk{

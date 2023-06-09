@@ -6,21 +6,19 @@
         <a href="javascript:history.back();">
           <img :src="imagePath_arrow" alt="Arrow" />
         </a>
-      </div>
-      <div>
         <a href="javascript:history.back();" class="Back_txt">뒤로가기</a>
       </div>
     </div>
     <div class="Title">
       <p>하트 충전소</p>
     </div>
-    <div class="Parent flex container">
+    <div class="Parent">
       <div class="HeartNum">
         <div class="HeartNum_text">
           <p>나의 하트</p>
         </div>
         <div class = "NumOfHeart">
-          {{this.$store.state.heart}} <!--&gt;-->
+          {{this.$store.state.heart}}
         </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
@@ -37,10 +35,10 @@
           <img :src="imagePath_heart" alt="heart" class = "heart-10000"/>
         </div>
 
-        <div class="GoPay_5ht"> <p>5개</p> </div>
-        <div class="GoPay_10ht"> <p>10개</p> </div>
-        <div class="GoPay_15ht"> <p>15개</p> </div>
-        <div class="GoPay_20ht"> <p>20개</p> </div>
+        <div class="GoPay_5ht"> <p>10개</p> </div>
+        <div class="GoPay_10ht"> <p>30개</p> </div>
+        <div class="GoPay_15ht"> <p>50개</p> </div>
+        <div class="GoPay_20ht"> <p>100개</p> </div>
 
         <div class="GoPay_img">
           <img :src="imagePath_gopay" alt="Heartgopay" />
@@ -122,7 +120,7 @@ export default {
     // 금액에 따른 결제
     checkModule(amount) {
       var IMP = window.IMP;
-      IMP.init("imp22834460"); // 대외비, 가맹점 코드 입력
+      IMP.init(""); // 대외비, 가맹점 코드 입력
 
       IMP.request_pay(
         {
@@ -226,73 +224,61 @@ export default {
 </script>
 
 <style scoped>
-
-@media (max-width: 768px) {
-  .Parent {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .HeartNum,
-  .GoPay,
-  .UseHistory {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
-.BoxingPay{
-  background-color : #FFFEF9;
+.BoxingPay {
+  background-color: #FFFEF9;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow : auto;
-
-  height : 100vh;
-  width : 100vw;
+  overflow: auto;
+  height: 100vh;
+  width: 100vw;
 }
 
-.Back_img{
-position: absolute;
-left: 3.68%;
-right: 93.89%;
-top: 6%;
-bottom: 90.11%;
+.Back{
+  float : right;
 }
 
-.Back_txt{color : #B87514;
-position: absolute;
-width: 98px;
-height: 38px;
-left: 111px;
-top: 52px;
-
-text-decoration : none;
-font-style: normal;
-font-weight: 600;
-font-size: 25px;
-line-height: 38px;
+.Back_img {
+  position: absolute;
+  left: 3.68%;
+  right: 93.89%;
+  top: 6%;
+  bottom: 90.11%;
 }
 
-.Title{color: #B87514;
-position: absolute;
-width: 408px;
-height: 3rem;
-left: 40rem;
-top: 7rem;
-
-font-style: normal;
-font-weight: bold;
-font-size: 50px;
-line-height: 75px;
-display: flex;
-align-items: center;
-text-align: center;
+.Back_txt {
+  color: #B87514;
+  position: absolute;
+  width: 98px;
+  height: 38px;
+  left: 111px;
+  top: 52px;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 38px;
 }
 
-.Parent{
-width: 90vw;
-margin: 10px auto;
+.Title {
+  color: #B87514;
+  position: absolute;
+  width: 408px;
+  height: 120px;
+  left: 592px;
+  top: 112px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 80px;
+  line-height: 120px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.Parent {
+  width: 90vw;
+  /* margin: 10px auto; */
 }
 
 .flex-container {
@@ -300,86 +286,83 @@ margin: 10px auto;
   justify-content: space-between;
 }
 
-.htnum{
-width : 23rem;
-height : 37.5rem;
+.htnum {
+  width: 368px;
+  height: 600px;
 }
 
-.HeartNum{  /*border: 1px solid red;*/
-position : relative;
-text-align: center;
-float: left;
-width:30%;
-top : 5rem;
-box-sizing: border-box;
-overflow-y: auto; /* 스크롤 추가 */
+.HeartNum {
+  position: relative;
+  text-align: center;
+  float: left;
+  width: 30%;
+  top: 80px;
+  box-sizing: border-box;
 }
 
-.HeartNum_text{color: #000;
-position: absolute;
-width: 10rem;
-height: 5rem;
-left: 8.5rem;
-top: 5rem;
-
-font-style: normal;
-font-weight: 600;
-font-size: 40px;
-line-height: 60px;
-display: flex;
-align-items: center;
-text-align: center;
+.HeartNum_text {
+  color: #000;
+  position: absolute;
+  width: 160px;
+  height: 80px;
+  left: 136px;
+  top: 80px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.GoPay{  /*border: 1px solid green;*/
-position : relative;
-text-align: center;
-
-margin-left: 5%;
-left: 0rem;
-right: 535px;
-top: 5rem;
-float: left;
-width:30%;
-box-sizing: border-box;
-overflow-y: auto; /* 스크롤 추가 */
+.GoPay {
+  position: relative;
+  text-align: center;
+  margin-left: 5%;
+  left: 0px;
+  right: 535px;
+  top: 80px;
+  float: left;
+  width: 30%;
+  box-sizing: border-box;
 }
 
-.GoPay_heart{
-position : absolute;
-left : 4rem;
-top : 15rem;
-vertical-align: auto;
+.GoPay_heart {
+  position: absolute;
+  left: 64px;
+  top: 240px;
+  vertical-align: auto;
 }
 
-.GoPay_5ht{
-position : absolute;
-left : 7.5rem;
-top : 14.25rem;
-font-weight: bold;
-font-size: 20px;
+.GoPay_5ht {
+  position: absolute;
+  left: 120px;
+  top: 228px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
-.GoPay_10ht{
-position : absolute;
-left : 7.5rem;
-top : 19.25rem;
-font-weight: bold;
-font-size: 20px;
+.GoPay_10ht {
+  position: absolute;
+  left: 120px;
+  top: 304px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .GoPay_15ht {
   position: absolute;
-  left: 7.5rem;
-  top: 24.25rem;
+  left: 120px;
+  top: 380px;
   font-weight: bold;
   font-size: 20px;
 }
 
 .GoPay_20ht {
   position: absolute;
-  left: 7.5rem;
-  top: 29.25rem;
+  left: 120px;
+  top: 456px;
   font-weight: bold;
   font-size: 20px;
 }
@@ -387,10 +370,10 @@ font-size: 20px;
 .GoPay_text {
   color: #000;
   position: absolute;
-  width: 10rem;
-  height: 5rem;
-  left: 8rem;
-  top: 5rem;
+  width: 160px;
+  height: 80px;
+  left: 128px;
+  top: 80px;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
@@ -403,7 +386,7 @@ font-size: 20px;
 .UseHistory {
   position: relative;
   text-align: center;
-  top: 5rem;
+  top: 80px;
   float: right;
   width: 30%;
   box-sizing: border-box;
@@ -412,10 +395,10 @@ font-size: 20px;
 .UseHistory_text {
   color: #FFFEF9;
   position: absolute;
-  width: 10rem;
-  height: 5rem;
-  left: 8.5rem;
-  top: 5rem;
+  width: 160px;
+  height: 80px;
+  left: 136px;
+  top: 80px;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
@@ -430,7 +413,7 @@ font-size: 20px;
   width: 251px;
   height: 800px;
   left: 90px;
-  top: 200px;
+  top: 400px;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -455,37 +438,37 @@ font-size: 20px;
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 5rem;
-  height: 1rem;
-  left: 15rem;
-  top: 15rem;
+  width: 160px;
+  height: 30px;
+  left: 240px;
+  top: 240px;
 }
 
 .heart-1000 {
   position: absolute;
-  left: 0.1rem;
-  top: 0rem;
+  left: 2px;
+  top: 0px;
   vertical-align: auto;
 }
 
 .heart-3000 {
   position: absolute;
-  left: 0.1rem;
-  top: 5rem;
+  left: 2px;
+  top: 80px;
   vertical-align: auto;
 }
 
 .heart-5000 {
   position: absolute;
-  left: 0.1rem;
-  top: 10rem;
+  left: 2px;
+  top: 160px;
   vertical-align: auto;
 }
 
 .heart-10000 {
   position: absolute;
-  left: 0.1rem;
-  top: 15rem;
+  left: 2px;
+  top: 240px;
   vertical-align: auto;
 }
 
@@ -502,10 +485,10 @@ font-size: 20px;
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 5rem;
-  height: 1rem;
-  left: 15rem;
-  top: 20rem;
+  width: 160px;
+  height: 30px;
+  left: 240px;
+  top: 320px;
 }
 
 .charge5000 {
@@ -521,10 +504,10 @@ font-size: 20px;
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 5rem;
-  height: 1rem;
-  left: 15rem;
-  top: 25rem;
+  width: 160px;
+  height: 30px;
+  left: 240px;
+  top: 400px;
 }
 
 .charge10000 {
@@ -540,19 +523,18 @@ font-size: 20px;
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 5rem;
-  height: 1rem;
-  left: 15rem;
-  top: 30rem;
+  width: 160px;
+  height: 30px;
+  left: 240px;
+  top: 480px;
 }
 
-.NumOfHeart{
+.NumOfHeart {
   position: absolute;
   width: 100px;
   height: 100px;
   left: 180px;
-  top: 300px;
-
+  top: 600px;
   font-style: normal;
   font-weight: 600;
   font-size: 50px;
@@ -560,7 +542,6 @@ font-size: 20px;
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #000000;
 }
 </style>

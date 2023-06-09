@@ -84,6 +84,11 @@ const router = createRouter({
         },
 
         {
+            path: '/paypay',
+            component: paypay
+        },
+
+        {
             path: '/Payments',
             component: Payments, 
             meta:{
@@ -103,10 +108,6 @@ const router = createRouter({
             meta:{
                 requiresAuth: true
             }
-        }
-        ,{
-            path: '/paypay',
-            component: paypay
         }
     ]
 })

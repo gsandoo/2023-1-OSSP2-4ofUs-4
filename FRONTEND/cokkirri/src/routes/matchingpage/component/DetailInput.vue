@@ -18,8 +18,9 @@
                             root: { class: 'bg-teal-500 border-teal-500' }
                         }
                     }"
+                    :minDate="new Date()"
                     dateFormat="yy/mm/dd"
-            />
+                />
             </div>
             <div style="clear:both;"></div>
 
@@ -68,6 +69,9 @@
 <script>
 import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
+import 'primevue/resources/themes/saga-blue/theme.css';       // theme
+import 'primevue/resources/primevue.min.css';                 // core css
+//import 'primeicons/primeicons.css';   
 
 import { ref } from "vue";
 import moment from 'moment'
@@ -103,6 +107,7 @@ export default {
         'selectedMatchingType'
     ],
     methods: {
+
         toggleSelection(course){
             const index = this.selectedCourses.indexOf(course)
             if (index >= 0){
@@ -133,6 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
     .frame-form{
         width: 659px;
         height: 401px;

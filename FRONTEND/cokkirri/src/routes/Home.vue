@@ -69,6 +69,11 @@ export default {
                 this.$store.dispatch('loginRequest',{inputId:this.user.id, inputPassword:this.user.password})
             }
         }
+    },
+    mounted(){
+        if(this.$route.query.status === 'verified'){
+            alert(this.$route.query.userId+"님의 이메일 인증이 완료되었습니다.")
+        }
     }
 }
 </script>

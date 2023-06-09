@@ -74,6 +74,11 @@
                         </div>
                         <div v-else class="frame-sub-form-body">
                             <div>
+                                <div class="font-head">Before</div>
+                                <input type="password" class="font-input" placeholder="기존 비밀번호" v-model="passwordForAuth">
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div>
                                 <div class="font-head">PWD</div>
                                 <input type="password" class="font-input" placeholder="비밀번호 재설정" v-model="userInfo.password">
                                 <div style="clear:both;"></div>
@@ -107,6 +112,7 @@ export default {
                 repassword: '',
                 submitPassword: this.$store.state.password
             },
+            passwordForAuth: '',
             stateTF: {
                 isEditState: false,
                 isPasswordEditState: false
@@ -137,12 +143,17 @@ export default {
         editComplete(){
             if(this.stateTF.isPasswordEditState){  
                 if(this.userInfo.password===this.userInfo.repassword & this.userInfo.password!==''){
-                    this.userInfo.submitPassword = this.userInfo.password
-                    this.userInfo.password = ''
-                    this.userInfo.repassword = ''
-                    this.userInfoUpdateClientToServer()
-                    this.stateTF.isEditState = false;
-                    this.stateTF.isPasswordEditState = false;
+                    if(this.passwordForAuth===this.userInfo.submitPassword){
+                        this.userInfo.submitPassword = this.userInfo.password
+                        this.userInfo.password = ''
+                        this.userInfo.repassword = ''
+                        this.passwordForAuth = ''
+                        this.userInfoUpdateClientToServer()
+                        this.stateTF.isEditState = false;
+                        this.stateTF.isPasswordEditState = false;
+                    }else{
+                        alert("입력하신 기존 비밀번호가 잘못되었습니다.")
+                    }
                 }
                 else{
                     alert("비밀번호를 입력하지 않았거나 PWD와 REPWD가 동일하지 않습니다.");

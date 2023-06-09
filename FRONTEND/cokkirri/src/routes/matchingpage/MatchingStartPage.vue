@@ -125,7 +125,7 @@ export default {
                         endTime:this.endTime,
                         matchingType:"free"
                 }).then(()=>{
-                    this.$store.dispatch('callRecord')
+                    this.$store.dispatch('callMatchingRecord')
                     this.$router.replace('/my/matching');
                     alert("공강 매칭 신청 완료")
                 }).catch(function(error){
@@ -143,7 +143,7 @@ export default {
                     courseNumber: this.courseNumber,
                     matchingType:"class"
                 }).then(()=>{
-                    this.$store.dispatch('callRecord')
+                    this.$store.dispatch('callMatchingRecord')
                     this.$router.replace('/my/matching');
                     alert("수업 매칭 신청 완료")
                 }).catch(function(error){
@@ -154,7 +154,6 @@ export default {
             }
         }
     },
-
 }
 </script>
 

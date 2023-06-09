@@ -68,7 +68,7 @@ public class UserController {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("userId", id);
             params.add("status", "verified");
-            RedirectView redirectView = new RedirectView("/", true);
+            RedirectView redirectView = new RedirectView("/#/", true);
             redirectView.setAttributesMap(params);
             return redirectView;
         } else {

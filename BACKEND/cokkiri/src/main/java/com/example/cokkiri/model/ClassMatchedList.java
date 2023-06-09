@@ -40,6 +40,11 @@ public class ClassMatchedList {
     @ElementCollection
     private List<String> emailList;
 
+    // 매칭 완료 누르면 이메일 주소 이동
+    @ElementCollection
+    @Column
+    private List<String> agreeList;
+
     @Column
     //매칭 동의수 사람수랑 같게 되면 matchingRes=매칭중
     private int matchingAgree;

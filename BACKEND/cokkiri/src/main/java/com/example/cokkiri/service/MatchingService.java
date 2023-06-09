@@ -699,9 +699,18 @@ public class MatchingService {
         return  waitUser;
     }
 
+    List<String> publicAgreeEmail  = new ArrayList<>();
 
     public String publicMatchAgree(int matchingId , String id) {
+
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
+        if(publicAgreeEmail.contains(id)){
+            return "이미 매칭 완료 버튼을 누르셨습니다.";
+        }else{
+            publicAgreeEmail.add(id);
+            matchedList.setAgreeList(publicAgreeEmail);
+            publicMatchedListRepository.save(matchedList);
+        }
         if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
             matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
             String comment = " 매칭완료 버튼을 눌렀습니다";
@@ -714,8 +723,16 @@ public class MatchingService {
         }
     }
 
+    List<String> classAgreeEmail  = new ArrayList<>();
     public String classMatchAgree(int matchingId,String id) {
         ClassMatchedList matchedList = classMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId,id);
+        if(classAgreeEmail.contains(id)){
+            return "이미 매칭 완료 버튼을 누르셨습니다." ;
+        }else{
+            classAgreeEmail.add(id);
+            matchedList.setAgreeList(classAgreeEmail);
+            classMatchedListRepository.save(matchedList);
+        }
         if(matchedList== null){
             return "해당 매치를 찾지 못했습니다.";
         }

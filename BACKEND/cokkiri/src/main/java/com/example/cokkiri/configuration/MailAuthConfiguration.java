@@ -22,7 +22,7 @@ public class MailAuthConfiguration {
         mailSender.setHost("smtp.gmail.com"); //Host mail 주소
         mailSender.setPort(587);
         mailSender.setUsername("skxkswls@gmail.com"); // Username
-        mailSender.setPassword(); // 비밀번호
+        mailSender.setPassword("password"); // 비밀번호
         mailSender.setDefaultEncoding("utf-8");
         mailSender.setJavaMailProperties(properties);
 

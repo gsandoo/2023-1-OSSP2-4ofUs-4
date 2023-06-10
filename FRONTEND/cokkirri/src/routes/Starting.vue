@@ -6,6 +6,12 @@
     <div class = "whole">
 
       <div class = "parent-talk">
+        <div class = "Gotopage">
+          <div class="link-page1">유저 : {{this.$store.state.name}}</div>
+          <!-- 요소 두 개 추가 -->
+          <router-link class="link-page2" to = "/my">마이페이지</router-link>
+          <div class="link-page3" @click="logout()">로그아웃</div>
+        </div>
 
         <div class = "wrap-que">
           <div class = "question">
@@ -29,13 +35,6 @@
         </div>
 
       </div>
-
-      <div class = "Gotopage">
-        <router-link class="link-page1" to = "/my">My Page</router-link>
-        <!-- 요소 두 개 추가 -->
-        <router-link class="link-page2" to = "/my">My Page</router-link>
-        <router-link class="link-page3" to = "/my">My Page</router-link>
-      </div>
     </div>
   </div>
   </div>
@@ -49,6 +48,16 @@ export default {
       imagePath_a: require('@/assets/startmainpage/user_answer.png'),
       imagePath_back: require('@/assets/startmainpage/MainBack.png')
     };
+  },
+  methods:{
+    logout(){
+      try{
+        this.$store.commit('logout')
+        alert("로그인 해제가 완료되었습니다.")
+      }catch(error){
+        console.log(error)
+      }
+    }
   }
 };
 </script>
@@ -110,17 +119,18 @@ export default {
 }
 
 .Gotopage{
-  position: absolute; /* 세 개 묶음 박스 width여기서 수정 */
-  width: 300px;
+ /* 세 개 묶음 박스 width여기서 수정 */
+  width: 500px;
   height: 30px;
-  left : 1190px;
-  top: 63px;
-
-  float : right;
+  margin-left : 70vw;
+  margin-top: 30px;
 }
 
 /* 각 요소 스타일 수정 */
 .link-page1{
+  width: 150px;
+  height: 30px;
+
   text-decoration : none;
   font-style: normal;
   font-weight: 600;
@@ -133,6 +143,9 @@ export default {
 }
 
 .link-page2{
+  width: 150px;
+  height: 30px;
+
   text-decoration : none;
   font-style: normal;
   font-weight: 600;
@@ -144,6 +157,9 @@ export default {
 }
 
 .link-page3{
+  width: 150px;
+  height: 30px;
+
   text-decoration : none;
   font-style: normal;
   font-weight: 600;

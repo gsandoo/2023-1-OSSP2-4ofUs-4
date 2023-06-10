@@ -108,7 +108,38 @@ export default createStore({
         },
         logout(state) { 
             state.isLogin = false
+            router.replace('/')
+            
             state.id = null
+    
+            state.major = null
+            state.name = null
+            state.number = null
+            state.sex = null
+            state.studentNum = null
+            state.course = []
+            state.password = null
+            state.heart = null
+            state.restrctionDate = null
+    
+            state.usageHistory = []
+    
+            state.notification = null
+    
+            state.publicMatchingRecord = null
+            state.classMatchingRecord = null
+    
+            // 매칭 대기 정보 불러오기
+            state.classMatchingWait = null
+            state.publicMatchingWait = null
+    
+            // 선택된 매칭 번호
+            state.matchingIdForChatroom = null
+            state.matchingTypeForChatroom = null
+    
+            // 매칭 대기 상태
+            state.isExistClassMatchingWait = false
+            state.isExistPublicMatchingWait = false
         },
         SET_NOTIFICATION(state, notification){
             console.log("들어온 신호"+notification)
@@ -134,6 +165,8 @@ export default createStore({
                         userId: state.id
                 }}).then((result)=>{
                     commit('publicSave',result.data)
+                    console.log("공강 매칭 적용 완료")
+                    console.log(result.data)
                 }).catch(function(error){
                     console.log(error)
                 })
@@ -146,6 +179,8 @@ export default createStore({
                         userId: state.id
                 }}).then((result)=>{
                     commit('classSave',result.data)
+                    console.log("공강 매칭 적용 완료")
+                    console.log(result.data)
                 }).catch(function(error){
                     console.log(error)
                 })

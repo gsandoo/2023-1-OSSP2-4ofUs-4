@@ -1,42 +1,32 @@
 <!--매칭페이지로 넘어가기 전 스타팅페이지-->
 
 <template>
-  <div>
-    <div class = "BOX">
-    <div class = "whole">
-
-      <div class = "parent-talk">
-        <div class = "Gotopage">
-          <div class="link-page1">유저 : {{this.$store.state.name}}</div>
-          <!-- 요소 두 개 추가 -->
-          <router-link class="link-page2" to = "/my">마이페이지</router-link>
-          <div class="link-page3" @click="logout()">로그아웃</div>
-        </div>
-
-        <div class = "wrap-que">
+  <div class="background-setting">
+      <div class = "Gotopage">
+        <div class="link-page1">유저 : {{this.$store.state.name}}</div>
+        <!-- 요소 두 개 추가 -->
+        <router-link class="link-page2" to = "/my">마이페이지</router-link>
+        <div class="link-page3" @click="logout()">로그아웃</div>
+      </div>
+      <div class = "whole">
           <div class = "question">
-            
+            <div class="img-box">
+              <div class="text-1">
+                <p>심각한<br><br><br>'Co-끼리' 중독입니다.</p>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="img-box-2">
+              <div class="text-2">
+                <p>흥, 중독인지 아닌지<br><br><br>매칭된 사람한테 물어봐요.</p>
+              </div>
+            </div>
+
             <div class="mybutton">
               <router-link class="link-button" to="/my/matching">매칭 페이지</router-link>
             </div>
-
-            <img :src="imagePath_q" alt="User Question" />
-            <img :src="imagePath_a" alt="User Answer" class = "answer"/>
-
-            <div class = "text-que">
-              <p>심각한<br><br><br>'Co-끼리' 중독입니다.</p>
-            </div>
-
-            <div class = "text-ans">
-              <p>흥, 중독인지 아닌지<br><br><br>매칭된 사람한테 물어봐요.</p>
-            </div>
-
           </div>
-        </div>
-
       </div>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -44,7 +34,7 @@
 export default {
   data() {
     return {
-      imagePath_q: require('@/assets/startmainpage/user_question.png'),
+      imgePath_q: require('@/assets/startmainpage/user_question.png'),
       imagePath_a: require('@/assets/startmainpage/user_answer.png'),
       imagePath_back: require('@/assets/startmainpage/MainBack.png')
     };
@@ -63,37 +53,37 @@ export default {
 </script>
 
 
-<style scoped>
+<style lang="scss" scoped>
 
-.BOX{
-  height : 100%;
-  width : 100%
-}
-
-.whole{
+.background-setting{
   height: 100vh;
   width: 100vw;
-  overflow: auto;
-  margin:0;
+
   background-image: url("@/assets/startmainpage/MainBack.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.whole{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .mybutton{
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 12px 20px;
-  gap: 10px;
 
-  position: absolute;
   width: 230px;
   height: 67px;
-  left: 100px;
-  top: 600px;
 
   background: #B87514;
   border-radius: 50px;
@@ -122,115 +112,115 @@ export default {
  /* 세 개 묶음 박스 width여기서 수정 */
   width: 500px;
   height: 30px;
-  margin-left : 70vw;
-  margin-top: 30px;
+
+  margin-left : 700px;
+  margin-bottom: 0px;
+
+  .link-page1{
+    width: 120px;
+    height: 30px;
+
+    float: left;
+
+    text-decoration : none;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    line-height: 30px;
+    color: #B87514;
+
+    padding-right : 20px;
+  }
+
+  .link-page2{
+      width: 120px;
+      height: 30px;
+
+      float: left;
+
+      text-decoration : none;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      color: #B87514;
+
+      padding-right : 20px;
+  }
+
+  .link-page3{
+      width: 120px;
+      height: 30px;
+
+      float: left;
+
+      text-decoration : none;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      color: #B87514;
+
+      padding-right : 20px;
+  }
 }
+
+
 
 /* 각 요소 스타일 수정 */
-.link-page1{
-  width: 150px;
-  height: 30px;
 
-  text-decoration : none;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-
-  line-height: 30px;
-  color: #B87514;
-
-  padding-right : 20px;
-}
-
-.link-page2{
-  width: 150px;
-  height: 30px;
-
-  text-decoration : none;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 30px;
-  color: #B87514;
-
-  padding-right : 20px;
-}
-
-.link-page3{
-  width: 150px;
-  height: 30px;
-
-  text-decoration : none;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 30px;
-  color: #B87514;
-
-  padding-right : 20px;
-}
-
-.parent-talk{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin : 10px auto;
-}
 
 .question{ /* 중독입니다.*/
-  position: absolute;
-  left: 33.82%;
-  right: 32.57%;
-  top: 14.67%;
-  bottom: 59.34%;
-  mix-blend-mode: normal;
-}
+  width: 500px;
+  height: 800px;
 
-.text-que{
-  position: absolute;
-  width: 439px;
-  height: 265px;
-  left: 30px;
-  top: -35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   
-  font-style: normal;
-  font-weight: bold;
-  font-size: 40px;
-  line-height: 24px;
+  .img-box{
+    background-image: url('../assets/startmainpage/user_question.png');
+    background-size: cover;
+    background-repeat: no-repeat;
 
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.5px;
+    width: 484px;
+    height: 230px;
+  }
+  .text-1{
+    margin-left: 30px;
 
-  color: #FFFFFF;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 24px;
+
+    letter-spacing: 2.5px;
+
+    color: #FFFFFF;
+  }
+  .img-box-2{
+    background-image: url('../assets/startmainpage/user_answer.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    width: 484px;
+    height: 230px;
+
+    margin-top: 80px;
+  }
+  .text-2{
+    margin-left: 30px; 
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 24px;
+
+    letter-spacing: 2.5px;
+
+    color: #000000;
+  }
 }
-
-.answer{ /* 흥! */
-  position: absolute;
-  left: 0px;
-  right: 32.57%;
-  top: 300px;
-  bottom: 23.68%;
-  mix-blend-mode: normal;
-}
-
-.text-ans{
-  position: absolute;
-  width: 484px;
-  height: 158px;
-  left: 30px;
-  top: 320px;
-
-  font-style: normal;
-  font-weight: bold;
-  font-size: 38px;
-  line-height: 24px;
-
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.5px;
-
-  color: #000000;
-}
-
 </style>

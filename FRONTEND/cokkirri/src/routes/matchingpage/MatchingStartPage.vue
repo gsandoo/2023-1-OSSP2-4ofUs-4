@@ -26,7 +26,7 @@
                 <div class="font-h4">
                     * ‘동의합니다' 버튼을 누르면, 자동으로 매칭에 참여되며 매칭 수수료로 하트 3개가 소진됩니다.
                     <br>* 매칭 완료 시 자동으로 채팅방이 생성되며, 생성된 채팅방은 24시간동안 유지됩니다.</div>
-                <div class="matching-submit-btn" @click="submitMatching()">매칭 신청</div>
+                <div class="matching-submit-btn" @click="checkHeartCount()">매칭 신청</div>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@ export default {
                 this.$store.dispatch('userInfoUpdate')
                 console.log("사용자 정보 자동 업데이트")
             }else{
-                console.log("하트 개수가 "+this.$store.state.heart+"개 입니다."+"10개 이상 소지하고 있어야 매칭 신청이 가능합니다")
+                alert("하트 개수가 "+this.$store.state.heart+"개 입니다."+"10개 이상 소지하고 있어야 매칭 신청이 가능합니다")
             }
         },
         clickedBtnHeadCountTwo(){

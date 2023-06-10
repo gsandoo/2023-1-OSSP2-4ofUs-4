@@ -225,7 +225,7 @@ export default {
             
             font-style: normal;
             font-weight: 400;
-            font-size: 50px;
+            font-size: 40px;
             line-height: 75px;
             color: #B87514;
             display: flex;

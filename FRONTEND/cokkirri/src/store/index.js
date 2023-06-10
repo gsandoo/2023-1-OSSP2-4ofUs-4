@@ -52,6 +52,7 @@ export default createStore({
             }
             else{
                 console.log("수업 대기 없다고 판단")
+                state.classMatchingWait = null
                 state.isExistClassMatchingWait = false
             }
         },
@@ -62,6 +63,7 @@ export default createStore({
             }
             else{
                 console.log("공강 대기 없다고 판단")
+                state.publicMatchingWait = record = null
                 state.isExistPublicMatchingWait = false
             }
         },
@@ -179,7 +181,7 @@ export default createStore({
                         userId: state.id
                 }}).then((result)=>{
                     commit('classSave',result.data)
-                    console.log("공강 매칭 적용 완료")
+                    console.log("수업 매칭 적용 완료")
                     console.log(result.data)
                 }).catch(function(error){
                     console.log(error)

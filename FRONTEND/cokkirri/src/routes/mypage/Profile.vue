@@ -293,16 +293,16 @@ export default {
         border-radius: 20px;
 
         .my-link{
-            width: 43px;
+            width: 35px;
             height: 31px;
-            margin-top: 0px;
-            margin-left: 0px;
+            margin-top: 5px;
+            margin-left: 17px;
             float:left;
 
-            font-size: 50px;
+            font-size: 35px;
             color: #B87514;
             display: flex;
-            justify-content: left;
+
             align-items: center;
         }
         .frame-sub-body{

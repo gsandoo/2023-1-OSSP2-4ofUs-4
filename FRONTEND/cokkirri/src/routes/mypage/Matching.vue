@@ -186,10 +186,12 @@
                     }
                 }).then(()=>{
                     console.log("매칭대기 취소 완료")
-                    this.$store.dispatch('callMatchingRecord')
+
                 }).catch(function(error){
                     console.log(error)
                 })
+                this.$store.dispatch('callMatchingRecord')
+                this.callMatchingRecord()
             },
             async cancelPublicWait(waitId){
                 await axios.get('/matching/delete/free/matchingWait',{
@@ -198,10 +200,11 @@
                     }
                 }).then(()=>{
                     console.log("매칭대기 취소 완료")
-                    this.$store.dispatch('callMatchingRecord')
                 }).catch(function(error){
                     console.log(error)
                 })
+                this.$store.dispatch('callMatchingRecord')
+                this.callMatchingRecord()
             },
             moveToChatroom(matchingId, matchingType){
                 this.$store.state.matchingIdForChatroom = matchingId
@@ -214,6 +217,8 @@
                 this.$store.dispatch('callMatchingRecord')
                 this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();
                 this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse();
+
+
             }
         },
     }
@@ -258,7 +263,7 @@
             
             font-style: normal;
             font-weight: 400;
-            font-size: 50px;
+            font-size: 40px;
             line-height: 75px;
             color: #B87514;
             display: flex;

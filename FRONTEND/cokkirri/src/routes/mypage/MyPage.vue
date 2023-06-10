@@ -3,6 +3,13 @@
     <div class="background-setting">
         <div class="container" >
             <div>
+                <router-link to="/Starting" class="link-box">
+                    <div class="link-img"></div>
+                    <div class="link-text">
+                        Co-kkirri
+                    </div>
+                </router-link>
+                <div style="clear:both;"></div>
                 <div class="frame-head">
                     <div class="user-img"></div>
                     <router-link to="/" v-if="!this.$store.state.isLogin" class="user-name">로그인</router-link>
@@ -61,20 +68,51 @@
         margin:0;
 
         background-color: #ECBC76; 
-        display: grid;
-        grid-template-rows: auto;
-        justify-items: center;
-        align-items: center;
-    }
-    // container 클래스 위치 조정
-    .container{
         display: flex;
         align-items: center;
         justify-content: center;
     }
+    // container 클래스 위치 조정
+    .container{
+        width: 996px;
+        height: 667px;
+
+        display: flex;
+        justify-content: center;
+    }
+    .link-box{
+        width: 125px;
+        height: 21px;
+
+        .link-img{
+            width: 23px;
+            height: 21px;
+
+            float: left;
+            
+            background-image: url("../../assets/mypage/home.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .link-text{
+            width: 100px;
+            height: 21px;
+
+            margin-left: 2px;
+            float: left;
+
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 25px;
+            color: #B87514;
+        }
+    }
     .frame-head{
         width: 996px;
         height: 125px;
+
+        margin-top: 28px;
+
         background-color: #FFFEF9;
         border-radius: 20px;
         display: flex;

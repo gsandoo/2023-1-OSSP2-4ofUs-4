@@ -138,6 +138,8 @@
             margin-left: 54px;
             margin-right: 58px;
 
+            cursor: pointer;
+
             background: #B87514;
             border-radius: 10px;
 
@@ -157,6 +159,8 @@
             margin-top: 39px;
             margin-left: 54px;
             margin-right: 58px;
+
+            cursor: pointer;
 
             background: #ECBC76;
             border-radius: 10px;

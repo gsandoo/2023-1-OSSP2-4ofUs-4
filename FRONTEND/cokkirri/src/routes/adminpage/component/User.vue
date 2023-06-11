@@ -159,6 +159,8 @@
                     margin-top: 10px;
                     margin-left: 5px;
 
+                    cursor: pointer;
+
                     background: #B87514;
                     border-radius: 10px;    
 
@@ -183,6 +185,8 @@
                     margin-top: 10px;
                     margin-left: 5px;
                     float: left;
+
+                    cursor: pointer;
 
                     background: #ECBC76;
                     border-radius: 10px;
@@ -231,6 +235,8 @@
                     margin-top: 10px;
                     margin-left: 10px;
                     float: left;
+
+                    cursor: pointer;
 
                     background: #ECBC76;
                     border-radius: 10px;
@@ -371,6 +377,8 @@
                     margin-left: 10px;
                     float: left;
 
+                    cursor: pointer;
+
                     background: #ECBC76;
                     border-radius: 10px;
 
@@ -394,6 +402,8 @@
                     margin-top: 5px;
                     margin-left: 10px;
                     float: left;
+
+                    cursor: pointer;
 
                     background: #B87514;
                     border-radius: 10px;

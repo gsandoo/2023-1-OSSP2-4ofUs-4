@@ -251,6 +251,8 @@ export default {
 
             float: left;
 
+            cursor: pointer;
+
             border-radius: 20px;
             background-color: #ECBC76;
 
@@ -270,6 +272,8 @@ export default {
             
             margin-left: 370px;
             float: left;
+
+            cursor: pointer;
 
             border-radius: 20px;
             background-color: #D9D9D9;
@@ -298,6 +302,9 @@ export default {
             margin-top: 5px;
             margin-left: 17px;
             float:left;
+
+            cursor: pointer;
+            text-decoration: none;
 
             font-size: 35px;
             color: #B87514;

@@ -213,6 +213,8 @@ export default {
             background: #B87514;
             border-radius: 50px;
 
+            cursor: pointer;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -300,6 +302,8 @@ export default {
                 margin-top: 10px;
                 float: left;
 
+                cursor: pointer;
+
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -322,6 +326,8 @@ export default {
                 margin-top: 10px;
                 float: left;
 
+                cursor: pointer;
+
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -342,6 +348,8 @@ export default {
 
                 margin-top: 10px;
                 float: left;
+
+                cursor: pointer;
 
                 display: flex;
                 align-items: center;
@@ -364,6 +372,8 @@ export default {
 
                 margin-top: 10px;
                 float: left;
+
+                cursor: pointer;
 
                 display: flex;
                 align-items: center;

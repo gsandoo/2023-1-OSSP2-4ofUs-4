@@ -222,6 +222,8 @@ export default {
             margin-left: 17px;
             float:left;
 
+            cursor: pointer;
+            text-decoration: none;
             
             font-style: normal;
             font-weight: 400;
@@ -276,6 +278,8 @@ export default {
             height: 55px;
             background-color: #B87514;
 
+            cursor: pointer;
+
             margin-top: 0px;
             margin-left: 444px;
             border-radius: 20px;
@@ -296,6 +300,8 @@ export default {
             width: 163px;
             height: 55px;
             background-color: #FFFEF9;
+
+            cursor: pointer;
 
             margin-top: 0px;
             margin-left: 444px;
@@ -410,6 +416,8 @@ export default {
                     margin-top: 13px;
                     margin-left: 55px;
 
+                    cursor: pointer;
+
                     background: #B87514;
                     border-radius: 20px;
 
@@ -431,6 +439,8 @@ export default {
                     
                     margin-top: 13px;
                     margin-left: 55px;
+
+                    cursor: pointer;
 
                     background: gray;
                     border-radius: 20px;

@@ -173,6 +173,8 @@ export default {
             margin-left: 44px;
             margin-right: 44px;
 
+            cursor: pointer;
+
             background: #E48700;
             border-radius: 10px;
             border-color: #E48700;

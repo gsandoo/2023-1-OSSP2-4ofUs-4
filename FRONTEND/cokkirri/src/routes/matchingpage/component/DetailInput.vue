@@ -229,6 +229,7 @@ export default {
             background: #B87514;
             border-radius: 20px;
 
+            cursor: pointer;
 
             display: flex;
             align-items: center;
@@ -249,6 +250,7 @@ export default {
             background: #ECBC76;
             border-radius: 20px;
 
+            cursor: pointer;
 
             display: flex;
             align-items: center;

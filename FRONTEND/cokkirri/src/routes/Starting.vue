@@ -21,10 +21,7 @@
                 <p>흥, 중독인지 아닌지<br><br><br>매칭된 사람한테 물어봐요.</p>
               </div>
             </div>
-
-            <div class="mybutton">
-              <router-link class="link-button" to="/my/matching">매칭 페이지</router-link>
-            </div>
+            <router-link class="mybutton" to="/my/matching">매칭 페이지</router-link>
           </div>
       </div>
   </div>
@@ -78,34 +75,27 @@ export default {
 }
 
 .mybutton{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   width: 230px;
   height: 67px;
 
   background: #B87514;
   border-radius: 50px;
-}
 
-.link-button{
-  width: 187px;
-  height: 24px;
-
+  cursor: pointer;
   text-decoration : none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-style: normal;
   font-weight: 700;
   font-size: 28px;
   line-height: 24px;
   text-align: center;
-
   letter-spacing: 0.5px;
-  color: #FFFFFF;
 
-  flex: none;
-  order: 0;
-  flex-grow: 0;
+  color: #FFFFFF;
 }
 
 .Gotopage{

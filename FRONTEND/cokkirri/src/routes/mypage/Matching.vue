@@ -260,6 +260,8 @@
             margin-left: 17px;
             float:left;
 
+            cursor: pointer;
+            text-decoration: none;
             
             font-style: normal;
             font-weight: 400;
@@ -319,6 +321,8 @@
             border-radius: 20px;
             float: left;
 
+            cursor: pointer;
+
             color: #FFFFFF;
             display: flex;
             justify-content: center;
@@ -339,6 +343,8 @@
             margin-left: 22px;
             border-radius: 20px;
             float: left;
+
+            cursor: pointer;
 
             color: #FFFFFF;
             display: flex;
@@ -398,6 +404,8 @@
             height: 34px;
 
             margin-left: 15px;
+
+            cursor: pointer;
 
             display: flex;
             justify-content: center;
@@ -533,6 +541,8 @@
                 margin-top: 18px;
                 margin-left: 35px;
                 float: left;
+
+                cursor: pointer;
 
                 border: 5px solid #ECBC76;
                 border-radius: 20px;

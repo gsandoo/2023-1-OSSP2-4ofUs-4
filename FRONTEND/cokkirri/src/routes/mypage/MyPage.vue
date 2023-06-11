@@ -21,7 +21,7 @@
                     <div>
                             <div class="heart-img"></div>
                             <div class="heart-txt">내 하트</div>
-                            <div class="heart-btn"><router-link to="/Payments">{{this.$store.state.heart}} &gt;</router-link></div>
+                            <router-link to="/Payments" class="heart-btn">{{this.$store.state.heart}} &gt;</router-link>
                             <div style="clear:both;"></div>
                             <div class="line-for-division"></div>
 
@@ -144,6 +144,8 @@
             margin-left: 370px;
             float: left;
 
+            text-decoration: none;
+
             border-radius: 20px;
             background-color: #ECBC76;
 
@@ -193,6 +195,8 @@
             margin-top: 59px;
             float:left;
 
+            text-decoration: none;
+
             font-size: 30px;
             color: #B87514;
             display: flex;
@@ -227,6 +231,8 @@
             margin-top: 40px;
             float:left;
 
+            text-decoration: none;
+
             font-size: 30px;
             color: #B87514;
             display: flex;
@@ -260,6 +266,8 @@
             height: 40px;
             margin-top: 40px;
             float:left;
+
+            text-decoration: none;
 
             font-size: 30px;
             color: #B87514;

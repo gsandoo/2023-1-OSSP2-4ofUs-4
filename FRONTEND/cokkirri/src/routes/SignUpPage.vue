@@ -317,6 +317,8 @@ export default {
             margin-right: 44px;
             margin-bottom: 78px;
 
+            cursor: pointer;
+
             background: #E48700;
             border-radius: 10px;
             border-color: #E48700;

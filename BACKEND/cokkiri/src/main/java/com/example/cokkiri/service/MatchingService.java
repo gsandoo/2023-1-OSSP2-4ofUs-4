@@ -262,8 +262,6 @@ public class MatchingService {
                 boolean head = (userList.get(i).getHeadCount()) == (userList.get(userList.size() - 1).getHeadCount());
                 if (day && head && times != null) {
 
-
-
                     userCount += 1;
                     //요소를 찾았지만 희망인원이 채워 졌는지 묻는 조건문
                     if (userCount + 1 == count) {
@@ -294,20 +292,17 @@ public class MatchingService {
                             boolean days = (userList.get(j).getAvailableDay()).equals(userList.get(userList.size() - 1).getAvailableDay());
                             boolean heads = (userList.get(j).getHeadCount()) == (userList.get(userList.size() - 1).getHeadCount());
                             if (days && heads && timess != null) {
-
                                 // 겹치는 시간 확인
-                                matched.setPromiseTime(timess);
+                                matched.setPromiseTime(timess); // publicMatchedList 객체
                                 publicUsersList.add(userList.get(j));
-                                usermatched.add(j);
+                                userList.remove(userList.get(j)); //
+                                usermatched.add(j); // 매치 된 사용자 index 담김 . 배열
 
                             }
                         }
                         //마지막 요소 제거
                         userList.remove(userLast);
-                        //매치 된 요소 제거
-                        for (int k = 0; k < usermatched.size(); k++) {
-                            userList.remove(usermatched.get(k));
-                        }
+                        System.out.println(userList);
                         userCount = 0;
 
                         // 학번 배열 생성, set
@@ -396,7 +391,7 @@ public class MatchingService {
 
                                 // 겹치는 시간 확인
                                 matched.setCourseNumber(courseNumber);
-
+                                userList.remove(userList.get(j)); //
                                 classUserList.add(userList.get(j));
                                 usermatched.add(j);
 
@@ -404,10 +399,7 @@ public class MatchingService {
                         }
                         //마지막 요소 제거
                         userList.remove(userLast);
-                        //매치 된 요소 제거
-                        for(int k=0 ;  k <  usermatched.size() ;k++){
-                            userList.remove(usermatched.get(k));
-                        }
+                        System.out.println(userList);
                         userCount =0;
 
                         // 학번 배열 생성, set
@@ -463,6 +455,7 @@ public class MatchingService {
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
         if(userInfo.isEmpty()){
+            System.out.println("회원가입 된 사용자가 아닙니다");
             return null;
         }
         if(userInfo.get().isPublicMatching()==false){
@@ -510,6 +503,7 @@ public class MatchingService {
         String id = user.getEmail();
         Optional<User> userInfo = userRepository.findById(id);
         if(userInfo.isEmpty()){
+            System.out.println("회원가입 된 사용자가 아닙니다");
             return null;
         }
         if(userInfo.get().isClassMatching()==false){
@@ -709,10 +703,13 @@ public class MatchingService {
         }else{
             publicAgreeEmail.add(id);
             matchedList.setAgreeList(publicAgreeEmail);
+            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
             publicMatchedListRepository.save(matchedList);
         }
+        if(matchedList== null){
+            return "해당 매치를 찾지 못했습니다.";
+        }
         if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
-            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
             String comment = " 매칭완료 버튼을 눌렀습니다";
             return comment;
         }else{
@@ -731,13 +728,13 @@ public class MatchingService {
         }else{
             classAgreeEmail.add(id);
             matchedList.setAgreeList(classAgreeEmail);
+            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
             classMatchedListRepository.save(matchedList);
         }
         if(matchedList== null){
             return "해당 매치를 찾지 못했습니다.";
         }
         if(matchedList.getMatchingAgree() != matchedList.getHeadCount()) {
-            matchedList.setMatchingAgree(matchedList.getMatchingAgree() + 1); // 1씩 증가
             return " 매칭완료 버튼을 눌렀습니다.";
         }else{
             matchedList.setMatchingRes("매칭완료");

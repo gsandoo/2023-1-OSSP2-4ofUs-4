@@ -48,13 +48,14 @@
                                     <div class="record-ing-btn">#매칭 대기</div>
                                 </div>
                             </div>
-                            <div v-for="(record, index) in matchingListClass" :key="index" :class="{'matching-frame': record.courseNumber.length!==0}">
-                                <div v-if="record.courseNumber.length!==0" class="matching-describe">
+                            <div v-for="(record, index) in matchingListClass" :key="index" class="matching-frame">
+                                <div class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('class',record.matchingId)">노쇼 신고</div>
-                                    <div class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-else>&nbsp;# 매칭 종료 접수 됨</div>
                                 </div>
-                                <div v-if="record.courseNumber.length!==0" class="matching-box">
+                                <div  class="matching-box">
                                     <div class="record-img"></div>
                                     <div class="record-type">수업 매칭</div>
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
@@ -70,7 +71,8 @@
                                 <div class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
-                                    <div class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-else>&nbsp;# 매칭 종료 접수 됨</div>
                                 </div>
                                 <div class="matching-box">
                                     <div class="record-img"></div>
@@ -152,7 +154,7 @@
                         }
                     }).then((result)=>{
                         console.log("매칭 완료")
-                        console.log(result)
+                        alert(result.data)
                         this.$store.dispatch('callMatchingRecord')
                     }).catch(function(error){
                         console.log(error)
@@ -170,7 +172,7 @@
                         }
                     }).then((result)=>{
                         console.log("매칭 완료")
-                        console.log(result)
+                        alert(result.data)
                         this.$store.dispatch('callMatchingRecord')
                     }).catch(function(error){
                         console.log(error)

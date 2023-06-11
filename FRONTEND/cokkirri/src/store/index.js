@@ -209,7 +209,6 @@ export default createStore({
                             commit('loginSuccess', inputId);
                             dispatch('userInfoUpdate')
                             dispatch('callMatchingRecord')
-                            dispatch('subscribeToSse')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -219,6 +218,9 @@ export default createStore({
                 }).catch(function(error){
                     console.log(error);
                 });
+                if(this.state.isLogin){
+                    dispatch('testSse')
+                }
             } catch(error){
                 console.log(error);
             }
@@ -269,7 +271,7 @@ export default createStore({
                 console.log(error)
             }
         },
-
+        /*
         subscribeToSse({ state }) {
             let eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
         
@@ -288,6 +290,50 @@ export default createStore({
                 }
             }; 
             
+        },
+        */
+        async testSse(){
+            const id = this.state.id;
+            const eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + id);
+
+            eventSource.addEventListener("sse", function (event) {
+                console.log(event.data);
+
+                const data = JSON.parse(event.data);
+
+                (async () => {
+                    // 브라우저 알림
+                    const showNotification = () => {
+                        
+                        const notification = new Notification('코드 봐줘', {
+                            body: data.content
+                        });
+                        
+                        setTimeout(() => {
+                            notification.close();
+                        }, 10 * 1000);
+                        
+                        notification.addEventListener('click', () => {
+                            window.open(data.url, '_blank');
+                        });
+                    }
+
+                    // 브라우저 알림 허용 권한
+                    let granted = false;
+
+                    if (Notification.permission === 'granted') {
+                        granted = true;
+                    } else if (Notification.permission !== 'denied') {
+                        let permission = await Notification.requestPermission();
+                        granted = permission === 'granted';
+                    }
+
+                    // 알림 보여주기
+                    if (granted) {
+                        showNotification();
+                    }
+                })();
+            })
         },
 
         async fetchUsageHistory({ commit }) {

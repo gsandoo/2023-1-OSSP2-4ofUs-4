@@ -693,10 +693,10 @@ public class MatchingService {
         return  waitUser;
     }
 
-    List<String> publicAgreeEmail  = new ArrayList<>();
+
 
     public String publicMatchAgree(int matchingId , String id) {
-
+        List<String> publicAgreeEmail  = new ArrayList<>();
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
         if(publicAgreeEmail.contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다.";
@@ -720,8 +720,8 @@ public class MatchingService {
         }
     }
 
-    List<String> classAgreeEmail  = new ArrayList<>();
     public String classMatchAgree(int matchingId,String id) {
+        List<String> classAgreeEmail  = new ArrayList<>();
         ClassMatchedList matchedList = classMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId,id);
         if(classAgreeEmail.contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다." ;

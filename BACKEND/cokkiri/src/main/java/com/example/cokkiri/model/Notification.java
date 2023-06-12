@@ -9,15 +9,19 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Notification {
 
+    @Id
     private String receiver; //알림을 받는 유저의 정보 , 이메일
 
+    @Column
     private String notificationType; //알림 종류별 분류를 위한
 
+    @Column
     private String content; //알람의 내용 -> "매칭이 성사 되었습니다 !"
 
-    private String url; //해당 알림 클릭시 이동할 mapping url -> 채팅?
 
+    @Column
     private Boolean isRead; //알림 열람에 대한 여부
 }

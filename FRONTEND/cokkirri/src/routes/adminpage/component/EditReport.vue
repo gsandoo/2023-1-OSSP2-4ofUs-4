@@ -10,35 +10,53 @@
         <div class="frame-main">
             <div class="title">유저 정보 수정</div>
             <div class="sub-title">
-                ID : {{email}}<br>
+                수정 ID : {{email}}<br>
                 수정 모드 : 관리자
             </div>
-            <div class="describe-content">1</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">아이디</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="id">
             <div style="clear:both;"></div>
-            <div class="describe-content">2</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">비밀번호</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="password">
             <div style="clear:both;"></div>
-            <div class="describe-content">3</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">이름</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="name">
             <div style="clear:both;"></div>
-            <div class="describe-content">4</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">성별</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="sex">
             <div style="clear:both;"></div>
-            <div class="describe-content">5</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">전공</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="major">
             <div style="clear:both;"></div>
-            <div class="describe-content">6</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">H.P</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="number">
             <div style="clear:both;"></div>
-            <div class="describe-content">7</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">학번</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="studentNum">
             <div style="clear:both;"></div>
-            <div class="describe-content">8</div>
-            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div class="describe-content">강좌</div>
+            <div class="input-content">{{course}}</div>
+            <div style="clear:both;"></div>
+            <div class="describe-content">규제 기한</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="restructionDate">
+            <div style="clear:both;"></div>
+            <div class="describe-content">하트 개수</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="heart">
+            <div style="clear:both;"></div>
+            <div class="describe-content">관리자 권한</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="admin">
+            <div style="clear:both;"></div>
+            <div class="describe-content">인증 여부</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="auth">
+            <div style="clear:both;"></div>
+            <div class="describe-content">수업 매칭 현황</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="isClassMatching">
+            <div style="clear:both;"></div>
+            <div class="describe-content">공강 매칭 현황</div>
+            <input type="text" placeholder="NULL" class="input-content" v-model="isPublicMatching">
             <div style="clear:both;"></div>
             
-            <div class="btn-submit" @click="submitReport()">제출</div>
+            <div class="btn-submit" @click="submitUserInfo()">제출</div>
             <div class="btn-cancel" @click="cancleReport()">취소</div>
             <div style="clear:both;"></div>
         </div>
@@ -52,6 +70,22 @@
         data(){
             return{
                 email: '',
+
+                id: '',
+                password: '',
+                name: '',
+                sex: '',
+                major: '',
+                number: '',
+                studentNum: '',
+                course: [],
+                restructionDate: '',
+                heart: '',
+                admin: '',
+                auth: '',
+                isClassMatching: '',
+                isPublicMatching: '',
+
                 title: '',
             }
         },
@@ -69,33 +103,63 @@
             }
         },
         methods:{
-            submitReport(){
-                if(this.title===''){
-                    alert("입력에 공백이 존재합니다.")
+            // 수정된 유저 정보 제출
+            async submitUserInfo(){
+                let restructionDate = null
+                if(this.restructionDate !== ''){
+                    restructionDate = this.restructionDate
                 }
-                else{
-                    this.reportNoshow()
-                }
-            },
-            // 수정 제출
-            async reportNoshow(){
-                try{
-                    await axios.post('/admin/user/'+this.email,{
-                        matchingType: this.matchingType,
-                        matchingId: this.matchingId,
-                        email: this.email,
-                        title: this.title,
-                        comment: this.comment
-                    }).then((result)=>{
-                        console.log(result)
-                        alert("유저 정보 수정이 요청되었습니다.")
-                        window.close()
-                    }).catch(function(error){
-                        console.log(error)
-                    })
-                }catch(error){
+                await axios.put('/admin/user/'+this.email,null,{
+                    params:{
+                        id:this.id,
+                        password:this.password,
+                        name:this.name,
+                        sex:this.sex,
+                        major:this.major,
+                        number:this.number,
+                        studentNum:this.studentNum,
+                        course:this.course,
+                        restructionDate:restructionDate,
+                        heart:this.heart,
+                        admin:this.admin,
+                        auth:this.auth,
+                        isClassMatching:this.isClassMatching,
+                        isPublicMatching:this.isPublicMatching,
+                    }
+                }).then(()=>{
+                    alert("유저 정보 수정이 완료되었습니다.")
+                    window.close()
+                }).catch(function(error){
                     console.log(error)
-                }
+                })
+            },
+            // 유저 기존 정보 불러오기
+            async loadUserInfo(email){
+                await axios.get('/admin/user/id',{
+                    params: {
+                        userId: email
+                    }
+                })
+                .then((result) =>{
+                    this.id = result.data.id
+                    this.password = result.data.password
+                    this.name = result.data.name
+                    this.sex = result.data.sex
+                    this.major = result.data.major
+                    this.number = result.data.number
+                    this.studentNum = result.data.studentNum
+                    this.course = result.data.course
+                    this.restructionDate = result.data.restructionDate
+                    this.heart = result.data.heart
+                    this.admin = result.data.admin
+                    this.auth = result.data.auth
+                    this.isClassMatching = result.data.classMatching
+                    this.isPublicMatching = result.data.publicMatching
+                    console.log(result.data)
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
             },
             // 수정 취소 버튼
             cancleReport(){
@@ -105,6 +169,7 @@
         },
         mounted(){
             this.email = this.$route.query.email;
+            this.loadUserInfo(this.email)
         },
     }
 </script>
@@ -124,6 +189,8 @@
         .frame-main{
             width: 550px;
             height: 700px;
+
+            overflow: auto;
 
             background: #FFFEF9;
             box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
@@ -201,7 +268,8 @@
 
                 display: flex;
                 align-items: center;
-                justify-content: left;
+                justify-content: center;
+                text-align: center;
 
                 background: #FFFFFF;
                 border: 1px solid #4285F4;
@@ -252,6 +320,7 @@
                 float: left;
                 margin-left: 210px;
                 margin-top: 18px;
+                margin-bottom: 50px;
 
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
@@ -277,6 +346,7 @@
                 float: left;
                 margin-left: 15px;
                 margin-top: 18px;
+                margin-bottom: 50px;
 
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);

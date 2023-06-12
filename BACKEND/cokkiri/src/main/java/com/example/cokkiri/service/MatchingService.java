@@ -295,7 +295,6 @@ public class MatchingService {
                                 // 겹치는 시간 확인
                                 matched.setPromiseTime(timess); // publicMatchedList 객체
                                 publicUsersList.add(userList.get(j));
-                                userList.remove(userList.get(j)); //
                                 usermatched.add(j); // 매치 된 사용자 index 담김 . 배열
 
                             }
@@ -303,6 +302,12 @@ public class MatchingService {
                         //마지막 요소 제거
                         userList.remove(userLast);
                         System.out.println(userList);
+
+                        //userList 내의 매치된 유저값 삭제
+                        for (int k = 0 ; k  <usermatched.size() ; k ++ ){
+                            userList.remove(usermatched.get(k));
+                        }
+                        usermatched.clear();
                         userCount = 0;
 
                         // 학번 배열 생성, set
@@ -391,7 +396,6 @@ public class MatchingService {
 
                                 // 겹치는 시간 확인
                                 matched.setCourseNumber(courseNumber);
-                                userList.remove(userList.get(j)); //
                                 classUserList.add(userList.get(j));
                                 usermatched.add(j);
 
@@ -400,6 +404,12 @@ public class MatchingService {
                         //마지막 요소 제거
                         userList.remove(userLast);
                         System.out.println(userList);
+
+                        //userList 내의 매치된 유저값 삭제
+                        for (int k = 0 ; k  <usermatched.size() ; k ++ ){
+                            userList.remove(usermatched.get(k));
+                        }
+                        usermatched.clear();
                         userCount =0;
 
                         // 학번 배열 생성, set
@@ -698,7 +708,7 @@ public class MatchingService {
     public String publicMatchAgree(int matchingId , String id) {
         List<String> publicAgreeEmail  = new ArrayList<>();
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
-        if(publicAgreeEmail.contains(id)){
+        if(matchedList.getAgreeList().contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다.";
         }else{
             publicAgreeEmail.add(id);
@@ -723,7 +733,7 @@ public class MatchingService {
     public String classMatchAgree(int matchingId,String id) {
         List<String> classAgreeEmail  = new ArrayList<>();
         ClassMatchedList matchedList = classMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId,id);
-        if(classAgreeEmail.contains(id)){
+        if(matchedList.getAgreeList().contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다." ;
         }else{
             classAgreeEmail.add(id);

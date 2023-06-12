@@ -71,6 +71,7 @@ public class MatchingController {
     }
     @PutMapping("agree/class")
     public ResponseEntity<String> classMatchingAgree(@RequestParam(value = "matchingId")int matchingId,@RequestParam(value = "userId")String id){
+
         String comment = matchingService.classMatchAgree(matchingId,id);
         return new ResponseEntity<String>(comment,HttpStatus.OK);
     }

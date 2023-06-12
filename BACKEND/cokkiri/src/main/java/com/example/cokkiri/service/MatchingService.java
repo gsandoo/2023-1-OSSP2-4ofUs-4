@@ -43,6 +43,8 @@ public class MatchingService {
     private PublicAccusationRepository publicAccusationRepository;
     @Autowired
     private  UserRepository userRepository;
+    @Autowired
+    private  NotificationService notificationService;
 
     @Autowired
     private PublicMatchingWaitRepository publicMatchingWaitRepository;
@@ -305,7 +307,8 @@ public class MatchingService {
 
                         //userList 내의 매치된 유저값 삭제
                         for (int k = 0 ; k  <usermatched.size() ; k ++ ){
-                            userList.remove(usermatched.get(k));
+                            int num = usermatched.get(k);
+                            userList.remove(num);
                         }
                         usermatched.clear();
                         userCount = 0;
@@ -407,7 +410,9 @@ public class MatchingService {
 
                         //userList 내의 매치된 유저값 삭제
                         for (int k = 0 ; k  <usermatched.size() ; k ++ ){
-                            userList.remove(usermatched.get(k));
+                            int num = usermatched.get(k);
+                            System.out.println(usermatched.get(k));
+                            userList.remove(num);
                         }
                         usermatched.clear();
                         userCount =0;
@@ -610,7 +615,7 @@ public class MatchingService {
         List receiver = matchedList.getEmailList();
         String content = "매칭이 성사되었습니다.";
         String type = matchedList.getMatchingType();
-        sseService.sendList(receiver,content,type);
+        notificationService.send(receiver,content,type);
     }
 
     public void sendSSEtoPublicUser(PublicMatchedList matchedList){
@@ -708,6 +713,9 @@ public class MatchingService {
     public String publicMatchAgree(int matchingId , String id) {
         List<String> publicAgreeEmail  = new ArrayList<>();
         PublicMatchedList matchedList = publicMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId , id);
+        if(matchedList == null){
+            return "매칭 번호로 매칭을 조회할 수 없습니다. 매칭타입과 매칭 번호를 확인해 주세요.";
+        }
         if(matchedList.getAgreeList().contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다.";
         }else{
@@ -733,6 +741,9 @@ public class MatchingService {
     public String classMatchAgree(int matchingId,String id) {
         List<String> classAgreeEmail  = new ArrayList<>();
         ClassMatchedList matchedList = classMatchedListRepository.findByMatchingIdAndEmailListContains(matchingId,id);
+        if(matchedList == null){
+            return "매칭 번호로 매칭을 조회할 수 없습니다. 매칭타입과 매칭 번호를 확인해 주세요.";
+        }
         if(matchedList.getAgreeList().contains(id)){
             return "이미 매칭 완료 버튼을 누르셨습니다." ;
         }else{

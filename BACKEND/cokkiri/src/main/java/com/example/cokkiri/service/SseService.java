@@ -142,14 +142,12 @@ public class SseService {
                     .receiver(receiver)     // 사용자 이메일
                     .content(content)       // "매칭이 성사되었습니다"
                     .notificationType(type) // free
-                    .url("")                // 일단 empty
                     .isRead(false)          // 사용자가 읽었는지 판단
                     .build();
         } else if (type.equals("class")) {
             return Notification.builder()
                     .content(content)
                     .notificationType(type)
-                    .url("")
                     .isRead(false)
                     .build();
         }
@@ -166,7 +164,6 @@ public class SseService {
             return Notification.builder()
                     .receiver(receiver)
                     .content(content)
-                    .url("/room/" + urlValue)
                     .notificationType(type)
                     .isRead(false)
                     .build();
@@ -175,7 +172,6 @@ public class SseService {
         else if (type.equals("quotation")) {
             return Notification.builder()
                     .content(content)
-                    .url("/quotation/" + urlValue)
                     .notificationType(type)
                     .isRead(false)
                     .build();
@@ -185,7 +181,6 @@ public class SseService {
             return Notification.builder()
                     .receiver(receiver)
                     .content(content)
-                    .url("/matchedgosulist/" + urlValue)
                     .notificationType(type)
                     .isRead(false)
                     .build();

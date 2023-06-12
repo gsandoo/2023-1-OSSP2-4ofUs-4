@@ -122,9 +122,9 @@
             async checkSubmitState(){
                 return await this.$store.dispatch('checkMatchingSubmitState')
             },
-            callMatchingRecord() {
+            async callMatchingRecord() {
                 if(this.$store.state.isLogin){
-                    this.$store.dispatch('callMatchingRecord')
+                    await this.$store.dispatch('callMatchingRecord')
                     this.matchingListClass = [...this.$store.state.classMatchingRecord].reverse()
                     this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse()
                 }

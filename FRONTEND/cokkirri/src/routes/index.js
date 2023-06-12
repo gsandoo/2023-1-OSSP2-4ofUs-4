@@ -13,6 +13,7 @@ import Report from './mypage/component/Report.vue'
 import MatchingStartPage from './matchingpage/MatchingStartPage.vue'
 
 import AdminHome from './adminpage/AdminHome.vue'
+import EditUser from './adminpage/component/EditReport.vue'
 
 import Payments from './Payments.vue'
 import Starting from './Starting.vue'
@@ -81,6 +82,11 @@ const router = createRouter({
         {
             path: '/admin',
             component: AdminHome
+        },
+
+        {
+            path: '/admin/user',
+            component: EditUser
         },
 
         {

@@ -22,7 +22,7 @@
             <div v-for="(user,index) in userList" :key="index">
                 <div class="content-row-name">{{user.name}}</div>
                 <div class="content-row-email">{{user.id}}</div>
-                <div class="content-row-btn-edit">수정</div>
+                <div class="content-row-btn-edit" @click="openReportWindow(user.id)">수정</div>
                 <div class="content-row-btn-delete" @click="deleteUserById(user.id)">제거</div>
                 <div style="clear:both;"></div>
             </div>
@@ -43,6 +43,21 @@
             }
         },
         methods:{
+            // 유저 정소 수정 새창 열기
+            openReportWindow(email){
+                const route = this.$router.resolve({
+                    path: '/admin/user', 
+                    query: { 
+                        email: email, 
+                    } });
+                
+                const width = 600;
+                const height = 750;
+                const left = (window.screen.width - width) / 2;
+                const top = (window.screen.height - height) / 2;
+
+                window.open(window.location.origin + route.href, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+            },
             // 모든 유저 정보 불러오기
             async loadUserList(){
                 try{

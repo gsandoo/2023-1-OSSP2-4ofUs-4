@@ -73,6 +73,7 @@ export default {
     mounted(){
         if(this.$route.query.status === 'verified'){
             alert(this.$route.query.userId+"님의 이메일 인증이 완료되었습니다.")
+            this.$router.replace('/');
         }
     }
 }

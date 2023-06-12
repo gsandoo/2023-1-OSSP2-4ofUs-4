@@ -8,15 +8,36 @@
             comment 신고 내용
         --->
         <div class="frame-main">
-            <div class="title">노쇼 신고</div>
+            <div class="title">유저 정보 수정</div>
             <div class="sub-title">
-                신고 매칭ID : {{matchingId}}<br>
-                매칭 종류 : {{alteredmatchingType}}
+                ID : {{email}}<br>
+                수정 모드 : 관리자
             </div>
-            <div class="describe-title">제목</div>
-            <input type="text" placeholder="  제목을 입력해주세요." class="input-title" v-model="title">
-            <div class="describe-content">내용</div>
-            <textarea type="text" placeholder=" 내용을 입력해주세요." class="input-content" v-model="comment"/>
+            <div class="describe-content">1</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">2</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">3</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">4</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">5</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">6</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">7</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            <div class="describe-content">8</div>
+            <input type="text" placeholder="  기존 값" class="input-content" v-model="title">
+            <div style="clear:both;"></div>
+            
             <div class="btn-submit" @click="submitReport()">제출</div>
             <div class="btn-cancel" @click="cancleReport()">취소</div>
             <div style="clear:both;"></div>
@@ -30,11 +51,8 @@
         
         data(){
             return{
-                matchingType: '',
-                matchingId: '',
                 email: '',
                 title: '',
-                comment: '',
             }
         },
         computed:{
@@ -53,18 +71,16 @@
         methods:{
             submitReport(){
                 if(this.title===''){
-                    alert("제목이 입력되지 않았습니다.")
-                }
-                else if(this.comment===''){
-                    alert("내용이 입력되지 않았습니다.")
+                    alert("입력에 공백이 존재합니다.")
                 }
                 else{
                     this.reportNoshow()
                 }
             },
+            // 수정 제출
             async reportNoshow(){
                 try{
-                    await axios.post('/matching/post/accusation',{
+                    await axios.post('/admin/user/'+this.email,{
                         matchingType: this.matchingType,
                         matchingId: this.matchingId,
                         email: this.email,
@@ -72,7 +88,7 @@
                         comment: this.comment
                     }).then((result)=>{
                         console.log(result)
-                        alert("노쇼 신고가 완료되었습니다.")
+                        alert("유저 정보 수정이 요청되었습니다.")
                         window.close()
                     }).catch(function(error){
                         console.log(error)
@@ -81,15 +97,14 @@
                     console.log(error)
                 }
             },
+            // 수정 취소 버튼
             cancleReport(){
-                alert("노쇼 신고가 취소되었습니다.")
+                alert("유저 정보 수정이 취소되었습니다.")
                 window.close()
             },
         },
         mounted(){
             this.email = this.$route.query.email;
-            this.matchingType = this.$route.query.matchingType;
-            this.matchingId = this.$route.query.matchingId;
         },
     }
 </script>
@@ -151,12 +166,14 @@
                 line-height: 24px;
                 color: #8D8D8D;
             }
-            .describe-title{
+            .describe-content{
                 width: 150px;
-                height: 30px;
+                height: 45px;
 
                 margin-left: 25px;
-                margin-top: 5px;
+                margin-top: 10px;
+
+                float: left;
 
                 display: flex;
                 align-items: center;
@@ -170,15 +187,17 @@
 
                 color: #000000;
             }
-            .input-title{
+            .input-content{
                 // 테두리 고려해서 가로 세로 2px 감소 적용됨
-                width: 498px;
+                width: 338px;
                 height: 43px;
 
                 box-sizing: border-box;
-                margin-left: 25px;
+                margin-left: 10px;
                 margin-right: 25px;
-                margin-top: 0px;
+                margin-top: 10px;
+
+                float: left;
 
                 display: flex;
                 align-items: center;
@@ -188,6 +207,7 @@
                 border: 1px solid #4285F4;
                 border-radius: 9px;
             }
+            /*
             .describe-content{
                 width: 150px;
                 height: 30px;
@@ -224,6 +244,7 @@
                 border: 1px solid #4285F4;
                 border-radius: 9px;
             }
+            */
             .btn-submit{
                 width: 150px;
                 height: 63px;

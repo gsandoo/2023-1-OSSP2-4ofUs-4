@@ -52,7 +52,7 @@
                                 <div class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('class',record.matchingId)">노쇼 신고</div>
-                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closeClassMatching(record.matchingId)">매칭 완료</div>
                                     <div v-else>&nbsp;# 매칭 종료 접수 됨</div>
                                 </div>
                                 <div  class="matching-box">
@@ -71,7 +71,7 @@
                                 <div class="matching-describe">
                                     # 신청 날짜 : {{record.matchingTime}} # 매칭 식별 번호 : {{record.matchingId}}
                                     <div class="btn-report" @click="openReportWindow('free',record.matchingId)">노쇼 신고</div>
-                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 종료</div>
+                                    <div v-if="!record.agreeList.includes(this.$store.state.id)" class="btn-report" @click="closePublicMatching(record.matchingId)">매칭 완료</div>
                                     <div v-else>&nbsp;# 매칭 종료 접수 됨</div>
                                 </div>
                                 <div class="matching-box">
@@ -155,7 +155,7 @@
                     }).then((result)=>{
                         console.log("매칭 완료")
                         alert(result.data)
-                        this.$store.dispatch('callMatchingRecord')
+                        this.callMatchingRecord()
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -173,7 +173,7 @@
                     }).then((result)=>{
                         console.log("매칭 완료")
                         alert(result.data)
-                        this.$store.dispatch('callMatchingRecord')
+                        this.callMatchingRecord()
                     }).catch(function(error){
                         console.log(error)
                     })
@@ -192,7 +192,6 @@
                 }).catch(function(error){
                     console.log(error)
                 })
-                this.$store.dispatch('callMatchingRecord')
                 this.callMatchingRecord()
             },
             async cancelPublicWait(waitId){
@@ -205,7 +204,6 @@
                 }).catch(function(error){
                     console.log(error)
                 })
-                this.$store.dispatch('callMatchingRecord')
                 this.callMatchingRecord()
             },
             moveToChatroom(matchingId, matchingType){
@@ -219,8 +217,6 @@
                 this.$store.dispatch('callMatchingRecord')
                 this.matchingListClass =  [...this.$store.state.classMatchingRecord].reverse();
                 this.matchingListFree = [...this.$store.state.publicMatchingRecord].reverse();
-
-
             }
         },
     }

@@ -213,7 +213,7 @@ public class SseService {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(json)
+                    .data(jsonString)
                     .reconnectTime(0));
 
             emitter.complete();

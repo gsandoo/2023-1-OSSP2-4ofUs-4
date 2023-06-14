@@ -81,7 +81,10 @@ const router = createRouter({
         
         {
             path: '/admin',
-            component: AdminHome
+            component: AdminHome,
+            meta:{
+                requiresadminAuth: true
+            }
         },
 
         {
@@ -120,13 +123,22 @@ const router = createRouter({
 router.beforeEach((to,from,next)=>{
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
     const isLoginPage = to.matched.some(record => record.meta.isLoginPage);
+    const requiresadminAuth = to.matched.some(record => record.meta.requiresadminAuth);
     const isLoggedIn = store.state.isLogin;
+    const adminAuth = store.state.admin;
     if(requiresAuth && !isLoggedIn){
         alert("로그인이 필요합니다.")
         next('/');
     }else if(isLoginPage && isLoggedIn){
         alert("이미 로그인 상태입니다.")
         next('/Starting');
+    }else if(requiresadminAuth && !adminAuth){
+        alert("관리자 권한이 없습니다.")
+        if(isLoggedIn){
+            next('/Starting')
+        }else{
+            next('/');
+        }
     }else{
         next();
     }

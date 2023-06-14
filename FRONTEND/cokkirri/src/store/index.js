@@ -13,6 +13,7 @@ export default createStore({
     state: {
         id: null,
         isLogin: false,
+        admin: false,
 
         major: null,
         name: null,
@@ -23,7 +24,6 @@ export default createStore({
         password: null,
         heart: null,
         restrctionDate: null,
-        admin: false,
 
         usageHistory: [],
 
@@ -96,12 +96,7 @@ export default createStore({
             state.password = payload.password
             state.heart = payload.heart
             state.restrctionDate = payload.restrctionDate
-
-            if(state.admin){
-                router.replace('/admin')
-            }else{
-                router.replace('/Starting')
-            }
+            state.admin = payload.admin
         },
         dateReform(state){
             if(state.restrctionDate===null){
@@ -116,8 +111,7 @@ export default createStore({
         },
         logout(state) { 
             state.isLogin = false
-            
-            router.replace('/')
+            state.admin = false
             
             state.id = null
     
@@ -149,6 +143,8 @@ export default createStore({
             // 매칭 대기 상태
             state.isExistClassMatchingWait = false
             state.isExistPublicMatchingWait = false
+
+            router.replace('/')
         },
         SET_NOTIFICATION(state, notification){
             console.log("들어온 신호"+notification)
@@ -209,13 +205,10 @@ export default createStore({
                         id: inputId,
                         password: inputPassword,
                     }
-                })
-                .then((result) => {
+                }).then((result) => {
                     if(result.status === 200){
                         if(result.data === true){
                             commit('loginSuccess', inputId);
-                            dispatch('userInfoUpdate')
-                            dispatch('callMatchingRecord')
                             alert('로그인 되었습니다.')
                         }
                         else{
@@ -227,6 +220,13 @@ export default createStore({
                 });
                 if(this.state.isLogin){
                     dispatch('testSse')
+                    await dispatch('userInfoUpdate')
+                    await dispatch('callMatchingRecord')
+                    if(this.state.admin){
+                        router.replace('/admin')
+                    }else{
+                        router.replace('/Starting')
+                    }
                 }
             } catch(error){
                 console.log(error);

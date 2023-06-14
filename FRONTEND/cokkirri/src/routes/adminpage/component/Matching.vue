@@ -4,11 +4,11 @@
         <div class="line-for-division"></div>
         <div class="frame-sub-head">
             <div class="btn-loadMatchingList" @click="loadMatchingList()">전체 조회</div>
-
+            <!---
             <div class="btn-temp" @click="searchMatchingId()">점검중</div>
             <input type="text" placeholder="Search Id" class="input-temp" v-model="searchId" @change="searchMatchingId()">
-
-            <div class="btn-searchMatchingId" @click="searchMatchingId()">매칭ID검색</div>
+            --->
+            <div class="btn-temp" @click="searchMatchingId()">매칭ID검색</div>
             <input type="text" placeholder="Search Matching ID" class="input-searchMatchingId" v-model="MatchingIdForSearch" @change="searchMatchingId()">
             <div style="clear:both;"></div>
         </div>

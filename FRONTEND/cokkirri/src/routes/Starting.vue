@@ -145,6 +145,8 @@ export default {
 
       float: left;
 
+      cursor: pointer;
+
       text-decoration : none;
       font-style: normal;
       font-weight: 600;

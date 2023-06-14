@@ -104,11 +104,7 @@ public class SseService {
                     // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                     emitterRepository.saveEventCache(key, notification);
                     // 데이터 전송
-                    try {
-                        sendToClient(emitter, key, notification);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
+                    sendToClient(emitter, key, notification);
                 }
         );
     }
@@ -135,11 +131,7 @@ public class SseService {
                         // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                         emitterRepository.saveEventCache(key, notifications.get(finalI));
                         // 데이터 전송
-                        try {
-                            sendToClient(emitter, key, notifications.get(finalI));
-                        } catch (JsonProcessingException e) {
-                            throw new RuntimeException(e);
-                        }
+                        sendToClient(emitter, key, notifications.get(finalI));
                     }
             );
         }
@@ -203,17 +195,13 @@ public class SseService {
     }
 
 
-    private void sendToClient(SseEmitter emitter, String id, Object data) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = mapper.writeValueAsString(data);
-        System.out.println(jsonString);
-        System.out.println(data);
-
+    private void sendToClient(SseEmitter emitter, String id, Object data) {
+        final String json = "{value: " + data + "}";
         try {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(jsonString)
+                    .data(json)
                     .reconnectTime(0));
 
             emitter.complete();

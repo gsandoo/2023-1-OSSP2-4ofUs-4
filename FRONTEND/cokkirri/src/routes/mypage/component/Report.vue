@@ -59,12 +59,18 @@
                     alert("내용이 입력되지 않았습니다.")
                 }
                 else{
-                    this.reportNoshow()
+                    if(this.matchingType==='class'){
+                        this.reportClassNoshow()
+                    }else if(this.matchingType==='free'){
+                        this.reportFreeNoshow()
+                    }else{
+                        alert("잘못된 접근입니다.")
+                    }
                 }
             },
-            async reportNoshow(){
+            async reportClassNoshow(){
                 try{
-                    await axios.post('/matching/post/accusation',{
+                    await axios.post('/matching/post/class/accusation',{
                         matchingType: this.matchingType,
                         matchingId: this.matchingId,
                         email: this.email,
@@ -72,7 +78,26 @@
                         comment: this.comment
                     }).then((result)=>{
                         console.log(result)
-                        alert("노쇼 신고가 완료되었습니다.")
+                        alert("수업 매칭 노쇼 신고가 완료되었습니다.")
+                        window.close()
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+                }catch(error){
+                    console.log(error)
+                }
+            },
+            async reportFreeNoshow(){
+                try{
+                    await axios.post('/matching/post/free/accusation',{
+                        matchingType: this.matchingType,
+                        matchingId: this.matchingId,
+                        email: this.email,
+                        title: this.title,
+                        comment: this.comment
+                    }).then((result)=>{
+                        console.log(result)
+                        alert("공강 매칭 노쇼 신고가 완료되었습니다.")
                         window.close()
                     }).catch(function(error){
                         console.log(error)
@@ -232,6 +257,8 @@
                 margin-left: 210px;
                 margin-top: 18px;
 
+                cursor: pointer;
+
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
                 border-radius: 10px;
@@ -256,6 +283,8 @@
                 float: left;
                 margin-left: 15px;
                 margin-top: 18px;
+
+                cursor: pointer;
 
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);

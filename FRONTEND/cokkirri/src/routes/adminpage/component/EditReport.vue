@@ -322,6 +322,8 @@
                 margin-top: 18px;
                 margin-bottom: 50px;
 
+                cursor: pointer;
+
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);
                 border-radius: 10px;
@@ -347,6 +349,8 @@
                 margin-left: 15px;
                 margin-top: 18px;
                 margin-bottom: 50px;
+
+                cursor: pointer;
 
                 background: #E48700;
                 box-shadow: 0px 4px 19px rgba(119, 147, 65, 0.3);

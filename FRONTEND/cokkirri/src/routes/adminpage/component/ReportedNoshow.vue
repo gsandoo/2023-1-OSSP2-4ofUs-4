@@ -79,7 +79,7 @@
             },
             async loadReportedClassNoshow(){
                 try{
-                    await axios.get('matching/get/accusation',{
+                    await axios.get('matching/get/class/accusation',{
                         params:{
                             matchingType: "class"
                         }
@@ -97,7 +97,7 @@
             },
             async loadReportedPublicNoshow(){
                 try{
-                    await axios.get('matching/get/accusation',{
+                    await axios.get('matching/get/public/accusation',{
                         params:{
                             matchingType: "free"
                         }

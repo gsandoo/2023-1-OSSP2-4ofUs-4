@@ -198,7 +198,7 @@ public class SseService {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(data, MediaType.APPLICATION_JSON)
+                    .data(data)
                     .reconnectTime(0));
 
             emitter.complete();

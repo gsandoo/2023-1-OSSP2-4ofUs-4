@@ -26,7 +26,7 @@ public class SseController {
     }
 
     // sse 연결
-    @GetMapping(value = "/subscribe/{email}", produces = MediaType.TEXT_EVENT_STREAM_VALUE )
+    @GetMapping(value = "/subscribe/{email}",  produces = "text/event-stream")
     public SseEmitter subscribe(@PathVariable String email, @RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId ){
         return sseService.subscribe(email, lastEventId);
     }

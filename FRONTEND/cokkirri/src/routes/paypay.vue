@@ -1,70 +1,82 @@
 <template>
   <div>
-  <div class="BoxingPay">
-    <div class="Back">
-      <div class="Back_img">
-        <a href="javascript:history.back();">
-          <img :src="imagePath_arrow" alt="Arrow" />
-        </a>
-        <a href="javascript:history.back();" class="Back_txt">뒤로가기</a>
-      </div>
-    </div>
-    <div class="Title">
-      <p>하트 충전소</p>
-    </div>
-    <div class="Parent">
-      <div class="HeartNum">
-        <div class="HeartNum_text">
-          <p>나의 하트</p>
-        </div>
-        <div class = "NumOfHeart">
-          {{this.$store.state.heart}}
-        </div>
-        <div class="HeartNum_img">
-          <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
-        </div>
-      </div>
-      <div class="GoPay">
-        <div class="GoPay_text">
-          <p>하트 충전</p>
-        </div>
-        <div class="GoPay_heart">
-          <img :src="imagePath_heart" alt="heart" class = "heart-1000"/>
-          <img :src="imagePath_heart" alt="heart" class = "heart-3000"/>
-          <img :src="imagePath_heart" alt="heart" class = "heart-5000"/>
-          <img :src="imagePath_heart" alt="heart" class = "heart-10000"/>
-        </div>
 
-        <div class="GoPay_5ht"> <p>10개</p> </div>
-        <div class="GoPay_10ht"> <p>30개</p> </div>
-        <div class="GoPay_15ht"> <p>50개</p> </div>
-        <div class="GoPay_20ht"> <p>100개</p> </div>
-
-        <div class="GoPay_img">
-          <img :src="imagePath_gopay" alt="Heartgopay" />
-        </div>
-        <div>
-          <a href="#" @click.prevent="checkModule(1000)" class = "charge1000">1000원</a>
-          <a href="#" @click.prevent="checkModule(3000)" class = "charge3000">3000원</a>
-          <a href="#" @click.prevent="checkModule(5000)" class = "charge5000">5000원</a>
-          <a href="#" @click.prevent="checkModule(10000)" class = "charge10000">10000원</a>
-        </div>
-      </div>
-      <div class="UseHistory">
-        <div class="UseHistory_text">
-          <p>결제 내역</p>
-        </div>
-        <div class="UseHistory_img">
-          <img :src="imagePath_history" alt="UseHistory" />
-        </div>
-        <div class = "UseHistory_his">
-          <div v-for="history in usageHistory" :key="history.date">
-            <p>
-              >> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount }}개
-            </p>
+    <div class="Boxing-Payments">
+      <div class = "Banner-Payments">
+        <div class="Shift-Back">
+          <div class="Back-icon">
+            <a href="javascript:history.back();"><img :src="imagePath_arrow" alt="Arrow" /></a>
+            <a href="javascript:history.back();" class="Back_txt">뒤로가기</a>
           </div>
         </div>
+        <div class="Title">
+          <p>하트 충전소</p>
+        </div>
       </div>
+
+      <div class="Parent-Payments">
+
+        <div class="HeartNum">
+          <div class = "HeartNum_content">
+            <div class="HeartNum_text">
+              <p>나의 하트</p>
+            </div>
+            <div class = "NumOfHeart">
+              {{this.$store.state.heart}}
+            </div>
+            <div class="HeartNum_img">
+              <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
+            </div>
+          </div>
+        </div>
+
+        <div class="GoPay">
+          <div class = "GoPay_content">
+            <div class="GoPay_text">
+              <p>하트 충전</p>
+            </div>
+            <div class="GoPay_heart">
+              <img :src="imagePath_heart" alt="heart" class = "heart-1000"/>
+              <img :src="imagePath_heart" alt="heart" class = "heart-3000"/>
+              <img :src="imagePath_heart" alt="heart" class = "heart-5000"/>
+              <img :src="imagePath_heart" alt="heart" class = "heart-10000"/>
+            </div>
+
+            <div class="GoPay_5ht"> <p>10개</p> </div>
+            <div class="GoPay_10ht"> <p>30개</p> </div>
+            <div class="GoPay_15ht"> <p>50개</p> </div>
+            <div class="GoPay_20ht"> <p>100개</p> </div>
+
+            <div class="GoPay_img">
+              <img :src="imagePath_gopay" alt="Heartgopay" />
+            </div>
+            <div>
+              <a href="#" @click.prevent="checkModule(1000)" class = "charge1000">1000원</a>
+              <a href="#" @click.prevent="checkModule(3000)" class = "charge3000">3000원</a>
+              <a href="#" @click.prevent="checkModule(5000)" class = "charge5000">5000원</a>
+              <a href="#" @click.prevent="checkModule(10000)" class = "charge10000">10000원</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="UseHistory">
+          <div class = "UseHistory_content">
+            <div class="UseHistory_text">
+              <p>결제 내역</p>
+            </div>
+            <div class="UseHistory_img">
+              <img :src="imagePath_history" alt="UseHistory" />
+            </div>
+            <div class = "UseHistory_his">
+              <div v-for="history in usageHistory" :key="history.date">
+                <p>
+                  >> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount }}개
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 </div>
@@ -224,7 +236,7 @@ export default {
 </script>
 
 <style scoped>
-.BoxingPay {
+.Boxing-Payments {
   background-color: #FFFEF9;
   display: flex;
   align-items: center;
@@ -234,11 +246,14 @@ export default {
   width: 100vw;
 }
 
-.Back{
+.Banner-Payments{
+  text-align : center;
+}
+.Shift-Back{
   float : right;
 }
 
-.Back_img {
+.Back-icon {
   position: absolute;
   left: 3.68%;
   right: 93.89%;
@@ -276,7 +291,7 @@ export default {
   text-align: center;
 }
 
-.Parent {
+.Parent-Payments {
   width: 90vw;
   /* margin: 10px auto; */
 }
@@ -300,12 +315,19 @@ export default {
   box-sizing: border-box;
 }
 
+.HeartNum_content{
+  position: relative;
+  left: 200px;
+  top: 300px;
+  transform: translate(-50%, -50%);
+}
+
 .HeartNum_text {
   color: #000;
   position: absolute;
   width: 160px;
   height: 80px;
-  left: 136px;
+  left: 132px;
   top: 80px;
   font-style: normal;
   font-weight: 600;
@@ -314,6 +336,22 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
+}
+
+.NumOfHeart {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 160px;
+  top: 300px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 75px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
 }
 
 .GoPay {
@@ -328,52 +366,73 @@ export default {
   box-sizing: border-box;
 }
 
-.GoPay_heart {
+/* GoPay 컨테이너 */
+.GoPay_content {
+  position: relative;
+}
+
+.GoPay_heart,
+.GoPay_5ht,
+.GoPay_10ht,
+.GoPay_15ht,
+.GoPay_20ht,
+.GoPay_text,
+.heart-1000,
+.heart-3000,
+.heart-5000,
+.heart-10000,
+.charge1000,
+.charge3000,
+.charge5000,
+.charge10000,
+.GoPay_img {
   position: absolute;
+}
+
+.GoPay_heart {
   left: 64px;
   top: 240px;
   vertical-align: auto;
 }
 
 .GoPay_5ht {
-  position: absolute;
   left: 120px;
   top: 228px;
   font-weight: bold;
   font-size: 20px;
+  white-space: nowrap; /* 화면 축소 시 자동줄바꿈 방지 */
 }
 
 .GoPay_10ht {
-  position: absolute;
   left: 120px;
   top: 304px;
   font-weight: bold;
   font-size: 20px;
+  white-space: nowrap; /* 화면 축소 시 자동줄바꿈 방지 */
 }
 
 .GoPay_15ht {
-  position: absolute;
   left: 120px;
   top: 380px;
   font-weight: bold;
   font-size: 20px;
+  white-space: nowrap; /* 화면 축소 시 자동줄바꿈 방지 */
 }
 
 .GoPay_20ht {
-  position: absolute;
   left: 120px;
   top: 456px;
   font-weight: bold;
   font-size: 20px;
+  white-space: nowrap; /* 화면 축소 시 자동줄바꿈 방지 */
 }
 
 .GoPay_text {
-  color: #000;
-  position: absolute;
   width: 160px;
   height: 80px;
   left: 128px;
   top: 80px;
+  color: #000;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
@@ -383,65 +442,9 @@ export default {
   text-align: center;
 }
 
-.UseHistory {
-  position: relative;
-  text-align: center;
-  top: 80px;
-  float: right;
-  width: 30%;
-  box-sizing: border-box;
-}
-
-.UseHistory_text {
-  color: #FFFEF9;
-  position: absolute;
-  width: 160px;
-  height: 80px;
-  left: 136px;
-  top: 80px;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 60px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-}
-
-.UseHistory_his {
-  position: absolute;
-  width: 251px;
-  height: 800px;
-  left: 90px;
-  top: 400px;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 30px;
-  display: block;
-  align-items: center;
-  color: white;
-  max-height: 350px;
-  overflow-y: auto;
-}
-
-.charge1000 {
-  color: white;
-  background: #ECBC76;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 20px;
-  gap: 10px;
-  position: absolute;
-  width: 160px;
-  height: 30px;
-  left: 240px;
-  top: 240px;
+.GoPay_img {
+  left: 0;
+  top: 0;
 }
 
 .heart-1000 {
@@ -472,6 +475,25 @@ export default {
   vertical-align: auto;
 }
 
+.charge1000 {
+  color: white;
+  background: #ECBC76;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  left: 240px;
+  top: 240px;
+}
+
 .charge3000 {
   color: white;
   background: #ECBC76;
@@ -485,7 +507,7 @@ export default {
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 160px;
+  width: 100px;
   height: 30px;
   left: 240px;
   top: 320px;
@@ -504,7 +526,7 @@ export default {
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 160px;
+  width: 100px;
   height: 30px;
   left: 240px;
   top: 400px;
@@ -523,25 +545,56 @@ export default {
   padding: 12px 20px;
   gap: 10px;
   position: absolute;
-  width: 160px;
+  width: 100px;
   height: 30px;
   left: 240px;
   top: 480px;
 }
 
-.NumOfHeart {
+
+.UseHistory {
+  position: relative;
+  text-align: center;
+  top: 80px;
+  float: right;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+.UseHistory_content{
+  position : relative;
+}
+
+.UseHistory_text {
+  color: #FFFEF9;
   position: absolute;
-  width: 100px;
-  height: 100px;
-  left: 180px;
-  top: 600px;
+  width: 160px;
+  height: 80px;
+  left: 145px;
+  top: 80px;
   font-style: normal;
   font-weight: 600;
-  font-size: 50px;
-  line-height: 75px;
+  font-size: 40px;
+  line-height: 60px;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #000000;
+}
+
+.UseHistory_his {
+  position: absolute;
+  width: 251px;
+  height: 800px;
+  left: 90px;
+  top: 200px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  display: block;
+  align-items: center;
+  color: white;
+  max-height: 350px;
+  overflow-y: auto;
 }
 </style>

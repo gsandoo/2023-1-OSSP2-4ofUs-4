@@ -20,7 +20,7 @@
           <p>나의 하트</p>
         </div>
         <div class = "NumOfHeart">
-          {{this.$store.state.heart}} <!--&gt;-->
+          {{this.$store.state.heart}}
         </div>
         <div class="HeartNum_img">
           <img :src="imagePath_htnum" alt="Heartnum" class="htnum" />
@@ -290,7 +290,7 @@ width : 23rem;
 height : 37.5rem;
 }
 
-.HeartNum{  /*border: 1px solid red;*/
+.HeartNum{
 position : relative;
 text-align: center;
 float: left;

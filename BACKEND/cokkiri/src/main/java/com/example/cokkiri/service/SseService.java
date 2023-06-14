@@ -193,12 +193,12 @@ public class SseService {
 
     //알림 전송
     private void sendToClient(SseEmitter emitter, String id, Object data) {
-
+        final String json = "{value: " + data + "}";
         try {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(data)
+                    .data(json)
                     .reconnectTime(0));
 
             emitter.complete();

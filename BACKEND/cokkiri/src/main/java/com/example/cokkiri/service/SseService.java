@@ -202,17 +202,18 @@ public class SseService {
         }
     }
 
-    //알림 전송
+
     private void sendToClient(SseEmitter emitter, String id, Object data) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(data);
         System.out.println(jsonString);
         System.out.println(data);
+
         try {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(data)
+                    .data(json)
                     .reconnectTime(0));
 
             emitter.complete();

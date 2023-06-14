@@ -23,6 +23,7 @@ export default createStore({
         password: null,
         heart: null,
         restrctionDate: null,
+        admin: false,
 
         usageHistory: [],
 
@@ -84,7 +85,6 @@ export default createStore({
         loginSuccess(state, payload) {
             state.isLogin = true
             state.id = payload
-            router.replace('/Starting')
         },
         userInfoApply(state, payload){
             state.major = payload.major
@@ -96,6 +96,12 @@ export default createStore({
             state.password = payload.password
             state.heart = payload.heart
             state.restrctionDate = payload.restrctionDate
+
+            if(state.admin){
+                router.replace('/admin')
+            }else{
+                router.replace('/Starting')
+            }
         },
         dateReform(state){
             if(state.restrctionDate===null){
@@ -110,6 +116,7 @@ export default createStore({
         },
         logout(state) { 
             state.isLogin = false
+            
             router.replace('/')
             
             state.id = null

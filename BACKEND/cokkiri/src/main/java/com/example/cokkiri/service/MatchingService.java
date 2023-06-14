@@ -619,10 +619,14 @@ public class MatchingService {
     }
 
     public void sendSSEtoPublicUser(PublicMatchedList matchedList){
-        List receiver = matchedList.getEmailList();
+        List<String> receiver = matchedList.getEmailList();
         String content = "매칭이 성사되었습니다.";
         String type = matchedList.getMatchingType();
-        sseService.sendList(receiver,content,type);
+        for(int i = 0 ; i < receiver.size() ; i ++){
+            String email = receiver.get(i);
+            sseService.send(email,content,type);
+        }
+
     }
     public PublicMatchedList savePublicUser(PublicMatchedList matchedList){
         for(int i = 0 ; i <matchedList.getEmailList().size(); i++){

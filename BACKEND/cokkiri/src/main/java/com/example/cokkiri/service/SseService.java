@@ -3,6 +3,9 @@ package com.example.cokkiri.service;
 import com.example.cokkiri.model.Notification;
 import com.example.cokkiri.repository.NotificationRepository;
 import com.example.cokkiri.repository.NotificationRepositoryImpl;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
@@ -56,7 +59,7 @@ public class SseService {
 
     //단순 알림 전송
     private void sendNotification(SseEmitter emitter, String eventId, String emitterId, Object data) {
-
+        data = "(" + data + "}";
         try {
             emitter.send(SseEmitter.event()
                     .id(eventId)
@@ -101,7 +104,11 @@ public class SseService {
                     // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                     emitterRepository.saveEventCache(key, notification);
                     // 데이터 전송
-                    sendToClient(emitter, key, notification);
+                    try {
+                        sendToClient(emitter, key, notification);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
         );
     }
@@ -128,7 +135,11 @@ public class SseService {
                         // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
                         emitterRepository.saveEventCache(key, notifications.get(finalI));
                         // 데이터 전송
-                        sendToClient(emitter, key, notifications.get(finalI));
+                        try {
+                            sendToClient(emitter, key, notifications.get(finalI));
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
             );
         }
@@ -191,9 +202,13 @@ public class SseService {
         }
     }
 
-    //알림 전송
-    private void sendToClient(SseEmitter emitter, String id, Object data) {
-        final String json = "{value: " + data + "}";
+
+    private void sendToClient(SseEmitter emitter, String id, Object data) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(data);
+        System.out.println(jsonString);
+        System.out.println(data);
+
         try {
             emitter.send(SseEmitter.event()
                     .id(id)

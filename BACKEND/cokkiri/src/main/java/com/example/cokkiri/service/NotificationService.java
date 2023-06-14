@@ -73,9 +73,9 @@ public class NotificationService {
 
             sseEmitters = new HashMap<>();
 
-            notifications.add(createNotification(receiverList.get(i).toString(), content, type));
+            notifications.add(createNotification(receiverList.get(i), content, type));
 
-            sseEmitters.putAll(notificationRepository.findAllEmitterStartWithByEmail(receiverList.get(i).toString()));
+            sseEmitters.putAll(notificationRepository.findAllEmitterStartWithByEmail(receiverList.get(i)));
 
             sseEmitters.forEach(
                     (key, emitter) -> {

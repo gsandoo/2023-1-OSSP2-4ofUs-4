@@ -89,9 +89,9 @@ public class SseService {
 //    서버에서 클라이언트로 일방적인 데이터 보내기
 
     //1ㄷ1로 특정 유저에게 알림 전송
-    public void send(String receiver, String content, String type, String urlValue) {
+    public void send(String receiver, String content, String type) {
 
-        Notification notification = createNotification(receiver, content, type, urlValue);
+        Notification notification = createNotifications(receiver, content, type);
 
         // 로그인 한 유저의 SseEmitter 모두 가져오기
         Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithByEmail(receiver);
@@ -119,7 +119,7 @@ public class SseService {
 
             sseEmitters = new HashMap<>();
 
-            notifications.add(createNotifications(receiverList.get(i).toString(), content, type));
+            notifications.add(createNotifications(receiverList.get(i), content, type));
 
             sseEmitters.putAll(emitterRepository.findAllEmitterStartWithByEmail(receiverList.get(i).toString()));
 

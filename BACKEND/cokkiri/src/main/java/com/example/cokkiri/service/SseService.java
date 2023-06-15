@@ -152,6 +152,7 @@ public class SseService {
                     .build();
         } else if (type.equals("class")) {
             return Notification.builder()
+                    .receiver(receiver)     // 사용자 이메일
                     .content(content)
                     .notificationType(type)
                     .isRead(false)

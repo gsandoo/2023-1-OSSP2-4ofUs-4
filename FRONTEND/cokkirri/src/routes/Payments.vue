@@ -65,7 +65,7 @@
             
             <div class = "UseHistory_his">
               <div v-for="history in usageHistory" :key="history.date">
-                <p>>> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount }}개</p>
+                <p>>> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount/100 }}개</p>
               </div>
             </div>
           
@@ -278,7 +278,7 @@ export default {
 .Title {
   color: #B87514;
   position: absolute;
-  width: 408px;
+  width: 300px;
   height: 120px;
   left: 800px;
   top: 60px;
@@ -287,8 +287,8 @@ export default {
   font-size: 70px;
   line-height: 120px;
   display: flex;
-  align-items: center;
   text-align: center;
+  white-space: nowrap;
 }
 
 .Parent-Payments {

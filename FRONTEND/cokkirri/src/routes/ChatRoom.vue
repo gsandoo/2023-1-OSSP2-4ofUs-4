@@ -1,16 +1,16 @@
 <template>
   <div>
     <header>
-      <nav class = "menuBar">
+      <nav class="menuBar">
         <span>
           <a href="javascript:history.back();">
-            <img :src="imagePath_arrow" alt="Arrow" class = "Back_img"/>
+            <img :src="imagePath_arrow" alt="Arrow" class="Back_img" />
           </a>
         </span>
         <span>
           <a href="javascript:history.back();" class="Back_txt">뒤로가기</a>
         </span>
-        <div class = "co-txt">
+        <div class="co-txt">
           <span>
             <h1>Co-kkirri</h1>
           </span>
@@ -22,9 +22,10 @@
       <div class="WholeBox">
         <div class="chat-room">
           <div class="messages">
-            <div v-for="message in messages" :key="message.id" class="message">
-              <div :class="{'sent-by-me': message.isSentByMe, 'received-from': !message.isSentByMe}" class = "message-content">
+            <div v-for="message in formattedMessages" :key="message.id" class="message">
+              <div :class="{'sent-by-me': message.sender === sender, 'received-from': message.sender !== sender}">
                 {{ message.isSentByMe ? message.text : message.content }}
+                <!-- <div class="chatTime">{{ message.formattedTime }}</div> -->
               </div>
             </div>
           </div>
@@ -38,78 +39,101 @@
   </div>
 </template>
 
-
 <script>
-  import { ref, onMounted } from 'vue';
-  import Stomp from 'stompjs';
-  import SockJS from 'sockjs-client';
-  import axios from '../api/index.js';
-  import { useStore } from 'vuex';
+import { ref, onMounted, computed } from 'vue';
+import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
+import axios from '../api/index.js';
+import { useStore } from 'vuex';
 
-  export default {
-  data(){
-    return{
-      // 이미지 삽입
-      imagePath_arrow: require("@/assets/pay/arrow-left.png"),
-    }
+const formattedTime = (message) => {
+  const date = new Date(message.timestamp);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+};
+
+export default {
+  data() {
+    return {
+      imagePath_arrow: require('@/assets/pay/arrow-left.png'),
+    };
   },
+  
   setup() {
     const store = useStore();
-    
+
     const messages = ref([]);
     const newMessage = ref('');
     const matchingId = ref(store.state.matchingIdForChatroom);
     const matchingType = ref(store.state.matchingTypeForChatroom);
     const sender = ref(store.state.id);
+
+    const formattedMessages = computed(() =>
+      messages.value.map((message) => ({
+        ...message,
+        formattedTime: formattedTime(message),
+      }))
+    );
+
     let stompClient = null;
-
-      const connectToWebSocket = () => {
-        const socket = new SockJS('http://3.37.37.164:8080/ws');
-        stompClient = Stomp.over(socket);
-
-        socket.onopen = () => {
-          stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
-            const receivedMessage = JSON.parse(message.body);
-            messages.value.push(receivedMessage);
-
-            console.log(receivedMessage);
-            console.log(receivedMessage.text);
-          });
-      };
-  };
-
-      // 메시지 보내기
-      const sendMessage = () => {
-          if (!newMessage.value || !stompClient || newMessage.value.trim() === '') {
-            return;
-          }
-
-          const chatMessage = {
-              matchingId: parseInt(matchingId.value),
-              matchingType: matchingType.value,
-              sender: sender.value,
-              content: newMessage.value
-          };
-
-          stompClient.send(`/send/${matchingId.value}/${matchingType.value}`, {}, JSON.stringify(chatMessage));
-          messages.value.push({
-              id: Date.now(),
-              text: newMessage.value,
-              isSentByMe: true
-          });
-          newMessage.value = '';
-      };
-
-      // 과거 채팅 내역 불러오기.
-      const fetchChatHistory = async () => {
+    
+    const connectToWebSocket = () => {
+      const socket = new SockJS('http://3.37.37.164:8080/ws');
+      stompClient = Stomp.over(socket);
+      stompClient.connect({}, () => {
+        stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
           try {
-              const response = await axios.get(`/room/${matchingId.value}/${matchingType.value}`);
-              messages.value = response.data;  // 가져온 데이터를 메시지에 직접 할당.
-              console.log(response.data);
+            const receivedMessage = JSON.parse(message.body);
+            console.log('Received message:', receivedMessage); // 메시지 수신 로그
+            receivedMessage.isSentByMe = receivedMessage.sender === sender.value;
+            messages.value.push(receivedMessage);
           } catch (error) {
-              console.error('Failed to fetch chat history:', error);
+            console.error('Failed to parse message body:', error);
           }
+        });
+      });
+
+      socket.onerror = (error) => {
+        console.log(`WebSocket Error: ${error}`);
+      };
+    };
+
+
+    const sendMessage = () => {
+      if (!newMessage.value || !stompClient || newMessage.value.trim() === '') {
+        return;
       }
+
+      const chatMessage = {
+        matchingId: parseInt(matchingId.value),
+        matchingType: matchingType.value,
+        sender: sender.value,
+        content: newMessage.value,
+      };
+
+      stompClient.send(`/send/${matchingId.value}/${matchingType.value}`, {}, JSON.stringify(chatMessage));
+
+      const sentMessage = {
+        id: Date.now(),
+        text: newMessage.value,
+        isSentByMe: true,
+        timestamp: new Date().toISOString(),
+        sender: sender.value // sender를 추가
+      };
+
+      messages.value.push(sentMessage);
+      newMessage.value = '';
+    };
+
+    const fetchChatHistory = async () => {
+      try {
+        const response = await axios.get(`/room/${matchingId.value}/${matchingType.value}`);
+        messages.value = response.data;
+      } catch (error) {
+        console.error('Failed to fetch chat history:', error);
+      }
+    };
 
     onMounted(async () => {
       connectToWebSocket();
@@ -118,33 +142,21 @@
       } catch (error) {
         console.error('Failed to load chat history:', error);
       }
-      console.log(messages, newMessage);
     });
-  
-  return {
+
+    return {
       messages,
       newMessage,
       matchingId,
       matchingType,
       sender,
-      sendMessage
-  };
-  },
-  filters: {
-    formatTimestamp(timestamp) {
-      const options = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-      };
-      return new Intl.DateTimeFormat('en-US', options).format(timestamp);
-    },
+      sendMessage,
+      formattedMessages,
+    };
   },
 };
 </script>
+
 
 <style scoped>
 
@@ -165,10 +177,6 @@ header {
   text-align : center;
 }
 
-/* .WholeBox{
-  background-color: yellow;
-} */
-
 .chat-room {
   display: flex;
   flex-direction: column;
@@ -178,37 +186,72 @@ header {
   padding-top: 75px;
 }
 
-.messages { 
-  /* background-color:black; */
+/* .messages {
+  display: flex;
+  flex-direction: column;
   max-height: 700px;
-  overflow-y: scroll;
-  flex-direction: column-reverse;
-  }
-
-.message {
-  /* background-color:blue; */
-  margin-bottom: 10px;
+  overflow-y: auto;
 }
 
 .sent-by-me {
   text-align: right;
-  text-size-adjust : 20px;
   background-color: #B87514;
-  padding: 5px;
-  color : white;
+  padding: 10px;
+  color: white;
   border-radius: 15px;
-  width : 400px;
-  float : right;
+  max-width: 200px;
+  height: 30px;
+  align-self: flex-end;
 }
 
+
 .received-from {
+  display: inline-block;
   background-color : #ECBC76;
   text-align: left;
-  padding: 5px;
+  padding: 10px;
   color : black;
   border-radius: 15px;
   max-width: 400px;
+} */
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 700px;
+  overflow-y: auto;
+  align-items: flex-start;
 }
+
+.message {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; /* default alignment */
+}
+
+.sent-by-me {
+  text-align: right;
+  background-color: #B87514;
+  padding: 10px;
+  color: white;
+  border-radius: 15px;
+  max-width: 200px;
+  height: 30px;
+  margin-left: auto; /* push message to the right */
+  margin-bottom : 10px;
+}
+
+.received-from {
+  display: inline-block;
+  background-color : #ECBC76;
+  text-align: left;
+  padding: 10px;
+  color : black;
+  border-radius: 15px;
+  max-width: 400px;
+  margin-bottom : 10px;
+}
+
 
 .input-section {
   margin-top: 20px;

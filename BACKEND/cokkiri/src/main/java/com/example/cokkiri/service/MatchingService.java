@@ -612,10 +612,13 @@ public class MatchingService {
     @Autowired
     SseService sseService;
     public void sendSSEtoClassUser(ClassMatchedList matchedList){
-        List receiver = matchedList.getEmailList();
+        List<String> receiver = matchedList.getEmailList();
         String content = "매칭이 성사되었습니다.";
         String type = matchedList.getMatchingType();
-        notificationService.send(receiver,content,type);
+        for(int i = 0 ; i < receiver.size() ; i ++){
+            String email = receiver.get(i);
+            sseService.send(email,content,type);
+        }
     }
 
     public void sendSSEtoPublicUser(PublicMatchedList matchedList){

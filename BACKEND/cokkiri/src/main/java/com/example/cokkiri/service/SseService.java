@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -47,7 +48,8 @@ public class SseService {
 
         // 503 에러를 방지하기 위한 더미 이벤트 전송
         String eventId = makeTimeIncludeId(email);
-        sendNotification(emitter, eventId, emitterId, "EventStream Created. [userId=" + email + "]");
+        Notification dummy = createDummyNotification(email);
+        sendNotification(emitter, eventId, emitterId, dummy);
 
         // 클라이언트가 미수신한 Event 목록이 존재할 경우 전송하여 Event 유실을 예방
         if (hasLostData(lastEventId)) {
@@ -146,12 +148,14 @@ public class SseService {
                     .content(content)       // "매칭이 성사되었습니다"
                     .notificationType(type) // free
                     .isRead(false)          // 사용자가 읽었는지 판단
+                    .notDummy(true)
                     .build();
         } else if (type.equals("class")) {
             return Notification.builder()
                     .content(content)
                     .notificationType(type)
                     .isRead(false)
+                    .notDummy(true)
                     .build();
         }
         else {
@@ -161,42 +165,18 @@ public class SseService {
 
 
     //타입별 알림 생성
-    private Notification createNotification(String receiver, String content, String type, String urlValue) {
-
-        if (type.equals("chat")){
+    private Notification createDummyNotification(String email) {
             return Notification.builder()
-                    .receiver(receiver)
-                    .content(content)
-                    .notificationType(type)
+                    .receiver(email)
+                    .content("this is dummy data")
+                    .notificationType(null)
                     .isRead(false)
+                    .notDummy(false)
                     .build();
-        }
-
-        else if (type.equals("quotation")) {
-            return Notification.builder()
-                    .content(content)
-                    .notificationType(type)
-                    .isRead(false)
-                    .build();
-        }
-
-        else if (type.equals("quotation")) {
-            return Notification.builder()
-                    .receiver(receiver)
-                    .content(content)
-                    .notificationType(type)
-                    .isRead(false)
-                    .build();
-        }
-
-        else {
-            return null;
-        }
     }
 
 
     private void sendToClient(SseEmitter emitter, String id, Object data) {
-
         try {
             sendNotification(emitter , id , id , data);
             emitterRepository.deleteById(id);

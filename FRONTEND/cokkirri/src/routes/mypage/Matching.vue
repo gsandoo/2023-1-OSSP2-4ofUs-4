@@ -64,7 +64,8 @@
                                             {{timeId}}
                                         </div>
                                     </div>
-                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn" @click="moveToChatroom(record.matchingId,'class')">#채팅방</div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-btn-move" @click="moveToChatroom(record.matchingId,'class')">#채팅방</div>
+                                    <div v-else class="record-ing-btn">#매칭 완료</div>
                                 </div>
                             </div>
                             <div v-for="(record, index) in matchingListFree" :key="index" class="matching-frame">
@@ -80,7 +81,8 @@
                                     <div class="record-head-count">인원 {{record.headCount}}명</div>
                                     <div class="record-detail">{{record.availableDay}}</div>
                                     <div class="record-detail">{{record.promiseTime[0].slice(0,5)}}~{{record.promiseTime[1].slice(0,5)}}</div>
-                                    <div v-if="record.matchingRes==='매칭중'" class="record-ing-btn" @click="moveToChatroom(record.matchingId,'free')">#채팅방</div>
+                                    <div v-if="record.matchingRes==='매칭중'" class="record-btn-move" @click="moveToChatroom(record.matchingId,'free')">#채팅방</div>
+                                    <div v-else class="record-ing-btn">#매칭 완료</div>
                                 </div>
                             </div>
                             <div class="matching-frame">
@@ -409,7 +411,7 @@
             justify-content: center;
             align-items: center;
 
-            background: #E48700;
+            background: #ECBC76;
             border-radius: 10px;
             color: #FFFFFF;
         }
@@ -534,13 +536,11 @@
             }
             .record-ing-btn{
                 width: 150px;
-                height: 72px;
+                height: 65px;
 
                 margin-top: 18px;
                 margin-left: 35px;
                 float: left;
-
-                cursor: pointer;
 
                 border: 5px solid #ECBC76;
                 border-radius: 20px;
@@ -557,6 +557,33 @@
                 display: flex;
 
                 color: #B87514;
+            }
+            .record-btn-move{
+                width: 150px;
+                height: 65px;
+
+                margin-top: 18px;
+                margin-left: 35px;
+                float: left;
+
+                cursor: pointer;
+
+                background: #E48700;
+                //#ECBC76;
+                border-radius: 20px;
+
+                align-items: center;
+                text-align: center;
+                justify-content: center;
+
+                
+                font-style: normal;
+                font-weight: 300;
+                font-size: 30px;
+                line-height: 45px;
+                display: flex;
+
+                color: #FFFFFF;
             }
         } 
         .matching-box-ex{

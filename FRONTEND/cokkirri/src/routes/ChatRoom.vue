@@ -29,12 +29,8 @@
             </div>
           </div>
           <div class="input-section">
-            <!-- <input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="메시지를 입력하세요" class="messageInput"> -->
             <textarea v-model="newMessage" @keyup.enter="sendMessage" placeholder="메시지를 입력하세요" class="messageInput"></textarea>
-            <a @click="sendMessage" class="sendMessage">
-              <!--전송하기 화살표 구현해야함.-->
-              <i class="fa-paper-plane-top" style="color: #b87514;"></i>
-            </a>
+            <a @click="sendMessage" class="sendMessage"></a>
           </div>
         </div>
       </div>

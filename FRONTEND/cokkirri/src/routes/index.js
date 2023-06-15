@@ -19,7 +19,6 @@ import Payments from './Payments.vue'
 import Starting from './Starting.vue'
 
 import ChatRoom from './ChatRoom.vue'
-import paypay from './paypay.vue'
 
 const router = createRouter({
     // Hash 모드로 설정
@@ -90,11 +89,6 @@ const router = createRouter({
         {
             path: '/admin/user',
             component: EditUser
-        },
-
-        {
-            path: '/paypay',
-            component: paypay
         },
 
         {

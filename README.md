@@ -13,15 +13,22 @@
 
 
 
-<div><img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
+<div><img src="https://capsule-render.vercel.app/api?type=waving&color=white&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
 
 ## 1. 프로젝트 주제
 <div>
 <h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 익명 매칭 서비스)
 </div>
 
+Open Source
+  <div>
+    <img src="https://img.shields.io/badge/아이콘내용-바탕색?style=flat&logo=SMTP&logoColor=white"/>
+    <img src="https://img.shields.io/badge/아이콘내용-바탕색?style=flat&logo=SSE&logoColor=white"/>
+    <img src="https://img.shields.io/badge/아이콘내용-바탕색?style=flat&logo=WebSocket&logoColor=white"/>
+    <img src="https://img.shields.io/badge/아이콘내용-바탕색?style=flat&logo=Iamport&logoColor=white"/>
 
--------------------------------------------------------------------------------------------------------------------------------------------
+  </div>
+
   ### github 키워드
 - Feat : 새로운 기능 추가
 - Fix : 버그 수정

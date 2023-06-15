@@ -25,7 +25,6 @@
             <div v-for="message in formattedMessages" :key="message.id" class="message">
               <div :class="{'sent-by-me': message.sender === sender, 'received-from': message.sender !== sender}">
                 {{ message.isSentByMe ? message.text : message.content }}
-                <!-- <div class="chatTime">{{ message.formattedTime }}</div> -->
               </div>
             </div>
           </div>
@@ -72,7 +71,7 @@ export default {
     const formattedMessages = computed(() =>
       messages.value.map((message) => ({
         ...message,
-        formattedTime: formattedTime(message),
+        formattedTime: formattedTime(message)
       }))
     );
 
@@ -85,9 +84,13 @@ export default {
         stompClient.subscribe(`/room/${matchingId.value}/${matchingType.value}`, (message) => {
           try {
             const receivedMessage = JSON.parse(message.body);
-            console.log('Received message:', receivedMessage); // 메시지 수신 로그
+            console.log('Received message:', receivedMessage);
             receivedMessage.isSentByMe = receivedMessage.sender === sender.value;
-            messages.value.push(receivedMessage);
+
+            // Filter out the sender's own messages
+            if (!receivedMessage.isSentByMe) {
+              messages.value.push(receivedMessage);
+            }
           } catch (error) {
             console.error('Failed to parse message body:', error);
           }
@@ -100,6 +103,7 @@ export default {
     };
 
 
+
     const sendMessage = () => {
       if (!newMessage.value || !stompClient || newMessage.value.trim() === '') {
         return;
@@ -109,7 +113,7 @@ export default {
         matchingId: parseInt(matchingId.value),
         matchingType: matchingType.value,
         sender: sender.value,
-        content: newMessage.value,
+        content: newMessage.value.trim(),
       };
 
       stompClient.send(`/send/${matchingId.value}/${matchingType.value}`, {}, JSON.stringify(chatMessage));
@@ -186,34 +190,6 @@ header {
   padding-top: 75px;
 }
 
-/* .messages {
-  display: flex;
-  flex-direction: column;
-  max-height: 700px;
-  overflow-y: auto;
-}
-
-.sent-by-me {
-  text-align: right;
-  background-color: #B87514;
-  padding: 10px;
-  color: white;
-  border-radius: 15px;
-  max-width: 200px;
-  height: 30px;
-  align-self: flex-end;
-}
-
-
-.received-from {
-  display: inline-block;
-  background-color : #ECBC76;
-  text-align: left;
-  padding: 10px;
-  color : black;
-  border-radius: 15px;
-  max-width: 400px;
-} */
 
 .messages {
   display: flex;
@@ -233,7 +209,7 @@ header {
   text-align: right;
   background-color: #B87514;
   padding: 10px;
-  color: white;
+  color: #fffef9;
   border-radius: 15px;
   max-width: 200px;
   height: 30px;

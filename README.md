@@ -49,7 +49,7 @@
 <div>
 <h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 익명 매칭 서비스)
 </div>
-    
+
 ## 2. 개요
 <p>
         코로나19로 인하여 비대면 기간중에는 학생들간의 원활한 교류가 없어 인간관계가 형성되지 못하였다. 대학 생활을 하면서 인적 네트워크가 형성 되지 않는다면 편의시설 이용, 강의 수강 등  여러가지 불편함과 어려움을 느낄 수 있는 부분이 존재한다. 예를 들어 과제로 팀플을 하는 경우 혹은 사정으로 인하여 결석하는 경우 독강 을 하게 된다면 난감한 경우가 종종 있다. 해당 서비스는 이러한 교류로 인한 불이익을 최소화 하고자 기획하게 되었다.
@@ -57,14 +57,13 @@
 
 </p>
 
-    
+
 ## 3. 프로젝트 구조도
-    
+
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/d9b5fcb4-a582-4026-8b10-3d1e0a7d02b6)
 
-    
+
 ## 3. 스크린 샷
-    
 
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/2d159f13-3367-4672-966b-033666c51681)
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/eb39988a-7837-4d56-8a78-5c44343be0e2)
@@ -74,8 +73,10 @@
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/653836ea-cb5f-4bbd-826f-1b9c77dfa780)
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/feeb9b58-eb8c-41a2-87e3-c1585806dc7e)
 
+![스크린샷 2023-06-16 오전 1.47.11](../images/README/스크린샷 2023-06-16 오전 1.47.11.png)
 
 ## 4. 사용 라이브러리
+
 ``` 
 <dependencies>
 		<dependency>
@@ -151,19 +152,22 @@
     
 ```
 
-  
+
 --------------------------------------------------------------------------------------------
   ### github 키워드
-- Feat : 새로운 기능 추가
-- Fix : 버그 수정
-- Design : CSS 등 사용자 UI 디자인 변경
-- !BREAKING CHANGE : 커다란 API 변경의 경우
-- !HOTFIX : 급하게 치명적인 버그를 고쳐야하는 경우
-- Docs : 문서 수정
-- Style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
-- Comment : 필요한 주석 추가 및 변경
-- Refactor : 코드 리펙토링
-- Test : test code, refactoring test code 추가
-- Chore : build 업무 수정, 패키지 매니저 수정
-- Rename : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
-- Remove : 파일을 삭제하는 작업만 수행한 경우
+
+|keyword|설명|
+|----|---|
+|Feat|새로운 기능 추가|
+|Fix|버그 수정|
+|Design|CSS 등 사용자 UI 디자인 변경|
+|!BREAKING CHANGE|커다란 API 변경의 경우|
+|!HOTFIX|급하게 치명적인 버그를 고쳐야하는 경우|
+|Docs|문서 수정|
+|Style|코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우|
+|Comment|필요한 주석 추가 및 변경|
+|Refactor|코드 리펙토링|
+|Test|test code, refactoring test code 추가|
+|Chore|build 업무 수정, 패키지 매니저 수정|
+|Rename|파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우|
+|Remove|파일을 삭제하는 작업만 수행한 경우|

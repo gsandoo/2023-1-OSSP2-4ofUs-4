@@ -43,8 +43,6 @@ public class MatchingService {
     private PublicAccusationRepository publicAccusationRepository;
     @Autowired
     private  UserRepository userRepository;
-    @Autowired
-    private  NotificationService notificationService;
 
     @Autowired
     private PublicMatchingWaitRepository publicMatchingWaitRepository;

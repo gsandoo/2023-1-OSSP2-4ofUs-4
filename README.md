@@ -11,13 +11,13 @@
 
 
 
------------------------------------------------------------------------------------------------------------------------------------------
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" />
 
-## H1. 프로젝트 주제
+<div><img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
+
+## 1. 프로젝트 주제
 <div>
-<h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 매칭 서비스)
+<h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 익명 매칭 서비스)
 </div>
 
 

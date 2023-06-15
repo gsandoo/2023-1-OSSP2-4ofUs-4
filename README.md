@@ -9,11 +9,6 @@
 |[나찬진](https://github.com/ckswls56)|컴퓨터공학|Backend|
 |[문채영](https://github.com/bbabbi)|컴퓨터공학|팀장, Frontend|
 
-## 1. 프로젝트 주제
-<div>
-<h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 매칭 서비스)
-</div>
-
 ### github 키워드
 - Feat : 새로운 기능 추가
 - Fix : 버그 수정
@@ -28,3 +23,10 @@
 - Chore : build 업무 수정, 패키지 매니저 수정
 - Rename : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
 - Remove : 파일을 삭제하는 작업만 수행한 경우
+
+## 1. 프로젝트 주제
+<div>
+<h4> Co-끼리(대학생 캠퍼스 네트워크 형성을 위한 매칭 서비스)
+</div>
+
+

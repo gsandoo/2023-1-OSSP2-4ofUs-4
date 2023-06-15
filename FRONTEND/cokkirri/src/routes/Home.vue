@@ -26,10 +26,6 @@
                         class="login-password-input"
                         @keydown.enter="submitForm"
                         v-model="user.password">
-                    <router-link 
-                        to="/" 
-                        @click="alertMassage" 
-                        class="link-finding-password">비밀번호 찾기</router-link>
                     <div 
                         class="submit-btn"
                         @click="submitForm">
@@ -143,6 +139,9 @@ export default {
             background: #FFFFFF;
             border: 1px solid #4285F4;
             border-radius: 9px;
+
+            font-size: 16px;
+            letter-spacing: 2px;
         }
         .font-password-describe{
             margin-top: 69px;
@@ -160,6 +159,9 @@ export default {
             background: #FFFFFF;
             border: 1px solid #4285F4;
             border-radius: 9px;
+
+            font-size: 16px;
+            letter-spacing: 2px;
         }
         .link-finding-password{
             margin-left: 416px;
@@ -170,7 +172,7 @@ export default {
         .submit-btn{
             width: 451px;
             height: 54px;
-            margin-top: 80px;
+            margin-top: 100px;
             margin-left: 44px;
             margin-right: 44px;
 

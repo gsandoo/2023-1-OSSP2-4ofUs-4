@@ -65,7 +65,7 @@
             
             <div class = "UseHistory_his">
               <div v-for="history in usageHistory" :key="history.date">
-                <p>>> {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount/100 }}개</p>
+                <p>&gt;&gt; {{ history.date }} &nbsp; &nbsp; &nbsp;+{{ history.amount/100 }}개</p>
               </div>
             </div>
           

@@ -24,4 +24,7 @@ public class Notification {
 
     @Column
     private Boolean isRead; //알림 열람에 대한 여부
+    
+    @Column
+    private  Boolean notDummy; // 더미 데이터 여부
 }

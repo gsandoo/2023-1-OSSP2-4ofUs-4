@@ -198,10 +198,7 @@ public class SseService {
     private void sendToClient(SseEmitter emitter, String id, Object data) {
 
         try {
-           
-
-            sendNotification(emitter , id , id , "매칭이 성사 되었습니다.");
-
+            sendNotification(emitter , id , id , data);
             emitterRepository.deleteById(id);
 
         } catch (Exception exception) {

@@ -198,13 +198,9 @@ public class SseService {
     private void sendToClient(SseEmitter emitter, String id, Object data) {
 
         try {
-            emitter.send(SseEmitter.event()
-                    .id(id)
-                    .name("match")
-                    .data(data , MediaType.APPLICATION_JSON)
-                    .reconnectTime(0));
+           
 
-            emitter.complete();
+            sendNotification(emitter , id , id , "매칭이 성사 되었습니다.");
 
             emitterRepository.deleteById(id);
 

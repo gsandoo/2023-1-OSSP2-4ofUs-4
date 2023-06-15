@@ -8,8 +8,8 @@
 
             <div class="btn-resisterClassNoshow" @click="resisterNoshow('class')">수업 노쇼 등록</div>
             <div class="btn-resisterPublicNoshow" @click="resisterNoshow('free')">공강 노쇼 등록</div>
-            <input type="text" placeholder="Search matchingId" class="input-matchingIdForNoshowResister" v-model="matchingIdForNoshowResister">
-            <input type="text" placeholder="Search id" class="input-idForNoshowResister" v-model="idForNoshowResister">
+            <input type="text" placeholder="Input matchingId" class="input-matchingIdForNoshowResister" v-model="matchingIdForNoshowResister">
+            <input type="text" placeholder="Input id" class="input-idForNoshowResister" v-model="idForNoshowResister">
             <div style="clear:both;"></div>
         </div>
         <div class="frame-sub-body">
@@ -329,7 +329,7 @@ export default {
                 color: #FFFEF9;
             }
             .input-matchingIdForNoshowResister{
-                width: 286px;
+                width: 292px;
                 height: 43px;
 
                 margin-top: 10px;
@@ -352,7 +352,7 @@ export default {
                 color: #000000;
             }
             .input-idForNoshowResister{
-                width: 286px;
+                width: 292px;
                 height: 43px;
 
                 margin-top: 10px;

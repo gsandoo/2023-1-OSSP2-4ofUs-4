@@ -211,8 +211,8 @@ header {
   padding: 10px;
   color: #fffef9;
   border-radius: 15px;
-  max-width: 200px;
-  height: 30px;
+  max-width: 500px;
+  max-height: 30px;
   margin-left: auto; /* push message to the right */
   margin-bottom : 10px;
 }
@@ -224,7 +224,8 @@ header {
   padding: 10px;
   color : black;
   border-radius: 15px;
-  max-width: 400px;
+  max-width: 500px;
+  max-height : 30px;
   margin-bottom : 10px;
 }
 

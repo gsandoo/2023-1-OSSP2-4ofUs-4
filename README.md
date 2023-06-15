@@ -24,8 +24,9 @@
 - Rename : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
 - Remove : 파일을 삭제하는 작업만 수행한 경우
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" />
+-----------------------------------------------------------------------------------------------------------------------------------------
 
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" />
 
 ## 1. 프로젝트 주제
 <div>

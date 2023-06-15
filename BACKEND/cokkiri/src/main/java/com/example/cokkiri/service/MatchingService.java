@@ -783,7 +783,7 @@ public class MatchingService {
 
 
     // 신고 등록, 타입별
-    public ClassAccusation postDeclarationList(ClassAccusation accusation){
+    public ClassAccusation postClassDeclarationList(ClassAccusation accusation){
         String classType = accusation.getMatchingType();
         String email = accusation.getEmail();
         int id = accusation.getMatchingId();

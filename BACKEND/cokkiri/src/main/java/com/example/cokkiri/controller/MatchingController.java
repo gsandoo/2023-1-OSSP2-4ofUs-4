@@ -127,7 +127,7 @@ public class MatchingController {
     // 신고 등록
     @PostMapping("post/class/accusation")
     public ResponseEntity<ClassAccusation> postAccusation(@RequestBody ClassAccusation declaration){
-        ClassAccusation list = matchingService.postDeclarationList(declaration);
+        ClassAccusation list = matchingService.postClassDeclarationList(declaration);
         return new ResponseEntity<ClassAccusation>(list,HttpStatus.OK);
     }
     @PostMapping("post/free/accusation")

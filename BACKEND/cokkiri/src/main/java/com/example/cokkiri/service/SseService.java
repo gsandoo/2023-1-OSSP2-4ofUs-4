@@ -196,12 +196,12 @@ public class SseService {
 
 
     private void sendToClient(SseEmitter emitter, String id, Object data) {
-        final String json = "{value: " + data + "}";
+        String dataFile = data + "\\n\\n";
         try {
             emitter.send(SseEmitter.event()
                     .id(id)
                     .name("match complete")
-                    .data(json)
+                    .data(dataFile)
                     .reconnectTime(0));
 
             emitter.complete();

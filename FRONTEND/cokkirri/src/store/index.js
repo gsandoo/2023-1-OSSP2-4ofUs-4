@@ -219,7 +219,7 @@ export default createStore({
                     console.log(error);
                 });
                 if(this.state.isLogin){
-                    dispatch('testSse')
+                    dispatch('ConnectSse')
                     await dispatch('userInfoUpdate')
                     await dispatch('callMatchingRecord')
                     if(this.state.admin){
@@ -279,13 +279,47 @@ export default createStore({
                 console.log(error)
             }
         },
-        /*
-        subscribeToSse({ state }) {
+        // sse 연결
+        ConnectSse({ state }) {
             let eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + state.id);
-        
+            
             eventSource.addEventListener("sse",(event)=>{
-                console.log(event.data)
-                //commit('SET_NOTIFICATION', event);
+                try{
+                    let eventData = event.data
+                    let rawProperties = eventData.slice(eventData.indexOf('(')+1, eventData.lastIndexOf(')')).split(', ');
+                    let parsedData = {};
+                    rawProperties.forEach(prop => {
+                        let [key, value] = prop.split('=');
+                        if (value === 'null') {
+                            value = null;
+                        } else if (value === 'true') {
+                            value = true;
+                        } else if (value === 'false') {
+                            value = false;
+                        }
+                        parsedData[key] = value;
+                    });
+
+                    if(parsedData.notDummy){
+                        let alertMsg = parsedData.receiver + "님의 "
+                        if(parsedData.notificationType==='free'){
+                            alertMsg = alertMsg + "공강 매칭 인원이 모두 모였습니다. 매칭 내역에서 확인 가능합니다."
+                        }else if(parsedData.notificationType==='class'){
+                            alertMsg = alertMsg + "수업 매칭 인원이 모두 모였습니다. 매칭 내역에서 확인 가능합니다."
+                        }else{
+                            alertMsg = alertMsg + "매칭 타입 null에 대한 알림이 왔습니다."
+                        }
+                        alert(alertMsg)
+                        console.log("isRead")
+                        console.log(parsedData.isRead)
+                    }
+                    console.log(event.data)
+                    console.log(parsedData)
+                }catch(error){
+                    console.log(error)
+                    console.log(event.data)
+                    console.log("정해진 형식과 다른 데이터를 수신받았습니다.")
+                }
             });
             
             eventSource.onerror = error => {
@@ -299,7 +333,7 @@ export default createStore({
             }; 
             
         },
-        */
+        /*
         async testSse(){
             const id = this.state.id;
             const eventSource = new EventSource('http://3.37.37.164:8080/subscribe/' + id);
@@ -343,7 +377,7 @@ export default createStore({
                 })();
             })
         },
-
+        */
         async fetchUsageHistory({ commit }) {
             try {
               const response = await axios.get('/admin/user/payment'); // 적절한 API 엔드포인트로 변경

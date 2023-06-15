@@ -59,7 +59,7 @@ public class SseService {
 
     //단순 알림 전송
     private void sendNotification(SseEmitter emitter, String eventId, String emitterId, Object data) {
-        data = "(" + data + "}";
+        data = "{" + data + "}";
         try {
             emitter.send(SseEmitter.event()
                     .id(eventId)
@@ -211,6 +211,7 @@ public class SseService {
         } catch (Exception exception) {
             emitterRepository.deleteById(id);
             emitter.completeWithError(exception);
+
         }
     }
 }

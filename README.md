@@ -73,7 +73,6 @@
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/653836ea-cb5f-4bbd-826f-1b9c77dfa780)
 ![image](https://github.com/CSID-DGU/2023-1-OSSP2-4ofUs-4/assets/98865571/feeb9b58-eb8c-41a2-87e3-c1585806dc7e)
 
-![스크린샷 2023-06-16 오전 1.47.11](../images/README/스크린샷 2023-06-16 오전 1.47.11.png)
 
 ## 4. 사용 라이브러리
 

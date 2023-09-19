@@ -1,6 +1,11 @@
 # 2023-1-OSSP2-4ofUs-4
 2023년, 1학기, 공개SW프로젝트, 02분반, 우리만4명이조, 4조
 
+## <div><img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
+
+- - - - - - - - - - - - - - - -
+
+
 ## TEAM MEMBER
 |이름|학과|역할|
 |----|---|---|
@@ -39,10 +44,6 @@
     <img src="https://img.shields.io/badge/SSE-F43E37?style=flat&logo=SSE&logoColor=white"/>
     <img src="https://img.shields.io/badge/WebSocket-010101?style=flat&logo=socketdotio&logoColor=white"/>
 </div>
-
-
-
-## <div><img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
 
 
 ## 1. 프로젝트 주제

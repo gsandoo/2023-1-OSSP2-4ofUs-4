@@ -17,6 +17,8 @@
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+## 시연영상
+<div>https://www.notion.so/4-542934eb805640249e6a80b6c6e0b632?pvs=4#d5b83612d7144869b677d88913e7318d</div>
 ## FrameWork
 <div>
     <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=Vue.js&logoColor=white"/>

@@ -1,4 +1,4 @@
-# 2023-1-OSSP2-4ofUs-4
+# 코끼리 : 동국대학교 학생 전용 랜덤 매칭 서비스
 2023년, 1학기, 공개SW프로젝트, 02분반, 우리만4명이조, 4조
 
 ## <div><img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Co-kkiri&fontSize=90" /></div>
